@@ -1,0 +1,18 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+dir="$1"
+for backup in $(ls "$dir"); do
+	[ -d "$dir/$backup" ] || continue
+	[ "$backup" = "boot" ] && continue
+	[ "$backup" = "lost+found" ] && continue
+	case "$backup" in
+		+*) true ;;
+		*) continue ;;
+	esac
+	backup_nombre=$(echo $backup | to_original_string)
+	printf "$dir/$backup\t%s\n" "$backup_nombre"
+done
+
+[ "x$backup_nombre" = "x" ] && printf "none\t--Vacío--\n" 

@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/class/autotools.mk
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/rules/simple-patchsys.mk
+
+DEB_CONFIGURE_EXTRA_FLAGS := --with-log-dir=/var/log/partimage \
+                             --with-debug-level=0 \
+			     --disable-pam --disable-login --disable-ssl --disable-nls 
+			     
+# Workaround for dirty makefile
+DEB_MAKE_INSTALL_TARGET := install prefix=$(CURDIR)/debian/tmp/usr \
+                                   sysconfdir=$(CURDIR)/debian/tmp/etc
+
+DEB_INSTALL_DOCS_ALL := BUGS AUTHORS README THANKS
+
+#DEB_DH_INSTALLINIT_ARGS := --name=partimaged
+#DEB_DH_INSTALLPAM_ARGS := --name=partimaged
+
+# As configure has been patched update config.h.in too.
+post-patches::
+	touch $(CURDIR)/config.h.in
+	
+# de.po and es.po have been patched and rebuilt. So the resulting *.gmo
+# files have to be deleted.
+cleanbuilddir::
+	rm -f $(CURDIR)/po/de.gmo
+	rm -f $(CURDIR)/po/es.gmo
+

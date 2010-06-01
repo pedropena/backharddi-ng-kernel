@@ -1,0 +1,8 @@
+The two files listed below were only added in this release to allow building
+the installer using updated kernel udebs for Etch point releases.
+- sources.list.udeb.local
+- sources.list.udeb.local.README
+
+If you want to build the installer yourself, you will probably want to delete
+these files. The function of sources.list.udeb.local is explained in the
+README file in this directory.

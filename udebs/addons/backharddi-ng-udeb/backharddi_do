@@ -1,0 +1,52 @@
+#!/bin/sh
+
+for var in $@; do
+        debconf-set ${var%%=*} ${var##*=}
+done
+
+
+medio="$(debconf-get backharddi/medio)"
+
+LEASES=/var/lib/dhcp/dhclient.leases
+server="$(debconf-get backharddi/net/server)"
+if [ -z "$server" ]; then
+	server="$(grep dhcp-server-identifier $LEASES | tail -n 1 | cut -d " " -f 5 | tr -d ";")"
+fi
+if [ -z "$server" ]; then
+	server="$(route -n | grep ^0.0.0.0 | tail -n 1 | cut -d " " -f 10)"
+fi
+
+debconf-set backharddi/net/server "$server"
+
+service_port="$(debconf-get backharddi/net/service_port)"
+if [ x"$service_port" = x ]; then
+	service_port=4600
+fi
+
+debconf-set backharddi/net/service_port "$service_port"
+
+case "$medio" in
+	net)
+		if ! grep -q vc\/7 /etc/inittab; then
+			echo "vc/7::respawn:/bin/backharddi-monitor $server $service_port" >> /etc/inittab
+			kill -SIGHUP 1
+		fi
+	;;
+esac
+
+kill $(pidof backharddi)
+kill $(pidof udpkg)
+kill $(pidof parted_server)
+rm /var/run/parted_server.pid
+kill $(pidof partimage)
+kill $(pidof udp-receiver)
+kill $(pidof lzop)
+kill $(pidof lzma)
+/sbin/debian-installer /bin/backharddi </dev/tty7 >/dev/tty7 2>/dev/tty7
+
+case "$medio" in
+	net)
+		sed -i "/vc\/7/d" /etc/inittab
+		kill -SIGHUP 1
+	;;
+esac

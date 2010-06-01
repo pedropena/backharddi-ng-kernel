@@ -1,0 +1,1265 @@
+main-menu (1.18backharddi-ng1) unstable; urgency=low
+
+  * Primera versión de backharddi-ng
+
+ --  <pedro.pena@open-phoenix.com>  Wed, 09 Sep 2009 13:00:49 +0200
+
+main-menu (1.18backharddi1) unstable; urgency=low
+
+  * Se modifican algunos mensajes.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Fri, 28 Dec 2007 12:07:52 +0000
+
+main-menu (1.18) unstable; urgency=low
+
+  [ Updated translations ]
+  * Finnish (fi.po) by Tapio Lehtonen
+  * Hebrew (he.po) by Lior Kaplan
+  * Malayalam (ml.po) by Praveen A
+
+ -- Frans Pop <fjp@debian.org>  Tue, 27 Feb 2007 16:54:34 +0100
+
+main-menu (1.17) unstable; urgency=low
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malayalam (ml.po) by Praveen A
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Frans Pop <fjp@debian.org>  Wed, 31 Jan 2007 11:46:37 +0100
+
+main-menu (1.16) unstable; urgency=low
+
+  * show_main_menu: free menu variable after use. Closes: #405774.
+    Thanks to Masami Ichikawa who spotted the error.
+  * Add myself to uploaders.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Belarusian (be.po) by Pavel Piatruk
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bosnian (bs.po) by Safir Secerovic
+  * Danish (da.po) by Claus Hindsgaul
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by Amed Çeko Jiyan
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malayalam (ml.po) by Praveen A
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Russian (ru.po) by Yuri Kozlov
+  * Tagalog (tl.po) by Eric Pareja
+
+ -- Frans Pop <fjp@debian.org>  Sat,  6 Jan 2007 10:29:01 +0100
+
+main-menu (1.15) unstable; urgency=low
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Andrei Darashenka
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * Italian (it.po) by Stefano Canepa
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Romanian (ro.po) by Eddy Petrișor
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Frans Pop <fjp@debian.org>  Tue, 24 Oct 2006 15:12:26 +0200
+
+main-menu (1.14) unstable; urgency=low
+
+  * Make cdebconf honour currently set debconf/language (#381142).
+  * Add Lintian override for standards-version.
+
+  [ Updated translations ]
+  * German (de.po) by Jens Seidel
+  * Greek (el.po) by quad-nrg.net
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Estonian (et.po) by Siim Põder
+  * Basque (eu.po) by Piarres Beobide
+  * Gujarati (gu.po) by Kartik Mistry
+  * Hebrew (he.po) by Lior Kaplan
+  * Hindi (hi.po) by Nishant Sharma
+  * Croatian (hr.po) by Josip Rodin
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Korean (ko.po) by Sunjae park
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Marathi (mr.po) by Priti D. Patil
+  * Punjabi (Gurmukhi) (pa.po) by A S Alam
+  * Slovak (sk.po) by Peter Mann
+  * Swedish (sv.po) by Daniel Nylander
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+ -- Frans Pop <fjp@debian.org>  Fri,  6 Oct 2006 02:39:02 +0200
+
+main-menu (1.13) unstable; urgency=low
+
+  * Comment out some debug items, switch another log item to info.
+  * Don't log about priority changing the first time through.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Danish (da.po) by Claus Hindsgaul
+  * Dzongkha (dz.po)
+  * Esperanto (eo.po) by Serge Leblanc
+  * Basque (eu.po) by Piarres Beobide
+  * Irish (ga.po) by Kevin Patrick Scannell
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Khmer (km.po) by Leang Chumsoben
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Nepali (ne.po) by Shiva Pokharel
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Northern Sami (se.po) by Børre Gaup
+  * Slovenian (sl.po) by Jure Čuhalev
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Joey Hess <joeyh@debian.org>  Wed,  7 Jun 2006 22:06:44 -0400
+
+main-menu (1.12) unstable; urgency=low
+
+  * Rebuilt with libd-i 0.41, 0.40 was broken.
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 18 Mar 2006 14:16:09 -0500
+
+main-menu (1.11) unstable; urgency=low
+
+  * Add misc:Depends to get cdebconf dependency.
+  * Rebuilt with new libd-i and cdebconf to get spiff correct library udeb
+    dependencies.
+
+  [ Updated translations ]
+  * Bosnian (bs.po) by Safir Secerovic
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Slovenian (sl.po) by Matej Kovačič
+  * Swedish (sv.po) by Daniel Nylander
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 18 Mar 2006 14:00:35 -0500
+
+main-menu (1.10) unstable; urgency=low
+
+  [ Joey Hess ]
+  * If a default menu item cannot be determined, drop priority to avoid
+    looping.
+
+  [ Updated translations ]
+  * Czech (cs.po) by Miroslav Kure
+  * Greek, Modern (1453-) (el.po) by Konstantinos Margaritis
+  * Finnish (fi.po) by Tapio Lehtonen
+  * French (fr.po) by Christian Perrier
+  * Hindi (hi.po) by Nishant Sharma
+  * Icelandic (is.po) by David Steinn Geirsson
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malagasy (mg.po) by Jaonary Rabarisoa
+  * Polish (pl.po) by Bartosz Fenski
+  * Romanian (ro.po) by Eddy Petrişor
+  * Slovenian (sl.po) by Jure Cuhalev
+  * Swedish (sv.po) by Daniel Nylander
+  * Turkish (tr.po) by Recai Oktaş
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Frans Pop <fjp@debian.org>  Tue, 24 Jan 2006 23:01:40 +0100
+
+main-menu (1.09) unstable; urgency=low
+
+  * Avoid trailing commas at end of missing-provide choices list since
+    cdebconf is picky. Closes: #327393
+
+  [ Updated translations ]
+  * Hindi (hi.po) by Nishant Sharma
+  * Icelandic (is.po) by David Steinn Geirsson
+  * Swedish (sv.po) by Daniel Nylander
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 19 Oct 2005 02:20:59 -0400
+
+main-menu (1.08) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Rip out all of the code to manually fetch localised templates; cdebconf
+    has known how to deal with this itself since 2002/2003 or so.
+
+  [ Updated translations ]
+  * German (de.po) by Holger Wansing
+  * Greek, Modern (1453-) (el.po) by Greek Translation Team
+  * Basque (eu.po) by Piarres Beobide
+  * Persian (fa.po) by Arash Bijanzadeh
+  * French (fr.po) by Christian Perrier
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Romanian (ro.po) by Eddy Petrisor
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 26 Sep 2005 17:10:20 +0200
+
+main-menu (1.07) unstable; urgency=low
+
+  * Updated translations: 
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Hebrew (he.po) by Lior Kaplan
+    - Tagalog (tl.po) by Eric Pareja
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 15 Jul 2005 16:56:27 +0300
+
+main-menu (1.06) unstable; urgency=low
+
+  * Updated translations:
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Slovak (sk.po) by Peter Mann
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+    - Vietnamese (vi.po) by Clytie Siddall
+
+ -- Christian Perrier <bubulle@debian.org>  Wed,  6 Jul 2005 23:30:10 +0200
+
+main-menu (1.05) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Build with -Os and -fomit-frame-pointer, saving three delightful
+    kilobytes.
+  
+  * Updated translations: 
+    - Arabic (ar.po) by Ossama M. Khayat
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Turkish (tr.po) by Recai Oktaş
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 15 Jun 2005 16:36:31 -0400
+
+main-menu (1.04) unstable; urgency=low
+
+  * Colin Watson
+    - Propagate EXIT_BACKUP from recursive calls to di_config_package()
+      (Ubuntu bug #8889).
+  * Updated translations:
+    - Greek, Modern (1453-) (el.po) by Kostas Papadimas
+    - Basque (eu.po) by Piarres Beobide
+    - Hebrew (he.po) by Lior Kaplan
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Russian (ru.po) by Yuri Kozlov
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 20 May 2005 17:04:15 +0100
+
+main-menu (1.03) unstable; urgency=low
+
+  NOTE: Not for sarge.
+  * Petter Reinholdtsen
+    - Improve the handling of errors when debconf priority limit is
+      set to critical.  Patch from Colin Watson. (Closes: #268425)
+  * Colin Watson
+    - Add support for executables in /lib/main-menu.d/, which get run at
+      main-menu startup. This allows packages to run scripts that need to
+      share main-menu's debconf frontend but that don't merit a menu item,
+      such as setting an info message.
+  * Updated translations: 
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Catalan (ca.po) by Guillem Jover
+    - Danish (da.po) by Claus Hindsgaul
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Spanish (es.po) by Javier Fernandez-Sanguino Peña
+    - Finnish (fi.po) by Tapio Lehtonen
+    - French (fr.po) by Christian Perrier
+    - Gallegan (gl.po) by Jacobo Tarrio
+    - Hebrew (he.po) by Lior Kaplan
+    - Croatian (hr.po) by Krunoslav Gernhard
+    - Lithuanian (lt.po) by Kęstutis Biliūnas
+    - Polish (pl.po) by Bartosz Fenski
+    - Romanian (ro.po) by Eddy Petrisor
+    - Russian (ru.po) by Yuri Kozlov
+    - Turkish (tr.po) by Recai Oktaş
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+
+ -- Joey Hess <joeyh@debian.org>  Sun,  1 May 2005 17:09:37 -0400
+
+main-menu (1.02) unstable; urgency=low
+
+  * Updated translations: 
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Catalan (ca.po) by Jordi Mallach
+    - Czech (cs.po) by Miroslav Kure
+    - Welsh (cy.po) by Dafydd Harries
+    - Danish (da.po) by Claus Hindsgaul
+    - German (de.po) by Dennis Stampfer
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Spanish (Castilian) (es.po) by Javier Fernandez-Sanguino Peña
+    - Basque (eu.po) by Piarres Beobide Egaña
+    - Finnish (fi.po) by Tapio Lehtonen
+    - French (fr.po) by French Team
+    - Hebrew (he.po) by Lior Kaplan
+    - Croatian (hr.po) by Krunoslav Gernhard
+    - Hungarian (hu.po) by VEROK Istvan
+    - Indonesian (id.po) by Debian Indonesia Team
+    - Japanese (ja.po) by Kenshi Muto
+    - Korean (ko.po) by Changwoo Ryu
+    - Lithuanian (lt.po) by Kęstutis Biliūnasn
+    - Latvian (lv.po) by Aigars Mahinovs
+    - Bøkmal, Norwegian (nb.po) by Bjorn Steensrud
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+    - Polish (pl.po) by Bartosz Fenski
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Romanian (ro.po) by Eddy Petrisor
+    - Russian (ru.po) by Russian L10N Team
+    - Slovak (sk.po) by Peter KLFMANiK Mann
+    - Slovenian (sl.po) by Jure Čuhalev
+    - Albanian (sq.po) by Elian Myftiu
+    - Swedish (sv.po) by Per Olofsson
+    - Turkish (tr.po) by Recai Oktaş
+    - Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+    - Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Joey Hess <joeyh@debian.org>  Wed,  6 Oct 2004 14:31:34 -0400
+
+main-menu (1.01) unstable; urgency=low
+
+  * Petter Reinholdtsen
+    - Remove myself as uploader.  I'm no longer developing this package.
+  * Updated translations: 
+    - Arabic (ar.po) by Ossama M. Khayat
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Bosnian (bs.po) by Safir Šećerović
+    - Catalan (ca.po) by Jordi Mallach
+    - Czech (cs.po) by Miroslav Kure
+    - Danish (da.po) by Claus Hindsgaul
+    - German (de.po) by Dennis Stampfer
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Spanish (Castilian) (es.po) by Javier Fernandez-Sanguino Peña
+    - Basque (eu.po) by Piarres Beobide Egaña
+    - Finnish (fi.po) by Tapio Lehtonen
+    - French (fr.po) by French Team
+    - Hebrew (he.po) by Lior Kaplan
+    - Croatian (hr.po) by Krunoslav Gernhard
+    - Japanese (ja.po) by Kenshi Muto
+    - Korean (ko.po) by Changwoo Ryu
+    - Lithuanian (lt.po) by Kęstutis Biliūnasn
+    - Latvian (lv.po) by Aigars Mahinovs
+    - Bøkmal, Norwegian (nb.po) by Axel Bojer
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+    - Polish (pl.po) by Bartosz Fenski
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Russian (ru.po) by Russian L10N Team
+    - Slovak (sk.po) by Peter KLFMANiK Mann
+    - Slovenian (sl.po) by Jure Čuhalev
+    - Swedish (sv.po) by Per Olofsson
+    - Turkish (tr.po) by Recai Oktaş
+    - Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 27 Sep 2004 21:21:24 -0400
+
+main-menu (1.00) unstable; urgency=low
+
+  * Bastian Blank
+    - Check for availability of debian-installer/language.
+  * Christian Perrier
+    - Rename templates file to main-menu.templates
+  * Joey Hess
+    - Remove the EXIT_QUIT and EXIT_RESTART return code handling
+      as that is no longer used. Closes: #258877
+    - This may as well be 1.0 with the rest of d-i.
+  * Updated translations: 
+    - Catalan (ca.po) by Jordi Mallach
+    - Danish (da.po) by Claus Hindsgaul
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - French (fr.po) by French Team
+    - Japanese (ja.po) by Kenshi Muto
+    - Lithuanian (lt.po) by Kęstutis Biliūnas
+    - Latvian (lv.po) by Aigars Mahinovs
+    - Bøkmal, Norwegian (nb.po) by 
+    - Polish (pl.po) by Bartosz Fenski
+    - Turkish (tr.po) by Recai Oktaş
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 27 Aug 2004 16:19:42 -0400
+
+main-menu (0.072) unstable; urgency=low
+
+  * Joey Hess
+    - Remove some dead code Bruce Perens noticed.
+  * Colin Watson
+    - Avoid empty entries in generated menu choices list; main-menu wrongly
+      assumed that the last package in the list is always installable.
+  * Updated translations:
+    - Arabic (ar.po) by Abdulaziz Al-Arfaj
+    - Croatian (hr.po) by Kruno
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 24 Jul 2004 03:27:54 +0100
+
+main-menu (0.071) unstable; urgency=low
+
+  * Bastian Blank
+    - Use X_SAVE.
+    - Fix backup.
+
+ -- Bastian Blank <waldi@debian.org>  Sat, 10 Jul 2004 22:26:58 +0200
+
+main-menu (0.070) unstable; urgency=low
+
+  * Bastian Blank
+    - Cleanup.
+    - Exit cleanly if asked to do so. Needs cdebconf 0.68.
+  * Updated translations: 
+    - Welsh (cy.po) by Dafydd Harries
+    - Basque (eu.po) by Piarres Beobide Egaña
+    - fa (fa.po) by Arash Bijanzadeh
+    - Finnish (fi.po) by Tapio Lehtonen
+
+ -- Bastian Blank <waldi@debian.org>  Sat, 10 Jul 2004 22:02:28 +0200
+
+main-menu (0.067) unstable; urgency=low
+
+  * Matt Kraai
+    - Do not skip a package unless all of the virtual packages that it
+      provides are provided by installed packages (closes: #247929).
+  * Updated translations:
+    - Spanish (Castilian) (es.po) by Javier Fernandez-Sanguino Peña
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+    - Vietnamese (vi.po) by Vũ Quang Trung
+  * Christian Perrier
+    - add myself to Uploaders
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 22 May 2004 08:46:36 +0200
+
+main-menu (0.066) unstable; urgency=low
+
+  * Updated translations: 
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Bokmal, Norwegian (nb.po) by Bjørn Steensrud
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+    - Romanian (ro.po) by Eddy Petrisor
+    - Vietnamese (vi.po) by Vu Quang Trung
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 23 Apr 2004 13:08:55 -0400
+
+main-menu (0.065) unstable; urgency=low
+
+  * Updated translations: 
+    - Finnish (fi.po) by Tapio Lehtonen
+    - Hebrew (he.po) by Lior Kaplan
+    - Indonesian (id.po) by Parlin Imanuel Toh
+    - Italian (it.po) by Giuseppe Sacco
+    - Bokmal, Norwegian (nb.po) by Axel Bojer
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+    - Turkish (tr.po) by Osman Yüksel
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 20 Apr 2004 10:44:06 -0400
+
+main-menu (0.064) unstable; urgency=low
+
+  * Updated translations: 
+    - Greek, Modern (1453-) (el.po) by Konstantinos Margaritis
+    - Basque (eu.po) by Piarres Beobide Egaña
+    - Gallegan (gl.po) by Héctor Fernández López
+    - Dutch (nl.po) by Bart Cornelis
+    - Polish (pl.po) by Bartosz Fenski
+    - Portuguese (pt.po) by Miguel Figueiredo
+    - Slovak (sk.po) by Peter KLFMANiK Mann
+    - Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 11 Apr 2004 21:00:47 -0400
+
+main-menu (0.063) unstable; urgency=low
+
+  * Joey Hess
+    - Don't raise priority when running neverdefault menu items.
+      Closes: #240182
+    - Comment out some debugging code.
+    - Add a nasty hack to detect backups. (Proper fix documented in TODO).
+    - Show a message when a menu item fails. Closes: #218597, #213015
+    - Don't link with -ggdb.
+  * Updated translations: 
+    - Catalan (ca.po) by Jordi Mallach
+    - Czech (cs.po) by Miroslav Kure
+    - Welsh (cy.po) by Dafydd Harries
+    - Danish (da.po) by Claus Hindsgaul
+    - German (de.po) by Dennis Stampfer
+    - Greek, Modern (1453-) (el.po) by Konstantinos Margaritis
+    - Spanish (Castilian) (es.po) by Javier Fernandez-Sanguino Peña
+    - French (fr.po) by Christian Perrier
+    - Gallegan (gl.po) by Héctor Fernández López
+    - Hebrew (he.po) by Lior Kaplan
+    - Hungarian (hu.po) by VERÓK István
+    - Indonesian (id.po) by Parlin Imanuel Toh
+    - Japanese (ja.po) by Kenshi Muto
+    - Korean (ko.po) by Changwoo Ryu
+    - Lithuanian (lt.po) by Kęstutis Biliūnas
+    - Polish (pl.po) by Bartosz Fenski
+    - Portuguese (pt.po) by Miguel Figueiredo
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Romanian (ro.po) by Eddy Petrisor
+    - Russian (ru.po) by Nikolai Prokoschenko
+    - Slovak (sk.po) by Peter KLFMANiK Mann
+    - Slovenian (sl.po) by Jure Čuhalev
+    - Albanian (sq.po) by Elian Myftiu
+    - Swedish (sv.po) by André Dahlqvist
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+    - Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Joey Hess <joeyh@debian.org>  Sun,  4 Apr 2004 16:10:43 -0400
+
+main-menu (0.062) unstable; urgency=low
+
+  * Joey Hess
+    - Backed out Denis's showold setting code of version 0.057. cdebconf's
+      new seen flag setting behavior (it never sets it) makes this
+      unnecessary.
+    - Don't set seen flags of main-menu's own templates, either.
+  * Updated translations: 
+    - Indonesian (id.po) by Parlin Imanuel Toh
+    - Turkish (tr.po) by Osman Yüksel
+    - Albanian (sq.po) by Elian Myftiu
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 30 Mar 2004 14:47:47 -0500
+
+main-menu (0.061) unstable; urgency=low
+
+  * Bastian Blank
+    - Use the permissive dependency resolver.
+    - Don't try to set the title of a non-menu-item.
+    - Build-Depend agains libdebian-installer4-dev (>= 0.20).
+
+ -- Bastian Blank <waldi@debian.org>  Mon, 15 Mar 2004 11:01:42 +0100
+
+main-menu (0.060) unstable; urgency=low
+
+  * Joey Hess
+    - Move the 900 constant out the the .h.
+  * Translations
+    - Dafydd Harries
+      - Added Welsh translation (cy.po)
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 13 Mar 2004 00:10:35 -0500
+
+main-menu (0.059) unstable; urgency=low
+
+  * Joshua Kwan
+    - Don't default to packages which are 'earlier' than the last
+      successfully configured package that has a value of less
+      than 900 (any higher are the packages that never get defaulted
+      to.), closes: #224633
+    - Add self to Uploaders.
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Mon,  8 Mar 2004 18:27:12 -0800
+
+main-menu (0.058) unstable; urgency=low
+
+  * Translations
+    - Bartosz Fenski
+      - Updated Polish translation (pl.po)
+    - Ming Hua
+      - Initial Traditional Chinese translation (zh_TW.po), by Tetralet
+      - Updated Traditional Chinese translation (zh_TW.po), by Tetralet
+    - Håvard Korsvoll
+      - Updated Norwegian, nynorsk translation (nn.po).
+    - Eddy Petrisor
+      - Initial Romanian translation (ro.po)
+    - Håvard Korsvoll
+      - Updated Norwegian, bokmål translation, (nb.po). From Axel Bojer
+
+ -- Joey Hess <joeyh@debian.org>  Tue,  2 Mar 2004 13:12:38 -0500
+
+main-menu (0.057) unstable; urgency=low
+
+  * Denis Barbier
+    - When a package is reconfigured, set debconf/showold to true and
+      restore the previous value after executing package script.
+      As soon as this package is uploaded, cdebconf-udeb can set
+      debconf/showold to false by default to fix #229648.
+  * Matt Kraai
+    - Remove an unused variable.
+  * Joey Hess
+    - Convert to using debhelper 4.2's udeb support.
+    - Update to debhelper v4 too.
+
+  * Translators:
+    - Eugen Meshcheryakov : added Ukrainian translation (uk.po)
+    - Kęstutis Biliūnas: updated Lithuanian translation (lt.po)
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 22 Feb 2004 21:57:47 -0500
+
+main-menu (0.056) unstable; urgency=low
+
+  * Bastian Blank
+    - Fix isinstallable calls.
+    - Build-Depend against libdebian-installer4-dev (>= 0.18).
+  * Joey Hess
+    - Remove the stderr interception and logging, it's all sent to the
+      messages file these days so this code was unnecessary.
+
+  * Translators:
+    - Peter Mann: update Slovak translation
+    - Jordi Mallach: Update Catalan translation.
+    - Lior Kaplan: initial Hebrew translation
+    - h3li0s: added Albanian translation (sq.po)
+    - Kenshi Muto: Updated Japanese translation (ja.po)
+
+ -- Joey Hess <joeyh@debian.org>  Thu,  5 Feb 2004 14:59:42 -0500
+
+main-menu (0.055) unstable; urgency=low
+
+  * Nikolai Prokoschenko
+    - Updated russian translation (ru.po)
+  * Safir Secerovic
+    - Update Bosnian translation (bs.po).
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 22 Jan 2004 19:53:40 -0500
+
+main-menu (0.054) unstable; urgency=low
+
+  * Ming Hua
+    - Updated Simplified Chinese translation (zh_CN.po), change the
+      encoding to UTF-8
+  * Bart Cornelis
+    - Merged Norwegian Nynorsk (nn.po) translation from skolelinux-cvs
+
+ -- Petter Reinholdtsen <pere@debian.org>  Wed, 31 Dec 2003 17:06:48 +0100
+
+main-menu (0.053) unstable; urgency=low
+
+  * Bart Cornelis 
+    - Merged Norwegian Bokmael (nb.po) translation from skolelinux-cvs
+  * Peter Mann
+    - Updated Slovak translations
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 25 Dec 2003 19:20:56 -0500
+
+main-menu (0.052) unstable; urgency=low
+
+  * Bartosz Fenski
+    - Updated Polish (pl) translation.
+  * Verok Istvan
+    - Initial Hungarian translation (hu.po)
+  * Anmar Oueja
+    - Initial Arabic translation. (ar.po)
+  * Arash Bijanzadeh
+    - Initial Farsi translation. (fa.po)
+  * Bart Cornelis
+    Updated Dutch translation (nl.po)
+  * Giuseppe Sacco
+    - updated italian translation
+    - switched to utf8
+  * Teófilo Ruiz Suárez
+    - Updated Spanish translation
+    - switching to utf8
+  * André Dahlqvist
+    - Update Swedish translation. (sv.po)
+  * Changwoo Ryu
+    - Initial Korean translation. (ko.po)
+  * Konstantinos Margaritis
+    - Updated Greek translation. (el.po)
+  * Peter Mann
+    - Updated Slovak translation. (sk.po)
+  * Petter Reinholdtsen
+    - Updated Norwegian Bokmål (nb.po).
+    - Update Norwegian Nynorsk (nn.po), thanks to Gaute Hvoslef Kvalnes.
+  * Miguel Figueiredo
+    - Added non-brazilian portuguese (pt.po).
+  * Ognyan Kulev
+    - Added/updated bulgarian translation (bg.po).
+  * Jure Cuhalev
+    - Added/updated slovenian translation (sl.po).
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 22 Dec 2003 13:39:44 -0500
+
+main-menu (0.051) unstable; urgency=low
+
+  * Dennis Stampfer
+    - Update German translation de.po
+  * Konstantinos Margaritis
+    - Initial Greek translation (el.po)
+  * Chris Tillman
+    - Christian Perrier's refinement and standardization, Closes: #220449
+    - Added ${VERSION} so the version will show in the main menu title
+  * Claus Hindsgaul
+    - Update Danish translation (da.po).
+  * Safir Šećerović
+    - Update Bosnian translation.
+  * Joey Hess
+    - Revert the ${VERSION} thing as it does not work.
+  * Peter Mann
+    - Initial Slovak translation (sk.po).
+  * Steinar H. Gunderson
+    - If main-menu encounters an unknown debconf/priority, it is no longer
+      interpreted as `critical', but as `medium'.
+  * Denis Barbier
+    - Fix a buffer overflow in menu_entry() when language contains an
+      underscore and the package description was not translated into
+      this language.
+    - Package descriptions could not be translated if LANGUAGE setting
+      contains any colon, which is a quite common case.
+  * Claus Hindsgaul
+    - Update Danish translation (da.po).
+  * Christian Perrier
+    - Update French translation.
+  * Tommi Vainikainen
+    - Update Finnish translation.
+  * André Luís Lopes
+    - Update pt_BR (Brazilian Portuguese) translation.
+  * Miroslav Kure
+    - Update Czech translation.
+  * Jordi Mallach
+    - Update Catalan translation.
+  * Kęstutis Biliūnas
+    - Updated Lithuanian translation.
+  * Kenshi Muto
+    - Update Japanese translation (ja.po)
+  * Ilgiz Kalmetev
+    - Update Russian translation. Closes: #221655.
+
+ -- Joey Hess <joeyh@debian.org>  Tue,  9 Dec 2003 15:36:22 -0500
+
+main-menu (0.050) unstable; urgency=low
+
+  * Kenshi Muto
+    - Update Japanese translation (ja.po)
+
+ -- Joey Hess <joeyh@debian.org>  Fri,  7 Nov 2003 21:56:09 -0500
+
+main-menu (0.049) unstable; urgency=low
+
+  * Bart Cornelis
+    - update Dutch translation (nl.po)
+  * André Luís Lopes
+    - Update pt_BR (Brazilian Portuguese) translation.
+      
+ -- Joey Hess <joeyh@debian.org>  Fri,  7 Nov 2003 13:41:03 -0500
+
+main-menu (0.048) unstable; urgency=low
+
+  * Joey Hess
+    - log an internal error if it cannot find the selected menu item
+    - cleaned up the template text a bit
+  * Safir Secerovic, Amila Akagic
+    - Add Bosnian translation (bs.po)
+  * Claus Hindsgaul
+    - Update Danish translation (da.po).
+  * André Luís Lopes
+    - Improve pt_BR (Brazilian Portuguese) translation a bit.
+  * Pierre Machard
+    - Run debconf-updatepo
+    - Update French translation.
+  * Kęstutis Biliūnas
+    - Update Lithuanian translation.
+  * Alastair McKinstry
+    - Fallback when we don't have translations for dialects; eg "de_CH" drops
+      back to the "de" translation if "de_CH" is missing.
+  * Miroslav Kure
+    - Update Czech (cs.po) translation.
+  * Tommi Vainikainen
+    - Update Finnish (fi.po) translation.
+  * Petter Reinholdtsen
+    - Updated Norwegian Bokmål (nb.po).
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 30 Oct 2003 18:23:08 -0500 
+
+main-menu (0.047) unstable; urgency=low
+
+  * Kęstutis Biliūnas
+    - Update Lithuanian translation (lt.po).
+  * Matt Kraai
+    - Do not default to a package that provides a virtual package that is
+      also provided by a package that is already installed (closes:
+      #216787).
+
+ -- Matt Kraai <kraai@debian.org>  Fri, 24 Oct 2003 01:06:09 -0700
+
+main-menu (0.046) unstable; urgency=low
+
+  * Tommi Vainikainen
+    - Add Finnish (fi.po) translation
+  * Matt Kraai
+    - Do not default to a package that provides a virtual package that is
+      also provided by a package that is already installed (closes:
+      #216787).
+    - Remove redundant build-dependency on dpkg-dev (>= 1.7.0).
+    - Add self to uploaders.
+
+ -- Matt Kraai <kraai@debian.org>  Mon, 20 Oct 2003 22:37:52 -0700
+
+main-menu (0.045) unstable; urgency=low
+
+  * Christian Perrier
+    - Improve French translation.
+  * Matt Kraai
+    - Set the title before configuring a package (Closes: #213725).
+  * Kęstutis Biliūnas
+    - Add Lithuanian (lt.po) translation.
+  * Claus Hindsgaul
+    - Actually include Danish translation (da.po) to CVS.
+  * Petter Reinholdtsen
+    - Removed Tollef Fog Heen as uploader.  He haven't touched the package
+      for a long time.
+    - Added myself as uploader.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sun, 19 Oct 2003 18:05:30 +0200
+
+main-menu (0.044) unstable; urgency=low
+
+  * Claus Hindsgaul
+    - Update da (Danish) translation.
+  * Alastair McKinstry
+    - Depend on libdebconfclient-dev > 0.47, for fixed debconf_capb() macro.
+  * Jure Cuhalev
+    - New  Slovenian translation. Closes: #214357.
+  * Petter Reinholdtsen
+    - Versioned depend against virtual package libdebconfclient-dev do not
+      work.  Depend on libdebconfclient0-dev instead.
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 12 Oct 2003 21:31:18 +0100
+
+main-menu (0.043) unstable; urgency=low
+
+  * Javier Fernandez-Sanguino:
+    - Updated spanish translation
+  * Alastair McKinstry
+    - Move to new debconf macros.
+  * Petter Reinholdtsen
+    - Update ru.po, thanks to patch from Ilgiz Kalmetev (Closes: #214357)
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sun, 12 Oct 2003 19:09:04 +0200
+
+main-menu (0.042) unstable; urgency=low
+
+  * Matt Kraai
+    - Set the title for menu entries (Closes: #213185).
+  * Bastian Blank
+    - Port to libdebian-installer api version 4.
+  * Petter Reinholdtsen
+    - Add Simplified Chinese debconf translation (zh_CN.po) thanks
+      to patch from Ming Hua.
+    - Avoid some compile warnings, based on a patch from Goswin
+      von Brederlow.
+    - Depend on libdebian-installer4-dev >= 0.17.  Patch from Goswin
+      von Brederlow.
+  * Miroslav Kure
+    - Initial Czech translation.
+  * Bart Cornelis
+    - Updated dutch translation (nl.po)
+
+ -- Bastian Blank <waldi@debian.org>  Thu, 09 Oct 2003 14:32:51 +0200
+
+main-menu (0.041) unstable; urgency=low
+
+  * Alastair McKinstry
+    - Convert changelog to UTF-8 as per policy.
+  * Matt Kraai
+    - Change menu entry template name from main-menu/<package> to
+      debian-installer/<package>/title.
+    - Preserve the user's choice to provide a virtual package (Closes:
+      #213360).
+
+ -- Sebastian Ley <ley@debian.org>  Thu,  2 Oct 2003 19:18:43 +0200
+
+main-menu (0.040) unstable; urgency=low
+
+  * Pierre Machard
+    - Update French po-debconf translation.
+  * Andre Luís Lopes
+    - Update pt_BR (Brazilian Portuguese) translation.
+  * Matt Kraai
+    - Fetch virtual package menu entries from debconf templates.
+  * Kenshi Muto
+    - Update ja.po.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sun, 28 Sep 2003 14:07:40 +0200
+
+main-menu (0.039) unstable; urgency=low
+
+  * Denis Barbier
+    - Run debconf-updatepo
+  * Jordi Mallach
+    - Added Catalan (ca) translation.
+  * Pierre Machard
+    - Proofread French po-debconf translation thanks to
+      [Christian Perrier]
+  * Kenshi Muto
+    - Update ja.po
+  * Andre Luís Lopes
+    - Update pt_BR (Brazilian Portuguese) translation.
+  * Bart Cornelis
+    - updated dutch translation
+  * Matt Kraai
+    - Fetch menu entries from debconf templates (Closes: #212922).
+    - Log packages that do not have a debconf menu entry.
+  * Petter Reinholdtsen
+    - Use SETTITLE instead of obsolete TITLE.
+    - Ran debconf2po-update.
+    - Updated nb.po.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat, 27 Sep 2003 17:50:12 +0200
+
+main-menu (0.038) unstable; urgency=low
+
+  * Petter Reinholdtsen
+    - Added Greek translation (el.po), received from
+      George Papamichelakis.
+    - Added Russian debconf template translation (ru.po), patch
+      from Serge Winitzki.
+    - Changed charset for el.po file, as it is invalid as UTF-8.
+      I am guessing that it might be ISO-8859-7, and use that in
+      the file header.
+    - Try to get parallel package handling working again.
+      Patch from Steinar H. Gunderson. (Closes: #210920)
+  * Sebastian Ley
+    - Better error handling of debconf priorities in error cases.
+      If something goes wrong, lower the debconf priority
+      (as before), but if things start to go right again, raise
+      the priority up to the default level.
+
+ -- Sebastian Ley <ley@debian.org>  Thu, 18 Sep 2003 14:35:02 +0200
+
+main-menu (0.037) unstable; urgency=low
+
+  * Bart Cornelis
+    - updated dutch translation (nl.po)
+  * Giuseppe Sacco
+    - Added italian translation (it.po)
+  * Javier Fernandez-Sanguino:
+    - Updated Spanish translation (es.po)
+  * Kenshi Muto
+    - Added Japanese translation (ja.po)
+
+ -- Petter Reinholdtsen <pere@debian.org>  Fri,  5 Sep 2003 23:04:38 +0200
+
+main-menu (0.036) unstable; urgency=low
+
+  * Petter Reinholdtsen
+    - Completed the german translation.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Wed, 30 Jul 2003 15:48:25 +0200
+
+main-menu (0.035) unstable; urgency=low
+
+  * Joey Hess
+    - Removed extra space in stderr output note.
+  * Petter Reinholdtsen
+    - Shortened the code by using di_logf() instead of di_log().
+    - Add some logging to the stderr handler.
+    - Send SIGUSR1 to cdebconf when a package is installed, to make sure
+      the debconf database is saved if something goes wrong.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Mon, 28 Jul 2003 23:26:55 +0200
+
+main-menu (0.034) unstable; urgency=low
+
+  * Pierre Machard
+    - Update fr.po. Thanks to Christian Perrier for proofread
+  * Florian Lohoff
+    - Updated de.po.  Thanks to from Maximilian Wilhelm.
+  * Aigars Mahinovs
+    - Added latvian translation (lv.po)
+  * Petter Reinholdtsen
+    - Updated nb.po.
+  * Sebastian Ley
+    - Added support for "isinstallable" control scripts in udebs
+      Works as described in doc/modules.txt
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat, 26 Jul 2003 23:53:21 +0200
+
+main-menu (0.033) unstable; urgency=low
+
+  * André Luís Lopes
+    - Run debconf-updatepo in order to feed more translatable string
+      for translators.
+    - Update Brazilian Portuguese (pt_BR) debconf template translations.
+  * Alastair McKinstry
+    - Convert changelog to UTF-8 for Standards-Version: 3.6.0
+
+ -- Alastair McKinstry <mckinstry@computer.org>  Sun, 20 Jul 2003 09:58:34 +0100
+
+main-menu (0.032) unstable; urgency=low
+
+  * Added stderr redirection, logging, and prettified display.
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 16 Jul 2003 18:33:30 +0200
+
+main-menu (0.031) unstable; urgency=low
+
+  * Bastian Blank
+    - add "exec" to the udpkg calls, ash isn't able to optimize the fork
+      away if it should execute only one command
+  * Joey Hess
+    - Moved status_read and config_package to libdebian-installer 0.15.
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 16 Jul 2003 16:46:11 +0200
+
+main-menu (0.030) unstable; urgency=low
+
+  * André Luís Lopes :
+    - Improve the wording of pt_BR translation a bit.
+  * Thorsten Sauter
+    - Include german translation (de.po)
+  * Martin Sjögren
+    - Recompile with libdebconfclient.
+    - Apply patch from David Nusinow to add some error handling to the
+      asprintf calls. (Closes: #193528)
+
+ -- Martin Sjogren <sjogren@debian.org>  Sat, 17 May 2003 19:45:44 +0200
+
+main-menu (0.029) unstable; urgency=low
+
+  * Petter Reinholdtsen
+    - Remove code to signal cdebconf on language change.  It is no longer
+      needed in cdebconf >= 0.36.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sun,  4 May 2003 11:00:28 +0200
+
+main-menu (0.028) unstable; urgency=low
+
+  * Petter Reinholdtsen
+    - Log the menu entry selected, to be able to track what happened
+      during automatic installation.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Thu, 17 Apr 2003 00:05:33 +0200
+
+main-menu (0.027) unstable; urgency=low
+
+  * Petter Reinholdtsen
+    - Log the old and new priority when lowering priority.
+    - Log the name of failing menu items.
+    - Log the package name and return value when unable to configure it.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat, 12 Apr 2003 11:08:26 +0200
+
+main-menu (0.026) unstable; urgency=low
+
+  * Sebastian Ley
+    - Unset the backup capability by calling debconfs "CAPB" in every loop.
+      This way only udebs that request backing up explicity will have the
+      capability set.
+  * Martin Sjögren
+    - Briefly turn backup on for the missing-provide question.
+  * Petter Reinholdtsen
+    - Rewrite how failing menu entries are handled.  Instead of increasing
+      the main menu priority, lower the debconf priority limit when
+      something fails.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sun,  6 Apr 2003 09:42:15 +0200
+
+main-menu (0.025) unstable; urgency=low
+
+  * Make sure language will be updated even when a language chooser is
+    configured indirectly (Closes: #184346).
+
+ -- Martin Sjogren <sjogren@debian.org>  Wed, 26 Mar 2003 10:08:03 +0100
+
+main-menu (0.024) unstable; urgency=low
+
+  * Petter Reinholdtsen
+    - Added Norwegian Bokmål and Nynorsk translations recieved from Bjørn
+      Steensrud and Gaute Hvoslef Kvalnes.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Tue,  4 Mar 2003 17:00:34 +0100
+
+main-menu (0.023) unstable; urgency=low
+
+  * Martin Sjögren
+    - When a menu item fails, set the menu question's priority to critical so
+      it will always be displayed. Based on a patch from pere. (Closes: #177723)
+    - Make sure that the missing provide question has priority critical if
+      there is no default value to the question.
+  * Petter Reinholdtsen
+    - Avoid memory leak in satisfy_virtual().
+
+ -- Martin Sjogren <sjogren@debian.org>  Sun, 26 Jan 2003 20:29:11 +0100
+
+main-menu (0.022) unstable; urgency=low
+
+  * Denis Barbier
+    - Add support for language selection.  Item 10 is by convention
+      language selection, and when it is called, the LANGUAGE environment
+      variable is updated as well as debconf backend by sending SIGUSR1
+      signal to debconf.
+  * Martin Sjögren
+    - Use a virtual package (language-selected) instead of i-m-i 10 to
+      indicate a language has been selected.
+    - Use di_list_free and di_pkg_free to free package lists.
+
+ -- Martin Sjogren <sjogren@debian.org>  Mon, 16 Dec 2002 19:49:55 +0100
+
+main-menu (0.021) unstable; urgency=low
+
+  * Martin Sjögren
+    - Make sure the default choice for resolving uninstalled menu items is at
+      the top
+    - Fix build-deps (Closes: #172805)
+  * André Luís Lopes :
+    - Sync pt_BR template translation with the original english.
+
+ -- Martin Sjogren <sjogren@debian.org>  Tue, 10 Dec 2002 11:56:55 +0100
+
+main-menu (0.020) unstable; urgency=low
+
+  * Martin Sjögren
+    - Move the toposort stuff to libdebian-installer
+
+ -- Martin Sjogren <sjogren@debian.org>  Sat,  7 Dec 2002 13:32:07 +0100
+
+main-menu (0.019) unstable; urgency=low
+
+  * Martin Sjögren
+    - Use new linked list stuff and package functions from libdebian-installer3
+    - Reimplement toposort with new linked list stuff
+    - Use toposort for the purpose of determining the default choice in the
+      menu
+    - Change maintainer to debian-boot and set dwhedon, tfheen and sjogren as
+      uploaders
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Thu,  5 Dec 2002 00:55:01 +0100
+
+main-menu (0.018) unstable; urgency=low
+
+  * Martin Sjögren
+    - Updates to debian/po/sv.po
+    - Don't run udpkg --configure on virtual packages
+  * Denis Barbier
+    - Replace "SUBST foo DEFAULT value" by "SET foo value"
+  * Tollef Fog Heen
+    - Don't use dpkg-reconfigure, use dpkg --force-configure --configure
+      instead.
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Tue, 26 Nov 2002 04:02:00 +0100
+
+main-menu (0.017) unstable; urgency=low
+
+  * Martin Sjögren
+    - Be more intelligent about the default choice when choosing between
+      several functionality-providing packages.
+  * Tollef Fog Heen
+    - Set correct default choice depending on both whether the item wants to
+      be default and the installer-menu-item number
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Thu, 14 Nov 2002 01:58:13 +0100
+
+main-menu (0.016) unstable; urgency=low
+
+  * Martin Sjögren
+    - Use libd-i2 with multiple provides
+    - Update the package_t structures when configuring packages so packages
+      won't be configured multiple times
+  * Convert to po-debconf, set Build-Depends: debhelper (>= 4.1.13)
+    to ensure that generated templates are right, and set output encoding
+    to UTF-8.
+  * André Luís Lopes
+    - Sync pt_BR translation with the original english.
+    - Set pt_BR.po's fields with right values instead
+      of the defaults provided.
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Wed,  6 Nov 2002 02:14:11 +0100
+
+main-menu (0.015) unstable; urgency=low
+
+  * Redirect menutests' standard output to /dev/null.
+  * Martin Sjögren
+    - When configuring virtual packages, only require one providing package,
+      and let the user choose which. Note that this will only happen if at
+      least one of the providing packages is a menu item.
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Thu, 24 Oct 2002 12:09:45 +0200
+
+main-menu (0.014) unstable; urgency=low
+
+  * Add french debconf template (closes: #138522)
+  * Apply patch from Martin Sjögren to use asprintf.
+  * Add Swedish debconf template.
+  * Add Brazilian Portuguese debconf template.
+  Martin Sjögren
+    - Use di_pkg_parse from libd-i
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Fri, 30 Aug 2002 17:09:38 +0200
+
+main-menu (0.013) unstable; urgency=low
+
+  * Don't use setlocale any more, this causes problems when strcmping
+    against a NULL value.
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Sun, 25 Aug 2002 21:36:45 +0200
+
+main-menu (0.012) unstable; urgency=low
+
+  * Build-depend on libcdebconf-dev instead of cdebconf-dev.
+  * Get rid of emacs changelog variables.
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Sun, 18 Aug 2002 14:40:28 +0200
+
+main-menu (0.011) unstable; urgency=low
+
+  * CFLAGS fix, Closes: #141428
+
+ -- Joey Hess <joeyh@debian.org>  Sat,  6 Apr 2002 11:40:34 -0500
+
+main-menu (0.010) unstable; urgency=low
+
+  * Select a default choice each time. 
+
+ -- Raphael Hertzog <hertzog@debian.org>  Sat,  4 Aug 2001 00:55:04 +0200
+
+main-menu (0.009) unstable; urgency=low
+
+  * Use seen flag rather than old isdefault flag. (The isdefault() function
+    just has an unfortunate name, it is really unconnected with these
+    flags..)
+
+ -- Joey Hess <joeyh@debian.org>  Fri,  4 May 2001 18:43:55 -0400
+
+main-menu (0.008) unstable; urgency=low
+
+  * Patch from Romain BEAUGRAND <rbeaugrand@easter-eggs.com> to order()
+    to fix the case of a package with no deps, which is added to the head 
+    of the list. Closes: #95315
+
+ -- Joey Hess <joeyh@debian.org>  Thu,  3 May 2001 21:12:57 -0400
+
+main-menu (0.007) unstable; urgency=low
+
+  * Really allow retrying of failed menu entries.
+
+ -- Joey Hess <joeyh@debian.org>  Thu,  8 Feb 2001 09:02:57 -0800
+
+main-menu (0.006) unstable; urgency=low
+
+  * Allow retrying of failed menu entries, patch from David Whedon.
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 31 Jan 2001 10:36:53 -0800
+
+main-menu (0.005) unstable; urgency=low
+
+  * Now build-depends on debconf-dev, and removed the hack.
+  * Some other minor changes by others.
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 21 Jan 2001 19:19:21 -0800
+
+main-menu (0.004) unstable; urgency=low
+
+  * Deal with half-configured packages.
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 31 Dec 2000 15:40:48 -0800
+
+main-menu (0.003) unstable; urgency=low
+
+  * Whoops, I missed one.
+
+ -- Joey Hess <joey@kitenet.net>  Thu, 21 Dec 2000 14:57:11 -0800
+
+main-menu (0.002) unstable; urgency=low
+
+  * Derelavatized paths for chroot.
+
+ -- Joey Hess <joey@kitenet.net>  Thu, 21 Dec 2000 14:23:04 -0800
+
+main-menu (0.001) unstable; urgency=low
+
+  * First release. Who knows if this will work, it depends on pools
+    getting rolled out and working by next dinstall run..
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 26 Oct 2000 12:02:04 -0700
+
+

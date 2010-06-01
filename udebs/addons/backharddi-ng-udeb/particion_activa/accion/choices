@@ -1,0 +1,14 @@
+#!/bin/sh
+
+dev=$1
+id=$2
+
+cd $dev
+
+if [ -f $id/gen ]; then
+	printf "accion\tGenerar copia de seguridad\n"
+elif [ -f $id/rest ]; then
+	printf "accion\tRestaurar copia de seguridad\n"
+else
+	printf "accion\tNo hacer nada\n"
+fi

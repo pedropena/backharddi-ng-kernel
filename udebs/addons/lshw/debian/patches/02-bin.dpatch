@@ -1,0 +1,19 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 02bin.dpatch by Ghe Rivero <ghe@upsa.es>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad lshw-02.11.01~/src/Makefile lshw-02.11.01/src/Makefile
+--- lshw-02.11.01~/src/Makefile	2007-09-12 09:19:02.000000000 +0200
++++ lshw-02.11.01/src/Makefile	2007-09-12 09:19:52.000000000 +0200
+@@ -4,7 +4,7 @@
+ 
+ DESTDIR?=/
+ PREFIX?=/usr
+-SBINDIR=$(PREFIX)/sbin
++SBINDIR=$(PREFIX)/bin
+ MANDIR=$(PREFIX)/share/man
+ DATADIR=$(PREFIX)/share
+ INSTALL?=install -p

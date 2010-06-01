@@ -1,0 +1,66 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+build: build-stamp
+
+build-stamp: 
+	dh_testdir
+	make
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	make clean
+	rm -f build-stamp configure-stamp
+	dh_clean 
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
+	debian/install-rc update.d backharddi
+	debian/install-rc valid_visuals.d backharddi
+	debian/install-rc visual.d backharddi
+	debian/install-rc particion_activa backharddi
+	debian/install-rc escoge_particion backharddi
+	debian/install-rc escoge_backup backharddi
+	debian/install-rc inicio.d backharddi
+	debian/install-rc auto backharddi
+	debian/install-rc escoge_dir backharddi
+	debian/install-rc fin.d backharddi
+	debian/install-rc auto.d partman
+	debian/install-rc finish.d partman
+	dh_install definitions.sh lib/backharddi
+	dh_install backharddi backharddi_do backharddi-monitor bin
+	dh_install pack_backup_metadata usr/bin
+	dh_install stidump bin
+	dh_install cmospwd bin
+	dh_install dd_rescue bin
+	dh_install split usr/bin
+	rm -rf `find debian/backharddi-udeb -name CVS`
+	rm -rf `find debian/backharddi-udeb -name .svn`
+
+binary-indep: build install
+
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installdebconf	
+	dh_strip
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install 

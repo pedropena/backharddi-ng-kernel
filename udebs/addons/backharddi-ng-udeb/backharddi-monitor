@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cmd="$(wget -q -O - http://$1:$2/command)"
+logger -t backharddi-monitor "Ejecutando $cmd"
+eval "$cmd"

@@ -1,0 +1,7 @@
+# This directive blacklists all devices which are members of the display class.
+# It has the main effect of stopping the udev/modprobe from loading the
+# fb drivers.
+
+# vendor, device, subsystem_vendor, subsystem_device, class, class, class
+install pci:v*d*sv*sd*bc03sc*i* /bin/true
+

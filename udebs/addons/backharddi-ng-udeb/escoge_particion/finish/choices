@@ -1,0 +1,8 @@
+#!/bin/sh
+
+. /usr/share/debconf/confmodule
+
+
+db_metaget backharddi/text/finalizar_seleccion description
+printf "finish\t$RET"
+

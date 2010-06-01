@@ -1,0 +1,12 @@
+/etc/modprobe.d/
+/etc/udev/
+/etc/udev/.dev/
+/lib/udev/
+/lib/udev/devices/
+/lib/firmware/
+/usr/lib/hotplug/firmware/
+/usr/share/bug/udev/
+/usr/share/initramfs-tools/hooks/
+/usr/share/initramfs-tools/scripts/init-premount/
+/usr/share/initramfs-tools/scripts/init-bottom/
+/sbin/

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+exec >&3
+
+echo "-- /etc/udev/rules.d/:"
+ls --format=long --almost-all --recursive /etc/udev/rules.d/
+echo
+
+echo "-- /sys/:"
+find /sys -name dev | grep -vE '/sys/class/(tty|vc|mem)/' | sort
+echo
+
+#echo "-- /dev/:"
+#ls --format=long --almost-all --recursive --ignore=.udev /dev/
+#echo
+
+echo "-- Kernel configuration:"
+for symbol in init_tmpfs isapnp_init; do
+  grep -E -q "^[^[:space:]]+ t ${symbol}$" /proc/kallsyms \
+    || echo " $symbol not present."
+done
+echo
+

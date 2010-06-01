@@ -1,0 +1,74 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+backup=$1
+auto=$3
+
+[ $backup = none ] && exit 0
+
+is_dir(){
+	db_get backharddi/medio
+	medio="$RET"
+	if [ "$medio" = net ]; then
+#		db_get backharddi/net/server
+#		server="$RET"
+#		db_get backharddi/net/service_port
+#		service_port="$RET"
+#		if [ x"$service_port" = x ]; then
+#			service_port=4600
+#		fi
+		basename $backup | grep -q ^+
+		return $?
+	else
+		! ls "$backup"/=dev=* >/dev/null 2>&1
+		return $?
+	fi
+}
+
+if is_dir; then
+	while true; do
+		ask_user /lib/backharddi/escoge_backup $backup $auto
+		exitcode="$?"
+		if [ "$exitcode" -ge 100 ]; then
+			break
+		fi
+	done	
+
+	if [ "$exitcode" -eq 100 ]; then
+		exit 100
+	else
+		exit 0
+	fi
+fi
+
+if [ x"$auto" = xauto ]; then
+       db_set backharddi/imagenes "$backup"
+       exit 100
+fi
+
+if backup_ok $backup; then
+	db_set backharddi/imagenes "$backup"
+	update_metadata
+	
+	while true; do
+		ask_user /lib/backharddi/escoge_particion $backup
+		exitcode="$?"
+		if [ "$exitcode" -ge 100 ]; then
+			break
+		fi
+	done	
+
+	if [ "$exitcode" -eq 100 ]; then
+		exit 100
+	else
+		restore_metadata
+		db_reset backharddi/imagenes
+		exit 0
+	fi
+else
+	db_input critical backharddi/no_devices || true
+	db_go || exit
+	db_get backharddi/no_devices
+	[ "$RET" = true ] && rm -rf $backup
+fi

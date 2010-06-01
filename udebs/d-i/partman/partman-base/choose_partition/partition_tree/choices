@@ -1,0 +1,5 @@
+#!/bin/sh
+
+. /lib/partman/definitions.sh
+
+partition_tree_choices

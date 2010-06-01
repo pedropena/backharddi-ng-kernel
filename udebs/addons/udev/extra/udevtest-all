@@ -1,0 +1,22 @@
+#!/bin/sh
+
+{
+
+for i in /sys/block/*; do
+  udevtest ${i#/sys}
+
+  for j in $i/*; do
+    [ -f $j/dev ] || continue
+    udevtest ${j#/sys}
+  done
+done
+
+for i in /sys/class/*; do
+  for j in $i/*; do
+    [ -f $j/dev ] || continue
+    udevtest ${j#/sys}
+  done
+done
+
+} | grep -v '^version '
+

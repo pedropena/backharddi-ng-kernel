@@ -1,0 +1,9 @@
+intl
+Makefile
+Makefile.in
+Makefile.in.in
+POTFILES
+.deps
+*.gmo
+partimage
+partimaged

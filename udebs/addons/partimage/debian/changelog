@@ -1,0 +1,837 @@
+partimage (0.6.4-17backharddi-ng1) unstable; urgency=low
+
+  * Primera versión de backharddi-ng
+
+ --  <pedro.pena@open-phoenix.com>  Wed, 09 Sep 2009 13:02:54 +0200
+
+partimage (0.6.4-17backharddi1) unstable; urgency=low
+
+  * Se aplican los parches de Debian.
+  * Se muestra progreso en la interfaz en modo texto.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Fri, 28 Dec 2007 12:25:03 +0000
+
+partimage (0.6.4-17) unstable; urgency=low
+
+  * Update maintainer email address to biebl@debian.org.
+  * Switch debian/partimaged-passwd to /bin/bash, it uses bash only
+    features, like read -s.
+  * debian/patches/disable_header_check.diff
+    - Added. Disable header check for amd64. Closes: #391046
+      This patch is a workaround. A proper fix is expected in the next
+      upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 25 Oct 2006 02:41:43 +0200
+
+partimage (0.6.4-16) unstable; urgency=medium
+
+  * Updated xfs.diff to fix a FTBFS on amd64. Closes: #374633
+    Thanks to Andreas Jochens for the patch.
+  * Fixed small typo in package description and README file. Closes: #390249
+  * Added a Recommends: db4-util | db4.3-util | db4.2-util. Closes: #376040
+  * Added LSB header to init script.
+
+ -- Michael Biebl <biebl@teco.edu>  Sat, 30 Sep 2006 01:47:17 +0200
+
+partimage (0.6.4-15) unstable; urgency=low
+
+  * Bumped debhelper compatibility to 5.
+  * Bumped Standards-Version to 3.7.2, no further changes required.
+  * Added homepage URL to package description.
+  * Added versioned dependency on lsb-base. Closes: #335953
+  * Updated patch xfs.diff to make partimage compile on ppc64. Closes: #361075
+    Thanks to Andreas Jochens.
+  * Do not recommend the usage of update-rc.d in /etc/default/partimaged but
+    suggest better alternatives. Closes: #367598
+  * Set the default debug level to 1.
+  * PAM support is back. Added empty_salt.diff to fix the crash related to
+    PAM. Also install a pam configuration file into /etc/pam.d/partimaged.
+    Because of security reasons an alternative authentication scheme was
+    implemented using its own password file in /etc/partimaged/passwd.db.
+    Wrote a small tool called partimage-passwd to simplify the management 
+    of this user database. Closes: #339745
+    Updated instructions in README.Debian and added a manpage for
+    partimaged-passwd.
+  * Synced the list of supported file systems in package description, manpage,
+    README, help and compile time info. Closes: 338735
+
+ -- Michael Biebl <biebl@teco.edu>  Mon, 22 May 2006 22:25:02 +0200
+
+partimage (0.6.4-14) unstable; urgency=low
+
+  * Removed dependency to debconf for partimage-server (forgot to do that in
+    0.6.4-12).
+
+ -- Michael Biebl <biebl@teco.edu>  Mon, 26 Sep 2005 21:56:35 +0200
+
+partimage (0.6.4-13) unstable; urgency=low
+
+  * Added status line to partimaged gui and hooks so that partimaged can be
+    stopped from keyboard. Closes: #179775
+  * Switched build system to cdbs.
+  * Extracted Debian specific modifications and moved them to separate patches
+    in debian/patches.
+  * Updated FSF address in copyright file.
+
+ -- Michael Biebl <biebl@teco.edu>  Tue,  6 Sep 2005 19:29:14 +0200
+
+partimage (0.6.4-12) unstable; urgency=low
+
+  * Updated to Debian Policy Standards Version 3.6.2.
+  * Reworked maintainer scripts. Removed bashisms and improved the creation of
+    the system user/group partimag.
+  * Added dependency to adduser and lsb-base for partimage-server.
+  * Rebuild against libslang2. Closes: #316000, #321547
+  * Changed architecture back to any. Added some notes about possible problems
+    in README.Debian. Closes: #321557
+  * Removed pam support for partimage-server. Seems to be broken by the GCC4
+    transition.
+  * Enabled cheuid for partimage-server. partimaged now drops its privileges
+    on startup and runs as uid "partimag". The default behaviour now is to
+    start partimaged on system startup. Closes: #297935
+  * Removed debconf questions. Providing sane defaults and giving instructions
+    in README.Debian how to change the defaults instead.
+    Closes: #311099, #316699, #315146, #316698
+  * Revised man pages. Closes: #211204
+  * Directory /var/log/partimage is created for partimage package. 
+    Closes: #301244
+
+ -- Michael Biebl <biebl@teco.edu>  Fri, 12 Aug 2005 02:26:57 +0200
+
+partimage (0.6.4-11) unstable; urgency=high
+
+  * New maintainer. Closes: #301562
+  * Revised German translation, switched German po files to UTF-8 encoding.
+  * Changed the description of the package.
+  * Removed build dependencies to automake, autoconf and autotools-dev
+  * Thanks to Anibal for sponsoring this package.
+
+ -- Michael Biebl <biebl@teco.edu>  Tue, 10 May 2005 00:23:14 +0200
+
+partimage (0.6.4-10.2) unstable; urgency=high
+
+  * NMU by Anibal Monsalve Salazar.
+  * Fixed RC bug #294953 "refuses to restore image on i386 which is
+    created on s390". Changed architecture from any to i386, closes:
+    #294953.
+
+ -- Anibal Monsalve Salazar <anibal@debian.org>  Mon, 09 May 2005 10:58:06 +1000
+
+partimage (0.6.4-10.1) unstable; urgency=low
+
+  * NMU
+  * Added complete GFDL text to debian/copyright and correct license
+    location to debian/man/*. Closes: #292240, #292241
+  * Removed configure call from debian/rules:clean
+
+ -- Paul Brossier <piem@altern.org>  Sat,  5 Feb 2005 03:40:46 +0000
+
+partimage (0.6.4-10) unstable; urgency=low
+
+  * Change to i386 only! Closes: #268248 
+
+ -- Sergio Rua <srua@debian.org>  Wed, 13 Oct 2004 12:16:25 +0100
+
+partimage (0.6.4-9) unstable; urgency=low
+
+  * Added portuguese po debconf. 
+
+ -- Sergio Rua <srua@debian.org>  Tue, 28 Sep 2004 05:03:46 +0100
+
+partimage (0.6.4-8) unstable; urgency=low
+
+  * I am sorry to say that ia64 will not be supported anymore. Closes: #259523 
+
+ -- Sergio Rua <srua@debian.org>  Wed, 22 Sep 2004 11:39:17 +0100
+
+partimage (0.6.4-7) unstable; urgency=low
+
+  *  Added patchs to document restoring from stdin. Thanks to
+     Andree Leidenfrost. Closes: #248076
+
+ -- Sergio Rua <srua@debian.org>  Tue, 15 Jun 2004 16:44:40 +0100
+
+partimage (0.6.4-6) unstable; urgency=low
+
+  * Added patch for compilation in amd64. Thanks to Andreas Jochens
+    Closes: #254014 
+
+ -- Sergio Rua <srua@debian.org>  Sat, 12 Jun 2004 16:36:24 +0100
+
+partimage (0.6.4-5) unstable; urgency=low
+
+  * Fixed wrong file size units on help. Closes: #243888 
+  * Added "-B" option into man page. Thanks to Andree Leidenfrost. 
+    Closes: #246316
+
+ -- Sergio Rua <srua@debian.org>  Wed,  5 May 2004 16:25:11 +0100
+
+partimage (0.6.4-4) unstable; urgency=low
+
+  * Added debconf translation to Catalan. Closes: #236650
+  * Fixed problem with the "-d" option. Closes: #236583
+
+ -- Sergio Rua <srua@debian.org>  Mon,  8 Mar 2004 10:00:31 +0000
+
+partimage (0.6.4-3) unstable; urgency=low
+
+  * Changed user creation order. Closes: #211366
+  * Decreased autoconf version. Closes: #234008 
+  * Added japaneses debconf translation. Closes: #233941
+  * Updated french debconf translation. Closes: #235512
+
+ -- Sergio Rua <srua@debian.org>  Mon,  1 Mar 2004 09:34:03 +0000
+
+partimage (0.6.4-2) unstable; urgency=low
+
+  * Added  Danish debconf translation. Closes: #233577
+  * Fixed typo in template. Closes: #214704
+  * Revised Spanish and Galician translations 
+
+ -- Sergio Rua <srua@debian.org>  Thu, 19 Feb 2004 09:22:43 +0000
+
+partimage (0.6.4-1) unstable; urgency=low
+
+  * New upstream release
+  * Corrected template mistype. Closes: #230603
+  * Updated Debian Policy Version.
+  * Updated config.* files
+
+ -- Sergio Rua <srua@debian.org>  Mon,  9 Feb 2004 10:03:27 +0000
+
+partimage (0.6.3-1) unstable; urgency=low
+
+  * Updated spanish debconf po file. Closes: #228103
+  * Added french debconf translation. Closes: #214863
+  * Updated libssl dependencies. Closes: #191502
+
+ -- Sergio Rua <srua@debian.org>  Tue,  3 Feb 2004 15:30:54 +0000
+
+partimage (0.6.2.final-9) unstable; urgency=low
+
+  * Added patch to migrate debconf templates to gettext. Closes: #214388
+  * Removed not translated file br.po Closes: #200863 
+
+ -- Sergio Rua <srua@debian.org>  Mon,  6 Oct 2003 11:26:58 +0100
+
+partimage (0.6.2.final-8) unstable; urgency=low
+
+  * Closes: #203702: Error at package installation. Replaced "user.group" by
+    "user:group" in the chown syntax
+  * Upgraded german translation
+
+ -- Sergio Rua <srua@debian.org>  Fri,  8 Aug 2003 10:26:05 +0100
+
+partimage (0.6.2.final-7) unstable; urgency=low
+
+  * Added man pages from partimage-doc. Closes: #200600 
+
+ -- Sergio Rua <srua@debian.org>  Wed,  9 Jul 2003 13:40:52 +0100
+
+partimage (0.6.2.final-6) unstable; urgency=low
+
+  * Fixed restart problem with partimage-server. Closes: #198631 
+  * This rebuild using the last libnewt should Closes: #197084
+
+ -- Sergio Rua <srua@debian.org>  Thu, 26 Jun 2003 09:02:45 +0100
+
+partimage (0.6.2.final-5) unstable; urgency=low
+
+  * Added option "-d" to select a target directory for the images. 
+    Closes: #195081
+  * Update man page. Closes: #195077
+  * Applied 'really_batchmode' patch from Ian Jackson. Closes: #187898
+
+ -- Sergio Rua <srua@debian.org>  Thu, 29 May 2003 15:09:10 +0100
+
+partimage (0.6.2.final-4) unstable; urgency=low
+
+  * Fixed some problems in the postinst and postrm script in partimage-server. 
+    Closes: #195026
+
+ -- Sergio Rua <srua@debian.org>  Wed, 28 May 2003 10:02:36 +0100
+
+partimage (0.6.2.final-3) unstable; urgency=medium
+
+  * Fixed bug on PPC thanks to Matthias Urlichs. Closes: #193391
+  * Removed slang1-dev from Build-depends. libnewt contains the dependency in
+    slang or slang-utf8
+  * Changed build-depends on newt to use the new version 0.51. Closes: #194087
+  * Moved to main
+
+ -- Sergio Rua <srua@debian.org>  Tue, 20 May 2003 14:41:08 +0100
+
+partimage (0.6.2.final-2) unstable; urgency=low
+
+  * Updated config.sub and config.guess Closes: #173798 
+
+ -- Sergio Rua <srua@debian.org>  Fri, 20 Dec 2002 23:27:25 +0000
+
+partimage (0.6.2.final-1) unstable; urgency=low
+
+  * New upstream release 
+  * Removed g++ from build-depends according with the section 2.4.2 of the
+    Debian Policy and suggested by Adrian Bunk. Closes: #168011
+  * Closes upload wishlist. Closes: #172167
+
+ -- Sergio Rua <srua@debian.org>  Sun,  8 Dec 2002 14:33:16 +0000
+
+partimage (0.6.2rc11-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sergio Rua <srua@debian.org>  Thu, 14 Nov 2002 18:26:13 +0000
+
+partimage (0.6.2rc5-6) unstable; urgency=low
+
+  * Added a patch to allow compatibility between 0.6.x. Closes: #166083 
+
+ -- Sergio Rua <srua@debian.org>  Thu, 24 Oct 2002 17:33:58 +0100
+
+partimage (0.6.2rc5-5) unstable; urgency=low
+
+  * Fixed 'make clean' entry from rules file. Closes: #165620 
+
+ -- Sergio Rua <srua@debian.org>  Mon, 21 Oct 2002 13:49:02 +0100
+
+partimage (0.6.2rc5-4) unstable; urgency=low
+
+  * Added libtool to Build-Depends. Closes: #165266
+
+ -- Sergio Rua <srua@debian.org>  Fri, 18 Oct 2002 10:50:13 +0100
+
+partimage (0.6.2rc5-3) unstable; urgency=low
+
+  * Fixed an entry on debian/rules to execute a script that correct
+  wrong paths. Closes: #165102
+
+ -- Sergio Rua <srua@debian.org>  Wed, 16 Oct 2002 23:44:29 +0100
+
+partimage (0.6.2rc5-2) unstable; urgency=low
+
+  * Updated config.sub and config.guess 
+
+ -- Sergio Rua <srua@debian.org>  Wed, 16 Oct 2002 10:40:18 +0100
+
+partimage (0.6.2rc5-1) unstable; urgency=low
+
+  * New upstream release.
+  * Changed auth module to libpam.
+  * Fixed syntax on init script. Closes: #164580
+  * New 'change uid' feature to allow authentication when you runs partimaged
+    as partimag user. Closes: #159834
+
+ -- Sergio Rua <srua@debian.org>  Tue, 15 Oct 2002 00:03:12 +0100
+
+partimage (0.6.1-27) unstable; urgency=low
+
+  * Removed install-doc call and usr-doc-link not longer requiered.
+  Changed --disabled-login to --disbled-password on adduser call. 
+  Closes: #162051 
+
+ -- Sergio Rua <srua@debian.org>  Tue,  8 Oct 2002 11:51:19 +0100
+
+partimage (0.6.1-26) unstable; urgency=low
+
+  * Removed doc-base. Documentation is now in partimage-doc. Closes: #163103 
+
+ -- Sergio Rua <srua@debian.org>  Wed,  2 Oct 2002 20:02:40 +0200
+
+partimage (0.6.1-25) unstable; urgency=low
+
+  * Added 'g++' to build-depends. Closes: #163066 
+
+ -- Sergio Rua <srua@debian.org>  Wed,  2 Oct 2002 12:39:50 +0200
+
+partimage (0.6.1-24) unstable; urgency=medium
+
+  * Remove ./autogen.sh call from rules file. Not needed and fails with the
+    new autoconf package. 
+
+ -- Sergio Rua <srua@debian.org>  Mon,  2 Sep 2002 10:43:39 +0200
+
+partimage (0.6.1-23) unstable; urgency=low
+
+  * This package doesn't contains documentation so, the call to install-docs
+    fails. Now, install-docs it's only called if there are something in
+    /usr/share/doc-base. Close: #155023
+
+ -- Sergio Rua <srua@debian.org>  Thu,  1 Aug 2002 16:28:47 +0200
+
+partimage (0.6.1-22) unstable; urgency=low
+
+  * Suggested by Robert Bihlmeyer, I changed the openssl command in postinst
+    to be non-interactive. Now, it doesn't ask for password. Close: #153837
+
+ -- Sergio Rua <srua@debian.org>  Wed, 31 Jul 2002 10:23:48 +0200
+
+partimage (0.6.1-21) unstable; urgency=low
+
+  * Added a /etc/default/partimage-server configuration file. There, you can
+    define is partimage-server is executed at boot time 
+
+ -- Sergio Rua <srua@debian.org>  Thu, 13 Jun 2002 10:31:14 +0200
+
+partimage (0.6.1-20) unstable; urgency=low
+
+  * Removed doc-base. Close bug #148018
+
+ -- Sergio Rua <srua@debian.org>  Fri, 24 May 2002 15:43:25 +0200
+
+partimage (0.6.1-19) unstable; urgency=low
+
+  * Added a authors patch to fix some bugs. Added too a warning about
+  devfs. This version can't be used on a system with a non mounted devfs 
+
+ -- Sergio Rua <srua@debian.org>  Fri, 10 May 2002 11:17:58 +0200
+
+partimage (0.6.1-18) unstable; urgency=low
+
+  * More macro additions to reopened bug #144693
+  Close bug #145562 about not existent file /var/run/partimaged
+
+ -- Sergio Rua <srua@debian.org>  Mon,  6 May 2002 10:06:01 +0200
+
+partimage (0.6.1-17) unstable; urgency=low
+
+  * Patched some files because on hppa it can't locate a defined macro.
+  Now, macro is defined inside files with errors.  Close bug #144693
+
+ -- Sergio Rua <srua@debian.org>  Tue, 30 Apr 2002 10:01:50 +0200
+
+partimage (0.6.1-16) unstable; urgency=low
+
+  * Patch over alpha and ia64 doesn't was completed. This new release must be
+  compile in both.
+
+ -- Sergio Rua <srua@debian.org>  Fri, 26 Apr 2002 10:56:54 +0200
+
+partimage (0.6.1-15) unstable; urgency=low
+
+  * Added the same patch to support alpha. 
+
+ -- Sergio Rua <srua@debian.org>  Wed, 24 Apr 2002 12:23:14 +0200
+
+partimage (0.6.1-14) unstable; urgency=low
+
+  * Close bug #142624. Patched file fs_xfs.h adding a compiler directive
+    to use 'unsigned long int' in ia64 instead 'unsigned long long int'
+
+ -- Sergio Rua <srua@debian.org>  Wed, 24 Apr 2002 11:36:00 +0200
+
+partimage (0.6.1-13) unstable; urgency=low
+
+  * Updated Galician translation. Close #138917
+
+ -- Sergio Rua <srua@debian.org>  Tue, 26 Mar 2002 10:39:56 +0100
+
+partimage (0.6.1-12) unstable; urgency=low
+
+  * Added German template to partimage-server. (#138599)
+
+ -- Sergio Rua <srua@debian.org>  Mon, 18 Mar 2002 10:34:59 +0100
+
+partimage (0.6.1-11) unstable; urgency=low
+
+  * Changed /etc/init.d/partimaged to provide and efective way to start and
+    stop partimaged as daemon. 
+  * Updated man pages with a new version provided by partimage users.
+
+ -- Sergio Rua <srua@debian.org>  Wed, 27 Feb 2002 09:43:25 +0100
+
+partimage (0.6.1-10) unstable; urgency=low
+
+  * Actualiced Readme.Debian. Closes bug #135916
+
+ -- Sergio Rua <srua@debian.org>  Tue, 26 Feb 2002 17:40:23 +0100
+
+partimage (0.6.1-9) unstable; urgency=low
+
+  * More bugs fixed. Last release on a unfortuned day.
+  Closes #135725, #135769, #135777, #135786, #135791, #135829
+  * Added partimaged man page
+
+ -- Sergio Rua <srua@debian.org>  Tue, 26 Feb 2002 09:47:52 +0100
+
+partimage (0.6.1-8) unstable; urgency=low
+
+  * Minor bug on a manpage.
+  Closes bugs #135596, #135602, #135636, #135639, #135595
+
+ -- Sergio Rua <srua@debian.org>  Thu, 14 Feb 2002 13:20:10 +0100
+
+partimage (0.6.1-7) unstable; urgency=low
+
+  * Matthew Wilcox suggest (#133848) back to arch=any on control file.
+  I'm don't know if is possible to build partimage in all architectures.
+  Added call to ./autogen.sh to update config.sub and config.guess
+
+ -- Sergio Rua <srua@debian.org>  Thu, 14 Feb 2002 09:02:31 +0100
+
+partimage (0.6.1-6) unstable; urgency=low
+
+  * Close bug #131095. Changed /dev/nul for /dev/null 
+
+ -- Sergio Rua <srua@debian.org>  Mon, 28 Jan 2002 09:26:34 +0100
+
+partimage (0.6.1-5) unstable; urgency=low
+
+  * Closes bug #129112. Two error messages are reversed.
+
+ -- Sergio Rua <srua@debian.org>  Mon, 14 Jan 2002 16:39:12 +0100
+
+partimage (0.6.1-4) unstable; urgency=low
+
+  * Spelling error in description. Close bugs #125218 and #125386
+
+ -- Sergio Rua <srua@debian.org>  Wed, 19 Dec 2001 11:24:49 +0100
+
+partimage (0.6.1-3) unstable; urgency=low
+
+  * Restricted archs to close bug #121692
+
+ -- Sergio Rua <srua@debian.org>  Fri, 14 Dec 2001 10:30:34 +0100
+
+partimage (0.6.1-2) unstable; urgency=low
+
+  * Added autoconf and automake to Build-Depends. It should be close bug
+    #120967 
+    Now, checks if openssl already exists because before, on a upgrade, it
+    trieds to make it.
+
+ -- Sergio Rua <srua@debian.org>  Mon, 26 Nov 2001 15:29:30 +0100
+
+partimage (0.6.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Sergio Rua <srua@debian.org>  Thu, 22 Nov 2001 09:43:13 +0100
+
+partimage (0.6.0-3) unstable; urgency=low
+
+  * Fixed bug #120062. Missed /var/log/partimage dir.
+  Added partimag user and group creation in partimage-server postinst
+
+ -- Sergio Rua <srua@debian.org>  Mon, 19 Nov 2001 16:13:05 +0100
+
+partimage (0.6.0-2) unstable; urgency=low
+
+  * Fixed bugs #115436, #118338 and #118340. Some corrections in package 
+    description, changed conflict from partimage << 6.0 to partimage << 0.6.0
+    and added openssl to buid-depends.
+
+ -- Sergio Rua <srua@debian.org>  Mon,  5 Nov 2001 10:30:36 +0100
+
+partimage (0.6.0-1) unstable; urgency=low
+
+  * New upstream release. Divided in two packages: client and server. Also, it
+    uses SSL encryption.
+
+ -- Sergio Rua <srua@debian.org>  Mon, 22 Oct 2001 15:43:49 +0200
+
+partimage (0.3.6-5) unstable; urgency=low
+
+  * Bug #113884 fixed in -3 release, it's not fixed in -4. So, I was added
+    debhelper in build-depends to fix it.
+
+ -- Sergio Rua <srua@debian.org>  Thu, 11 Oct 2001 09:41:47 +0200
+
+partimage (0.3.6-4) unstable; urgency=low
+
+  * Fixed bug. When I changed DH_COMPAT=1 to DH_COMPAT=3 in the previous
+    release, I forgot to move "make install" from debin/tmp to
+    debian/partimage
+
+ -- Sergio Rua <srua@debian.org>  Wed, 10 Oct 2001 11:30:13 +0200
+
+partimage (0.3.6-3) unstable; urgency=low
+
+  * Changed DH_COMPAT=1 to DH_COMPAT=3 fixing build-depends
+
+ -- Sergio Rua <srua@debian.org>  Thu,  4 Oct 2001 15:38:55 +0200
+
+partimage (0.3.6-2) unstable; urgency=low
+
+  * Fixing build-depends 
+
+ -- Sergio Rua <srua@debian.org>  Sat, 11 Aug 2001 20:22:41 +0200
+
+partimage (0.3.6-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sergio Rua <srua@debian.org>  Thu, 17 May 2001 11:44:21 +0200
+
+partimage (0.3.5-1) unstable; urgency=low
+
+  * New path to log file
+  * Deleted REDME.Debian and INSTALL files from doc directory
+  * New upstream release
+
+ -- Sergio Rua <srua@debian.org>  Sat, 18 Nov 2000 19:36:23 +0100
+
+partimage (0.3.2-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Sergio Rua <srua@debian.org>  Thu, 2 Oct 2000 23:30:19 +0200
+
+Local variables:
+mode: debian-changelog
+End:
+partimage (0.6.1-27) unstable; urgency=low
+
+  * Removed install-doc call and usr-doc-link not longer requiered.
+  Changed --disabled-login to --disbled-password on adduser call. 
+  Closes: #162051 
+
+ -- Sergio Rua <srua@debian.org>  Tue,  8 Oct 2002 11:51:19 +0100
+
+partimage (0.6.1-26) unstable; urgency=low
+
+  * Removed doc-base. Documentation is now in partimage-doc. Closes: #163103 
+
+ -- Sergio Rua <srua@debian.org>  Wed,  2 Oct 2002 20:02:40 +0200
+
+partimage (0.6.1-25) unstable; urgency=low
+
+  * Added 'g++' to build-depends. Closes: #163066 
+
+ -- Sergio Rua <srua@debian.org>  Wed,  2 Oct 2002 12:39:50 +0200
+
+partimage (0.6.1-24) unstable; urgency=medium
+
+  * Remove ./autogen.sh call from rules file. Not needed and fails with the
+    new autoconf package. 
+
+ -- Sergio Rua <srua@debian.org>  Mon,  2 Sep 2002 10:43:39 +0200
+
+partimage (0.6.1-23) unstable; urgency=low
+
+  * This package doesn't contains documentation so, the call to install-docs
+    fails. Now, install-docs it's only called if there are something in
+    /usr/share/doc-base. Close: #155023
+
+ -- Sergio Rua <srua@debian.org>  Thu,  1 Aug 2002 16:28:47 +0200
+
+partimage (0.6.1-22) unstable; urgency=low
+
+  * Suggested by Robert Bihlmeyer, I changed the openssl command in postinst
+    to be non-interactive. Now, it doesn't ask for password. Close: #153837
+
+ -- Sergio Rua <srua@debian.org>  Wed, 31 Jul 2002 10:23:48 +0200
+
+partimage (0.6.1-21) unstable; urgency=low
+
+  * Added a /etc/default/partimage-server configuration file. There, you can
+    define is partimage-server is executed at boot time 
+
+ -- Sergio Rua <srua@debian.org>  Thu, 13 Jun 2002 10:31:14 +0200
+
+partimage (0.6.1-20) unstable; urgency=low
+
+  * Removed doc-base. Close bug #148018
+
+ -- Sergio Rua <srua@debian.org>  Fri, 24 May 2002 15:43:25 +0200
+
+partimage (0.6.1-19) unstable; urgency=low
+
+  * Added a authors patch to fix some bugs. Added too a warning about
+  devfs. This version can't be used on a system with a non mounted devfs 
+
+ -- Sergio Rua <srua@debian.org>  Fri, 10 May 2002 11:17:58 +0200
+
+partimage (0.6.1-18) unstable; urgency=low
+
+  * More macro additions to reopened bug #144693
+  Close bug #145562 about not existent file /var/run/partimaged
+
+ -- Sergio Rua <srua@debian.org>  Mon,  6 May 2002 10:06:01 +0200
+
+partimage (0.6.1-17) unstable; urgency=low
+
+  * Patched some files because on hppa it can't locate a defined macro.
+  Now, macro is defined inside files with errors.  Close bug #144693
+
+ -- Sergio Rua <srua@debian.org>  Tue, 30 Apr 2002 10:01:50 +0200
+
+partimage (0.6.1-16) unstable; urgency=low
+
+  * Patch over alpha and ia64 doesn't was completed. This new release must be
+  compile in both.
+
+ -- Sergio Rua <srua@debian.org>  Fri, 26 Apr 2002 10:56:54 +0200
+
+partimage (0.6.1-15) unstable; urgency=low
+
+  * Added the same patch to support alpha. 
+
+ -- Sergio Rua <srua@debian.org>  Wed, 24 Apr 2002 12:23:14 +0200
+
+partimage (0.6.1-14) unstable; urgency=low
+
+  * Close bug #142624. Patched file fs_xfs.h adding a compiler directive
+    to use 'unsigned long int' in ia64 instead 'unsigned long long int'
+
+ -- Sergio Rua <srua@debian.org>  Wed, 24 Apr 2002 11:36:00 +0200
+
+partimage (0.6.1-13) unstable; urgency=low
+
+  * Updated Galician translation. Close #138917
+
+ -- Sergio Rua <srua@debian.org>  Tue, 26 Mar 2002 10:39:56 +0100
+
+partimage (0.6.1-12) unstable; urgency=low
+
+  * Added German template to partimage-server. (#138599)
+
+ -- Sergio Rua <srua@debian.org>  Mon, 18 Mar 2002 10:34:59 +0100
+
+partimage (0.6.1-11) unstable; urgency=low
+
+  * Changed /etc/init.d/partimaged to provide and efective way to start and
+    stop partimaged as daemon. 
+  * Updated man pages with a new version provided by partimage users.
+
+ -- Sergio Rua <srua@debian.org>  Wed, 27 Feb 2002 09:43:25 +0100
+
+partimage (0.6.1-10) unstable; urgency=low
+
+  * Actualiced Readme.Debian. Closes bug #135916
+
+ -- Sergio Rua <srua@debian.org>  Tue, 26 Feb 2002 17:40:23 +0100
+
+partimage (0.6.1-9) unstable; urgency=low
+
+  * More bugs fixed. Last release on a unfortuned day.
+  Closes #135725, #135769, #135777, #135786, #135791, #135829
+  * Added partimaged man page
+
+ -- Sergio Rua <srua@debian.org>  Tue, 26 Feb 2002 09:47:52 +0100
+
+partimage (0.6.1-8) unstable; urgency=low
+
+  * Minor bug on a manpage.
+  Closes bugs #135596, #135602, #135636, #135639, #135595
+
+ -- Sergio Rua <srua@debian.org>  Thu, 14 Feb 2002 13:20:10 +0100
+
+partimage (0.6.1-7) unstable; urgency=low
+
+  * Matthew Wilcox suggest (#133848) back to arch=any on control file.
+  I'm don't know if is possible to build partimage in all architectures.
+  Added call to ./autogen.sh to update config.sub and config.guess
+
+ -- Sergio Rua <srua@debian.org>  Thu, 14 Feb 2002 09:02:31 +0100
+
+partimage (0.6.1-6) unstable; urgency=low
+
+  * Close bug #131095. Changed /dev/nul for /dev/null 
+
+ -- Sergio Rua <srua@debian.org>  Mon, 28 Jan 2002 09:26:34 +0100
+
+partimage (0.6.1-5) unstable; urgency=low
+
+  * Closes bug #129112. Two error messages are reversed.
+
+ -- Sergio Rua <srua@debian.org>  Mon, 14 Jan 2002 16:39:12 +0100
+
+partimage (0.6.1-4) unstable; urgency=low
+
+  * Spelling error in description. Close bugs #125218 and #125386
+
+ -- Sergio Rua <srua@debian.org>  Wed, 19 Dec 2001 11:24:49 +0100
+
+partimage (0.6.1-3) unstable; urgency=low
+
+  * Restricted archs to close bug #121692
+
+ -- Sergio Rua <srua@debian.org>  Fri, 14 Dec 2001 10:30:34 +0100
+
+partimage (0.6.1-2) unstable; urgency=low
+
+  * Added autoconf and automake to Build-Depends. It should be close bug
+    #120967 
+    Now, checks if openssl already exists because before, on a upgrade, it
+    trieds to make it.
+
+ -- Sergio Rua <srua@debian.org>  Mon, 26 Nov 2001 15:29:30 +0100
+
+partimage (0.6.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Sergio Rua <srua@debian.org>  Thu, 22 Nov 2001 09:43:13 +0100
+
+partimage (0.6.0-3) unstable; urgency=low
+
+  * Fixed bug #120062. Missed /var/log/partimage dir.
+  Added partimag user and group creation in partimage-server postinst
+
+ -- Sergio Rua <srua@debian.org>  Mon, 19 Nov 2001 16:13:05 +0100
+
+partimage (0.6.0-2) unstable; urgency=low
+
+  * Fixed bugs #115436, #118338 and #118340. Some corrections in package 
+    description, changed conflict from partimage << 6.0 to partimage << 0.6.0
+    and added openssl to buid-depends.
+
+ -- Sergio Rua <srua@debian.org>  Mon,  5 Nov 2001 10:30:36 +0100
+
+partimage (0.6.0-1) unstable; urgency=low
+
+  * New upstream release. Divided in two packages: client and server. Also, it
+    uses SSL encryption.
+
+ -- Sergio Rua <srua@debian.org>  Mon, 22 Oct 2001 15:43:49 +0200
+
+partimage (0.3.6-5) unstable; urgency=low
+
+  * Bug #113884 fixed in -3 release, it's not fixed in -4. So, I was added
+    debhelper in build-depends to fix it.
+
+ -- Sergio Rua <srua@debian.org>  Thu, 11 Oct 2001 09:41:47 +0200
+
+partimage (0.3.6-4) unstable; urgency=low
+
+  * Fixed bug. When I changed DH_COMPAT=1 to DH_COMPAT=3 in the previous
+    release, I forgot to move "make install" from debin/tmp to
+    debian/partimage
+
+ -- Sergio Rua <srua@debian.org>  Wed, 10 Oct 2001 11:30:13 +0200
+
+partimage (0.3.6-3) unstable; urgency=low
+
+  * Changed DH_COMPAT=1 to DH_COMPAT=3 fixing build-depends
+
+ -- Sergio Rua <srua@debian.org>  Thu,  4 Oct 2001 15:38:55 +0200
+
+partimage (0.3.6-2) unstable; urgency=low
+
+  * Fixing build-depends 
+
+ -- Sergio Rua <srua@debian.org>  Sat, 11 Aug 2001 20:22:41 +0200
+
+partimage (0.3.6-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sergio Rua <srua@debian.org>  Thu, 17 May 2001 11:44:21 +0200
+
+partimage (0.3.5-1) unstable; urgency=low
+
+  * New path to log file
+  * Deleted REDME.Debian and INSTALL files from doc directory
+  * New upstream release
+
+ -- Sergio Rua <srua@debian.org>  Sat, 18 Nov 2000 19:36:23 +0100
+
+partimage (0.3.2-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Sergio Rua <srua@debian.org>  Thu, 2 Oct 2000 23:30:19 +0200
+
+Local variables:
+mode: debian-changelog
+End:

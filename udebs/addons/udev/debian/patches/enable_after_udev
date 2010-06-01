@@ -1,0 +1,31 @@
+diff -ruNp udev-090.orig/udev_device.c udev-090/udev_device.c
+--- udev-090.orig/udev_device.c	2006-04-13 19:10:01.000000000 +0200
++++ udev-090/udev_device.c	2006-04-14 01:13:32.000000000 +0200
+@@ -108,10 +108,27 @@ static int rename_net_if(struct udevice 
+ 	return retval;
+ }
+ 
++/* return true if the udev database exists */
++static int dynamic_dev(void) {
++	char dbpath[PATH_MAX];
++	struct stat stats;
++
++	strlcpy(dbpath, udev_root, sizeof(dbpath));
++	strlcat(dbpath, "/"DB_DIR, sizeof(dbpath));
++	if (stat(dbpath, &stats) == 0)
++		return 1;
++	return 0;
++}
++
+ int udev_device_event(struct udev_rules *rules, struct udevice *udev)
+ {
+ 	int retval = 0;
+ 
++	if (major(udev->devt) != 0 && !dynamic_dev()) {
++		dbg("db not found, ignoring add event for %s", udev->dev->devpath);
++		return 0;
++	}
++
+ 	/* add device node */
+ 	if (major(udev->devt) != 0 && strcmp(udev->action, "add") == 0) {
+ 		struct udevice *udev_old;

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" ]; then
+	db_get backharddi/medio
+	if [ "$RET" = cdrom ]; then
+		printf "eliminar\t"
+	else
+		db_metaget backharddi/text/eliminar description
+		printf "eliminar\t$RET"
+	fi
+fi
+

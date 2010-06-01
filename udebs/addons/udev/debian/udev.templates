@@ -1,0 +1,24 @@
+Template: udev/reboot_needed
+Type: note
+_Description: Reboot needed after this upgrade
+ You are currently upgrading udev using an incompatible kernel version. A
+ compatible version is installed or being installed on your system, but 
+ you need to reboot using this new kernel as soon as the upgrade is 
+ complete.
+ .
+ Without a reboot with this new kernel version, your system may become 
+ UNUSABLE.
+
+Template: udev/new_kernel_needed
+Type: boolean
+Default: false
+_Description: Proceed with the upgrade nevertheless?
+ You are currently upgrading udev using an incompatible kernel version.
+ You MUST install a compatible kernel version (2.6.15 or more) before
+ proceeding with the upgrade, otherwise your system may become UNUSABLE.
+ Packages with a name starting with "linux-image-2.6-" provide a kernel
+ image usable with this new udev version.
+ .
+ If you choose to upgrade udev nevertheless, you should install a 
+ compatible kernel and reboot on it as soon as possible. You have been 
+ warned.

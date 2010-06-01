@@ -1,0 +1,49 @@
+#!/usr/bin/make -f
+
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+#DESTDIR=$(CURDIR)/debian/rootskel-gtk/
+
+build: build-stamp debian/templates
+build-stamp:
+	dh_testdir
+
+	$(MAKE) build
+
+	touch $@
+
+debian/templates: debian/templates-arch
+	debian/templates-build.pl $(DEB_HOST_ARCH) < $< > $@
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+
+	$(MAKE) clean
+	rm -f debian/templates
+
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+
+	$(MAKE) install
+	dh_link etc usr/local/etc
+
+binary-indep: build install
+
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installdebconf
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install

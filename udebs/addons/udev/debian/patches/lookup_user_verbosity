@@ -1,0 +1,21 @@
+diff -ruNp udev-103.orig/udev_utils.c udev-103/udev_utils.c
+--- udev-103.orig/udev_utils.c	2006-10-20 14:43:35.000000000 +0200
++++ udev-103/udev_utils.c	2006-11-26 16:06:01.000000000 +0100
+@@ -172,7 +172,7 @@ uid_t lookup_user(const char *user)
+ 	pw = getpwnam(user);
+ 	if (pw == NULL) {
+ 		if (errno == 0 || errno == ENOENT || errno == ESRCH)
+-			err("specified user '%s' unknown", user);
++			info("specified user '%s' unknown", user);
+ 		else
+ 			err("error resolving user '%s': %s", user, strerror(errno));
+ 	} else
+@@ -190,7 +190,7 @@ extern gid_t lookup_group(const char *gr
+ 	gr = getgrnam(group);
+ 	if (gr == NULL) {
+ 		if (errno == 0 || errno == ENOENT || errno == ESRCH)
+-			err("specified group '%s' unknown", group);
++			info("specified group '%s' unknown", group);
+ 		else
+ 			err("error resolving group '%s': %s", group, strerror(errno));
+ 	} else

@@ -1,0 +1,37 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 60_opt_O1.dpatch by  <martin.pitt@ubuntu.com>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Build with -O1 to work around cfdisk segfault
+
+@DPATCH@
+diff -urNad util-linux-2.12p/configure /tmp/dpep.54ETBp/util-linux-2.12p/configure
+--- util-linux-2.12p/configure	2004-12-20 23:20:35.000000000 +0100
++++ /tmp/dpep.54ETBp/util-linux-2.12p/configure	2005-08-15 15:13:57.000000000 +0200
+@@ -58,7 +58,7 @@
+ echo >> defines.h
+ 
+ CC=${CC-cc}
+-CFLAGS=${CFLAGS-"-O2"}
++CFLAGS=${CFLAGS-"-O1"}
+ LDFLAGS=${LDFLAGS-"-s"}
+ echo CC=$CC >> make_include
+ echo CFLAGS=$CFLAGS >> make_include
+diff -urNad util-linux-2.12p/MCONFIG /tmp/dpep.54ETBp/util-linux-2.12p/MCONFIG
+--- util-linux-2.12p/MCONFIG	2005-08-15 15:12:29.000000000 +0200
++++ /tmp/dpep.54ETBp/util-linux-2.12p/MCONFIG	2005-08-15 15:13:49.000000000 +0200
+@@ -138,12 +138,12 @@
+     CPUTAIL=486
+   endif
+   CPUOPT= $(CPUHEAD)$(CPUTAIL)
+-  OPT=          -pipe -O2 $(CPUOPT) -fomit-frame-pointer
++  OPT=          -pipe -O1 $(CPUOPT) -fomit-frame-pointer
+ else 
+   ifeq "$(ARCH)" "arm"
+     OPT=	-pipe -O2 -fsigned-char -fomit-frame-pointer
+   else
+-    OPT=	-O2 -fomit-frame-pointer
++    OPT=	-O1 -fomit-frame-pointer
+   endif
+ endif
+ 

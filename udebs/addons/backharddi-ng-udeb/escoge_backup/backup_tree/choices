@@ -1,0 +1,35 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+dir="$1"
+db_get backharddi/medio
+medio="$RET"
+if [ "$medio" = net ]; then
+	db_get backharddi/net/server
+	server="$RET"
+	db_get backharddi/net/service_port
+	service_port="$RET"
+	if [ x"$service_port" = x ]; then
+		service_port=4600
+	fi
+	backups=$(wget -q -O - http://$server:$service_port/listPartition?dir=$(echo $dir | escape_string))
+	for backup in $backups; do
+		backup_nombre=$(echo $backup | to_original_string)
+		printf "$dir/$backup\t%s\n" "$backup_nombre"
+	done
+else
+	for backup in $(ls "$dir"); do
+		[ -d "$dir/$backup" ] || continue
+		[ "$backup" = "boot" ] && continue
+		[ "$backup" = "lost+found" ] && continue
+		case "$backup" in
+			+*) true ;;
+			*) ls "$dir/$backup"/=dev=* >/dev/null 2>&1 || continue ;;
+		esac
+		backup_nombre=$(echo $backup | to_original_string)
+		printf "$dir/$backup\t%s\n" "$backup_nombre"
+	done
+fi
+
+[ "x$backup_nombre" = "x" ] && printf "none\t--Vacío--\n" 

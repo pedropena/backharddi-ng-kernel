@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+cd $DEVICES
+if [ -f cmosgen ]; then
+	printf "cmosgen\tGenerar copia de seguridad de la CMOS\n"
+else
+	printf "cmosgen\tNo generar copia de seguridad de la CMOS\n"
+fi

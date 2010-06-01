@@ -1,0 +1,35 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+[ "$1" = nocrear_directorio ] && exit 0
+
+dir="$1"
+while true; do
+	db_input critical backharddi/directorio_nombre || true
+	if db_go; then
+		db_get backharddi/directorio_nombre
+		backup="$dir/$(echo +$RET | to_secure_string)" 
+		if [ -d "$backup" ]; then
+			db_input critical backharddi/directorio_existe || true
+			db_go || true
+			continue
+		fi
+		mkdir "$backup"
+		while true; do
+			ask_user /lib/backharddi/escoge_dir "$backup"
+			exitcode="$?"
+			if [ "$exitcode" -ge 100 ]; then
+				break
+			fi
+		done	
+		if [ "$exitcode" -eq 100 ]; then
+			exit 100
+		else
+			rmdir "$backup"
+			break
+		fi
+	else
+		break
+	fi
+done

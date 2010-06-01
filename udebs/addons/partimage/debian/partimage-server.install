@@ -1,0 +1,4 @@
+debian/tmp/usr/sbin/partimaged
+debian/partimage-certs.cnf /etc/partimaged/
+debian/partimagedusers /etc/partimaged/
+debian/partimaged-passwd /usr/sbin/

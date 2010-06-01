@@ -1,0 +1,76 @@
+Template: partman-target/help
+Type: note
+#flag:translate!:8
+_Description: Help on partitioning
+ Partitioning a hard drive consists of dividing it to create the space
+ needed to install your new system.  You need to choose which
+ partition(s) will be used for the installation.
+ .
+ Select a free space to create partitions in it.
+ .
+ Select a device to remove all partitions in it and create a new empty
+ partition table.
+ .
+ Select a partition to remove it or to specify how it should be used.
+ At a bare minimum, you need one partition to contain the root of the
+ file system (whose mount point is /).  Most people also feel that a
+ separate swap partition is a necessity.  "Swap" is scratch space for an
+ operating system, which allows the system to use disk storage as
+ "virtual memory".
+ .
+ When the partition is already formatted you may choose to keep and
+ use the existing data in the partition.  Partitions that will be used
+ in this way are marked with "${KEEP}" in the main partitioning menu.
+ .
+ In general you will want to format the partition with a newly created
+ file system.  NOTE: all data in the partition will be irreversibly
+ deleted.  If you decide to format a partition that is already
+ formatted, it will be marked with "${DESTROY}" in the main
+ partitioning menu.  Otherwise it will be marked with "${FORMAT}".
+ .
+ ${ARCHITECTURE_HELP}
+
+Template: partman-target/arch_help/i386/generic
+Type: text
+_Description: In order to start your new system, a so called boot loader is used.  It can be installed either in the master boot record of the first hard disk, or in a partition.  When the boot loader is installed in a partition, you must set the bootable flag for it. Such a partition will be marked with "${BOOTABLE}" in the main partitioning menu.
+
+Template: partman-target/arch_help/powerpc/powermac_newworld
+Type: text
+_Description: In order to start your new system, a so called boot loader is used.  It is installed in a boot partition.  You must set the bootable flag for the partition.  Such a partition will be marked with "${BOOTABLE}" in the main partitioning menu.
+
+Template: partman-target/same_mountpoint
+Type: error
+_Description: Identical mount points for two file systems
+ Two file systems are assigned the same mount point (${MOUNTPOINT}):
+ ${PART1} and ${PART2}.
+ .
+ Please correct this by changing mount points.
+
+Template: partman-target/no_root
+Type: error
+_Description: No root file system
+ No root file system is defined.
+ .
+ Please correct this from the partitioning menu.
+
+Template: partman-target/mount_failed
+Type: boolean
+_Description: Do you want to resume partitioning?
+ The attempt to mount a file system with type ${TYPE} in ${DEVICE} at
+ ${MOUNTPOINT} failed.
+ .
+ You may resume partitioning from the partitioning menu.
+
+Template: partman-target/choose_method
+Type: select
+Choices: ${CHOICES}
+_Description: How to use this partition:
+
+Template: partman-target/text/method
+Type: text
+_Description: Use as:
+
+Template: partman-target/text/get_help
+Type: text
+_Description: Help on partitioning
+

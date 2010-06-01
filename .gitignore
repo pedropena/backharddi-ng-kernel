@@ -1,0 +1,6 @@
+.pydevproject
+boot
+build/localudebs
+udebs/pbuilder
+udebs/apt
+usr

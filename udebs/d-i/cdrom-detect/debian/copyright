@@ -1,0 +1,7 @@
+This module provides CDROM detection for the Debian/GNU Linux installer.
+
+Author(s): Raphael Hertzog
+
+Copyright 2001 Raphael Hertzog <hertzog@debian.org>
+
+The copyright of this package is GPL, version 2 or later.

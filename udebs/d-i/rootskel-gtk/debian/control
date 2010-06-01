@@ -1,0 +1,13 @@
+Source: rootskel-gtk
+Section: debian-installer
+Priority: optional
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Uploaders: Frans Pop <fjp@debian.org>
+Build-Depends: debhelper (>= 4.2), dpkg-dev (>= 1.7.0)
+XS-Vcs-Svn: svn://svn.debian.org/d-i/trunk/packages/rootskel-gtk
+
+Package: rootskel-gtk
+XC-Package-Type: udeb
+Architecture: any
+Depends: ${misc:Depends}, rootskel, mouse-modules, gtk2-engines-udeb
+Description: Additions for graphical installs to skeleton root filesystem (debian-installer)

@@ -1,0 +1,43 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## disk_image.dpatch by Soren Hansen <soren@ubuntu.com>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Replace the use of O_DIRECT with calls to fsync() at appropriate times.
+## DP: Upstream: http://lists.alioth.debian.org/pipermail/parted-devel/2008-August/002392.html
+
+@DPATCH@
+diff -urNad parted-1.8.8.git.2008.03.24~/libparted/arch/linux.c parted-1.8.8.git.2008.03.24/libparted/arch/linux.c
+--- parted-1.8.8.git.2008.03.24~/libparted/arch/linux.c	2008-08-25 08:59:22.318140140 +0200
++++ parted-1.8.8.git.2008.03.24/libparted/arch/linux.c	2008-08-25 09:01:09.415346391 +0200
+@@ -65,15 +65,9 @@
+ #define HDIO_GETGEO             0x0301  /* get device geometry */
+ #define HDIO_GET_IDENTITY       0x030d  /* get IDE identification info */
+ 
+-#if defined(O_DIRECT) && !(defined(__s390__) || defined(__s390x__))
+-#define RD_MODE (O_RDONLY | O_DIRECT)
+-#define WR_MODE (O_WRONLY | O_DIRECT)
+-#define RW_MODE (O_RDWR | O_DIRECT)
+-#else
+ #define RD_MODE (O_RDONLY)
+ #define WR_MODE (O_WRONLY)
+ #define RW_MODE (O_RDWR)
+-#endif
+ 
+ struct hd_geometry {
+         unsigned char heads;
+@@ -1286,6 +1280,7 @@
+                         fd = open (name, WR_MODE, 0);
+                         if (fd > 0) {
+                                 ioctl (fd, BLKFLSBUF);
++                                fsync (fd);
+                                 close (fd);
+                         }
+                 }
+@@ -1348,6 +1343,7 @@
+ 
+         if (dev->dirty)
+                 _flush_cache (dev);
++        fsync (arch_specific->fd);
+         close (arch_specific->fd);
+         return 1;
+ }

@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/class/autotools.mk
+include /usr/share/cdbs/1/rules/debhelper.mk
+
+CFLAGS += $(shell getconf LFS_CFLAGS)
+
+DEB_CONFIGURE_EXTRA_FLAGS = --disable-dependency-tracking
+DEB_INSTALL_CHANGELOGS_ALL = NEWS
+DEB_INSTALL_DOCS_ALL = AUTHORS THANKS
+
+install/lzop::

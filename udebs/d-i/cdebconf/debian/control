@@ -1,0 +1,146 @@
+Source: cdebconf
+Section: utils
+Priority: optional
+Build-Depends: debhelper (>= 5.0.22), po-debconf (>= 0.5.0), libslang2-dev, libnewt-dev, libtextwrap-dev (>= 0.1-5), libdebian-installer4-dev (>= 0.41) | libdebian-installer-dev, libgtk-directfb-2.0-dev (>= 2.8.18-5), libcairo-directfb2-dev
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Uploaders: Randolph Chung <tausq@debian.org>, Martin Sjogren <sjogren@debian.org>, Joey Hess <joeyh@debian.org>, Colin Watson <cjwatson@debian.org>, Matt Kraai <kraai@debian.org>, Bastian Blank <waldi@debian.org>, Frans Pop <fjp@debian.org>, Jérémy Bobbio <lunar@debian.org>
+Standards-Version: 3.7.2.2
+Vcs-Svn: svn://svn.debian.org/d-i/trunk/packages/cdebconf
+
+Package: cdebconf
+Architecture: any
+Depends: ${shlibs:Depends}, debconf
+Provides: debconf-2.0
+Priority: extra
+Description: Debian Configuration Management System (C-implementation)
+ Debconf is a configuration management system for Debian packages. It is
+ used by some packages to prompt you for information before they are
+ installed. This is a reimplementation of the original debconf version
+ in C.
+
+Package: libdebconfclient0
+Architecture: any
+Section: libs
+Depends: ${shlibs:Depends}
+Description: Debian Configuration Management System (C-implementation)
+ Debconf is a configuration management system for Debian packages. It is
+ used by some packages to prompt you for information before they are
+ installed. This is a reimplementation of the original debconf version
+ in C.
+ .
+ This is the libraries needed by libdebconfclient-dev and cdebconf.
+
+Package: libdebconfclient0-dev
+Architecture: any
+Section: libdevel
+Depends: libdebconfclient0 (= ${binary:Version})
+Conflicts: libdebconfclient-dev, libdebconf-dev, libcdebconf-dev, cdebconf-dev
+Provides: libdebconfclient-dev
+Replaces: libdebconf-dev
+Description: Development files for cdebconf
+ Debconf is a configuration management system for Debian packages. It is
+ used by some packages to prompt you for information before they are
+ installed. This is a reimplementation of the original debconf version
+ in C.
+ .
+ This package contains files needed to do cdebconf development
+
+Package: cdebconf-udeb
+Architecture: any
+Section: debian-installer
+Priority: standard
+Depends: ${shlibs:Depends}
+Provides: debconf-2.0
+XC-Package-Type: udeb
+Description: Debian Configuration Management System (C-implementation)
+ Debconf is a configuration management system for Debian packages. It is
+ used by some packages to prompt you for information before they are
+ installed. This is a reimplementation of the original debconf version
+ in C.
+ .
+ cdebconf-udeb is a minimal cdebconf package used by the 
+ debian-installer
+
+Package: cdebconf-priority
+Architecture: all
+Section: debian-installer
+Priority: standard
+Depends: cdebconf-udeb
+XC-Package-Type: udeb
+XB-Installer-Menu-Item: 93000
+Description: Change debconf priority
+ This is a udeb that allows you to change the priority limit for the
+ questions.
+
+Package: libdebconfclient0-udeb
+Architecture: any
+Section: debian-installer
+Priority: optional
+Depends: ${shlibs:Depends}, cdebconf-udeb
+XC-Package-Type: udeb
+Description: Debian Configuration Management System (C-implementation)
+ Debconf is a configuration management system for Debian packages. It is
+ used by some packages to prompt you for information before they are
+ installed. This is a reimplementation of the original debconf version
+ in C.
+ .
+ This is a udeb version of libdebconfclient0.
+
+Package: cdebconf-slang-udeb
+Architecture: disabled
+Section: debian-installer
+Priority: optional
+Depends: cdebconf-udeb, di-utils-terminfo, ${shlibs:Depends}
+XC-Package-Type: udeb
+Description: S-Lang frontend for Debian Configuration Management System
+ Debconf is a configuration management system for Debian packages. It is
+ used by some packages to prompt you for information before they are
+ installed. This is a reimplementation of the original debconf version
+ in C.
+ .
+ cdebconf-slang-udeb is a minimal S-Lang frontend cdebconf package used
+ by the debian-installer.
+
+Package: cdebconf-newt-udeb
+Architecture: any
+Section: debian-installer
+Priority: optional
+Depends: cdebconf-udeb, di-utils-terminfo, ${shlibs:Depends}
+XC-Package-Type: udeb
+Description: Newt frontend for Debian Configuration Management System
+ Debconf is a configuration management system for Debian packages. It is
+ used by some packages to prompt you for information before they are
+ installed. This is a reimplementation of the original debconf version
+ in C.
+ .
+ cdebconf-newt-udeb is a minimal Newt frontend cdebconf package used
+ by the debian-installer.
+
+Package: cdebconf-text-udeb
+Architecture: any
+Section: debian-installer
+Priority: optional
+Depends: cdebconf-udeb, ${shlibs:Depends}
+XC-Package-Type: udeb
+Description: Plain text frontend for Debian Configuration Management System
+ Debconf is a configuration management system for Debian packages. It is
+ used by some packages to prompt you for information before they are
+ installed. This is a reimplementation of the original debconf version
+ in C.
+ .
+ cdebconf-text-udeb is a basic plain text frontend cdebconf package used
+ by the debian-installer.
+
+Package: cdebconf-gtk-udeb
+Architecture: any
+Section: debian-installer
+Priority: optional
+Depends: cdebconf-udeb, ${shlibs:Depends}, rootskel-gtk (>=0.05)
+XC-Package-Type: udeb
+Description: Gtk+ frontend for Debian Configuration Management System
+ Debconf is a configuration management system for Debian packages. It is
+ used by some packages to prompt you for information before they are
+ installed. This is a reimplementation of the original debconf version in C.
+ .
+ cdebconf-gtk-udeb is a minimal Gtk+ frontend cdebconf package used
+ by the debian-installer.

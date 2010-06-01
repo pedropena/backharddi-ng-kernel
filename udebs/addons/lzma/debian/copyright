@@ -1,0 +1,87 @@
+This package was debianized by Mohammed Adnène Trojette
+<adn+deb@diwi.org> on Fri May 5 18:01:06 CEST 2006.
+
+The current Debian maintainer is Mohammed Adnène Trojette
+<adn+deb@diwi.org>.
+
+It was downloaded from <http://www.7-zip.org/sdk.html>.
+
+LZMA SDK is Copyright (C) 1999-2006 Igor Pavlov.
+
+LZMA SDK is available under any of the following licenses:
+
+1. GNU Lesser General Public License (GNU LGPL)
+-----------------------------------------------
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+On Debian systems, the complete text of the GNU Lesser General Public
+License, can be found in /usr/share/common-licenses/LGPL.
+
+2. Common Public License (CPL)
+------------------------------
+
+Please see <http://www.eclipse.org/legal/cpl-v10.html>
+
+3. Simplified license for unmodified code
+-----------------------------------------
+
+Igor Pavlov, as the author of this code, expressly permits you to
+statically or dynamically link your code (or bind by name) to the files
+from LZMA SDK without subjecting your linked code to the terms of the
+CPL or GNU LGPL. Any modifications or additions to files from LZMA SDK,
+however, are subject to the GNU LGPL or CPL terms.
+
+4. Proprietary license
+----------------------
+
+LZMA SDK also can be available under a proprietary license which can
+include:
+
+   1. Right to modify code from LZMA SDK without subjecting modified
+code to the terms of the CPL or GNU LGPL
+
+   2. Technical support for LZMA SDK via email
+
+To request such proprietary license or any additional
+consultations, send email message from page for support:
+<http://www.7-zip.org/support.html>
+
+----------------------------------------------------------------------------
+
+debian/patches/* and lzma.1 are released under the terms of the GNU
+General Public License.
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License with
+  the Debian GNU/Linux distribution in file /usr/share/common-licenses/GPL;
+  if not, write to the Free Software Foundation, Inc., 51 Franklin St,
+  Fifth Floor, Boston, MA 02110-1301, USA.
+
+ On Debian systems, the complete text of the GNU General Public
+ License, version 2, can be found in /usr/share/common-licenses/GPL-2.
+
+----------------------------------------------------------------------------
+
+The current Debian packaging is (C) 2006-2007, Mohammed Adnène Trojette
+<adn+deb@diwi.org> and is licensed under the LGPL, see above.

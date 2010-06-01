@@ -1,0 +1,1461 @@
+cdrom-detect (1.20etch1backharddi-ng1) unstable; urgency=low
+
+  * Primera versión de backharddi-ng
+
+ --  <pedro.pena@open-phoenix.com>  Wed, 09 Sep 2009 12:57:58 +0200
+
+cdrom-detect (1.20etch1backharddi1) stable; urgency=low
+
+  * Se cambia el punto de montaje del cdrom a /target en lugar de /cdrom.
+  * Se elimina la búsqueda de información del instalador.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Fri, 28 Dec 2007 11:30:20 +0000
+
+cdrom-detect (1.20etch1) stable; urgency=low
+
+  [ Joey Hess ]
+  * After scanning CDs, scan for things that look like USB floppies to
+    list-devices, since these can sometimes really be USB CD drives.
+    (Which is probably a udev or kernel bug). Closes: #410006, 418850
+  * Needs di-utils 1.45etch1.
+
+ -- Frans Pop <fjp@debian.org>  Mon,  4 Jun 2007 21:16:51 +0200
+
+cdrom-detect (1.20) unstable; urgency=low
+
+  [ Updated translations ]
+  * Hebrew (he.po) by Lior Kaplan
+  * Malayalam (ml.po) by Praveen A
+  * Dutch (nl.po) by Bart Cornelis
+
+ -- Frans Pop <fjp@debian.org>  Tue, 27 Feb 2007 16:41:56 +0100
+
+cdrom-detect (1.19) unstable; urgency=low
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Belarusian (be.po) by Pavel Piatruk
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Danish (da.po) by Claus Hindsgaul
+  * Esperanto (eo.po) by Serge Leblanc
+  * Hebrew (he.po) by Lior Kaplan
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by Amed Çeko Jiyan
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malayalam (ml.po) by Praveen A
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovenian (sl.po) by Matej Kovačič
+  * Swedish (sv.po) by Daniel Nylander
+
+ -- Frans Pop <fjp@debian.org>  Wed, 31 Jan 2007 11:28:14 +0100
+
+cdrom-detect (1.18) unstable; urgency=low
+
+  * Simplify CD-ROM detection (remove automatic retry as code already allows
+    user to retry), and improve consistency in handling failures.
+    Patch by Osamu Aoki. Closes: #267168.
+  * Add missing debconf dependency.
+  * Add Lintian override for standards-version.
+  * Add myself to uploaders.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Belarusian (be.po) by Andrei Darashenka
+  * Esperanto (eo.po) by Serge Leblanc
+  * Estonian (et.po) by Siim Põder
+  * Basque (eu.po) by Piarres Beobide
+  * Hebrew (he.po) by Lior Kaplan
+  * Hindi (hi.po) by Nishant Sharma
+  * Croatian (hr.po) by Josip Rodin
+  * Italian (it.po) by Giuseppe Sacco
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Romanian (ro.po) by Eddy Petrișor
+  * Albanian (sq.po) by Elian Myftiu
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Turkish (tr.po) by Recai Oktaş
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Frans Pop <fjp@debian.org>  Tue, 24 Oct 2006 14:12:11 +0200
+
+cdrom-detect (1.17) unstable; urgency=low
+
+  * Put debhelper in Build-Depends rather than in Build-Depends-Indep.
+  * Use list-devices to look for CD devices. Requires di-utils 1.33.
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * German (de.po) by Jens Seidel
+  * Greek, Modern (1453-) (el.po) by quad-nrg.net
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Estonian (et.po) by Siim Põder
+  * Gujarati (gu.po) by Kartik Mistry
+  * Hebrew (he.po) by Lior Kaplan
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Dutch (nl.po) by Bart Cornelis
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Panjabi (pa.po) by A S Alam
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 31 Aug 2006 17:29:01 +0100
+
+cdrom-detect (1.16) unstable; urgency=low
+
+  * Change menu item number from 14 to 13. cdrom-detect, load-iso,
+    load-cdrom, ethdetect, and s390-netdevice are all changed due to this and
+    should transition together.
+    Closes: #373097
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 13 Jun 2006 20:29:51 -0400
+
+cdrom-detect (1.15) unstable; urgency=low
+
+  * prebaseconfig transition
+  * Remove unused .dirs file.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Catalan (ca.po) by Jordi Mallach
+  * Basque (eu.po) by Piarres Beobide
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Northern Sami (se.po) by Børre Gaup
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Joey Hess <joeyh@debian.org>  Wed,  7 Jun 2006 21:56:32 -0400
+
+cdrom-detect (1.14) unstable; urgency=low
+
+  * Always schedule apt-mirror-setup for installation. Whether it will be used
+    depends on the type of CD and the user.
+  * Only schedule apt-cdrom-setup for installation if the base system is
+    installable from the CD.
+
+  [ Updated translations ]
+  * Danish (da.po) by Claus Hindsgaul
+  * Dzongkha (dz.po)
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Hebrew (he.po) by Lior Kaplan
+  * Italian (it.po) by Giuseppe Sacco
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Slovenian (sl.po) by Jure Čuhalev
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Thai (th.po) by Theppitak Karoonboonyanan
+
+ -- Frans Pop <fjp@debian.org>  Thu, 18 May 2006 01:24:58 +0200
+
+cdrom-detect (1.13) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Rename debconf templates to cdrom/suite and cdrom/codename. These do not
+    need to be translatable, they are internal use.
+    Needs apt-setup 1:0.10, base-installer 1.56.
+
+  [ Frans Pop ]
+  * Schedule installation of choose-mirror for CDs that do not contain the
+    base system packages. Needed to support installation without using network
+    mirrors again.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Ognyan Kulev
+  * Bengali (bn.po) by Baishampayan Ghose
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Welsh (cy.po) by Dafydd Harries
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po) by Sonam Rinchen
+  * Greek, Modern (1453-) (el.po) by quad-nrg.net
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Tapio Lehtonen
+  * French (fr.po) by Christian Perrier
+  * Irish (ga.po) by Kevin Patrick Scannell
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hindi (hi.po) by Nishant Sharma
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Indonesian (id.po) by Parlin Imanuel Toh
+  * Italian (it.po) by Stefano Canepa
+  * Japanese (ja.po) by Kenshi Muto
+  * Khmer (km.po) by Leang Chumsoben
+  * Korean (ko.po) by Sunjae park
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Macedonian (mk.po) by Georgi Stanojevski
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Bart Cornelis
+  * Punjabi (pa.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Northern Sami (se.po) by Børre Gaup
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Jure Cuhalev
+  * Albanian (sq.po) by Elian Myftiu
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Tagalog (tl.po) by Eric Pareja
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Frans Pop <fjp@debian.org>  Wed, 19 Apr 2006 19:40:12 +0200
+
+cdrom-detect (1.12) unstable; urgency=low
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * German (de.po) by Jens Seidel
+  * Greek, Modern (1453-) (el.po) by Konstantinos Margaritis
+  * Finnish (fi.po) by Tapio Lehtonen
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Lior Kaplan
+  * Hindi (hi.po) by Nishant Sharma
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malagasy (mg.po) by Jaonary Rabarisoa
+  * Malagasy (pa_IN.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovenian (sl.po) by Jure Čuhalev
+  * Albanian (sq.po) by Elian Myftiu
+  * Swedish (sv.po) by Daniel Nylander
+  * Tagalog (tl.po) by Eric Pareja
+  * Turkish (tr.po) by Recai Oktaş
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Frans Pop <fjp@debian.org>  Mon, 23 Jan 2006 20:21:37 +0100
+
+cdrom-detect (1.11) unstable; urgency=low
+
+  * Also determine the codename of the release. This can be used later to
+    set apt sources by codename.
+
+ -- Frans Pop <fjp@debian.org>  Tue, 15 Nov 2005 20:30:19 +0100
+
+cdrom-detect (1.10) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Synchronise cdrom-detect/wrong-cd text with apt-setup/cd/bad in
+    base-config, avoiding unnecessary Debian "branding".
+
+  [ Joey Hess ]
+  * Queue apt-cdrom-setup for install, this is part of the apt-setup
+    replacement that I've not quite gotten around to finishing yet. In the
+    meantime, queuing it should be harmless.
+  * Use log-output.
+
+  * Updated translations: 
+    - Catalan (ca.po) by Guillem Jover
+    - Czech (cs.po) by Miroslav Kure
+    - Danish (da.po) by Claus Hindsgaul
+    - German (de.po) by Holger Wansing
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Esperanto (eo.po) by Serge Leblanc
+    - Spanish (es.po) by Javier Fernández-Sanguino Peña
+    - Persian (fa.po) by Arash Bijanzadeh
+    - French (fr.po) by Christian Perrier
+    - Galician (gl.po) by Jacobo Tarrio
+    - Italian (it.po) by Giuseppe Sacco
+    - Japanese (ja.po) by Kenshi Muto
+    - Kurdish (ku.po) by Erdal Ronahi
+    - Lithuanian (lt.po) by Kęstutis Biliūnas
+    - Macedonian (mk.po) by Georgi Stanojevski
+    - Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+    - Dutch (nl.po) by Bart Cornelis
+    - Polish (pl.po) by Bartosz Fenski
+    - Portuguese (pt.po) by Miguel Figueiredo
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Romanian (ro.po) by Eddy Petrisor
+    - Russian (ru.po) by Yuri Kozlov
+    - Slovak (sk.po) by Peter Mann
+    - Slovenian (sl.po) by Jure Čuhalev
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+    - Vietnamese (vi.po) by Clytie Siddall
+    - Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+    - Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 26 Sep 2005 16:55:44 +0200
+
+cdrom-detect (1.09) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Make indentation consistent.
+  
+  * Updated translations: 
+    - Catalan (ca.po) by Guillem Jover
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Basque (eu.po) by Piarres Beobide
+    - French (fr.po) by Christian Perrier
+    - Gallegan (gl.po) by Jacobo Tarrio
+    - Indonesian (id.po) by Arief S Fitrianto
+    - Lithuanian (lt.po) by Kęstutis Biliūnas
+    - Romanian (ro.po) by Eddy Petrişor
+    - Tagalog (tl.po) by Eric Pareja
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+    - Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 15 Jul 2005 16:44:12 +0300
+
+cdrom-detect (1.08) unstable; urgency=low
+
+  [Joey Hess ]
+  * Don't bother messing with mirror/suite's seen flag; this was instead
+    fixed in base-config.
+  * Remove udeb extended description.
+  
+  * Updated translations: 
+    - Catalan (ca.po) by Guillem Jover
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Basque (eu.po) by Piarres Beobide
+    - Portuguese (pt.po) by Miguel Figueiredo
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 13 Jun 2005 12:31:52 -0400
+
+cdrom-detect (1.07) unstable; urgency=low
+
+  * Joey Hess
+    - Don't just set mirror/suite; properly preseed it by marking it as seen.
+      This will allow apt-setup to ask the question at high priority as it
+      should be, w/o making the question be displayed during initial installs.
+  * Updated translations: 
+    - Arabic (ar.po) by Ossama M. Khayat
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Czech (cs.po) by Miroslav Kure
+    - Danish (da.po) by Claus Hindsgaul
+    - German (de.po) by Dennis Stampfer
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Spanish (es.po) by Javier Fernández-Sanguino Peña
+    - Basque (eu.po) by Piarres Beobide
+    - Hebrew (he.po) by Lior Kaplan
+    - Italian (it.po) by Giuseppe Sacco
+    - Japanese (ja.po) by Kenshi Muto
+    - Korean (ko.po) by Changwoo Ryu
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Romanian (ro.po) by Eddy Petrişor
+    - Russian (ru.po) by Yuri Kozlov
+    - Albanian (sq.po) by Elian Myftiu
+    - Turkish (tr.po) by Recai Oktaş
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 11 Jun 2005 13:31:25 -0400
+
+cdrom-detect (1.06) unstable; urgency=low
+
+  * Stephen R. Marenka
+    - m68k/atari/aranym workaround long cdrom filenames vs. find.
+  * Frans Pop
+    - Fail when the distribution (mirror/suite) cannot be determined.
+      Currently the user only finds out in base-installation. Closes: #271976
+    - Add option to not eject the installation CD before the reboot.
+      Closes: #295476
+  * Updated translations: 
+    - Arabic (ar.po) by Ossama M. Khayat
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Bosnian (bs.po) by Safir Šećerović
+    - Catalan (ca.po) by Guillem Jover
+    - Czech (cs.po) by Miroslav Kure
+    - Welsh (cy.po) by Dafydd Harries
+    - Danish (da.po) by Claus Hindsgaul
+    - German (de.po) by Dennis Stampfer
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Spanish (es.po) by Javier Fernandez-Sanguino Peña
+    - Finnish (fi.po) by Tapio Lehtonen
+    - French (fr.po) by Christian Perrier
+    - Gallegan (gl.po) by Jacobo Tarrio
+    - Hebrew (he.po) by Lior Kaplan
+    - Croatian (hr.po) by Krunoslav Gernhard
+    - Italian (it.po) by Stefano Canepa
+    - Japanese (ja.po) by Kenshi Muto
+    - Korean (ko.po) by Changwoo Ryu
+    - Lithuanian (lt.po) by Kęstutis Biliūnas
+    - Dutch (nl.po) by Frans Pop
+    - Polish (pl.po) by Bartosz Fenski
+    - Portuguese (pt.po) by Miguel Figueiredo
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Romanian (ro.po) by Eddy Petrisor
+    - Russian (ru.po) by Yuri Kozlov
+    - Slovak (sk.po) by Peter KLFMANiK Mann
+    - Slovenian (sl.po) by Jure Čuhalev
+    - Albanian (sq.po) by Elian Myftiu
+    - Swedish (sv.po) by Per Olofsson
+    - Turkish (tr.po) by Recai Oktaş
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+    - Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+    - Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Joey Hess <joeyh@debian.org>  Sun,  1 May 2005 17:18:41 -0400
+
+cdrom-detect (1.05) unstable; urgency=low
+
+  * Note that this includes variable substitution fixes for translated
+    templates.
+  * Updated translations: 
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Bosnian (bs.po) by Safir Šećerović
+    - Catalan (ca.po) by Jordi Mallach
+    - Welsh (cy.po) by Dafydd Harries
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Finnish (fi.po) by Tapio Lehtonen
+    - French (fr.po) by French Team
+    - Gallegan (gl.po) by Hctor Fenndez Lpez
+    - Hebrew (he.po) by Lior Kaplan
+    - Italian (it.po) by Davide Viti
+    - Lithuanian (lt.po) by Kęstutis Biliūnas
+    - Dutch (nl.po) by Bart Cornelis
+    - Portuguese (pt.po) by Miguel Figueiredo
+    - Romanian (ro.po) by Eddy Petrisor
+    - Russian (ru.po) by Dmitry Beloglazov
+    - Slovenian (sl.po) by Jure Čuhalev
+    - Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Joey Hess <joeyh@debian.org>  Wed,  2 Feb 2005 17:07:46 -0500
+
+cdrom-detect (1.04) unstable; urgency=low
+
+  * Updated translations: 
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Catalan (ca.po) by Jordi Mallach
+    - Czech (cs.po) by Miroslav Kure
+    - Welsh (cy.po) by Dafydd Harries
+    - Danish (da.po) by Claus Hindsgaul
+    - German (de.po) by Dennis Stampfer
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Spanish (Castilian) (es.po) by Javier Fernandez-Sanguino Peña
+    - Basque (eu.po) by Piarres Beobide Egaña
+    - Finnish (fi.po) by Tapio Lehtonen
+    - French (fr.po) by French Team
+    - Hebrew (he.po) by Lior Kaplan
+    - Croatian (hr.po) by Krunoslav Gernhard
+    - Hungarian (hu.po) by VEROK Istvan
+    - Indonesian (id.po) by Debian Indonesia Team
+    - Japanese (ja.po) by Kenshi Muto
+    - Korean (ko.po) by Changwoo Ryu
+    - Lithuanian (lt.po) by Kęstutis Biliūnasn
+    - Latvian (lv.po) by Aigars Mahinovs
+    - Bøkmal, Norwegian (nb.po) by Bjorn Steensrud
+    - Dutch (nl.po) by Bart Cornelis
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+    - Polish (pl.po) by Bartosz Fenski
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Romanian (ro.po) by Eddy Petrisor
+    - Russian (ru.po) by Russian L10N Team
+    - Slovak (sk.po) by Peter KLFMANiK Mann
+    - Slovenian (sl.po) by Jure Čuhalev
+    - Albanian (sq.po) by Elian Myftiu
+    - Swedish (sv.po) by Per Olofsson
+    - Turkish (tr.po) by Recai Oktaş
+    - Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+    - Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Joey Hess <joeyh@debian.org>  Wed,  6 Oct 2004 14:25:55 -0400
+
+cdrom-detect (1.03) unstable; urgency=low
+
+  * Updated translations: 
+    - Italian (it.po) by Davide Viti
+    - Bøkmal, Norwegian (nb.po) by Axel Bojer
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 27 Sep 2004 21:13:10 -0400
+
+cdrom-detect (1.02) unstable; urgency=low
+
+  * Colin Watson
+    - Put up a progress bar while scanning directories.
+  * Updated translations: 
+    - Arabic (ar.po) by Ossama M. Khayat
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Catalan (ca.po) by Jordi Mallach
+    - Czech (cs.po) by Miroslav Kure
+    - Danish (da.po) by Claus Hindsgaul
+    - German (de.po) by Dennis Stampfer
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Spanish (Castilian) (es.po) by Javier Fernandez-Sanguino Peña
+    - Basque (eu.po) by Piarres Beobide Egaña
+    - Finnish (fi.po) by Tapio Lehtonen
+    - French (fr.po) by French Team
+    - Hebrew (he.po) by Lior Kaplan
+    - Croatian (hr.po) by Krunoslav Gernhard
+    - Italian (it.po) by Davide Viti
+    - Japanese (ja.po) by Kenshi Muto
+    - Korean (ko.po) by Changwoo Ryu
+    - Lithuanian (lt.po) by Kęstutis Biliūnasn
+    - Polish (pl.po) by Bartosz Fenski
+    - Portuguese (pt.po) by Miguel Figueiredo
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Russian (ru.po) by Russian L10N Team
+    - Slovak (sk.po) by Peter KLFMANiK Mann
+    - Slovenian (sl.po) by Jure Čuhalev
+    - Swedish (sv.po) by Per Olofsson
+    - Turkish (tr.po) by Recai Oktaş
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+    - Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 23 Sep 2004 16:55:58 +0200
+
+cdrom-detect (1.01) unstable; urgency=low
+
+  * Joey Hess
+    - Remove the failure template, since it's got confusing wording, and
+      once we fail, main-menu will display its own, sufficient, failure
+      message. Closes: #265612
+  * Colin Watson
+    - Run 'find /cdrom/' once the CD is mounted, to get all the directories
+      into the dentry cache at once. This cuts down a lot on seek times
+      later.
+  * Updated translations: 
+    - Arabic (ar.po) by Ossama M. Khayat
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Bosnian (bs.po) by Safir Šećerović
+    - Catalan (ca.po) by Jordi Mallach
+    - Czech (cs.po) by Miroslav Kure
+    - Welsh (cy.po) by Dafydd Harries
+    - Danish (da.po) by Claus Hindsgaul
+    - German (de.po) by Dennis Stampfer
+    - Greek, Modern (1453-) (el.po) by Konstantinos Margaritis
+    - Spanish (Castilian) (es.po) by Javier Fernandez-Sanguino Peña
+    - Basque (eu.po) by Piarres Beobide Egaña
+    - Finnish (fi.po) by Tapio Lehtonen
+    - French (fr.po) by French Team
+    - Hebrew (he.po) by Lior Kaplan
+    - Croatian (hr.po) by Krunoslav Gernhard
+    - Japanese (ja.po) by Kenshi Muto
+    - Korean (ko.po) by Changwoo Ryu
+    - Lithuanian (lt.po) by Kęstutis Biliūnas
+    - Latvian (lv.po) by Aigars Mahinovs
+    - Bøkmal, Norwegian (nb.po) by Bjørn Steensrud
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+    - Polish (pl.po) by Bartosz Fenski
+    - Russian (ru.po) by Yuri Kozlov
+    - Slovak (sk.po) by Peter KLFMANiK Mann
+    - Slovenian (sl.po) by Matjaz Horvat
+    - Turkish (tr.po) by Recai Oktaş
+    - Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+
+ -- Joey Hess <joeyh@debian.org>  Mon,  6 Sep 2004 20:40:02 -0400
+
+cdrom-detect (1.00) unstable; urgency=low
+
+  * Updated translations: 
+    - Arabic (ar.po) by Ossama M. Khayat
+    - Danish (da.po) by Frederik Dannemare
+    - German (de.po) by Dennis Stampfer
+    - Croatian (hr.po) by Krunoslav Gernhard
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 25 Jul 2004 19:13:24 -0400
+
+cdrom-detect (0.59) unstable; urgency=low
+
+  * Osamu Aoki
+    - When CD mount fails, unmount it and try again, to work around DMA
+      issues. Closes: #255128
+    - Add logging around CD mounting.
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 28 Jun 2004 14:56:58 -0400
+
+cdrom-detect (0.58) unstable; urgency=low
+
+  * Updated translations: 
+    - Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 25 May 2004 15:30:32 -0300
+
+cdrom-detect (0.57) unstable; urgency=low
+
+  * Joey Hess
+    - Pass the custom title to hw-detect when calling it after loading a
+      driver floppy.
+  * Christian Perrier
+    - Ellipsis typography fixed
+  * Updated translations:
+    - Norwegian (nn.po) by Håvard Korsvoll
+    - Polish (pl.po) by Bartosz Fenski
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Russian (ru.po) by Nikolai Prokoschenko
+
+ -- Otavio Salvador <otavio@debian.org>  Tue, 18 May 2004 23:56:15 -0300
+
+cdrom-detect (0.56) unstable; urgency=low
+
+  * Updated translations: 
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Bokmal, Norwegian (nb.po) by Bjørn Steensrud
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 23 Apr 2004 13:00:36 -0400
+
+cdrom-detect (0.55) unstable; urgency=low
+
+  * Updated translations: 
+    - German (de.po) by Alwin Meschede
+    - Basque (eu.po) by Piarres Beobide Egaña
+    - Finnish (fi.po) by Tapio Lehtonen
+    - Hebrew (he.po) by Lior Kaplan
+    - Indonesian (id.po) by Parlin Imanuel Toh
+    - Bokmal, Norwegian (nb.po) by Axel Bojer
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+    - Portuguese (pt.po) by Miguel Figueiredo
+    - Romanian (ro.po) by Eddy Petrisor
+    - Turkish (tr.po) by Osman Yüksel
+    - Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 20 Apr 2004 10:54:30 -0400
+
+cdrom-detect (0.54) unstable; urgency=low
+
+  * Joshua Kwan
+    - Switch to debhelper's new udeb support.
+  * Updated translations: 
+    - Basque (eu.po) by Piarres Beobide Egaña
+    - Hebrew (he.po) by Lior Kaplan
+    - Italian (it.po) by Davide Viti
+    - Dutch (nl.po) by Bart Cornelis
+    - Romanian (ro.po) by Eddy Petrisor
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 10 Apr 2004 00:43:50 -0400
+
+cdrom-detect (0.53) unstable; urgency=low
+
+  * Joey Hess
+    - Pass a custom progress bar title to hw-detect.
+  * Updated translations: 
+    - Catalan (ca.po) by Jordi Mallach
+    - Czech (cs.po) by Miroslav Kure
+    - Welsh (cy.po) by Dafydd Harries
+    - Danish (da.po) by Claus Hindsgaul
+    - German (de.po) by Alwin Meschede
+    - Greek, Modern (1453-) (el.po) by Konstantinos Margaritis
+    - Spanish (Castilian) (es.po) by Javier Fernandez-Sanguino
+    - French (fr.po) by Christian Perrier
+    - Gallegan (gl.po) by Héctor Fernández López
+    - Hungarian (hu.po) by VERÓK István
+    - Indonesian (id.po) by Parlin Imanuel Toh
+    - Japanese (ja.po) by Kenshi Muto
+    - Korean (ko.po) by Changwoo Ryu
+    - Lithuanian (lt.po) by Kęstutis Biliūnas
+    - Polish (pl.po) by Bartosz Fenski
+    - Portuguese (pt.po) by Miguel Figueiredo
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Romanian (ro.po) by Eddy Petrisor
+    - Russian (ru.po) by Nikolai Prokoschenko
+    - Slovak (sk.po) by Peter KLFMANiK Mann
+    - Slovenian (sl.po) by Jure Čuhalev
+    - Albanian (sq.po) by Elian Myftiu
+    - Swedish (sv.po) by André Dahlqvist
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+    - Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+
+ -- Joey Hess <joeyh@debian.org>  Sun,  4 Apr 2004 15:59:14 -0400
+
+cdrom-detect (0.52) unstable; urgency=low
+
+  * Updated translations: 
+    - Bosnian (bs.po) by Safir Šećerović
+    - Indonesian (id.po) by Parlin Imanuel Toh
+    - Turkish (tr.po) by Osman Yüksel
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+    - Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 30 Mar 2004 15:19:16 -0500
+
+cdrom-detect (0.51) unstable; urgency=low
+
+  * Translations:
+    - Bartosz Fenski
+      - Some updates to Polish translation (pl.po)
+    - Giuseppe Sacco (it.po)
+      - Two lines were incorrectly joined during last commit.
+    - Russian by Nikolai Prokoschenko (ru.po)
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sun, 14 Mar 2004 19:11:07 +0100
+
+cdrom-detect (0.50) unstable; urgency=low
+
+  * Joey Hess
+    - Menu item number moves from 20 to 14 to match load-cdrom move.
+
+  * Translations:
+    - Giuseppe Sacco
+      - Updated italian translation by Davide Viti (it.po)
+    - Ognyan Kulev
+      - Updated Bulgarian translation (bg.po).
+    - Andre Dahlqvist
+      - Update Swedish translation (sv.po)
+    - Dafydd Harries : Added Welsh translation (cy.po)
+    
+ -- Joey Hess <joeyh@debian.org>  Wed, 10 Mar 2004 21:12:09 -0500
+
+cdrom-detect (0.49) unstable; urgency=low
+
+  * Joey Hess
+    - Use three dots in elipses for consistency.
+  * Petter Reinholdtsen
+    - Add logging in prebaseconfig script, to try to find out why
+      the CD isn't ejected some times.
+  * Translations:
+    - Miguel Figueiredo (pt.po)
+      - Updated Portuguese translation (pt.po)
+    - Bartosz Fenski
+      - Updated Polish translation (pl.po)
+    - Pierre Machard
+      - Update French translation (fr.po)
+    - Kenshi Muto
+      - Updated Japanese translation (ja.po)
+    - Konstantinos Margaritis
+      - Updated Greek translation (el.po)
+    - Carlos Z.F. Liu
+      - Updated Simplified Chinese translation (zh_CN.po)
+    - Jordi Mallach
+      - Updated Catalan translation (ca.po)
+    - André Luís Lopes
+      - Updated Brazilian Portuguese translation (pt_BR.po)
+    - Eugeniy Meshcheryakov
+      - Updated Ukrainian Translation (uk.po)
+    - Miroslav Kure
+      - Updated Czech translation (cs.po)
+    - Claus Hindsgaul
+      - Update Danish translation (da.po)
+    - Håvard Korsvoll
+      - Updated Norwegian, nynorsk (nn.po) translation.
+    - Peter Mann
+      - Updated Slovak translation (sk.po)
+    - Elian Myftiu
+      - Updated Albanian translation (sq.po)
+    - Dennis Stampfer
+      - Update German translation (de.po)
+    - Changwoo Ryu
+      - Updated Korean translation (ko.po)
+    - Bart Cornelis
+      - Update Dutch translation (nl.po)
+    - Ming Hua
+      - Initial Traditional Chinese translation (zh_TW.po), by Tetralet
+      - Updated Traditional Chinese translation (zh_TW.po), by Tetralet
+    - Javier Fernandez-Sanguino
+      - Spanish translation update (es.po)
+    - Jure Cuhalev
+      - Updated Slovenian translation (sl.po)
+    - Håvard Korsvoll
+      - Updated Norwegian, bokmål translation, (nb.po). From Axel Bojer
+
+ -- Petter Reinholdtsen <pere@debian.org>  Tue,  2 Mar 2004 07:44:19 +0100
+
+cdrom-detect (0.48) unstable; urgency=low
+
+  * Joey Hess
+    - Add a prebaseconfig progress template.
+
+  * Translations:
+    - Changwoo Ryu
+      - Added Korean translation (ko.po)
+    - André Luís Lopes
+      - Updated Brazilian Portuguese translation (pt_BR.po)
+    - Kenshi Muto
+      - Updated Japanese translation (ja.po)
+    - Claus Hindsgaul
+      - Update Danish translation (da.po)
+    - Kęstutis Biliūnas
+      - Updated Lithuanian translation (lt.po)
+    - Eugeniy Meshcheryakov
+      - Updated Ukrainian translation (uk.po)
+    - Carlos Z.F. Liu
+      - Updated Simplified Chinese translation (zh_CN.po)
+    - Konstantinos Margaritis
+      - Updated Greek translation (el.po)
+    - Miroslav Kure
+      - Updated Czech translation (cs.po)
+    - Elian Myftiu
+      - Updated Albanian translation (sq.po)
+    - Jordi Mallach
+      - Updated Catalan translation (ca.po)
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 21 Feb 2004 14:49:03 -0500
+
+cdrom-detect (0.47) unstable; urgency=low
+
+  * Translations:
+    - Peter Mann          : Updated Slovak translation (sk.po)
+    - Kenshi Muto         : Updated Japanese translation (ja.po)
+    - Jordi Mallach       : Update Catalan translation (ca.po)
+    - Christian Perrier   : Update French translation (fr.po)
+    - Bart Cornelis       : - Update Dutch translation (nl.po)
+    			    - Added corrections send by Bastiaan
+                              Eeckhoudt
+    - Miroslav Kure       : Update Czech translation (cs.po)
+    - Claus Hindsgaul     : Update Danish translation (da.po)
+    - K. Margaritis       : Update Greek translation (el.po)
+    - Miguel Figueiredo   : Update Portuguese translation (pt.po)
+    - André Luís Lopes  : Updated Brazilian Portuguese translation (pt_BR.po)
+    - Dennis Stampfer     : Update German translation (de.po)
+    - Kęstutis Biliūnas   : Updated Lithuanian translation (lt.po)
+    - Carlos Z.F. Liu     : Updated Simplified Chinese translation (zh_CN.po)
+    - Andre Dahlqvist     : Update Swedish translation (sv.po)
+  * Eugen Meshcheryakov : added Ukrainian translation (uk.po)
+  * Stephen R. Marenka
+    - Added additional test to see if a cd was already mounted.
+    - Always save cdrom-detect/cdrom_device.
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 20 Feb 2004 17:18:29 -0500
+
+cdrom-detect (0.46) unstable; urgency=low
+
+  * Remove unnecessary seen flag unsetting.
+  * If CD drive detection fails, prompt for a driver floppy,
+    and retry.
+
+ -- Joey Hess <joeyh@debian.org>  Thu,  5 Feb 2004 19:31:55 -0500
+
+cdrom-detect (0.45) unstable; urgency=low
+
+  * Joey Hess
+    - Rename mirror/distribution to the more accurate mirror/suite.
+    - Improved on the CD suite detection code, now it should
+      set mirror/suite properly for later base-config use.
+
+  * Translations:
+    - Jordi Mallach: Update Catalan translation (ca.po).
+    - Carlos Z.F. Liu
+      - fix some serious errors in Simplified Chinese translation.
+    - Giuseppe Sacco
+      - Applied patch for normalizing menus and some italian translation (it.po)
+    - h3li0s
+      - Added Albanian translation (sq.po)
+      
+ -- Joey Hess <joeyh@debian.org>  Thu,  5 Feb 2004 14:37:20 -0500
+
+cdrom-detect (0.44) unstable; urgency=low
+
+  * Bartosz Fenski
+    - Updated Polish (pl) translation.
+  * Joey Hess
+    - Call them CDROM drives, not readers. Closes: #225168
+    - No need to apt-install discover; hw-detect does that.
+    - Cleaned up the prompting if the CD device is found and CD is not
+      auto-mounted. Closes: #213174
+    - Remove dangling skip-autodetection template.
+    - Don't give up on a non-debian CD until all drives have been scanned,
+      and allow the user to insert the right CD to continue.
+    - Fix debian/rules to use binary-indep, not -arch. Closes: #223087
+    - Update to debhelper v4.
+    - Clean up rules file.
+    - Remove Standards-Version; it's a udeb.
+    - Remove the mtab hack in the prebaseconfig hack, /etc/mtab is a link to
+      /proc/mounts in the rootskel.
+    - Fix prebaseconfig script to eject the right cdrom, by calling eject on
+      /cdrom. No more coffee spills.
+  * Kęstutis Biliūnas
+    - Updated Lithuanian translation (lt.po).
+  * Christian Perrier
+    - Updated French translation (fr.po).
+  * Kenshi Muto
+    - Update Japanese translation (ja.po)
+  * André Luís Lopes
+    - Updated Brazilian Portuguese (pt_BR) translation.
+    - Fixed inconsistencies among various pt_BR translations.
+      Thanks to Christian Perrier for noticing these.
+  * Bart Cornelis
+    - Updated Dutch (nl.po) ranslation
+  * Ognyan Kulev
+    - Updated bulgarian translation (bg.po).
+  * Anmar Oueja
+    - created and translated to Arabic (ar.po)
+  * Pierre Machard
+     - Update French translation
+     - Run debconf-updatepo
+  * Christian Perrier
+     - Removed an extra dot in on error template short description
+     - Unfuzzy translations after debconf-updatepo
+  * Konstantinos Margaritis
+     - Update Greek translation (el.po)
+  * Nikolai Prokoschenko
+    ­ Update the russian translation (ru.po)
+  * Teófilo Ruiz Suárez
+    - Updated Spanish translation (po/es.po)
+  * Miroslav Kure
+     - Updated Czech translation
+  * Peter Mann
+     - Updated Slovak translation
+  * Dennis Stampfer
+     - Updated German translation (de.po)
+  * Anmar Oueja
+     - Updated Arabic translation (ar.po)
+  * Claus Hindsgaul
+    - Update Danish translation.
+  * Ming Hua
+    - Updated Simplified Chinese translation (zh_CN.po)
+  * Andre Dahlqvist
+    - Update Swedish translation (sv.po)
+  * Safir Secerovic
+    - Update Bosnian translation (bs.po).
+  * Miguel Figueiredo
+    - Updated Portuguese translation 
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 27 Jan 2004 07:43:40 +0100
+
+cdrom-detect (0.43) unstable; urgency=low
+
+  * Ming Hua
+    - Initial Simplified Chinese translation (zh_CN.po)
+  * Kęstutis Biliūnas
+     - Updated Lithuanian translation (lt.po).
+  * Bart Cornelis
+      - Merged Norwegian Nynorsk (nn.po) translation from skolelinux-cvs
+  * Teófilo Ruiz Suárez
+    - Fixed some inconsistencies in Spanish Translation (es.po)
+  * Ognyan Kulev
+    - Updated bulgarian translation (bg.po).
+  * Christian Perrier
+    - Fixed obvious mistake in finnish translation which made it inconsistent
+      with iso-scan and choose-mirror
+
+ -- Joey Hess <joeyh@debian.org>  Thu,  1 Jan 2004 14:41:32 -0500
+
+cdrom-detect (0.42) unstable; urgency=low
+
+  * Bart Cornelis
+    - Merged Norwegian Bokmael (nb.po) translation from skolelinux-cvs
+  * Dennis Stampfer
+    - Merged some strings in German translation de.po
+  * Luis Ferreira
+    - Initial Portuguese translation (pt.po).
+  * Peter Mann
+    - Updated Slovak translation
+  * Claus Hindsgaul
+    - Update Danish translation.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 25 Dec 2003 19:55:49 -0500
+
+cdrom-detect (0.41) unstable; urgency=low
+
+  * Bartosz Fenski
+    - Updated Polish (pl) translation.
+  * Kenshi Muto
+    - Update Japanese translation (ja.po)
+  * André Luís Lopes
+    - Update pt_BR (Brazilian Portuguese) translation.
+  * André Dahlqvist
+    - Update Swedish translation. (sv.po)
+  * Christian Perrier
+    - Update French translation.
+  * Claus Hindsgaul
+    - Update Danish translation.
+  * Konstantinos Margaritis
+    - Update Greek translation (el.po)
+  * Teófilo Ruiz Suárez
+    - Updated Spanish translation (es.po)
+    - Switched to UTF-8
+  * Kęstutis Biliūnas
+    - Updated Lithuanian translation (lt.po).
+  * Alwin Meschede
+    - Updated German translation (de.po)
+  * Miroslav Kure
+    - Updated Czech translation (cs.po)
+  * Marco d'Itri
+    - Add preliminary support for .ko kernel modules.
+  * Joey Hess
+    - sed -re does not work with busybox, use 2 sed calls instead
+  * Giuseppe Sacco
+    - First italian translation by Davide Viti (it.po)
+  * Bart Cornelis
+    - Updated Dutch translation (nl.po)
+    - fixed mistakes found by debian-l10n-dutch review process
+  * Steinar H. Gunderson
+    - Updated Norwegian translation (nb.po).
+  * Ognyan Kulev
+    - Added/updated bulgarian translation (bg.po).
+  * Petter Reinholdtsen
+    - Updated Norwegian Nynorsk (nn.po), thanks to Gaute Hvoslef Kvalnes.
+  * Jure Cuhalev
+    - Added/updated slovenian translation (sl.po).
+  * Teófilo Ruiz Suárez
+    - Updated es.po
+
+ -- Bart Cornelis <cobaco@linux.be>  Tue, 23 Dec 2003 15:52:48 +0100
+
+cdrom-detect (0.40) unstable; urgency=low
+
+  * Verok Istvan
+    - Initial Hungarian translation.
+  * Joey Hess
+    - Per discussion on debian-boot, use symbolic distribution names in
+      mirror/distribution.
+    - Remove release code name stuff.
+    - Look for a testing distro on the iso before stable, as our current isos
+      have a (bogus) stable symlink, which would end up with debootstrap being
+      asked to bootstrap woody..
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 12 Dec 2003 16:37:35 -0500
+
+cdrom-detect (0.39) unstable; urgency=low
+
+  * Peter Mann
+    - Initial Slovak translation (sk.po).
+  * Ilgiz Kalmetev 
+    - Initial Russian translation.
+  * Konstantinos Margaritis
+    - Initial Greek translation (el.po)
+  * Christian Perrier/Joe Nahmias
+    - Refined and standardized templates. Closes: #220180
+  * Christian Perrier
+    - Update French translation.
+  * Claus Hindsgaul
+    - Update da (Danish) translation.
+  * Safir Šećerović
+    - Update Bosnian translation.
+  * Miroslav Kure
+    - Update Czech translation.
+  * Jordi Mallach
+    - Update Catalan translation.
+  * Kęstutis Biliūnas
+    - Updated Lithuanian translation.
+  * Kenshi Muto
+    - Update Japanese translation (ja.po)
+  * André Luís Lopes
+    - Update pt_BR (Brazilian Portuguese) translation.
+
+ -- Joey Hess <joeyh@debian.org>  Tue,  9 Dec 2003 16:05:52 -0500
+
+cdrom-detect (0.38) unstable; urgency=low
+
+  * Kenshi Muto
+    - Update Japanese translation (ja.po)
+  * Kęstutis Biliūnas
+    - Add Lithuanian translation (lt.po)
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat,  8 Nov 2003 20:25:01 +0100
+
+cdrom-detect (0.37) unstable; urgency=low
+
+  * Bart Cornelis
+    - updated Dutch translation (nl.po)
+  * Pierre Machard
+    - Fix Changelog.
+  * Christian Perrier
+    - Update French translation.
+  * André Luís Lopes
+    - Update pt_BR (Brazilian Portuguese) translation.
+  * Miroslav Kure
+    - Update Czech translation.
+  * Tommi Vainikainen
+    - Update Finnish translation.
+  * Petter Reinholdtsen
+    - Updated nb.po.
+
+ -- Joey Hess <joeyh@debian.org>  Fri,  7 Nov 2003 13:04:50 -0500
+
+cdrom-detect (0.36) unstable; urgency=low
+
+  * Joey Hess
+    - Simplify menu item text.
+    - Versioned dependencies are not allowed in udebs, removed version from
+      cdebconf-udeb dependency.
+    - ORed dependencies are not allowed either, removed modutils-basic |
+      modutils-full, which was obsolete anyway.
+
+ -- Joey Hess <joeyh@debian.org>  Wed,  5 Nov 2003 00:04:38 -0500
+
+cdrom-detect (0.35) unstable; urgency=low
+
+  * Safir Secerovic, Amila Akagic
+    - Add Bosnian translation (bs.po)
+  * Joey Hess 
+    - Change Installer-Menu-Number from 15 to 20 as part of the 10-30
+      renumbering.
+
+ -- Joey Hess <joeyh@debian.org>  Sat,  1 Nov 2003 22:20:06 -0500
+
+cdrom-detect (0.34) unstable; urgency=low
+
+  * Jure Cuhalev
+    - New Slovenian translation. Closes: #218021.
+  * Petter Reinholdtsen
+    - Update nb.po, avoid comma in menu entry.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat,  1 Nov 2003 09:57:32 +0100
+
+cdrom-detect (0.33) unstable; urgency=low
+
+  * Claus Hindsgaul
+    - Update da (Danish) translation.
+  * Miroslav Kure
+    - Initial Czech translation.
+  * Christian Perrier
+    - Update French translation.
+  * Petter Reinholdtsen
+    - Drop Raphael Hertzog and Tollef Fog Heen from uploaders lists.
+      Neither have touched this package in a long time.
+    - Updated nb.po.
+  * Tommi Vainikainen
+    - Add Finnish (fi.po) translation.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Tue, 28 Oct 2003 18:09:42 +0100
+
+cdrom-detect (0.32) unstable; urgency=low
+
+  * André Luís Lopes :
+    - Update pt_BR (Brazilian Portuguese) translation
+  * Bart Cornelis
+    - Updated dutch translation (nl.po)
+
+ -- Bart Cornelis <cobaco@linux.be>  Wed,  8 Oct 2003 22:14:45 +0200
+
+cdrom-detect (0.31) unstable; urgency=low
+
+  * André Luís Lopes :
+    - debian/po/pt_BR.po :
+      - Fix one translation to be consistent with the rest
+        of the same sentence within choose-mirror package.
+  * Alastair McKinstry
+    - Fix changelog UTF-8 brokenness
+    - Move to Standards-Version: 3.6.1
+  * Petter Reinholdtsen
+    - Correct the text of a few templates.
+    - Use the 'error' template type for error reporting.
+    - Make menu entry translatable.
+  * Pierre Machard
+    - Update French po-debconf translation.
+  * Kenshi Muto
+    - Update Japanese po (ja.po)
+  * Denis Barbier
+    - Add a comment in templates file, which is copied into PO files,
+      to tell translators which string is a main menu item.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat,  4 Oct 2003 01:30:38 +0200
+
+cdrom-detect (0.30) unstable; urgency=low
+ 
+  * André Luís Lopes :
+    - Update pt_BR (Brazilian Portuguese) translation.
+  * Bart Cornelis
+    - updated dutch translation
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sun, 28 Sep 2003 15:05:39 +0200
+
+cdrom-detect (0.29) unstable; urgency=low
+
+  * Chris Tillman
+    - Update English usage in message templates
+  * Jordi Mallach
+    - Added Catalan (ca) translation.
+  * Pierre Machard
+    - Update French po-debconf translation [Christian Perrier]
+  * Kenshi Muto
+    - Update ja.po
+  * Petter Reinholdtsen
+    - Update nb.po.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Wed, 24 Sep 2003 20:40:55 +0200
+
+cdrom-detect (0.28) unstable; urgency=low
+
+  * Sebastian Ley
+    - Typo: CDROM -> $CDROM
+
+ -- Petter Reinholdtsen <pere@debian.org>  Tue,  9 Sep 2003 20:37:52 +0200
+
+cdrom-detect (0.27) unstable; urgency=low
+
+  * Javier Fernandez-Sanguino:
+    - Minor changes to the spanish translation
+  * Kenshi Muto
+    - Added Japanese translation (ja.po)
+
+ -- Petter Reinholdtsen <pere@debian.org>  Fri,  5 Sep 2003 23:10:53 +0200
+
+cdrom-detect (0.26) unstable; urgency=low
+
+  * Log to syslog instead of /var/log/messages.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Mon, 28 Jul 2003 15:48:51 +0200
+
+cdrom-detect (0.25) unstable; urgency=low
+
+  * Petter Reinholdtsen
+    - Updated de.po.  Thanks to from Maximilian Wilhelm.
+  * Alastair McKinstry
+    - Converted changelog to UTF-8, in accordance with Standards-Version 3.6.0
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat, 26 Jul 2003 23:59:46 +0200
+
+cdrom-detect (0.24) unstable; urgency=low
+
+  * Thorsten Sauter
+    - update german translation (de.po)
+  * Denis Barbier
+    - update debian/po/POTFILES.in to take file renaming into account
+  * Matt Kraai
+    - Update nl.po, thanks to Bart Cornelis.
+  * Alastair McKinstry
+    - Remove cdrom-detect.menutest, as it isn't needed and will break things
+
+ -- Alastair McKinstry <mckinstry@computer.org>  Mon, 19 May 2003 22:08:57 +0200
+
+cdrom-detect (0.23) unstable; urgency=low
+
+  * Petter Reinholdtsen
+    - Updated nb.po.
+  * Thorsten Sauter
+    - Insert german translation (de.po)
+
+ -- Petter Reinholdtsen <pere@debian.org>  Fri, 16 May 2003 21:13:22 +0200
+
+cdrom-detect (0.22) unstable; urgency=low
+
+  * Martin Sjögren
+    - Fix the looping on the is_cd_inserted question.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sun,  4 May 2003 23:20:01 +0200
+
+cdrom-detect (0.21) unstable; urgency=low
+
+  * Update nb.po.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sun,  4 May 2003 15:29:22 +0200
+
+cdrom-detect (0.20) unstable; urgency=low
+
+  * Fix typo in nb.po.
+  * Adjust postinst to call the correct script (hw-detect instead of
+    hwdetect) now that we are using the new hw-detect package.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Wed, 23 Apr 2003 17:55:30 +0200
+
+cdrom-detect (0.19) unstable; urgency=low
+
+  * Depend on and use the new hw-detect package instead of
+    calling discover directly.
+  * Give package control files 'cdrom-detect.' prefixes.
+  * Depend on modutils-basic or modutils-full instead of only modutils-full.
+  * Pierre Machard:
+    - Update fr debconf template translation.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Mon, 21 Apr 2003 09:52:18 +0200
+
+cdrom-detect (0.18) unstable; urgency=low
+
+  * Move the active part of postinst into separate script hwdetect.
+  * Describe the structure of a driver floppy when asking if one
+    should be used.
+  * Only try to load missing modules from floppy if the device is
+    available.
+  * Always try to load the floppy driver.
+  * Check if module already is loaded before trying to load it again.
+  * Improve description of the modules that is always loaded.
+  * Improve the text when asking for driver floppy.
+  * Add debconf title.
+  * Ask for kernel module parameters as a low priority question.
+  * Ran 'debconf2po-update' to update the translator files.
+  * André Luís Lopes :
+    - Update pt_BR debconf template translation.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat, 19 Apr 2003 01:04:21 +0200
+
+cdrom-detect (0.17) unstable; urgency=low
+
+  * Pierre Machard
+    - Update debian/po/fr.po
+  * Petter Reinholdtsen
+    - Unmount the CD if it isn't a Debian install CD.
+    - Report the error using debconf if the CD is missing, or not a Debian
+      install CD.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat, 12 Apr 2003 11:04:29 +0200
+
+cdrom-detect (0.16) unstable; urgency=low
+
+  * Martin Sjogren
+    - Silence the depmod -a run.
+  * Petter Reinholdtsen
+    - Updated nn.po, thanks to Gaute Hvoslef Kvalnes.
+    - Load sd_mod if SCSI device was detected. (Closes: #183716).
+    - Correct code to quiet down 'depmod -a'.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Fri, 21 Mar 2003 15:13:56 +0100
+
+cdrom-detect (0.15) unstable; urgency=low
+
+  * Correct typo in progress bar handling.  Calling db_progress STOP after
+    db_progress STOP crashes cdebconfig.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sun, 16 Mar 2003 10:29:58 +0100
+
+cdrom-detect (0.14) unstable; urgency=low
+
+  * André Luís Lopes :
+    - Update pt_BR template translations.
+  * Petter Reinholdtsen
+    - Add usr/lib/prebaseconfig.d to debian/dirs.
+    - Avoid progress bar from 0 to 0 (it crashes cdebconf/newt).
+    - Rewrite some part of the script to handle 'set -e'.
+    - Avoid crashing when the module name or HW name is empty.
+    - Stop trying to mount on /cdrom after first successfull try.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat, 15 Mar 2003 23:39:05 +0100
+
+cdrom-detect (0.13) unstable; urgency=low
+
+  * Upgraded Standards-Version from 3.5.2 to 3.5.8.
+  * Add depend on modutils-full to have the programs depmod and
+    modprobe available (Closes: #183542).
+  * Output progress to /var/log/messages instead of stdout.
+  * Add progress bar support, let the user know which HW was detected.
+  * Depend on cdebconf-udeb 0.31 or newer to get progress bar support.
+  * General code cleanup.
+  * Ran debconf2po-update to update the .po files.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat, 15 Mar 2003 19:43:30 +0100
+
+cdrom-detect (0.12) unstable; urgency=low
+
+  * Sync hw detection code with the code in disk-detect.
+  * Remove out-commented code from postinst.
+  * Report module name when trying to load a module.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Tue,  4 Mar 2003 16:36:39 +0100
+
+cdrom-detect (0.11) unstable; urgency=low
+
+  * Added Norwegian Nynorsk translations (nn.po) recieved from
+    Gaute Hvoslef Kvalnes.
+  * Updated nb.po recieved from Bjørn Steensrud.
+  * Fetch the distribution code name from the Release file, instead of
+    guessing based on the symlinks in cdrom/dists/.
+  * Use 'apt-install eject' to get the tool used in the prebaseconfig script
+    to eject the CD (Closes: #175187).
+  * Package cdrom-detect no longer need discover-data at build time.
+  * Martin Sjögren
+    - Change installer-menu-item to 15, as per doc/menu-item-numbers.txt
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sun, 23 Feb 2003 15:05:49 +0100
+
+cdrom-detect (0.10) unstable; urgency=low
+
+  * Added Norwegian Bokmål (nb.po) translations recieved from
+    Bjørn Steensrud.
+  * Use new package discover-data-udeb instead of including the lists
+    ourself.  A better fix might be to add discover-data-udeb as a
+    dependency for discover-udeb.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Tue,  4 Feb 2003 00:24:23 +0100
+
+cdrom-detect (0.09) unstable; urgency=low
+
+  * In the prebaseconfig script, get rid of then error message when
+    failing to find eject in PATH.  Use only /target/usr/bin/eject,
+    and only if it exists.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Mon, 20 Jan 2003 19:36:15 +0100
+
+cdrom-detect (0.08) unstable; urgency=low
+
+  * Try harder to eject CDROM (Closes: #166952).
+
+ -- Petter Reinholdtsen <pere@debian.org>  Thu, 16 Jan 2003 20:54:18 +0100
+
+cdrom-detect (0.07) unstable; urgency=low
+
+  * Copy prebaseconfig.d script from prebaseconfig.  Ejecting CDs belong
+    here, not in prebaseconfig.
+  * Remove discover/detect workaround.  Tollef Fog Heen told me it is
+    no longer needed (Closes: #157735).
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat, 11 Jan 2003 00:23:44 +0100
+
+cdrom-detect (0.06) unstable; urgency=low
+
+  * Log the detected distribution.
+  * Set priority to low for debconf questions asking if missing kernel
+    module should be loaded from floppy, and question letting the user
+    know that a working CD was found.
+  * Add myself to uploaders.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sun, 15 Dec 2002 18:22:51 +0100
+
+cdrom-detect (0.05) unstable; urgency=low
+
+  * Petter Reinholdtsen
+    -  Move content of /etc/modules.conf to the rootskel udeb, and remove
+       the file to avoid package conflict.
+  * Tollef Fog Heen
+    -  Remove rm of conffile in debian/rules, since it made the package not
+       build.
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Sat,  7 Dec 2002 17:39:56 +0100
+
+cdrom-detect (0.04) unstable; urgency=low
+
+  * Martin Sjögren
+    - Replace XBC with XB so our special control fields don't confuse the
+      changes files.
+  * André Luís Lopes
+    - Update pt_BR.po template translation.
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Thu, 14 Nov 2002 02:24:20 +0100
+
+cdrom-detect (0.03) unstable; urgency=low
+
+  * exit 0 if the cd is already mounted.
+  * Set debconf answer mirror/distribution using info from the
+    detected CD.
+  * Convert to po-debconf, set Build-Depends-Indep: debhelper (>= 4.1.13)
+    to ensure that generated templates are right, and set output encoding
+    to UTF-8.
+  * Drop depend on non-existant package discover-basic-udeb.
+  * Correct floppy device, and try to load the floppy driver module
+    before mounting floppies.
+  * Make sure driver modules fetched from floppy are owned by root, to
+    avoid rejections from depmod -a.
+  * Use the same way as discover to find out if a module is available.
+  * Avoid error message if /usr/share/discover is missing (Closes: #157735).
+
+ -- Petter Reinholdtsen <pere@hungry.com>  Mon, 28 Oct 2002 14:04:03 +0100
+
+cdrom-detect (0.02) unstable; urgency=low
+
+  * Fix up using discover somewhat
+  * Remove emacs changelog variables
+  * Make _all udeb, not _$(ARCH)
+  * Strip off the Package header in the templates file, since it could
+    confuse cdebconf.
+  * Get rid of the build-dep on cdebconf-dev, we don't build-dep on it at
+    all.
+  * Use discover's database instead of detect, build-dep accordingly.
+  * Add Brazilian Portuguese and Danish debconf templates.
+  * Make debian-boot maintainer with hertzog and tfheen in uploaders.
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Tue, 24 Sep 2002 00:13:28 +0200
+
+  * Fix up language on templates.
+
+ -- Chris Tillman <tillman@voicetrak.com> Sun, 1 Sep 2002
+
+cdrom-detect (0.01) unstable; urgency=low
+
+  * Initial Release.
+  * Create all the cdrom devices when launched.
+  * Include a modules.conf to stop complaints about net-pf-1 (unix)
+    missing.
+
+ -- Raphael Hertzog <hertzog@debian.org>  Thu,  2 Aug 2001 21:54:56 +0200
+

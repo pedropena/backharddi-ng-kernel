@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. /usr/share/debconf/confmodule
+
+dir="$1"
+db_get backharddi/medio
+if [ "$RET" = cdrom ]; then
+	printf "nogenerar\t%s\n" "No se puede generar sobre un medio de solo lectura"
+else
+	db_metaget backharddi/text/generar description
+	printf "$dir\t$RET"
+fi

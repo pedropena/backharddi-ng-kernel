@@ -1,0 +1,153 @@
+backharddi-ng-udeb (0.6) karmic; urgency=low
+
+  * Se quita la espera de pulsación de tecla para lanzar el grupo multicast.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Sat, 29 May 2010 08:55:06 +0200
+
+backharddi-ng-udeb (0.5) karmic; urgency=low
+
+  * No se genera copia de seguridad de la cmos en la generación desatendida.
+  * Corregido fallo al obtener el servidor activo cuando se lanzaba un proceso
+    desde la interfaz web.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Fri, 28 May 2010 17:58:04 +0200
+
+backharddi-ng-udeb (0.4) unstable; urgency=low
+
+  * Comunicación de estado y progreso con el nuevo servicio de red y monitor.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Fri, 21 May 2010 19:12:45 +0200
+
+backharddi-ng-udeb (0.3) unstable; urgency=low
+
+  * Comunicación con el nuevo servicio de red y monitor.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Fri, 14 May 2010 17:59:56 +0200
+
+backharddi-ng-udeb (0.2) unstable; urgency=low
+
+  * Se elimina la comunicación con el antiguo monitor mediante xmlrpc.
+  * Se elimina el montaje de la partición de backup mediante NFS en el modo net.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Fri, 30 Apr 2010 17:50:39 +0200
+
+backharddi-ng-udeb (0.1) unstable; urgency=low
+
+  * Primera versión de backharddi-ng
+
+ --  <pedro.pena@open-phoenix.com>  Wed, 09 Sep 2009 13:46:17 +0200
+
+backharddi-udeb (0.17) unstable; urgency=low
+
+  * Se explora más exhaustivamente el final del disco duro para la tarjeta de backup
+    versión 1.68 con stidump
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Mon,  1 Dec 2008 09:38:18 +0100
+
+backharddi-udeb (0.16) unstable; urgency=low
+
+  * Se añade posibilidad de cancelar la espera de comandos del monitor 
+
+ --  <pedro.pena@edmanufacturer.es>  Sat, 22 Nov 2008 15:48:03 +0100
+
+backharddi-udeb (0.15) unstable; urgency=high
+
+  * Corregido fallo en stidump con versiones de la tarjeta de backup 5.7 y superiores
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Mon, 17 Nov 2008 16:36:52 +0100
+
+backharddi-udeb (0.14) unstable; urgency=low
+
+  * Se explora más extensión del final del disco duro para la tarjeta de backup
+    versión 1.68 con stidump.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Fri, 14 Nov 2008 13:37:07 +0100
+
+backharddi-udeb (0.13) unstable; urgency=low
+
+  * Se explora más exhaustivamente los metadatos de la tarjeta de backup versión 1.68
+    con stidump.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Mon, 10 Nov 2008 11:52:57 +0100
+
+backharddi-udeb (0.12) unstable; urgency=low
+
+  * Se modifica la manera en que detecta stidump los metadatos de tarjetas de backup
+    versión mayor que 5.3.
+  * Se corrige fallo en stidump que se da en ciertos particionados.
+  * Vuelve a funcionar stidump con tarjetas de backup versión 1.68.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Thu,  6 Nov 2008 17:21:27 +0100
+
+backharddi-udeb (0.11) unstable; urgency=low
+
+  * Se clona el uuid de las particiones swap.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Thu, 28 Aug 2008 19:12:18 +0200
+
+backharddi-udeb (0.10) unstable; urgency=low
+
+  * Se escanea con stidump solamente en el primer disco duro detectado. 
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Thu, 14 Aug 2008 16:07:16 +0000
+
+backharddi-udeb (0.9) unstable; urgency=low
+
+  * Se añade el tipo 0xf como tipo de partición extendida.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Fri,  1 Aug 2008 11:42:04 +0000
+
+backharddi-udeb (0.8) unstable; urgency=low
+
+  * Nuevos mensajes más específicos para algunas barras de progreso.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Tue, 22 Jul 2008 10:20:15 +0000
+
+backharddi-udeb (0.7) unstable; urgency=low
+
+  * Se prepara conexión con el nuevo monitor.
+  * Se corrige dependencia de construcción.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Tue, 22 Apr 2008 15:55:22 +0000
+
+backharddi-udeb (0.6) unstable; urgency=low
+
+  * Se añaden más barras de progreso.
+  * Se actualizan dependencias.
+  * Se añade funcionalidad al modo restauración automático. Ahora se pregunta la
+    copia de seguridad a restaurar en caso de no estar establecida.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Wed, 26 Mar 2008 09:56:12 +0000
+
+backharddi-udeb (0.5) unstable; urgency=low
+
+  * Se reimplementa la manera en que se muestran las particiones existentes en una
+    copia de seguridad. Ahora no se vuelca la tabla de particiones ni el mbr al
+    solamente seleccionar una copia de seguridad, con el riesgo que conllevaba.
+  * Se actualizan dependencias.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Tue, 25 Mar 2008 16:10:15 +0000
+
+backharddi-udeb (0.4) unstable; urgency=low
+
+  * Se actualizan dependencias.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Tue, 26 Feb 2008 12:21:14 +0000
+
+backharddi-udeb (0.3) unstable; urgency=low
+
+  * Se corrige fallo en stidump.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Thu, 31 Jan 2008 11:43:03 +0000
+
+backharddi-udeb (0.2) unstable; urgency=low
+
+  * Se renombra el paquete fuente a backharddi-udeb.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Thu, 17 Jan 2008 11:17:15 +0000
+
+backharddi-udeb (0.1) unstable; urgency=low
+
+  * Versión inicial.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Wed,  7 Dec 2005 10:38:58 +0100

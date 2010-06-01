@@ -1,0 +1,2604 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: partimage 0.7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-08 21:17+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Milan Plzik <mplzik@post.sk>\n"
+"Language-Team: Slovak <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# src/client/gui_text.cpp:56
+#: src/client/gui_text.cpp:56
+msgid "Restore an MBR to the hard disk"
+msgstr "Obnovi» MBR na harddisku"
+
+# src/client/gui_text.cpp:59
+#: src/client/gui_text.cpp:59
+msgid "Disk with the MBR to restore"
+msgstr "Disk s MBR na obnovenie"
+
+# src/client/gui_text.cpp:62
+#: src/client/gui_text.cpp:62
+msgid "Original MBR to use"
+msgstr "Originálny MBR"
+
+# src/client/gui_text.cpp:65
+#: src/client/gui_text.cpp:65
+msgid "What to restore:"
+msgstr "Èo obnovi»"
+
+# src/client/gui_text.cpp:67
+#: src/client/gui_text.cpp:67
+msgid "The whole MBR"
+msgstr "Celý MBR"
+
+# src/client/gui_text.cpp:203 src/client/misc.cpp:1741
+#: src/client/gui_text.cpp:207 src/client/misc.cpp:1747
+#, c-format
+msgid ""
+"Cannot read \"/proc/partitions\" (%s). Then, you must use the command line "
+"to run Partition Image. Type \"partimage --help\" for help."
+msgstr "Nemô¾em naèíta»\"/proc/partitions\" (%s). Na spustenie Partition Image musíte pou¾i» príkazový riadok.  Napí¹te \"partimage --help\" pre pomoc "
+
+# src/client/gui_text.cpp:293
+#: src/client/gui_text.cpp:313
+msgid "Continue (F5)"
+msgstr "Pokraèova» (F5)"
+
+# src/client/gui_text.cpp:294 src/client/interface_newt.cpp:214
+#: src/client/gui_text.cpp:314 src/client/interface_newt.cpp:240
+msgid "Exit (F6)"
+msgstr "Koniec (F6)"
+
+# src/client/gui_text.cpp:295
+#: src/client/gui_text.cpp:315
+msgid "Main window (F7)"
+msgstr "Hlavné okno (F7)"
+
+# src/client/gui_text.cpp:306 src/client/gui_text.cpp:450
+#: src/client/gui_text.cpp:325 src/client/gui_text.cpp:455
+msgid "save partition to image file"
+msgstr "ulo¾i» oddiel do súboru"
+
+# src/client/gui_text.cpp:308
+#: src/client/gui_text.cpp:327
+msgid "Compression level"
+msgstr "Úroveò kompresie"
+
+# src/client/gui_text.cpp:309
+#: src/client/gui_text.cpp:328
+msgid "None (very fast + very big file)"
+msgstr "®iadna (veµmi rýchle + veµmi veµký súbor)"
+
+# src/client/gui_text.cpp:332 src/client/gui_text.cpp:596
+#: src/client/gui_text.cpp:332 src/client/gui_text.cpp:607
+msgid "Options"
+msgstr "Voµby"
+
+# src/client/gui_text.cpp:333
+#: src/client/gui_text.cpp:333
+msgid "Check partition before saving"
+msgstr "Skontrolova» oddiel pred ulo¾ením"
+
+# src/client/gui_text.cpp:334
+#: src/client/gui_text.cpp:334
+msgid "Enter description"
+msgstr "Zada» popis"
+
+# src/client/gui_text.cpp:335
+#: src/client/gui_text.cpp:335
+msgid "Overwrite without prompt"
+msgstr "Prepísa» bez pýtania"
+
+# src/client/gui_text.cpp:338
+#: src/client/gui_text.cpp:337
+msgid "Image split mode"
+msgstr "Mód delenia obrazov"
+
+# src/client/gui_text.cpp:339
+#: src/client/gui_text.cpp:338
+msgid "Automatic split (when no space left)"
+msgstr "Automatické delenie (keï nie je miesto)"
+
+# src/client/gui_text.cpp:340
+#: src/client/gui_text.cpp:339
+msgid "Into files whose size is:............"
+msgstr "Do súborov, ktorých veµkos» je:....."
+
+#: src/client/gui_text.cpp:342
+msgid "MiB"
+msgstr ""
+
+# src/client/gui_text.cpp:344
+#: src/client/gui_text.cpp:343
+msgid "Wait after each volume change"
+msgstr "Èaka» po ka¾dom zväzku"
+
+# src/client/gui_text.cpp:346 src/client/gui_text.cpp:601
+#: src/client/gui_text.cpp:345 src/client/gui_text.cpp:612
+msgid "If finished successfully:"
+msgstr "Ak sa skonèí úspe¹ne:"
+
+# src/client/gui_text.cpp:347 src/client/gui_text.cpp:602
+#: src/client/gui_text.cpp:346 src/client/gui_text.cpp:613
+msgid "Wait"
+msgstr "Èakaj"
+
+# src/client/gui_text.cpp:348 src/client/gui_text.cpp:603
+#: src/client/gui_text.cpp:347 src/client/gui_text.cpp:614
+msgid "Halt"
+msgstr "Zastav poèítaè"
+
+# src/client/gui_text.cpp:349 src/client/gui_text.cpp:604
+#: src/client/gui_text.cpp:348 src/client/gui_text.cpp:615
+msgid "Reboot"
+msgstr "Re¹tart"
+
+# src/client/gui_text.cpp:350 src/client/gui_text.cpp:605
+#: src/client/gui_text.cpp:349 src/client/gui_text.cpp:616
+msgid "Quit"
+msgstr "Odchod"
+
+#: src/client/gui_text.cpp:350
+msgid "Last"
+msgstr ""
+
+# src/client/gui_text.cpp:453
+#: src/client/gui_text.cpp:458
+#, c-format
+msgid "Partition to save:...........%s"
+msgstr "Oddiel na ulo¾enie:..........%s"
+
+# src/client/gui_text.cpp:456
+#: src/client/gui_text.cpp:461
+#, c-format
+msgid "Size of the Partition:.......%s = %llu bytes"
+msgstr "Veµkos» oddielu:.............%s = %llu bajtov"
+
+# src/client/gui_text.cpp:459
+#: src/client/gui_text.cpp:464
+#, c-format
+msgid "Image file to create.........%s"
+msgstr "Vytváraný súbor s obrazom....%s"
+
+# src/client/gui_text.cpp:465
+#: src/client/gui_text.cpp:470
+#, c-format
+msgid "Detected file system:........%s"
+msgstr "Zistený súborový systém:.....%s"
+
+# src/client/gui_text.cpp:471
+#: src/client/gui_text.cpp:476
+msgid "Compression level:...........None"
+msgstr "Úroveò kompresie:...........®iadna"
+
+# src/client/gui_text.cpp:474
+#: src/client/gui_text.cpp:479
+msgid "Compression level:...........gzip"
+msgstr "Úroveò konpresie:............gzip"
+
+# src/client/gui_text.cpp:477
+#: src/client/gui_text.cpp:482
+msgid "Compression level:...........bzip2"
+msgstr "Úroveò kompresie:............bzip2"
+
+# src/client/gui_text.cpp:480
+#: src/client/gui_text.cpp:485
+msgid "Compression level:...........lzo"
+msgstr "Úroveò kompresie:............lzo"
+
+# src/client/gui_text.cpp:531
+#: src/client/gui_text.cpp:539
+#, c-format
+msgid "Time elapsed:................%s"
+msgstr "Pou¾itý èas:.................%s"
+
+#: src/client/gui_text.cpp:542
+#, c-format
+msgid "Estimated time remaining:....%s"
+msgstr ""
+
+# src/client/gui_text.cpp:536
+#: src/client/gui_text.cpp:547
+#, c-format
+msgid "Speed:.......................%s/min"
+msgstr "Rýchlos»:....................%s/min"
+
+# src/client/gui_text.cpp:539
+#: src/client/gui_text.cpp:550
+#, c-format
+msgid "Data copied:.................%s / %s"
+msgstr "Skopírovaných dát:...........%s / %s"
+
+# src/client/gui_text.cpp:571
+#: src/client/gui_text.cpp:582
+#, c-format
+msgid "Current image file:..........%s"
+msgstr "Aktuálny súbor s obrazom:....%s"
+
+# src/client/gui_text.cpp:576
+#: src/client/gui_text.cpp:587
+#, c-format
+msgid "Image file size:.............%s"
+msgstr "Veµkos» súboru s obrazom:....%s"
+
+# src/client/gui_text.cpp:580
+#: src/client/gui_text.cpp:591
+#, c-format
+msgid "Available space for image:...%s = %llu bytes"
+msgstr "Dostupné miesto pre obraz:...%s = %llu bajtov"
+
+# src/client/gui_text.cpp:593 src/client/gui_text.cpp:735
+#: src/client/gui_text.cpp:604 src/client/gui_text.cpp:664
+msgid "restore partition from image file"
+msgstr "obnovi» oddiel zo súboru s obrazom"
+
+# src/client/gui_text.cpp:598
+#: src/client/gui_text.cpp:609
+msgid "Erase free blocks with zero values"
+msgstr "Premaza» voµné bloky nulami"
+
+# src/client/gui_text.cpp:599
+#: src/client/gui_text.cpp:610
+msgid "Simulation of the restoration (nothing is written)"
+msgstr "Simulácia obnovovania (nebude sa zapisova»)"
+
+# src/client/gui_text.cpp:593 src/client/gui_text.cpp:735
+#: src/client/gui_text.cpp:662
+#, fuzzy
+msgid "simulate partition restoration from image file"
+msgstr "obnovi» oddiel zo súboru s obrazom"
+
+# src/client/gui_text.cpp:738
+#: src/client/gui_text.cpp:667
+#, c-format
+msgid "Partition to restore:.............%s"
+msgstr "Oddiel na obnovenie:..............%s"
+
+# src/client/gui_text.cpp:741
+#: src/client/gui_text.cpp:670
+#, c-format
+msgid "Size of partition to restore:.....%s = %llu bytes"
+msgstr "Veµkos» oddielu na obnovenie:.....%s = %llu bajtov"
+
+# src/client/gui_text.cpp:744
+#: src/client/gui_text.cpp:673
+#, c-format
+msgid "Image file to use.................%s"
+msgstr "Súbor s obrazom...................%s"
+
+# src/client/gui_text.cpp:747
+#: src/client/gui_text.cpp:676
+#, c-format
+msgid "File system:......................%s"
+msgstr "Súborový systém:..................%s"
+
+# src/client/gui_text.cpp:752
+#: src/client/gui_text.cpp:681
+#, c-format
+msgid "Partition was on device:..........%s\n"
+msgstr "Oddiel bol na zariadení:..........%s\n"
+
+# src/client/gui_text.cpp:755
+#: src/client/gui_text.cpp:684
+#, c-format
+msgid "Image created on:.................%s\n"
+msgstr "Obraz bol vytvorený na:...........%s\n"
+
+# src/client/gui_text.cpp:758
+#: src/client/gui_text.cpp:687
+#, c-format
+msgid "Size of the original partition:...%s = %llu bytes"
+msgstr "Veµkos» pôvodného oddielu:........%s = %llu bajtov"
+
+# src/client/gui_text.cpp:697 src/client/gui_text.cpp:818
+#: src/client/gui_text.cpp:754
+#, c-format
+msgid "Time elapsed:.....................%s"
+msgstr "Pou¾itý èas:......................%s"
+
+# src/client/gui_text.cpp:459
+#: src/client/gui_text.cpp:757
+#, fuzzy, c-format
+msgid "Estimated time remaining:.........%s"
+msgstr "Vytváraný súbor s obrazom....%s"
+
+# src/client/gui_text.cpp:702 src/client/gui_text.cpp:823
+#: src/client/gui_text.cpp:762
+#, c-format
+msgid "Speed:............................%s/min"
+msgstr "Rýchlos»:.........................%s/min"
+
+# src/client/gui_text.cpp:826
+#: src/client/gui_text.cpp:765
+#, c-format
+msgid "Data copied:......................%s / %s"
+msgstr "Skopírovaných dát:................%s / %s"
+
+# src/client/gui_text.cpp:866
+#: src/client/gui_text.cpp:796
+#, c-format
+msgid "Current image file:...............%s"
+msgstr "Aktuálny súbor s obrazom:.........%s"
+
+# src/client/gui_text.cpp:871
+#: src/client/gui_text.cpp:804
+#, fuzzy
+msgid "Compression level:................None\n"
+msgstr "Úroveò kompresie:................%s\n"
+
+# src/client/gui_text.cpp:474
+#: src/client/gui_text.cpp:807
+#, fuzzy
+msgid "Compression level:................gzip"
+msgstr "Úroveò konpresie:............gzip"
+
+# src/client/gui_text.cpp:477
+#: src/client/gui_text.cpp:810
+#, fuzzy
+msgid "Compression level:................bzip2"
+msgstr "Úroveò kompresie:............bzip2"
+
+# src/client/gui_text.cpp:480
+#: src/client/gui_text.cpp:813
+#, fuzzy
+msgid "Compression level:................lzo"
+msgstr "Úroveò kompresie:............lzo"
+
+# src/client/gui_text.cpp:891
+#: src/client/gui_text.cpp:839
+msgid "Change"
+msgstr "Zmeni»"
+
+# src/client/gui_text.cpp:892 src/client/interface_newt.cpp:118
+# src/client/interface_newt.cpp:128 src/client/interface_newt.cpp:141
+# src/client/interface_newt.cpp:353 src/client/interface_newt.cpp:406
+#: src/client/gui_text.cpp:840 src/client/interface_newt.cpp:123
+#: src/client/interface_newt.cpp:134 src/client/interface_newt.cpp:151
+#: src/client/interface_newt.cpp:379 src/client/interface_newt.cpp:432
+msgid "Cancel"
+msgstr "Zru¹i»"
+
+# src/client/gui_text.cpp:894
+#: src/client/gui_text.cpp:842
+msgid "Enter new filename"
+msgstr "Zadajte nový názov súboru"
+
+# src/client/gui_text.cpp:938
+#: src/client/gui_text.cpp:886
+#, c-format
+msgid ""
+"The following imagefile already exist.\n"
+"Do you want to overwrite or change image filename ?\n"
+"File: %s\n"
+"To change the filename, please enter a full path\n"
+"(location + filename) without volume number at the end, \n"
+"and press \"Change\""
+msgstr ""
+"Súbor s obrazom u¾ existuje.\n"
+"Chcete súbor prepísa», alebo zmeni» jeho meno ?\n"
+"Súbor: %s\n"
+"Pri zmene mena zadajte prosím úplnú cestu\n"
+"(umiestnenie + meno súboru) bez èísla zväzku na konci, \n"
+"a stlaène \"Zmeni»\""
+
+# src/client/interface_base.cpp:406
+#: src/client/gui_text.cpp:891 src/client/interface_base.cpp:433
+msgid "Overwrite image?"
+msgstr "Prepísa» obraz ?"
+
+# src/client/gui_text.cpp:943
+#: src/client/gui_text.cpp:891
+msgid "Overwrite"
+msgstr "Prepísa»"
+
+# src/client/gui_text.cpp:955
+#: src/client/gui_text.cpp:903
+#, c-format
+msgid ""
+"The following imagefile is locked.\n"
+"Do you want to wait and retry or change image filename ?\n"
+"File: %s\n"
+"To change the filename, please enter a full path\n"
+"(location + filename) without volume number at the end, \n"
+"and press \"Change\""
+msgstr ""
+"Súbor s obrazom je zamknutý.\n"
+"Chcete poèka» a skúsi» znovu, alebo zmeni» jeho meno ?\n"
+"Súbor: %s\n"
+"Pri zmene mena zadajte prosím úplnú cestu\n"
+"(umiestnenie + meno súboru) bez èísla zväzku na konci, \n"
+"a stlaène \"Zmeni»\""
+
+# src/client/gui_text.cpp:960
+#: src/client/gui_text.cpp:908
+msgid "imagefile locked"
+msgstr "obraz zamknutý"
+
+# src/client/gui_text.cpp:960
+#: src/client/gui_text.cpp:908
+msgid "Retry"
+msgstr "Znovu"
+
+# src/client/gui_text.cpp:973
+#: src/client/gui_text.cpp:921
+#, c-format
+msgid ""
+"unable to access to %s\n"
+"\n"
+"Please, enteranother directory path (without filename):"
+msgstr ""
+"nemô¾em získa» prístup k %s\n"
+"\n"
+"Prosím zadajte iný adresár (bez názvu súboru):"
+
+# src/client/gui_text.cpp:976
+#: src/client/gui_text.cpp:924
+msgid "wrong path"
+msgstr "chybná cesta"
+
+# src/client/imagefile.cpp:594
+#. warning
+#: src/client/imagefile.cpp:631
+msgid "Automatic mount"
+msgstr "Automatické pripojenie"
+
+# src/client/imagefile.cpp:595
+#: src/client/imagefile.cpp:632
+#, c-format
+msgid "Please, press \"ok\" to mount [%s] on [%s]"
+msgstr "Prosím stlaète \"ok\" na pripojenie [%s] na [%s]"
+
+#: src/client/imagefile.cpp:1000
+msgid "Wrong volume inserted"
+msgstr ""
+
+#: src/client/imagefile.cpp:1001
+msgid "You will be prompted to remove this media and insert the right one"
+msgstr ""
+
+# src/client/imagefile.cpp:937
+#: src/client/imagefile.cpp:1008
+#, c-format
+msgid ""
+"Can't read the following volume file:\n"
+"%s\n"
+"%s"
+msgstr ""
+"Nemô¾em preèíta» zväzok:\n"
+"%s\n"
+"%s"
+
+# src/client/imagefile.cpp:938
+#: src/client/imagefile.cpp:1010
+msgid "Enter another full path (directory & name)"
+msgstr "Zadajte inú úplnú cestu (adresár a meno)"
+
+# src/client/imagefile.cpp:939
+#: src/client/imagefile.cpp:1011
+msgid "Volume not found"
+msgstr "Zväzkok nenájdený"
+
+# src/client/imginfo.cpp:44
+#: src/client/imginfo.cpp:44
+msgid "No flag set"
+msgstr "®iaden príznak"
+
+# src/client/imginfo.cpp:50
+#: src/client/imginfo.cpp:50
+msgid "No description"
+msgstr "®iaden popis"
+
+# src/client/imginfo.cpp:56
+#: src/client/imginfo.cpp:56 src/client/imginfo.cpp:110
+msgid "none"
+msgstr "¾iaden"
+
+# src/client/imginfo.cpp:60
+#: src/client/imginfo.cpp:60 src/client/imginfo.cpp:126
+msgid "unknown"
+msgstr "neznámy"
+
+# src/client/imginfo.cpp:64
+#: src/client/imginfo.cpp:64
+#, c-format
+msgid ""
+"Filesystem:............%s\n"
+"Description:...........%s\n"
+"Original device:.......%s\n"
+"Original filepath:.... %s\n"
+"Flags:.................%ld: %s\n"
+"Creation date:.........%sPartition size:........%s\n"
+"Hostname:..............%s\n"
+"Compatible Version:....%s\n"
+"Encryption algorithm:..%ld -> %s\n"
+"MBR saved count:.......%lu\n"
+"\n"
+"System of the backup:\n"
+"- machine:.............%s\n"
+"- operating system:....%s\n"
+"- release:.............%s\n"
+"\n"
+"\n"
+msgstr ""
+"Súborový systém:.......%s\n"
+"Popis:.................%s\n"
+"Pôvodné zariadenie:....%s\n"
+"Pôvodná cesta:........ %s\n"
+"Príznaky:..............%ld: %s\n"
+"Dátum vytvorenia:......%sVeµkos» oddielu:.......%s\n"
+"Meno poèítaèa:.........%s\n"
+"Kompatibilná verzia:...%s\n"
+"©ifrovanie:.....%ld -> %s\n"
+"Poèet ulo¾ených MBR:...%lu\n"
+"\n"
+"Systém zálohy:\n"
+"- poèítaè:.............%s\n"
+"- operaèný systém:.....%s\n"
+"- vydanie:.............%s\n"
+"\n"
+"\n"
+
+#: src/client/imginfo.cpp:89
+#, c-format
+msgid ""
+"-------------------- MBR %.3d -------------------\n"
+"Device:................%s\n"
+"Device blocks count:...%llu\n"
+"Device model:..........%s\n"
+"\n"
+msgstr ""
+
+# src/client/imginfo.cpp:102
+#: src/client/imginfo.cpp:130
+#, c-format
+msgid ""
+"Volume number:.........%lu\n"
+"Volume size:...........%s\n"
+"Compression level: ....%ld -> %s\n"
+"Identificator:.........%llu=%llX\n"
+"\n"
+msgstr ""
+"Èíslo zväzku:..........%lu\n"
+"Veµkos» zväzku:........%s\n"
+"Úroveò kompresie:. ....%ld -> %s\n"
+"Identifikátor:.........%llu=%llX\n"
+"\n"
+
+# src/client/imginfo.cpp:128
+#: src/client/imginfo.cpp:155
+#, c-format
+msgid "The image file \"%s\" cannot be found"
+msgstr "Súbor s obrazom \"%s\" nebol nájdený"
+
+# src/client/imginfo.cpp:154
+#: src/client/imginfo.cpp:176
+msgid "Cannot read image file"
+msgstr "Nemô¾em naèíta» obraz"
+
+# src/client/imginfo.cpp:209
+#: src/client/imginfo.cpp:231
+msgid "Image informations"
+msgstr "Informácie o obraze"
+
+# src/client/interface_base.cpp:40 src/client/interface_newt.cpp:128
+# src/client/misc.cpp:1876 src/client/fs/fs_ntfs.cpp:178
+#: src/client/interface_base.cpp:40 src/client/interface_newt.cpp:134
+#: src/client/misc.cpp:1888 src/client/fs/fs_ntfs.cpp:184
+msgid "Error"
+msgstr "Chyba"
+
+# src/client/interface_base.cpp:48
+#: src/client/interface_base.cpp:48
+#, c-format
+msgid "About Partition Image %s"
+msgstr "O Partition Image %s"
+
+# src/client/interface_base.cpp:50
+#: src/client/interface_base.cpp:50
+#, fuzzy, c-format
+msgid ""
+"Partition Image is distributed under the GNU GPL 2 (General Public License)\n"
+"\n"
+"version:...%s\n"
+"web:.......http://www.partimage.org/\n"
+"\n"
+"Authors:\n"
+"Francois Dupoux  <fdupoux@partimage.org>\n"
+"Franck Ladurelle <ladurelf@partimage.org>"
+msgstr ""
+"Partition Image je distrubuovaný pod licenciou GNU GPL 2 (General Public License)\n"
+"\n"
+"verzia:....%s\n"
+"web:.......http://www.partimage.org/\n"
+"\n"
+"Autori:\n"
+"François Dupoux <fdupoux@partimage.org>\n"
+"Franck Ladurelle <ladurelf@partimage.org>"
+
+# src/client/interface_base.cpp:61
+#: src/client/interface_base.cpp:61
+#, c-format
+msgid "Can't write block %ld to image"
+msgstr "Nemô¾em zapísa» blok %ld do obrazu"
+
+# src/client/interface_base.cpp:65
+#: src/client/interface_base.cpp:65
+#, c-format
+msgid "Can't write %s to image"
+msgstr "Nemô¾em zapísa» do obrazu %s"
+
+# src/client/interface_base.cpp:69
+#: src/client/interface_base.cpp:69
+#, c-format
+msgid "Can't write bitmap block %ld to image"
+msgstr "Nemô¾em zapísa» bitmapu bloku %ld do obrazu"
+
+# src/client/interface_base.cpp:73
+#: src/client/interface_base.cpp:73
+#, c-format
+msgid "Can't read bitmap block %ld from image"
+msgstr "Nem¾em naèíta» bitmapu bloku %ld z obrazu"
+
+# src/client/interface_base.cpp:77
+#: src/client/interface_base.cpp:77
+#, c-format
+msgid "Can't write block %ld to harddrive"
+msgstr "Nemô¾em zapísa» na disk blok %ld"
+
+# src/client/interface_base.cpp:81
+#: src/client/interface_base.cpp:81
+#, c-format
+msgid "Can't read block %ld from image (%d)"
+msgstr "Nemô¾em z obrazu naèíta» blok %ld (%d)"
+
+# src/client/interface_base.cpp:85
+#: src/client/interface_base.cpp:85
+#, c-format
+msgid "Can't read %s from image"
+msgstr "Nemô¾em naèíta» %s z obrazu"
+
+# src/client/interface_base.cpp:89
+#: src/client/interface_base.cpp:89
+msgid "Can't read SuperBlock"
+msgstr "Nemô¾em naèíta» superblok"
+
+# src/client/interface_base.cpp:93
+#: src/client/interface_base.cpp:93
+msgid "Can't write SuperBlock"
+msgstr "Nemô¾em zapísa» superblok"
+
+# src/client/interface_base.cpp:97
+#: src/client/interface_base.cpp:97
+#, c-format
+msgid "Can't read block %ld from harddrive partition"
+msgstr "Nemô¾em naèíta» %ld z oddielu disku"
+
+# src/client/interface_base.cpp:101
+#: src/client/interface_base.cpp:101
+#, c-format
+msgid "Can't read bitmap block %ld from harddrive partition (%s)"
+msgstr "Nemô¾em naèíta» bitmapu bloku %ld z oddielu disku (%s)"
+
+# src/client/interface_base.cpp:106
+#: src/client/interface_base.cpp:106
+msgid "Can't write the MBR"
+msgstr "Nemô¾em zapísa» do MBR"
+
+# src/client/interface_base.cpp:112
+#: src/client/interface_base.cpp:112
+msgid "Can't read the MBR"
+msgstr "Nemô¾em naèíta» MBR"
+
+# src/client/interface_base.cpp:118
+#: src/client/interface_base.cpp:118
+#, c-format
+msgid "Not a %s partition. Check the filesystem type"
+msgstr "To nie je %s oddiel. Skontrolujte typ súborového systému"
+
+# src/client/interface_base.cpp:124
+#: src/client/interface_base.cpp:124
+msgid ""
+"The partition was saved with a newer version of Partion Image. Please "
+"download the last one."
+msgstr "Oddiel bol ulo¾ený pomocou nev¹ej verzie Partition Image. Prosím, stiahnite si najnov¹iu verziu."
+
+# src/client/interface_base.cpp:131
+#: src/client/interface_base.cpp:131
+msgid "Error while writing image file: disk full !"
+msgstr "Chyba pri zápise obrazu: disk je plný !"
+
+# src/client/interface_base.cpp:137
+#: src/client/interface_base.cpp:137
+#, c-format
+msgid "Can't detect file system of partition %s"
+msgstr "Nemô¾em zisti» typ súborového systému v oddiele %s"
+
+# src/client/interface_base.cpp:143
+#: src/client/interface_base.cpp:143
+msgid "Can't write main header"
+msgstr "Nemô¾em zapísa» hlavnú hlavièku"
+
+# src/client/interface_base.cpp:149
+#: src/client/interface_base.cpp:149
+msgid "Can't write main tail"
+msgstr "Nemô¾em zapísa» hlavné zakonèenie"
+
+# src/client/interface_base.cpp:155
+#: src/client/interface_base.cpp:155
+msgid "Can't read main tail"
+msgstr "Nemô¾em preèíta» hlavné zakonèenie"
+
+# src/client/interface_base.cpp:161
+#: src/client/interface_base.cpp:161
+msgid ""
+"The image you try to restore was encrypted. The current version doesn't "
+"support encryption. Please, download the latest version of partimage."
+msgstr "Obraz, ktorý ste sa pokúsili obnovi», je za¹ifrovaný. Aktuálna verzia nepodporuje ¹ifrovanie. Prosím, stiahnite si najnov¹iu verziu."
+
+# src/client/interface_base.cpp:169
+#: src/client/interface_base.cpp:169
+#, c-format
+msgid ""
+"%s is not the first volume of an image. Please, retry with the volume number "
+"000"
+msgstr "%s nie je prvý zväzok obrazu. Prosím, skúste znovu so zväzkom èíslo 000"
+
+# src/client/interface_base.cpp:176
+#: src/client/interface_base.cpp:176
+#, c-format
+msgid "%s is not a valid partition image file."
+msgstr "% nie je platný obraz oddielu"
+
+# src/client/interface_base.cpp:182
+#: src/client/interface_base.cpp:182
+#, c-format
+msgid ""
+"The partition is to small to be restored:\n"
+"Original partition size:........%llu bytes\n"
+"Destination partition size:.....%llu bytes"
+msgstr ""
+"Oddiel je na obnovenie príli¹ malý:\n"
+"Pôvodná veµkos» oddielu:........%llu bajtov\n"
+"Veµkost cieµového oddielu:......%llu bajtov"
+
+# src/client/interface_base.cpp:190
+#: src/client/interface_base.cpp:190
+#, c-format
+msgid ""
+"There was an error while restoring partition:\n"
+"CRC64 are differents, the imagefile was damaged:\n"
+"Original CRC64:.....%llu\n"
+"Current CRC64:......%llu"
+msgstr ""
+"Pri obnovovaní oddielu sa vyskytla chyba:\n"
+"CRC64 sú rozdielne - súbor s obrazom je po¹kodený:\n"
+"Originálny CRC64:.....%llu\n"
+"Aktuálny CRC64:.......%llu"
+
+# src/client/interface_base.cpp:199
+#: src/client/interface_base.cpp:199
+#, c-format
+msgid "Invalid volume number (%ld instead of %ld)."
+msgstr "Neplatné èíslo zväzku (%ld namiesto %ld)."
+
+# src/client/interface_base.cpp:206
+#: src/client/interface_base.cpp:206
+msgid "Error on close"
+msgstr "Chyba pri zatváraní"
+
+# src/client/interface_base.cpp:213
+#: src/client/interface_base.cpp:213
+#, c-format
+msgid "The partition %s is already locked by another process. Can't work on it"
+msgstr "Oddiel %s je u¾ zamknutý iným procesom. Nemô¾em na òom pracova»"
+
+# src/client/interface_base.cpp:226
+#: src/client/interface_base.cpp:226
+#, c-format
+msgid "Can't open partition %s"
+msgstr "Nemô¾em otvori» oddiel %s"
+
+# src/client/interface_base.cpp:232
+#: src/client/interface_base.cpp:232
+#, c-format
+msgid "Can't lock partition %s"
+msgstr "Nemô¾em zamknú» oddiel %s"
+
+# src/client/interface_base.cpp:238
+#: src/client/interface_base.cpp:238
+msgid "Can't read main header: imagefile was damaged"
+msgstr "Nemô¾em preèíta» hlavnú hlavièku: súbor s obrazom bol po¹kodený"
+
+# src/client/interface_base.cpp:244
+#: src/client/interface_base.cpp:244
+msgid "Can't write informations"
+msgstr "Nemô¾em zapísa» informácie"
+
+# src/client/interface_base.cpp:250
+#: src/client/interface_base.cpp:250
+msgid "Can't read informations"
+msgstr "Nemô¾em naèíta» informácie"
+
+# src/client/interface_base.cpp:256
+#: src/client/interface_base.cpp:256
+msgid "Can't read MBR Magic: imagefile was damaged"
+msgstr "Nemô¾em preèita» MBR Magic: súbor s obrazom bol po¹kodený"
+
+#: src/client/interface_base.cpp:278
+msgid "Know bug"
+msgstr ""
+
+#: src/client/interface_base.cpp:278
+msgid ""
+"Cannot restore the MBR from an image compressed with bzip2. You have to "
+"change the compression level."
+msgstr ""
+
+# src/client/interface_base.cpp:282 src/client/interface_base.cpp:311
+# src/client/interface_base.cpp:318 src/client/interface_base.cpp:341
+# src/client/interface_base.cpp:361 src/client/misc.cpp:1868
+#. return = newtWinChoice(i18n("Warning"), i18n("Continue"), i18n("Cancel"),
+#. i18n("You are not logged as root. You may have \"access denied\" errors"
+#. " when working."));
+#. newtWinMessage(i18n("Warning"), i18n("Ok"), i18n("The current %s support is experimental !"), szFileSys);
+#. return newtWinChoice(i18n("Warning"), i18n("Continue"), i18n("Cancel"),
+#. i18n("The MBR is a very important data of the hard disk. If you write "
+#. "a bad MBR, you will lose all the partitions of your hard drive. "
+#. "Don't continue unless you know what you are doing. Press 'Continue' "
+#. "to restore.\n"
+#. "Device with MBR to restore:.........%s [%llu]\n"
+#. "Original MBR:.......................%s [%llu]"),
+#. szCurrentDevice, qwCurrentSize, szOriginalDevice, qwOriginalSize);
+#. return newtWinChoice(i18n("Warning"), i18n("Continue"), i18n("Cancel"),
+#. i18n("The original hard disk does not fit with the current hard disk. "
+#. "The MBR you are trying to restore was saved from another hard disk. "
+#. "This means the original and current hard disks does not have the same "
+#. "size or they are not on the same device (%s and %s). "
+#. "Do you want to continue?"), szOriginalDevice, szCurrentDevice);
+#: src/client/interface_base.cpp:288 src/client/interface_base.cpp:316
+#: src/client/interface_base.cpp:323 src/client/interface_base.cpp:330
+#: src/client/interface_base.cpp:338 src/client/interface_base.cpp:345
+#: src/client/interface_base.cpp:368 src/client/interface_base.cpp:388
+#: src/client/main.cpp:528 src/client/misc.cpp:1880
+msgid "Warning"
+msgstr "Varovanie"
+
+# src/client/interface_base.cpp:282 src/client/misc.cpp:1868
+#: src/client/interface_base.cpp:288 src/client/misc.cpp:1880
+msgid ""
+"You are not logged as root. You may have \"access denied\" errors when "
+"working."
+msgstr "Nie ste prihlásený ako root. Pri va¹ej práci sa mo¾u syskytnú» chyby ako  \"Prístup zamietnutý\"."
+
+# src/client/interface_base.cpp:292
+#. return newtWinChoice(i18n("New Volume"), i18n("Continue"), i18n("Stop"),
+#. i18n("The volume has been changed.\nOld: %s\nNew: %s/%s.%.3ld\n"
+#. "Press Enter to continue"), szOld, szNewPath, szOriginalFilename, Volume);
+#: src/client/interface_base.cpp:298
+msgid "New Volume"
+msgstr "Nový zväzok"
+
+# src/client/interface_base.cpp:292
+#: src/client/interface_base.cpp:298
+#, c-format
+msgid ""
+"The volume has been changed.\n"
+"Old: %s\n"
+"New: %s/%s.%.3ld\n"
+"Press Enter to continue"
+msgstr ""
+"Zväzok bol zmenený.\n"
+"Starý: %s\n"
+"Nový:  %s/%s.%.3ld\n"
+"Stlaète Enter pre pokraèovanie"
+
+# src/client/interface_base.cpp:302
+#. return newtWinChoice(i18n("Confirmation"), i18n("Yes"), i18n("No"),
+#. i18n("Do you really want to restore %s from the image file %s ?"),
+#. szDevice, szImageFilename);
+#: src/client/interface_base.cpp:308
+msgid "Confirmation"
+msgstr "Potvrdenie"
+
+# src/client/interface_base.cpp:303
+#: src/client/interface_base.cpp:309
+#, c-format
+msgid "Do you really want to restore %s from the image file %s ?"
+msgstr "Naozaj chcete obnovi» %s z obrazu %s ?"
+
+# src/client/interface_base.cpp:311
+#: src/client/interface_base.cpp:317
+#, fuzzy, c-format
+msgid "%s found errors on the file system."
+msgstr "Na súborovom systéme sú chyby, alebo nemô¾em spusti» %s"
+
+#: src/client/interface_base.cpp:324
+#, c-format
+msgid "Partimage will not check partition because %s does't exist."
+msgstr ""
+
+#: src/client/interface_base.cpp:331
+#, c-format
+msgid "Partimage will not check partition because of run access denied for %s."
+msgstr ""
+
+# src/client/interface_base.cpp:318
+#: src/client/interface_base.cpp:338
+#, c-format
+msgid "The current %s support is experimental !"
+msgstr "Aktuálna podpora %s je experimentálna !"
+
+# src/client/interface_base.cpp:318
+#: src/client/interface_base.cpp:345
+#, fuzzy, c-format
+msgid "The current %s support is beta !"
+msgstr "Aktuálna podpora %s je experimentálna !"
+
+# src/client/interface_base.cpp:326
+#. newtWinMessage(i18n("Simulation mode"), i18n("Ok"),
+#. i18n("You are using simulation mode: no write will be performed"));
+#: src/client/interface_base.cpp:353
+msgid "Simulation mode"
+msgstr "Simulaèný mód"
+
+# src/client/interface_base.cpp:326
+#: src/client/interface_base.cpp:353
+msgid "You are using simulation mode: no write will be performed"
+msgstr "Pou¾ívate simulaèný mód: niè sa nebude zapisova»"
+
+# src/client/interface_base.cpp:342
+#: src/client/interface_base.cpp:369
+#, c-format
+msgid ""
+"The MBR is a very important data of the hard disk. If you write a bad MBR, "
+"you will lose all the partitions of your hard drive. Don't continue unless "
+"you know what you are doing. Press 'Continue' to restore.\n"
+"Device with MBR to restore:.........%s [%llu]\n"
+"Original MBR:.......................%s [%llu]"
+msgstr ""
+"MBR je veµmi dôle¾itá èas» disku. Ak zapí¹ete zlý MBR, stratíte v¹etky     na va¹om disku. Nepokraèujte, pokiaµ presne neviete, èo robíte. Stlaète 'Pokraèova»' pre obnovenie.\n"
+"Zariadenie s MBR na obnovenie:......%s [%llu]\n"
+"Pôvodný MBR:........................%s [%llu]"
+
+# src/client/interface_base.cpp:362
+#: src/client/interface_base.cpp:389
+#, c-format
+msgid ""
+"The original hard disk does not fit with the current hard disk. The MBR you "
+"are trying to restore was saved from another hard disk. This means the "
+"original and current hard disks does not have the same size or they are not "
+"on the same device (%s and %s). Do you want to continue?"
+msgstr "Originálny harddisk nie je zhodný s aktuálnym harddiskom. MBR, ktorý sa pokú¹ate obnovi» bol ulo¾ený z iného disku. To znamená, ¾e pôvodný a aktuálny harddisk najú rozlièné veµkosti, alebo nie sú na tom istom zariadení (%s a %s) Chcete pokraèova» ?"
+
+# src/client/interface_base.cpp:372 src/client/main.cpp:742
+#: src/client/interface_base.cpp:399 src/client/main.cpp:730
+msgid "Success"
+msgstr "Úspech"
+
+# src/client/interface_base.cpp:372
+#: src/client/interface_base.cpp:399
+#, c-format
+msgid ""
+"The MBR of [%s] has beensuccessfully restored. You might need to reboot your "
+"computer if you wantthe operating system to use the new MBR."
+msgstr "MBR z [%s] bol úspe¹ne obnovený. Budete musie» re¹tartova» poèítaè ak chcete, aby operaèný systém pou¾il nový MBR."
+
+# src/client/interface_base.cpp:393 src/client/interface_base.cpp:403
+#: src/client/interface_base.cpp:420 src/client/interface_base.cpp:430
+#, c-format
+msgid "Error: %s"
+msgstr "Chyba: %s"
+
+# src/client/interface_base.cpp:400
+#: src/client/interface_base.cpp:427
+msgid "Action canceled as user required"
+msgstr "Akcia bola zru¹ená u¾ívateµom"
+
+# src/client/interface_base.cpp:406
+#: src/client/interface_base.cpp:433
+#, c-format
+msgid "The %s imagefile already exist. Do you want to overwrite it?"
+msgstr "Obraz %s u¾ existuje. Chcete ho prepísa» ?"
+
+# src/client/interface_base.cpp:412
+#: src/client/interface_base.cpp:440
+msgid "Access denied"
+msgstr "Prístup zamietnutý"
+
+# src/client/interface_base.cpp:412
+#: src/client/interface_base.cpp:440
+#, c-format
+msgid "You don't have write access on %s"
+msgstr "Nemáte prístup na zápis na %s"
+
+# src/client/interface_base.cpp:416
+#: src/client/interface_base.cpp:444
+#, c-format
+msgid "Invalid compression level for %s"
+msgstr "Chybná úroveò kompresie pre %s"
+
+# src/client/interface_base.cpp:420
+#: src/client/interface_base.cpp:448
+#, c-format
+msgid "imagefile %s is already open"
+msgstr "Súbor s obrazom %s je u¾ otvorený"
+
+# src/client/interface_base.cpp:430
+#: src/client/interface_base.cpp:458
+#, c-format
+msgid "file %s is too short to be a partimage volume: can't read header"
+msgstr "súbor %s je príli¹ krátky na to, aby bol zväzok partimage: nemô¾em preèíta» hlavièku"
+
+# src/client/interface_base.cpp:440
+#. case ERR_PARTITIONVOLUME:
+#. msgBoxError(i18n("file %s is not an partimage volume: "
+#. "magic string does not match"), szFilename);
+#. return ERR_QUIT;
+#. ERR_WRONGMAGIC:
+#: src/client/interface_base.cpp:468
+#, c-format
+msgid "file %s is not an partimage file: magic string does not match"
+msgstr "súbor %s nie je obraz z partimage: èarovné re»azce sa nezhodujú"
+
+# src/client/interface_base.cpp:445
+#: src/client/interface_base.cpp:473
+#, c-format
+msgid "magic string does not match: error in the image file [%s]"
+msgstr "èarovné re»azce as nezhodujú: chyba v súbore s obrazom [%s]"
+
+# src/client/interface_base.cpp:449
+#: src/client/interface_base.cpp:477
+msgid "the current volume doesn't fit with current image: wrong identificator"
+msgstr "aktuálny zväzok nepatrí k aktuálnemu obrazu: zlý identifikátor"
+
+# src/client/interface_base.cpp:454
+#: src/client/interface_base.cpp:482
+msgid "Out of memory."
+msgstr "Málo pamäte."
+
+# src/client/interface_base.cpp:458
+#: src/client/interface_base.cpp:486
+#, fuzzy
+msgid "incorrect password or user not in partimagedusers file"
+msgstr "nesprávne heslo/prihlásenie zamietnuté"
+
+# src/client/interface_base.cpp:462
+#: src/client/interface_base.cpp:490
+msgid "Too many clients connected to partimaged. Please, retry later"
+msgstr "Na partimaged je pripojených príli¹ veµa klientov. Skúste, prosím, neskôr"
+
+# src/client/interface_base.cpp:467
+#: src/client/interface_base.cpp:495
+#, c-format
+msgid ""
+"Only 4096 bytes per block %s volumes are supported. Current one is %lu bytes/"
+"block"
+msgstr "Sú podporované iba %s zväzky s 4096 bajtmi na blok. Aktuálne je %lu bajtov/blok"
+
+# src/client/interface_base.cpp:472
+#: src/client/interface_base.cpp:500
+#, c-format
+msgid ""
+"The partition %s id already locked by anotherprocess. You can't work on it"
+msgstr "Oddiel %s je u¾ zamknutý iným procesom. Nemô¾ete na òom pracova»"
+
+# src/client/interface_base.cpp:481
+#: src/client/interface_base.cpp:509
+msgid ""
+"Error while checking the data: Invalid block number.Maybe a volume or some "
+"data were skipped."
+msgstr "Chyba pri kontrolovaní dát: Chybné èislo bloku. Mo¾no bol preskoèený zväzok alebo dáta."
+
+# src/client/interface_base.cpp:486
+#: src/client/interface_base.cpp:514
+#, fuzzy, c-format
+msgid "This volume (%ld) is not the expected one: %ld."
+msgstr "Tento zväzok (%ld) nie je ten oèakávaný: %ld"
+
+#: src/client/interface_base.cpp:519
+msgid ""
+"Hostname/IP Error!\n"
+"Perhaps the hostname could not be resolved. (Try again using IP address)"
+msgstr ""
+
+# src/client/interface_base.cpp:525
+#: src/client/interface_base.cpp:559
+msgid "No MBR was found in this imagefile. We can't continue"
+msgstr "V tomto obraze nebol nájdený MBR. Nemô¾m pokraèova»"
+
+# src/client/interface_base.cpp:529
+#: src/client/interface_base.cpp:563
+msgid "Partition checks found error(s) on partitions"
+msgstr "Kontrola oddielu na¹la na oddieloch chybu(-y)"
+
+# src/client/interface_base.cpp:544
+#: src/client/interface_base.cpp:578
+msgid "Impossible to read MBR from disk"
+msgstr "Z disku na nedá preèíta» MBR"
+
+# src/client/interface_base.cpp:547
+#: src/client/interface_base.cpp:581
+#, c-format
+msgid "Invalid or damaged filesystem %s"
+msgstr "Chybný alebo po¹kodený súborový systém %s"
+
+# src/client/interface_base.cpp:553
+#: src/client/interface_base.cpp:587
+#, c-format
+msgid "Impossible to zero the block on harddrive: %s"
+msgstr "Nedá sa vynulova» blok na disku: %s"
+
+# src/client/interface_base.cpp:557
+#: src/client/interface_base.cpp:591
+#, fuzzy
+msgid ""
+"Connexion refused by server: incompatibles networking options.Try disabling "
+"login option for server with '-L'"
+msgstr "Spojenie odmietnuté serverom: nekompatibilné sie»ové nastavenia"
+
+# src/client/interface_base.cpp:561
+#: src/client/interface_base.cpp:596
+msgid "Connexion refused by server: versions mismatch"
+msgstr "Spojenie odmietnuté serverom: nezhodné verzie"
+
+# src/client/interface_base.cpp:565
+#: src/client/interface_base.cpp:600
+#, c-format
+msgid ""
+"The image file was created by a newer release (%s) of Partition Image. "
+"Please update this software and retry."
+msgstr "Obraz bol vytvorený nov¹ím vydaním (%s) Partition Image. Prosím, aktualizujte software a skúste znovu."
+
+# src/client/interface_base.cpp:570
+#: src/client/interface_base.cpp:605
+#, c-format
+msgid ""
+"The image file was created by an older release (%s) of Partition Image. You "
+"must use the old version to restoreyour image or you have to recreate it "
+"with current version"
+msgstr "Súbor s obrazom bol vytvorený star¹ou (%s) verziou Partition Image. Na obnovenie musíte pou¾i» star¹iu verziu alebo musíte obraz znovu vytvori» aktuálnou verziou"
+
+# src/client/interface_base.cpp:577
+#: src/client/interface_base.cpp:612
+#, c-format
+msgid ""
+"%s is not a valid Partition Image file or it's damaged. Sorry, can't continue"
+msgstr "%s nie je platný súbor Partition Image, alebo je po¹kodený. Nemô¾em pokraèova»"
+
+# src/client/interface_base.cpp:582
+#: src/client/interface_base.cpp:617
+#, c-format
+msgid "File %s is not a regular file. For security reasons, we can't continue"
+msgstr "Súbor %s nie je obyèajný súbor. Z bezpeènostných dôvodov nemô¾em pokraèova»"
+
+# src/client/interface_base.cpp:587
+#: src/client/interface_base.cpp:622
+#, c-format
+msgid "Cannot mount %s"
+msgstr "Nemô¾em pripoji» %s"
+
+# src/client/interface_base.cpp:591
+#: src/client/interface_base.cpp:626
+#, c-format
+msgid "Cannot unmount %s"
+msgstr "Nemô¾em odpoji» %s"
+
+# src/client/interface_base.cpp:595
+#: src/client/interface_base.cpp:630
+#, c-format
+msgid ""
+"Cannot create temp file [%s]. Please, check there is space enough and you "
+"have access rights."
+msgstr "Nemô¾em vytvori» doèasný súbor [%s]. Prosím, skontrolujte voµné miesto a èi máte dostatoèné prístupové práva."
+
+# src/client/interface_base.cpp:599
+#: src/client/interface_base.cpp:634
+#, c-format
+msgid "Cannot create temp file [%s]. No space left on device."
+msgstr "Nemô¾em vytvori» doèasný súbor [%s]. Na zariadení u¾ nie je voµné miesto."
+
+# src/client/interface_base.cpp:599
+#: src/client/interface_base.cpp:639
+#, fuzzy, c-format
+msgid ""
+"Cannot create temp file in [%s]. Write access is denied for user 'partimag'"
+msgstr "Nemô¾em vytvori» doèasný súbor [%s]. Na zariadení u¾ nie je voµné miesto."
+
+# src/client/interface_base.cpp:599
+#: src/client/interface_base.cpp:642
+#, fuzzy, c-format
+msgid "Cannot create temp file in [%s]. Write access is denied."
+msgstr "Nemô¾em vytvori» doèasný súbor [%s]. Na zariadení u¾ nie je voµné miesto."
+
+#: src/client/interface_base.cpp:647
+msgid ""
+"File too large. (larger than 2 GB). Can't continue. This problem can come "
+"from the kernel, the glibc, the file system which where the image is written"
+msgstr ""
+
+# src/client/interface_base.cpp:607
+#: src/client/interface_base.cpp:651
+#, c-format
+msgid "Unknown error %d -> %s"
+msgstr "Neznáma chyba %ld -> %s"
+
+# src/client/interface_newt.cpp:37
+#: src/client/interface_newt.cpp:37
+msgid "Newt debug information"
+msgstr "Ladiace informácie Newt"
+
+# src/client/interface_newt.cpp:37 src/client/interface_newt.cpp:108
+# src/client/interface_newt.cpp:320 src/client/interface_newt.cpp:352
+# src/client/interface_newt.cpp:405
+#: src/client/interface_newt.cpp:37 src/client/interface_newt.cpp:110
+#: src/client/interface_newt.cpp:346 src/client/interface_newt.cpp:378
+#: src/client/interface_newt.cpp:431
+msgid "Ok"
+msgstr "Ok"
+
+# src/client/interface_newt.cpp:141
+#: src/client/interface_newt.cpp:151
+msgid "Continue"
+msgstr "Pokraèova»"
+
+# src/client/interface_newt.cpp:156
+#: src/client/interface_newt.cpp:174
+msgid "Yes"
+msgstr "Áno"
+
+# src/client/interface_newt.cpp:156
+#: src/client/interface_newt.cpp:174
+msgid "No"
+msgstr "Nie"
+
+# src/client/interface_newt.cpp:191
+#: src/client/interface_newt.cpp:213
+msgid "* Partition to save/restore"
+msgstr "* Oddiel na ulo¾enie/obnovenie"
+
+# src/client/interface_newt.cpp:193
+#: src/client/interface_newt.cpp:215
+msgid "* Image file to create/use"
+msgstr "* Súbor s obrazom na vytvorenie/pou¾itie"
+
+# src/client/interface_newt.cpp:195
+#: src/client/interface_newt.cpp:217
+msgid "Action to be done:"
+msgstr "Akcia, ktorá sa má vykona»:"
+
+# src/client/interface_newt.cpp:196
+#: src/client/interface_newt.cpp:218
+msgid "Save partition into a new image file"
+msgstr "Ulo¾i» oddiel do nového súboru s obrazom"
+
+# src/client/interface_newt.cpp:197
+#: src/client/interface_newt.cpp:219
+msgid "Restore partition from an image file"
+msgstr "Obnovi» oddiel zo súboru s obrazom"
+
+# src/client/interface_newt.cpp:198
+#: src/client/interface_newt.cpp:220
+msgid "Restore an MBR from the imagefile"
+msgstr "Obnovi» MBR zo súboru s obrazom"
+
+# src/client/interface_newt.cpp:200
+#: src/client/interface_newt.cpp:222
+msgid "Connect to server"
+msgstr "Pripoji» sa k serveru"
+
+# src/client/interface_newt.cpp:202
+#: src/client/interface_newt.cpp:224
+msgid "Encrypt data on the network with SSL"
+msgstr "©ifrova» dáta na sieti s SSL"
+
+# src/client/interface_newt.cpp:204
+#: src/client/interface_newt.cpp:227
+msgid "SSL disabled at compile time"
+msgstr "SSL bolo vypnuté pri kompilácii"
+
+# src/client/interface_newt.cpp:204
+#: src/client/interface_newt.cpp:229
+#, fuzzy
+msgid "SSL&login disabled at compile time"
+msgstr "SSL bolo vypnuté pri kompilácii"
+
+# src/client/interface_newt.cpp:206
+#: src/client/interface_newt.cpp:232
+msgid "IP/name of the server:"
+msgstr "IP/meno servera:"
+
+# src/client/interface_newt.cpp:208
+#: src/client/interface_newt.cpp:234
+msgid "Port:"
+msgstr "Port:"
+
+# src/client/interface_newt.cpp:212
+#: src/client/interface_newt.cpp:238
+msgid "Next (F5)"
+msgstr "Ïalej (F5)"
+
+# src/client/interface_newt.cpp:213
+#: src/client/interface_newt.cpp:239
+msgid "About"
+msgstr "O programe"
+
+# src/client/interface_newt.cpp:244
+#: src/client/interface_newt.cpp:270
+msgid "The \"Image\" filed is empty. Cannot continue"
+msgstr "Pole \"Obraz\" je prázdne. Nemô¾em pokraèova»"
+
+# src/client/interface_newt.cpp:252
+#: src/client/interface_newt.cpp:278
+msgid "The \"Server IP/Name\" field is empty. Cannot continue"
+msgstr "Pole \"IP/meno servera\" je prázdne. Nemô¾em pokraèova»"
+
+# src/client/interface_newt.cpp:258
+#: src/client/interface_newt.cpp:284
+msgid "The \"Server Port\" field is not a valid integer. Cannot continue"
+msgstr "V poli \"Port\" nie je platná celoèíselná hodnota. Nemô¾em pokraèova»"
+
+# src/client/interface_newt.cpp:316 src/client/misc.cpp:985
+#: src/client/interface_newt.cpp:342 src/client/misc.cpp:863
+msgid "Partition description"
+msgstr "Popis oddielu"
+
+# src/client/interface_newt.cpp:318
+#: src/client/interface_newt.cpp:344
+msgid "You can enter a description of the saved partition:"
+msgstr "Mô¾ete zada» popis ulo¾eného oddielu:"
+
+# src/client/interface_newt.cpp:370 src/client/interface_newt.cpp:426
+#: src/client/interface_newt.cpp:396 src/client/interface_newt.cpp:452
+msgid "Text cannot be empty"
+msgstr "Text nemô¾e my» prázdny"
+
+# src/client/interface_newt.cpp:395
+#: src/client/interface_newt.cpp:421
+msgid "Password required"
+msgstr "Potrebné heslo"
+
+# src/client/interface_newt.cpp:398
+#: src/client/interface_newt.cpp:424
+msgid "Enter your login"
+msgstr "Zadajte vá¹ login"
+
+# src/client/interface_newt.cpp:402
+#: src/client/interface_newt.cpp:428
+msgid "Enter your password"
+msgstr "Zadajte va¹e heslo"
+
+# src/client/interface_newt.cpp:442
+#: src/client/interface_newt.cpp:468
+#, c-format
+msgid ""
+"Disk full! Can't write next volume file (%s.%.3ld)\n"
+"to %s\n"
+"Please, enter another directory path (without filename):"
+msgstr ""
+"Disk je plný! Nemô¾em zapísa» ïal¹í zväzok(%s.%.3ld)\n"
+"do %s\n"
+"Prosím, zadajte inú cestu (bez mena súboru):"
+
+# src/client/interface_newt.cpp:447
+#. *(szMess+2047) = '\0';
+#: src/client/interface_newt.cpp:473
+msgid "New Volume location"
+msgstr "Nové umiestnenie zväzku"
+
+# src/client/main.cpp:224 src/client/misc.cpp:1903
+#: src/client/main.cpp:240 src/client/misc.cpp:1915
+msgid "server's port must be between 1 and 65535\n"
+msgstr "port servera musí by» medzi 1 a 65536\n"
+
+# src/client/main.cpp:233
+#: src/client/main.cpp:249
+#, fuzzy
+msgid "Compression mode must be 0 (none), 1(gzip), 2(bzip2)\n"
+msgstr "Mód kompresie musí by» 0 (¾iadna), 1(gzip), 2(bzip2) alebo 3(lzo)\n"
+
+# src/client/main.cpp:264
+#: src/client/main.cpp:259
+msgid "Finish mode must be 0 (wait), 1(halt), 2(reboot) or 3(quit)\n"
+msgstr "Mód skonèenia musí by» 0 (èakanie), 1(zastavenie), 2(re¹tart) alebo 3(odchod)\n"
+
+# src/client/main.cpp:274
+#: src/client/main.cpp:269
+msgid ""
+"The debug level must be 0(none), 1(user), 2(developer) or 3(debugging)\n"
+msgstr "Ladiaca úroveò musí by» 0(¾iadna), 1(u¾ívateµská), 2(vývojárska), 3(ladenie)\n"
+
+# src/client/main.cpp:288
+#: src/client/main.cpp:278
+#, fuzzy, c-format
+msgid "Volume size: %llu bytes (%ld MiB)\n"
+msgstr "Veµkos» zväzku: %llu bajtov (%ld KB)\n"
+
+# src/client/main.cpp:325
+#. version
+#: src/client/main.cpp:308
+#, c-format
+msgid "Partition Image version %s (distributed under the GNU GPL2).\n"
+msgstr "Partition Image verzia %s (distribuované pod GNU GPL2).\n"
+
+# src/client/main.cpp:377
+#: src/client/main.cpp:352
+msgid "Cannot open debug file.\n"
+msgstr "Nemô¾em otvori» ladiaci súbor\n"
+
+#: src/client/main.cpp:529
+msgid ""
+"You have devfs enabled but not mounted. You have to do it to continue. You "
+"can also boot with non-devfs kernel if you have one."
+msgstr ""
+
+#: src/client/main.cpp:651 src/client/main.cpp:664
+msgid "commiting buffer cache to disk."
+msgstr ""
+
+# src/client/main.cpp:731
+#: src/client/main.cpp:719
+msgid "The MBR was successfully restored"
+msgstr "MBR bol úspe¹ne obnovený"
+
+# src/client/main.cpp:736
+#: src/client/main.cpp:724
+msgid "Simulation"
+msgstr "Simulácia"
+
+# src/client/main.cpp:738
+#: src/client/main.cpp:726
+msgid "Operation"
+msgstr "Operácia"
+
+# src/client/main.cpp:749
+#. if we reach this point, it's because shutdown failed
+#: src/client/main.cpp:741
+msgid "Error: Cannot halt the computer"
+msgstr "Chyba: Nemô¾em zastavi» poèítaè"
+
+# src/client/main.cpp:759
+#. if we reach this point, it's because shutdown failed
+#: src/client/main.cpp:751
+msgid "Error: Cannot reboot the computer"
+msgstr "Chyba: Nemô¾em re¹tartova» poèítaè"
+
+# src/client/main.cpp:759
+#: src/client/main.cpp:782 src/client/main.cpp:789 src/client/main.cpp:815
+#, fuzzy
+msgid "Error: Cannot count remaining partimages"
+msgstr "Chyba: Nemô¾em re¹tartova» poèítaè"
+
+# src/client/main.cpp:759
+#. nRes = system("/sbin/shutdown -r now");
+#. nRes = system("/sbin/reboot");
+#. if we reach this point, it's because shutdown failed
+#: src/client/main.cpp:804
+#, fuzzy
+msgid "DEBUG: reboot the computer"
+msgstr "Chyba: Nemô¾em re¹tartova» poèítaè"
+
+# src/client/main.cpp:793
+#: src/client/main.cpp:843
+#, fuzzy, c-format
+msgid ""
+"Partition Image (http://www.partimage.org/) version %s [%s]\n"
+"---- distributed under the GPL 2 license (GNU General Public License) ----\n"
+"\n"
+"Supported file systems:....ext2fs, reiserfs, fat16, fat32, ntfs(exp), hpfs\n"
+"\n"
+"usage: partimage [options] <action> <device> <image_file>\n"
+"       partimage <imginfo/restmbr> <image_file>\n"
+"\n"
+"ex: partimage -z1 -o -d save /dev/hda12 /mnt/backup/redhat-6.2.partimg.gz\n"
+"ex: partimage restore /dev/hda13 /mnt/backup/suse-6.4.partimg\n"
+"ex: partimage restmbr /mnt/backup/debian-potato-2.2.partimg.bz2\n"
+"ex: partimage -z1 -om save /dev/hda9 /mnt/backup/win95-osr2.partimg.gz\n"
+"ex: partimage imginfo /mnt/backup/debian-potato-2.2.partimg.bz2\n"
+"ex: partimage -a/dev/hda6#/mnt/partimg#vfat -V1440 save /dev/hda12 /mnt/"
+"partimg/redhat-6.2.partimg.gz\n"
+"\n"
+"Arguments:\n"
+"* <action>:\n"
+"  - save: save the partition datas in an image file\n"
+"  - restore: restore the partition from an image file\n"
+"  - restmbr: restore a MBR of the image file to an hard disk\n"
+"  - imginfo: show informations about the image file\n"
+"* <device>: partition to save/restore (example: /dev/hda1)\n"
+"* <image_file>: file where data will be read/written. can be very big\n"
+"\n"
+"Options:\n"
+"* -z,  --compress     (image file compression level):\n"
+"  -z0, --compress=0   don't compress: very fast but very big image file\n"
+"  -z1, --compress=1   compress using gzip: fast and small image file "
+"(default)\n"
+"  -z2, --compress=2   (compress using bzip2: very slow and very small image "
+"file):\n"
+"* -c,  --nocheck      don't check the partition before saving\n"
+"* -o,  --overwrite    overwrite the existing image file without "
+"confirmation\n"
+"* -d,  --nodesc       don't ask any description for the image file\n"
+"* -V,  --volume       (split image into multiple volumes files)\n"
+"  -VX, --volume=X     create volumes with a size of X KB\n"
+"* -w,  --waitvol      wait for a confirmation after each volume change\n"
+"* -e,  --erase        erase empty blocks on restore with zero bytes\n"
+"* -m,  --allowmnt     don't fail if the partition is mounted. Dangerous !\n"
+"* -M,  --nombr        don't create a backup of the MBR (Mast Boot Record) in "
+"the image file\n"
+"* -h,  --help         show help\n"
+"* -v,  --version      show version\n"
+"* -i,  --compilinfo   show compilation options used\n"
+"* -f,  --finish       (action to do if finished successfully):\n"
+"  -f0, --finish=0     wait: don't make anything\n"
+"  -f1, --finish=1     halt (power off) the computer\n"
+"  -f2, --finish=2     reboot (restart the computer):\n"
+"  -f3, --finish=3     quit\n"
+"* -b,  --batch        batch mode: the GUI won't wait for an user action\n"
+"* -y,  --nosync       don't synchronize the disks at the end of the "
+"operation (dangerous)\n"
+"* -sX, --server=X     give partimaged server's ip address\n"
+"* -pX, --port=X       give partimaged server's listening port\n"
+"* -g,  --debug=X      set the debug level to X (default: 1):\n"
+"* -n,  --nossl        disable SSL in network mode\n"
+"* -S,  --simulate     simulation of restoration mode\n"
+"* -aX, --automnt=X    Automatic mount with X options. Read the doc for more "
+"details\n"
+"* -UX  --username=X   Username to authenticate to server\n"
+"* -PX  --Password=X   Password for authentication of user to server\n"
+msgstr ""
+"Partition Image (http://www.partimage.org/) verzia %s [%s]\n"
+"---- distribuované pod GPL 2 licenciou (GNU General Public License) ----\n"
+"\n"
+"Podporované súborové systémy: ext2fs, reiserfs, fat16, fat32, ntfs(exp), hpfs\n"
+"\n"
+"pou¾itie: partimage [mo¾nosti] <akcia> <zariadenie> <súbor_s_obrazom>\n"
+"          partimage <imginfo/restmbr> <súbor_s_obrazom>\n"
+"\n"
+"napr: partimage -z1 -o -d save /dev/hda12 /mnt/backup/redhat-6.2.partimg.gz\n"
+"napr: partimage restore /dev/hda13 /mnt/backup/suse-6.4.partimg\n"
+"napr: partimage restmbr /mnt/backup/debian-potato-2.2.partimg.bz2\n"
+"napr: partimage -z1 -om save /dev/hda9 /mnt/backup/win95-osr2.partimg.gz\n"
+"napr: partimage imginfo /mnt/backup/debian-potato-2.2.partimg.bz2\n"
+"napr: partimage -a/dev/hda6#/mnt/partimg#vfat -V1440 save /dev/hda12 /mnt/"
+"partimg/redhat-6.2.partimg.gz\n"
+"\n"
+"Argumenty:\n"
+"* <akcia>:\n"
+"  - save: ulo¾í dáta z oddielu do súboru\n"
+"  - restore: obnoví oddiel zo súboru\n"
+"  - restmbr: zapí¹e MBR zo súboru na harddisk\n"
+"  - imginfo: vypí¹e informácie o súbore s obrazom\n"
+"  - imgconv: konvertuje súbor s obrazom do súboru s inou úrovòou kompresie\n"
+"* <zariadenie>: oddiel na obnovenie/ulo¾enie (príklad: /dev/hda1)\n"
+"* <súbor_s_obrazom>: súbor na èítanie/zápis dát; mô¾e by» veµký\n"
+"\n"
+"Mo¾nosti:\n"
+"* -z,  --compress     (úroveò kompresie obrazu):\n"
+"  -z0, --compress=0   nekomprimova»: veµmi rýchle, ale veµmi veµké obrazy\n"
+"  -z1, --compress=1   kompresia pomocou gzip: rýchla a malé súbory (východzie)\n"
+"  -z2, --compress=2   (kompresia pomocou bzip2: veµmi pomalé a veµmi malé obrazy):\n"
+"* -c,  --nocheck      neskontroluje oddiel pred ukladaním\n"
+"* -o,  --overwrite    prepí¹e existujúci obraz bez potvrdenia \n"
+"* -d,  --nodesc       nepýta sa na popis súboru s obrazom\n"
+"* -V,  --volume       (rozdelí obraz na viacej zväzkov)\n"
+"  -VX, --volume=X     vytvorí zväzky veµkosti X KB\n"
+"* -w,  --waitvol      èaká na potvrdenie pri ka¾dej zmene zväzku\n"
+"* -e,  --erase        pri obnovovaní prema¾e prázdne bloky nulami\n"
+"* -m,  --allowmnt     nezru¹i», keï je oddiel pripojený. Nebezpeèné !\n"
+"* -M,  --nombr        nevytvára» zálohu MBR v súbore s obrazom \n"
+"* -h,  --help         vypí¹e pomoc\n"
+"* -v,  --version      vypí¹e verziu\n"
+"* -i,  --compilinfo   vypí¹e pou¾ité kompilaèné mo¾nosti\n"
+"* -f,  --finish       (akcia, keï sa skonèí úspe¹ne):\n"
+"  -f0, --finish=0     èakaj: nerob niè\n"
+"  -f1, --finish=1     zastav (vypni) poèítaè\n"
+"  -f2, --finish=2     re¹tart (re¹tartuje poèítaè):\n"
+"  -f3, --finish=3     odíï\n"
+"* -b,  --batch        dávkový mód: GUI nebude èaka» na ¾iadnu akciu u¾ívateµa\n"
+"* -y,  --nosync       nesynchronizuje disky po skonèení operácie (nebezpeèné) \n"
+"* -sX, --server=X     adresa partimaged servera\n"
+"* -pX, --port=X       port partimaged servera\n"
+"* -g,  --debug=X      nastaví ladiacu úrovaò na X (východzie: 1):\n"
+"* -n,  --nossl        vypne SSL v sie»ovom móde\n"
+"* -S,  --simulate     simulácia obnovovacieho módu\n"
+"* -aX, --automnt=X    automatické pripojenie s X mo¾nos»ami. Pre podrobnosti si preèítajte dokumentáciu\n"
+"* -A   --saveall      ulo¾í aj voµné bloky v oddieli.\n"
+
+# src/client/main.cpp:844
+#: src/client/main.cpp:894
+msgid "stable"
+msgstr "stabilné"
+
+# src/client/main.cpp:844
+#: src/client/main.cpp:894
+msgid "unstable"
+msgstr "nestabilné"
+
+# src/client/main.cpp:979
+#: src/client/main.cpp:1050
+#, c-format
+msgid ""
+"%s  successfully finished:\n"
+"\n"
+"Time elapsed:...%s\n"
+"Speed:..........%s/min\n"
+"Data copied:....%s"
+msgstr ""
+"%s  úspe¹ne dokonèené:\n"
+"\n"
+"Pou¾itý èas:....%s\n"
+"Rýchlos»:.......%s/min\n"
+"Kopír. dát:.....%s"
+
+# src/client/misc.cpp:514
+#: src/client/misc.cpp:374
+msgid "initializing the operation. Please wait..."
+msgstr "inicializujem operáciu. Prosím èakajte..."
+
+#: src/client/misc.cpp:417
+msgid "Bzip2 bug workaround"
+msgstr ""
+
+#: src/client/misc.cpp:418
+msgid ""
+"Because of a bug, you won't be able to restore MBR from any bzip2 compressed "
+"image unless you manualy run bzip2 -d on them"
+msgstr ""
+
+# src/client/misc.cpp:726
+#: src/client/misc.cpp:595
+msgid "Saving partition to the image file..."
+msgstr "Ukladám oddiel do súboru s obrazom..."
+
+# src/client/misc.cpp:819
+#: src/client/misc.cpp:711
+msgid "initializing the operation"
+msgstr "inicializujem operáciu"
+
+#: src/client/misc.cpp:1001 src/client/misc.cpp:1015 src/client/misc.cpp:1025
+msgid "Error in Main Tail"
+msgstr ""
+
+# src/client/interface_base.cpp:256
+#: src/client/misc.cpp:1002
+#, fuzzy
+msgid "Impossible to read the magic: the image is damaged"
+msgstr "Nemô¾em preèita» MBR Magic: súbor s obrazom bol po¹kodený"
+
+# src/client/interface_base.cpp:238
+#: src/client/misc.cpp:1016
+#, fuzzy
+msgid "CRC changed: the image is damaged"
+msgstr "Nemô¾em preèíta» hlavnú hlavièku: súbor s obrazom bol po¹kodený"
+
+#: src/client/misc.cpp:1026
+msgid "volume numbers changed: the image is damaged"
+msgstr ""
+
+# src/client/misc.cpp:1631
+#: src/client/misc.cpp:1639
+msgid "inode missing"
+msgstr "chýba inode"
+
+# src/client/misc.cpp:1631
+#: src/client/misc.cpp:1639
+#, c-format
+msgid ""
+"%s inode doesn't exists. Partimage can create it for you. You can also use "
+"the manual mknod command. Do you want this inode to be created for you now ?"
+msgstr "Chýba indode na %s. Partimage ho mô¾e vytvori». Mô¾ete tie¾ pou¾i» príkaz mknod. Mám teraz vytvori» tento inode ?"
+
+# src/client/misc.cpp:1648
+#: src/client/misc.cpp:1656
+#, c-format
+msgid "%s is not a block device."
+msgstr "%s nie je blokové zariadenie."
+
+#: src/client/misc.cpp:1708
+msgid "You haven't access to /proc/mounts."
+msgstr ""
+
+#: src/client/misc.cpp:1714
+msgid "An error occurred trying to read /proc/mounts."
+msgstr ""
+
+# src/client/misc.cpp:1876
+#: src/client/misc.cpp:1888
+#, c-format
+msgid ""
+"The %s partition is mounted. Partition Image can't work on mounted "
+"partitions. Please, unmount it before. You can do it with \"umount %s\""
+msgstr "Oddiel %s je pripojený. Partition Image nemô¾e pracova» na pripojených oddieloch. Najskôr ho, prosím odpojte. Mô¾ete to vykona» s \"umount %s\""
+
+# src/client/misc.cpp:1896
+#: src/client/misc.cpp:1908
+msgid ""
+"Split volumes size must be an integer greater than 1024 (size >= 1024 KB)"
+msgstr "Veµkos» rozdeµovania zväzkov musí by» celoèíselná hodnota väè¹ia ako 1024(veµkost >= 1024 KB)"
+
+# src/client/misc.cpp:1916
+#: src/client/misc.cpp:1928
+msgid "Invalid automount options. Read the manual for more details"
+msgstr "Chybné mo¾nosti pre automatické pripojenie. Pre viac informácií si preèítajte manuál"
+
+# src/client/misc.cpp:1924
+#: src/client/misc.cpp:1936
+#, c-format
+msgid "The second argument [%s] must be a valid device (ex: /dev/hda1)"
+msgstr "Druhý argument [%s] musí by» platné zariadenie (napr.: /dev/hda1)"
+
+# src/client/misc.cpp:1933 src/client/misc.cpp:1943
+#: src/client/misc.cpp:1945
+#, c-format
+msgid ""
+"The third argument [%s] must be a valid regular file (not a directory, a "
+"symlink, ...)"
+msgstr "Tretí argument [%s] musí by» platný obyèajný súbor (NIE adresár, symlink,..."
+
+# src/client/misc.cpp:88
+#: src/client/fs/fs_base.cpp:81
+msgid "Exit partimage ?"
+msgstr "Odís» z partimage ?"
+
+# src/client/misc.cpp:88
+#: src/client/fs/fs_base.cpp:81
+msgid "Do you really want to cancel the current operation ?"
+msgstr "Chcete naozaj zru¹i» prebiehajúcu operáciu ?"
+
+#: src/client/fs/fs_base.cpp:346
+msgid "local check error"
+msgstr ""
+
+#: src/client/fs/fs_base.cpp:347
+msgid ""
+"Impossible to find a local check structure. Data may be damaged. Do you want "
+"to continue ?"
+msgstr ""
+
+#: src/client/fs/fs_base.cpp:359 src/client/fs/fs_base.cpp:371
+msgid "local CRC error"
+msgstr ""
+
+#: src/client/fs/fs_base.cpp:360
+msgid ""
+"There was a position error in CCheck. Data may be damaged. Do you want to "
+"continue ?"
+msgstr ""
+
+#: src/client/fs/fs_base.cpp:372
+msgid ""
+"There was a CRC error in CCheck. Data may be damaged. Do you want to "
+"continue ?"
+msgstr ""
+
+# src/client/fs/fs_base.cpp:313
+#: src/client/fs/fs_base.cpp:473
+msgid "reading partition properties"
+msgstr "èítam vlastnosti oddielov"
+
+# src/client/fs/fs_base.cpp:329
+#: src/client/fs/fs_base.cpp:485
+msgid "checking the file system with fsck"
+msgstr "kontrolujem súborový systém pomocou fsck"
+
+# src/client/fs/fs_base.cpp:348
+#: src/client/fs/fs_base.cpp:507
+msgid "writing header"
+msgstr "zapisujem hlavièku"
+
+# src/client/fs/fs_base.cpp:405 src/client/fs/fs_base.cpp:540
+#: src/client/fs/fs_base.cpp:564 src/client/fs/fs_base.cpp:699
+msgid "copying used data blocks"
+msgstr "kopírujem pou¾ité dátové bloky"
+
+# src/client/fs/fs_base.cpp:429
+#: src/client/fs/fs_base.cpp:588
+msgid "reading partition informations"
+msgstr "èítam informácie o oddiele"
+
+# src/client/fs/fs_base.cpp:566
+#: src/client/fs/fs_base.cpp:724
+#, c-format
+msgid ""
+"Block size....................%llu bytes\n"
+"Total blocks count............%llu\n"
+"Used blocks count.............%llu\n"
+"Free blocks count.............%llu\n"
+msgstr ""
+"Veµkos» bloku.................%llu bajtov\n"
+"Celk. poèet blokov............%llu\n"
+"Poèet vou¾itých blokov........%llu\n"
+"Poèet voµných blokov..........%llu\n"
+
+# src/client/fs/fs_base.cpp:580
+#: src/client/fs/fs_base.cpp:738
+#, fuzzy, c-format
+msgid ""
+"%sSpace usage:..................%llu %%\n"
+"Used space....................%s\n"
+"Free space....................%s\n"
+"Bitmap size...................%s\n"
+"Label.........................%s\n"
+msgstr ""
+"%sVyu¾itie miesta:..............%llu %%\n"
+"Celkom miesta:................%s\n"
+"Vyu¾ité miesto................%s\n"
+"Voµné miesto..................%s\n"
+"Veµkos» bitmapy...............%s\n"
+"Meno..........................%s\n"
+
+# src/client/fs/fs_ext2.cpp:79
+#: src/client/fs/fs_ext2.cpp:105
+#, c-format
+msgid ""
+"%sNumber of groups..............%lu\n"
+"First block...................%lu\n"
+"Ext3fs journalization.........%s\n"
+"Sparse super block............%s\n"
+"Large files support...........%s\n"
+"File system revision..........%lu\n"
+msgstr ""
+"%sPoèet skupín..................%lu\n"
+"Prvý blok.....................%lu\n"
+"Ext3fs ¾urnalizácia...........%s\n"
+"Sparse super block............%s\n"
+"Podpora dlhých súborov........%s\n"
+"Revízia súb. systému..........%lu\n"
+
+# src/client/fs/fs_ext2.cpp:87 src/client/fs/fs_ext2.cpp:88
+# src/client/fs/fs_ext2.cpp:89
+#: src/client/fs/fs_ext2.cpp:113 src/client/fs/fs_ext2.cpp:114
+#: src/client/fs/fs_ext2.cpp:115
+msgid "yes"
+msgstr "áno"
+
+# src/client/fs/fs_ext2.cpp:87 src/client/fs/fs_ext2.cpp:88
+# src/client/fs/fs_ext2.cpp:89
+#: src/client/fs/fs_ext2.cpp:113 src/client/fs/fs_ext2.cpp:114
+#: src/client/fs/fs_ext2.cpp:115
+msgid "no"
+msgstr "nie"
+
+# src/client/fs/fs_ext2.cpp:93
+#: src/client/fs/fs_ext2.cpp:119
+msgid "Ext3fs informations"
+msgstr "Ext3fs informácie"
+
+# src/client/fs/fs_ext2.cpp:95
+#: src/client/fs/fs_ext2.cpp:121
+msgid "Ext2fs informations"
+msgstr "Ext2fs informácie"
+
+# src/client/fs/fs_ext2.cpp:407
+#: src/client/fs/fs_ext2.cpp:331
+msgid "There was an error while reading the bitmap"
+msgstr "Vyskytla sa chyba pri èítaní bitmapy"
+
+# src/client/fs/fs_fat.cpp:231
+#: src/client/fs/fs_fat.cpp:123
+#, c-format
+msgid ""
+"%sSector Size...................%u\n"
+"Sectors per cluster...........%u\n"
+"Reserved Sectors count........%u\n"
+"Root directory sectors........%lu\n"
+"FAT tables count..............%u\n"
+"Total Sectors Count...........%lu\n"
+"Sectors per FAT...............%lu\n"
+"Clusters count:...............%lu\n"
+"Used clusters.................%lu\n"
+"Free clusters.................%lu\n"
+"Damaged clusters..............%lu\n"
+msgstr ""
+"%sVeµkos» sektora...............%u\n"
+"Sektorov na cluster...........%u\n"
+"Poèet rezervovaných sektorov..%u\n"
+"Sektorov koreòového adresára..%lu\n"
+"Poèet FAT tabuliek............%u\n"
+"Poèet sektorov................%lu\n"
+"Sektorov na FAT...............%lu\n"
+"Poèet clusterov...............%lu\n"
+"Pou¾ité clustery..............%lu\n"
+"Voµné clustery................%lu\n"
+"Po¹kodené clustery............%lu\n"
+
+# src/client/fs/fs_fat.cpp:250
+#: src/client/fs/fs_fat.cpp:142
+msgid "FAT informations"
+msgstr "FAT informácie"
+
+# src/client/fs/fs_fat.cpp:408
+#: src/client/fs/fs_fat.cpp:288
+msgid "Can't read boot sector"
+msgstr "Nemô¾em naèíta» boot sektor"
+
+# src/client/fs/fs_fat.cpp:459
+#: src/client/fs/fs_fat.cpp:343
+msgid ""
+"m_cSectorsPerCluster can't be null. Check the partition to save is a FAT one."
+msgstr "m_cSectorsPerCluster nemô¾e by» nulový. Skontrolujte, èi oddiel, ktorý chcete ulo¾i» je FAT."
+
+# src/client/fs/fs_fat.cpp:408
+#: src/client/fs/fs_fat.cpp:379
+#, fuzzy
+msgid "Can't read FSInfo sector"
+msgstr "Nemô¾em naèíta» boot sektor"
+
+# src/client/fs/fs_ntfs.cpp:59
+#: src/client/fs/fs_ntfs.cpp:61
+#, c-format
+msgid "%s is not an NTFS file system partition"
+msgstr "%s nie je oddiel so súborovým systémom NTFS"
+
+# src/client/fs/fs_ntfs.cpp:128
+#: src/client/fs/fs_ntfs.cpp:134
+#, c-format
+msgid "Out of memory: need %lu bytes to read file record in readBitmap()"
+msgstr "Málo pamäte: potrebujem %lu bajtov na naèítanie záznamu v readBitmap()"
+
+# src/client/fs/fs_ntfs.cpp:178
+#: src/client/fs/fs_ntfs.cpp:184
+msgid ""
+"Unable to read the $Bitmap MFT record. Do you want to make an experimental "
+"search for it ? (it can take a long time)"
+msgstr "Nemô¾em naèíta» $Bitmap MFT záznam. Chcete ho skúsi» experimentálne hµada» ? (Mô¾e to trna» veµmi dlho)"
+
+# src/client/fs/fs_ntfs.cpp:193
+#: src/client/fs/fs_ntfs.cpp:199
+msgid "Cannot find the $bitmap with experimental search"
+msgstr "Nemô¾em nájs» $bitmap experimentálnym hµadaním"
+
+# src/client/fs/fs_ntfs.cpp:205
+#: src/client/fs/fs_ntfs.cpp:211
+msgid "Cannot use $bitmap file record"
+msgstr "Nemô¾em pou¾i» záznam $bitmap"
+
+# src/client/fs/fs_ntfs.cpp:214
+#: src/client/fs/fs_ntfs.cpp:220
+msgid "NTFS $Bitmap is to small"
+msgstr "NTFS $Bitmap je príli¹ malá"
+
+# src/client/fs/fs_ntfs.cpp:230 src/client/fs/fs_ntfs.cpp:599
+#: src/client/fs/fs_ntfs.cpp:236 src/client/fs/fs_ntfs.cpp:605
+msgid "Out of memory"
+msgstr "Málo pamäte"
+
+# src/client/fs/fs_ntfs.cpp:302
+#: src/client/fs/fs_ntfs.cpp:308
+#, c-format
+msgid ""
+"%sBytes per sector..............%u\n"
+"Sectors per cluster...........%u\n"
+"File record size..............%lu\n"
+"LCN of MFT Data attrib........%llu\n"
+msgstr ""
+"%sbajtov na sektor..............%u\n"
+"Sektorov na cluster...........%u\n"
+"Veµkos» záznamu súboru........%lu\n"
+"LCN z MFT Data attrib........%llu\n"
+
+# src/client/fs/fs_ntfs.cpp:310
+#: src/client/fs/fs_ntfs.cpp:316
+msgid "NTFS informations"
+msgstr "NTFS informácie"
+
+# src/client/fs/fs_ntfs.cpp:335
+#: src/client/fs/fs_ntfs.cpp:341
+#, c-format
+msgid "Out of memory: need %lu bytes to read file record in readVolumeLabel()"
+msgstr "Málo pamäte: potrebujem %lu bajtov na naèítanie záznamu v readVolumeLabel()"
+
+# src/client/fs/fs_ntfs.cpp:438
+#: src/client/fs/fs_ntfs.cpp:444
+msgid "NTFS: \"Attribute List\" attribute is not yet supported."
+msgstr "NTFS: \"Attribute List\" atribút e¹te nie je podporovaný."
+
+# src/client/fs/fs_ntfs.cpp:472
+#: src/client/fs/fs_ntfs.cpp:478
+#, c-format
+msgid "NTFS: Compression flag for DATA attribute not null: %ld"
+msgstr "NTFS: Príznak kompresie pre atribút DATA nie je nulový: %ld"
+
+# src/client/fs/fs_ntfs.cpp:487
+#. WORD nOffsetOfStream;
+#. nOffsetOfStream=NTFS_GETU16(cAttribData+0x14);
+#. qwDataSize = (QWORD) NTFS_GETU16(cAttribData+0x10);
+#: src/client/fs/fs_ntfs.cpp:493
+msgid "NTFS: Resident data attribute not supported"
+msgstr "NTFS: Atribút \"Resident data\" nie je podporovaný"
+
+# src/client/fs/fs_ntfs.cpp:500
+#: src/client/fs/fs_ntfs.cpp:506
+msgid "NTFS: processRunList() returned -1"
+msgstr "NTFS: processRunList() vrálil -1"
+
+# src/client/fs/fs_ntfs.cpp:520
+#: src/client/fs/fs_ntfs.cpp:526
+msgid "Error in readFilenameAttribute"
+msgstr "Chyba v readFilenameAttribute"
+
+# src/client/fs/fs_ntfs.cpp:520
+#: src/client/fs/fs_ntfs.cpp:526
+msgid "The \"filename\" attribute must be resident !"
+msgstr "Atribút \"filename\" musí bu» rezidentný !"
+
+# src/client/fs/fs_ntfs.cpp:850
+#: src/client/fs/fs_ntfs.cpp:858
+msgid "$bitmap record search"
+msgstr "hµadanie záznamu $bitmap"
+
+# src/client/fs/fs_ntfs.cpp:850
+#: src/client/fs/fs_ntfs.cpp:858
+msgid "experimental search succeed"
+msgstr "experimentálne hµadanie bolo úspe¹né"
+
+# src/client/fs/fs_hpfs.cpp:144
+#: src/client/fs/fs_hpfs.cpp:148
+#, c-format
+msgid "%sHPFS version:.................%d\n"
+msgstr "%sHPFS verzia:..................%d\n"
+
+# src/client/fs/fs_hpfs.cpp:148
+#: src/client/fs/fs_hpfs.cpp:152
+msgid "HPFS informations"
+msgstr "HPFS informácie"
+
+# src/client/fs/fs_hpfs.cpp:170
+#: src/client/fs/fs_hpfs.cpp:176
+msgid "Can't read boot block"
+msgstr "Nemô¾em preèíta» bootovací blok"
+
+# src/client/fs/fs_hpfs.cpp:182
+#: src/client/fs/fs_hpfs.cpp:188
+msgid "Can't read super block"
+msgstr "Nemô¾em preèíta» super blok"
+
+# src/client/fs/fs_hpfs.cpp:194
+#: src/client/fs/fs_hpfs.cpp:200
+msgid "Can't read spare block"
+msgstr "Nemô¾em preèíta» spare blok"
+
+# src/client/fs/fs_hpfs.cpp:201
+#: src/client/fs/fs_hpfs.cpp:207
+msgid "Invalid HPFS magic numbers. Not a valid HPFS partition."
+msgstr "Chybné èarovné èísla HPFS. Toto nie je platný HPFS oddiel."
+
+# src/client/fs/fs_reiser.cpp:118
+#: src/client/fs/fs_reiser.cpp:113
+msgid "ReiserFS informations"
+msgstr "ReiserFS informácie"
+
+# src/client/fs/fs_jfs.cpp:564
+#: src/client/fs/fs_jfs.cpp:566
+msgid "JFS informations"
+msgstr "JFS informácie"
+
+# src/client/fs/fs_xfs.cpp:212
+#: src/client/fs/fs_xfs.cpp:210
+#, c-format
+msgid ""
+"%sAllocation Group count:.......%lu\n"
+"Blocks per Allocation Group...%lu\n"
+"Allocation Group size:........%s\n"
+msgstr ""
+"%Ppoèet alokaèných skupín:......%lu\n"
+"Blokov na alokaènú skupinu....%lu\n"
+"Veµkos» alokaènej skupiny.....%s\n"
+
+# src/client/fs/fs_xfs.cpp:219
+#: src/client/fs/fs_xfs.cpp:217
+msgid "XFS informations"
+msgstr "XSF informácie"
+
+# src/server/partimaged.cpp:68
+#: src/server/partimaged.cpp:77
+msgid "Waitting ..."
+msgstr "Èakám ..."
+
+# src/server/partimaged.cpp:76
+#: src/server/partimaged.cpp:85
+msgid "error !"
+msgstr "chhyba !"
+
+# src/server/partimaged.cpp:95
+#: src/server/partimaged.cpp:104
+msgid "getspace ..."
+msgstr "getspace ..."
+
+# src/server/partimaged.cpp:109
+#: src/server/partimaged.cpp:118
+msgid "writting ..."
+msgstr "zapisujem ..."
+
+# src/server/partimaged.cpp:136
+#: src/server/partimaged.cpp:146
+msgid "opening for write ..."
+msgstr "otváram pre zápis ..."
+
+# src/server/partimaged.cpp:147
+#: src/server/partimaged.cpp:157
+msgid "saving"
+msgstr "ukladám"
+
+# src/server/partimaged.cpp:152
+#: src/server/partimaged.cpp:162
+msgid "reading ..."
+msgstr "èítam ..."
+
+# src/server/partimaged.cpp:177
+#: src/server/partimaged.cpp:188
+msgid "closing ..."
+msgstr "zatváram ..."
+
+# src/server/partimaged.cpp:189
+#: src/server/partimaged.cpp:200
+msgid "opening for read ..."
+msgstr "otváram pre èítanie ..."
+
+# src/server/partimaged.cpp:190
+#: src/server/partimaged.cpp:201
+msgid "restoring"
+msgstr "obnovujem"
+
+# src/server/partimaged.cpp:366
+#: src/server/partimaged.cpp:382
+msgid "finished"
+msgstr "dokonèené"
+
+# src/server/partimaged-gui_newt.cpp:51
+#: src/server/partimaged-gui_newt.cpp:56 src/server/partimaged-gui_newt.cpp:58
+#: src/server/partimaged-gui_newt.cpp:62 src/server/partimaged-gui_newt.cpp:64
+#: src/server/partimaged-gui_newt.cpp:68 src/server/partimaged-gui_newt.cpp:70
+msgid "Partimaged"
+msgstr "Partimaged"
+
+# src/server/partimaged-gui_newt.cpp:61
+#: src/server/partimaged-gui_newt.cpp:83
+msgid "Client #"
+msgstr "Klient #"
+
+# src/server/partimaged-gui_newt.cpp:62
+#: src/server/partimaged-gui_newt.cpp:84
+msgid "State"
+msgstr "Stav"
+
+# src/server/partimaged-gui_newt.cpp:63
+#: src/server/partimaged-gui_newt.cpp:85
+msgid "Host"
+msgstr "Hostiteµ"
+
+# src/server/partimaged-gui_newt.cpp:64
+#: src/server/partimaged-gui_newt.cpp:86
+msgid "Location"
+msgstr "Umiestnenie"
+
+# src/server/partimaged-gui_newt.cpp:65
+#: src/server/partimaged-gui_newt.cpp:87
+msgid "Size"
+msgstr "Veµkos»"
+
+# src/server/partimaged-gui_newt.cpp:87
+#: src/server/partimaged-gui_newt.cpp:109
+msgid "waiting"
+msgstr "èakám"
+
+# src/server/partimaged-main.cpp:100
+#: src/server/partimaged-main.cpp:108
+#, c-format
+msgid ""
+"Segmentation fault. Please report the bug and send the [%s] file to authors\n"
+msgstr "Chyba segmentácie. Prosím zaznamenajte túto chybu a po¹lite súbor [$s] autorom \n"
+
+# src/server/partimaged-main.cpp:109
+#: src/server/partimaged-main.cpp:119
+#, fuzzy, c-format
+msgid ""
+"Partition Image Daemon (http://www.partimage.org/) version %s\n"
+"---- distributed under the GPL 2 license (GNU General Public License) ----\n"
+"\n"
+"usage: partimaged [options]\n"
+"\n"
+"Options:\n"
+"* -h,  --help            show help\n"
+"* -v,  --version         show version\n"
+"* -d,  --dest            destination directory\n"
+"* -pX, --port=X          server's port listening (defaults to %d)\n"
+"* -D,  --daemon          start in daemon mode, not foreground\n"
+"* -i,  --compilinfo      show compilation options used\n"
+"* -r dir, --chroot dir   use chroot to improve security\n"
+"* -g, --debug=X          set the debug level to X (default: 1)\n"
+"* -L, --nologin          disable login from clients\n"
+msgstr ""
+"Partition Image Daemon (http://www.partimage.org/) verzia %s\n"
+"---- distribuované pod GPL 2 licenciou (GNU General Public License) ----\n"
+"\n"
+"pou¾itie: partimaged [options]\n"
+"\n"
+"Mo¾nosti:\n"
+"* -h,  --help            vypí¹e pomoc\n"
+"* -v,  --version         vypí¹e verziu\n"
+"* -pX, --port=X          port pre server (východzí %d)\n"
+"* -D,  --daemon          spustí sa ako démon, nie v popredí\n"
+"* -r dir, --chroot dir   pou¾íje chroot na zvý¹enie bezpeènosti\n"
+"* -g, --debug=X          nastaví ladiacu úroveò na X (východzie: 1)\n"
+
+# src/server/partimaged-main.cpp:132
+#: src/server/partimaged-main.cpp:150
+#, fuzzy, c-format
+msgid "Impossible to open logfile %s: %s\n"
+msgstr "Nemô¾em otvori» log súbor %s.\n"
+
+# src/server/partimaged-main.cpp:133
+#: src/server/partimaged-main.cpp:152
+msgid "Fix this and retry.\n"
+msgstr "Opravte to a skúste znova.\n"
+
+# src/server/partimaged-main.cpp:145
+#: src/server/partimaged-main.cpp:173
+#, c-format
+msgid "impossible to find user \"%s\"\n"
+msgstr "nomô¾em nájs» u¾íveteµa \"%s\"\n"
+
+# src/server/partimaged-main.cpp:146
+#: src/server/partimaged-main.cpp:174
+msgid "add it and retry\n"
+msgstr "pridajte a skúste znova\n"
+
+# src/server/partimaged-main.cpp:149
+#: src/server/partimaged-main.cpp:177
+msgid ""
+"Warning: we couldn't changed euid because we weren't launched as root\n"
+"expect some access denied or troubles like this.\n"
+msgstr ""
+"Varovanie: nedá sa zmeni» euid, preto¾e program nebol spustený ako rootovský\n"
+"èakajte zamietnutia prístupu alebo nejaké iné chyby ako tieto.\n"
+
+# src/server/partimaged-main.cpp:195
+#: src/server/partimaged-main.cpp:226
+#, c-format
+msgid "Partition Image Daemon version %s+SSL\n"
+msgstr "Partition Image Démon verzia %s+SSL\n"
+
+# src/server/partimaged-main.cpp:197
+#: src/server/partimaged-main.cpp:228
+#, c-format
+msgid "Partition Image Daemon version %s\n"
+msgstr "Partition Image Démon verzia %s\n"
+
+# src/server/partimaged-main.cpp:199
+#: src/server/partimaged-main.cpp:230
+msgid "(distributed under the GNU GPL 2)\n"
+msgstr "(distribuované pod GNU GPL 2)\n"
+
+# src/server/partimaged-main.cpp:314
+#: src/server/partimaged-main.cpp:373
+msgid "Waiting for client ..."
+msgstr "Èakám na klienta ..."
+
+# src/server/partimaged-main.cpp:333
+#: src/server/partimaged-main.cpp:392
+msgid "too much client connected"
+msgstr "pripojených príli¹ veµa klientov"
+
+# src/shared/common.cpp:78
+#: src/shared/common.cpp:75
+msgid "==== Partition Image: compilation options used ====\n"
+msgstr "=== Partition Image: pou¾ité mo¾nosti kompilácie ===\n"
+
+#: src/shared/common.cpp:76
+#, c-format
+msgid ""
+"\n"
+"* Version is %s [%s].\n"
+msgstr ""
+
+# src/shared/common.cpp:79
+#: src/shared/common.cpp:78
+#, fuzzy
+msgid ""
+"\n"
+"* Supported file systems:\n"
+"  - "
+msgstr ""
+"\n"
+"* Súborové systémy:\n"
+
+#: src/shared/common.cpp:80
+msgid "\n"
+msgstr ""
+
+# src/shared/common.cpp:90
+#: src/shared/common.cpp:83
+msgid "  - Ext2fs support: based on libext2fs library\n"
+msgstr "  - Podpora pre Ext2fs: zalo¾ená na knihovni libe2fs\n"
+
+# src/shared/common.cpp:92
+#: src/shared/common.cpp:85
+msgid "  - Ext2fs support: internal code\n"
+msgstr "  - Podpora Ext2fs: interný kód\n"
+
+# src/shared/common.cpp:95
+#: src/shared/common.cpp:88
+msgid ""
+"\n"
+"* Debug options:\n"
+msgstr ""
+"\n"
+"* Ladiace mo¾nosti:\n"
+
+# src/shared/common.cpp:101
+#: src/shared/common.cpp:91
+#, c-format
+msgid "  - PARTIMAGE_LOG=%s\n"
+msgstr "  - PARTIMAGE_LOG=%s\n"
+
+# src/shared/common.cpp:104
+#: src/shared/common.cpp:94
+#, c-format
+msgid "  - PARTIMAGED_LOG=%s\n"
+msgstr "  - PARTIMAGED_LOG=%s\n"
+
+# src/shared/common.cpp:135
+#: src/shared/common.cpp:98
+#, fuzzy
+msgid "  - DEVEL ENABLED\n"
+msgstr "  - SSL ZAPNUTÉ\n"
+
+# src/shared/common.cpp:137
+#: src/shared/common.cpp:100
+#, fuzzy
+msgid "  - DEVEL DISABLED\n"
+msgstr "  - SSL VYPNUTÉ\n"
+
+# src/shared/common.cpp:107
+#: src/shared/common.cpp:103
+#, c-format
+msgid "  - DEFAULT_DEBUG_LEVEL=%d\n"
+msgstr "  - DEFAULT_DEBUG_LEVEL=%d\n"
+
+# src/shared/common.cpp:109
+#: src/shared/common.cpp:105
+#, c-format
+msgid "  - APPEND_PID=%s\n"
+msgstr "  - APPEND_PID=%s\n"
+
+# src/shared/common.cpp:109
+#: src/shared/common.cpp:105
+msgid "true"
+msgstr "pravda"
+
+# src/shared/common.cpp:109
+#: src/shared/common.cpp:106
+msgid "false"
+msgstr "nepravda"
+
+# src/shared/common.cpp:126
+#: src/shared/common.cpp:109
+msgid ""
+"\n"
+"* Other options:\n"
+msgstr ""
+"\n"
+"* Ïal¹ie mo¾nosti:\n"
+
+# src/shared/common.cpp:128
+#: src/shared/common.cpp:110
+#, fuzzy, c-format
+msgid "  - CURRENT_IMAGE_FORMAT=%s\n"
+msgstr ""
+"  - CURRENT_IMAGE_FORMAT=%s\n"
+"\n"
+
+# src/shared/common.cpp:130
+#: src/shared/common.cpp:113
+msgid "  - USERS MUST LOGIN\n"
+msgstr "  - U®ÍVATEIA SA MUSIA PRIHLÁSI«\n"
+
+# src/shared/common.cpp:127
+#: src/shared/common.cpp:114
+#, c-format
+msgid "  - PARTIMAGED_USERS=%s\n"
+msgstr "  - PARTIMAGED_USERS=%s\n"
+
+# src/shared/common.cpp:132
+#: src/shared/common.cpp:116
+msgid "  - USERS DON'T LOGIN\n"
+msgstr "  - U®ÍVATELIA SA NEPRIHLASUJÚ\n"
+
+# src/shared/common.cpp:127
+#: src/shared/common.cpp:117
+#, fuzzy
+msgid "  - PARTIMAGED_USERS not used\n"
+msgstr "  - PARTIMAGED_USERS=%s\n"
+
+# src/shared/common.cpp:135
+#: src/shared/common.cpp:120
+msgid "  - SSL ENABLED\n"
+msgstr "  - SSL ZAPNUTÉ\n"
+
+# src/shared/common.cpp:137
+#: src/shared/common.cpp:122
+msgid "  - SSL DISABLED\n"
+msgstr "  - SSL VYPNUTÉ\n"
+
+# src/shared/common.cpp:140
+#: src/shared/common.cpp:125
+msgid "  - CHEUID ENABLED\n"
+msgstr "  - CHEUID ZAPNUTÉ\n"
+
+# src/shared/common.cpp:142
+#: src/shared/common.cpp:127
+msgid "  - CHEUID DISABLED\n"
+msgstr "  - CHEUID VYPNUTÉ\n"
+
+# src/shared/common.cpp:363
+#: src/shared/common.cpp:254
+#, c-format
+msgid "%lld bytes"
+msgstr "%lld bajtov"
+
+# src/shared/common.cpp:368
+#: src/shared/common.cpp:259
+#, fuzzy, c-format
+msgid "%.2f KiB"
+msgstr "%.2f KB"
+
+# src/shared/common.cpp:373
+#: src/shared/common.cpp:264
+#, fuzzy, c-format
+msgid "%.2f MiB"
+msgstr "%.2f MB"
+
+# src/shared/common.cpp:378
+#: src/shared/common.cpp:269
+#, fuzzy, c-format
+msgid "%.2f GiB"
+msgstr "%.2f GB"
+
+# src/shared/common.cpp:383
+#: src/shared/common.cpp:274
+#, fuzzy, c-format
+msgid "%.2f TiB"
+msgstr "%.2f TB"
+
+# src/client/gui_text.cpp:343
+#~ msgid "Kilo-Bytes"
+#~ msgstr "Kilo-Bajtov"
+
+# src/client/interface_base.cpp:587
+#, fuzzy
+#~ msgid "mount: %s"
+#~ msgstr "Nemô¾em pripoji» %s"
+
+# src/client/gui_text.cpp:68
+#~ msgid "Only the boot loader"
+#~ msgstr "Iba bootovací záznam"
+
+# src/client/gui_text.cpp:69
+#~ msgid "Only the partition table"
+#~ msgstr "Iba tabuµku oddielov"
+
+# src/client/gui_text.cpp:313
+#~ msgid "Lzo (.lzo: quite fast + quite big image file)"
+#~ msgstr "Lzo (.lzo: celkom rýchle + celkom veµký súbor)"
+
+# src/client/gui_text.cpp:316
+#~ msgid "( ) Lzo was disabled at compile time."
+#~ msgstr "( ) Podpora Lzo bola vypnutá pri kompilácii."
+
+# src/client/gui_text.cpp:322
+#~ msgid "( ) Gzip was disabled at compile time."
+#~ msgstr "( ) Podpora Gzip bola vypnutá pri kompilácii."
+
+# src/client/gui_text.cpp:329
+#~ msgid "( ) Bzip2 was disabled at compile time."
+#~ msgstr "( ) Podpora Bzip2 bola vypnutá pri kompilácii."
+
+# src/client/gui_text.cpp:336
+#~ msgid "Save all blocks (even free ones)"
+#~ msgstr "Ulo¾i» v¹etky bloky (aj voµné)"
+
+# src/client/gui_text.cpp:649 src/client/misc.cpp:143
+#~ msgid "converting the compression level"
+#~ msgstr "konvertujem do kompresnej úrovne"
+
+# src/client/gui_text.cpp:652 src/client/gui_text.cpp:714
+#~ msgid "Old image to read:................%s"
+#~ msgstr "Pôvodný obraz:.............%s"
+
+# src/client/gui_text.cpp:654
+#~ msgid "Old compression level:............%s"
+#~ msgstr "Pôvodná úroveò kompresie:.........%s"
+
+# src/client/gui_text.cpp:657 src/client/gui_text.cpp:716
+#~ msgid "New image to create:..............%s"
+#~ msgstr "Vytváraný nový obraz:.............%s"
+
+# src/client/gui_text.cpp:659
+#~ msgid "New compression level:............%s"
+#~ msgstr "Nová úroveò kompresie:............%s"
+
+# src/client/gui_text.cpp:705
+#~ msgid "Data copied:......................%s"
+#~ msgstr "Skopírovaných dát:................%s"
+
+# src/client/gui_text.cpp:719
+#~ msgid "Available space for image:........%s = %llu bytes"
+#~ msgstr "Dostupné miesto pre obraz:........%s = %llu bajtov"
+
+# src/client/gui_text.cpp:943
+#~ msgid "Overwrite image ?"
+#~ msgstr "Prepísa» obraz ?"
+
+# src/client/imginfo.cpp:135
+#~ msgid "Not a valid image file"
+#~ msgstr "Neplatný súbor s obrazom"
+
+# src/client/interface_base.cpp:603
+#~ msgid ""
+#~ "Cannot convert the image file: you must use another compression level in "
+#~ "order to change something, with the -z option."
+#~ msgstr "Nemô¾em konvertova» súbor s obrazom: musíte pou¾i» inú úroveò kompresie spolu s prepínaèom -z, aby ste nieèo zmenili."
+
+# src/client/main.cpp:240 src/client/main.cpp:247 src/client/main.cpp:254
+#~ msgid "Cannot use %s compression level: it was disabled at compile time.\n"
+#~ msgstr "Nemô¾em pou¾i» úroveò kompresie %s: bola vypnutá pri kompilácii.\n"
+
+# src/client/fs/fs_ext2.cpp:116
+#~ msgid ""
+#~ "Can't open partition with ext2fs_open(). Maybe partition is not an ext2 "
+#~ "file system."
+#~ msgstr "Nemô¾em otvori» oddiel pomocou ext2fs_open(). Má oddiel súborový systém ext2 ?"
+
+# src/client/fs/fs_ext2.cpp:124
+#~ msgid "%s is not an ext2fs file system partition"
+#~ msgstr "%s nie je oddiel so súborovým systémom ext2"
+
+# src/client/fs/fs_ext2.cpp:166
+#~ msgid "Can't read block bitmaps\n"
+#~ msgstr "Nemô¾em naèíta» bitmapy blokov\n"
+
+# src/shared/common.cpp:82
+#~ msgid "  - JFS File system support (IBM Aix)\n"
+#~ msgstr "  - Podpora pre JFS (IBM AIX)\n"
+
+# src/shared/common.cpp:86
+#~ msgid "  - XFS File system support (SGI Irix)\n"
+#~ msgstr "  - Podpora pre XFS (SGI IRIX)\n"
+
+# src/shared/common.cpp:98
+#~ msgid "  - PARTIMAGE_LOCAL_DEBUG=%s\n"
+#~ msgstr "  - PARTIMAGE_LOCAL_DEBUG=%s\n"
+
+# src/shared/common.cpp:113
+#~ msgid ""
+#~ "\n"
+#~ "* Supported compression levels:\n"
+#~ msgstr ""
+#~ "\n"
+#~ "* Podporované úrovne kompresie:\n"
+
+# src/shared/common.cpp:116
+#~ msgid "  - LEVELSUPPORT_GZIP=true\n"
+#~ msgstr "  - LEVELSUPPORT_GZIP=true\n"
+
+# src/shared/common.cpp:119
+#~ msgid "  - LEVELSUPPORT_BZIP2=true\n"
+#~ msgstr "  - LEVELSUPPORT_BZIP2=true\n"
+
+# src/shared/common.cpp:122
+#~ msgid "  - LEVELSUPPORT_LZO=true\n"
+#~ msgstr "  - LEVELSUPPORT_LZO=true\n"
+
+# src/shared/common.cpp:395
+#~ msgid "None"
+#~ msgstr "®iadne"

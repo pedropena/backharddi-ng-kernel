@@ -1,0 +1,15 @@
+# udebs needed for graphical installer
+libnss-files-udeb
+rootskel-gtk
+cdebconf-gtk-udeb
+
+ttf-freefont-udeb
+ttf-farsiweb-udeb
+ttf-cjk-compact-udeb
+ttf-tmuni-udeb
+ttf-dejavu-udeb
+ttf-khmeros-udeb
+ttf-thai-tlwg-udeb
+ttf-tamil-fonts-udeb
+ttf-malayalam-fonts-udeb
+ttf-bpg-georgian-fonts-udeb

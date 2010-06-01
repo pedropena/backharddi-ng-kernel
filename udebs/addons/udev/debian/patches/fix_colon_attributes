@@ -1,0 +1,28 @@
+From: Theodoros V. Kalamatianos <nyb@users.sourceforge.net>
+Date: Sun, 25 Feb 2007 00:04:23 +0000 (+0100)
+Subject: fix udev attribute names with a colon
+X-Git-Url: http://www.kernel.org/git/?p=linux%2Fhotplug%2Fudev.git;a=commitdiff_plain;h=7db33ac19c430c9a4c4af415e2febbd6b17aff2a
+
+fix udev attribute names with a colon
+---
+
+diff --git a/udev_rules_parse.c b/udev_rules_parse.c
+index 8ef5ffe..5ce91df 100644
+--- a/udev_rules_parse.c
++++ b/udev_rules_parse.c
+@@ -104,12 +104,9 @@ static int get_key(char **line, char **key, enum key_operation *operation, char
+ 			break;
+ 		if (linepos[0] == '=')
+ 			break;
+-		if (linepos[0] == '+')
+-			break;
+-		if (linepos[0] == '!')
+-			break;
+-		if (linepos[0] == ':')
+-			break;
++		if ((linepos[0] == '+') || (linepos[0] == '!') || (linepos[0] == ':'))
++			if (linepos[1] == '=')
++				break;
+ 	}
+ 
+ 	/* remember end of key */

@@ -1,0 +1,13 @@
+Index: lzma-4.43/C/7zip/Compress/LZMA_Alone/makefile.gcc
+===================================================================
+--- lzma-4.43.orig/C/7zip/Compress/LZMA_Alone/makefile.gcc	2006-08-08 22:07:54.000000000 +0200
++++ lzma-4.43/C/7zip/Compress/LZMA_Alone/makefile.gcc	2006-08-08 22:08:12.000000000 +0200
+@@ -3,7 +3,7 @@
+ CXX_C = gcc -O2 -Wall
+ LIB = -lm
+ RM = rm -f
+-CFLAGS = -c -I ../../../
++CFLAGS = -c -I ../../../ -D_FILE_OFFSET_BITS=64
+ 
+ OBJS = \
+   LzmaAlone.o \

@@ -1,0 +1,12 @@
+-Wp,-lang-c89
+-O2
+-Wall
+-W
+-Wbad-function-cast
+-Wcast-align
+-Wcast-qual
+-Wimplicit
+-Wnested-externs
+-Wpointer-arith
+-Wstrict-prototypes
+-Wwrite-strings

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+DD_LOG=/var/log/ddrescue
+
+monitor_dd(){
+	db_progress START 0 "$1" debian-installer/backharddi-udeb/title
+	db_subst backharddi/progress/t1sti device $(humandev $(cat $id/path))
+	db_progress INFO backharddi/progress/t1sti
+	kbytes=0
+	db_progress SET "$kbytes"
+	while [ "$kbytes" -lt "$1" ]; do
+		sleep 1 
+		kbytes="$(grep ipos $DD_LOG | sed -e "s/\t/\n/g" | cut -b 34-43 | tail -n 1)"
+		[ "$kbytes" -eq "$oldkbytes" ] || db_progress SET "$kbytes"
+		oldkbytes=$kbytes
+	done
+	db_progress SET "$1"
+	db_progress STOP
+}
+
+for dev in $DEVICES/*; do
+	[ -d "$dev" ] || continue
+	cd $dev
+	[ -f sti ] || continue
+	for id in $dev/*; do
+		if [ -f $id/rest ]; then
+			t1begin="$(grep "T1\ Backup\ $(cat $id/path)\ begin" sti | cut -d ":" -f 2)"
+			[ -z "$t1begin" ] && continue
+			t1size="$(grep "T1\ Backup\ $(cat $id/path)\ size" sti | cut -d ":" -f 2)"
+			monitor_dd "$((t1size/2))" | dd_rescue /dev/zero "$(cat device)" -S "$((t1begin*512))" -m "$((t1size*512))" 2> $DD_LOG
+		fi
+	done
+done
+
+exit 0

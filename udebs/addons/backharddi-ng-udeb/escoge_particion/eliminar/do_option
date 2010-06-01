@@ -1,0 +1,14 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+db_get backharddi/imagenes
+imagenes="$RET"
+
+db_input critical backharddi/eliminar || true
+db_go || exit
+db_get backharddi/eliminar
+if [ "$RET" = true ]; then
+	rm -rf $imagenes
+	exit 255
+fi

@@ -1,0 +1,28 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## baseline-symbols-update.dpatch by Otavio Salvador <otavio@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Update the library symbols to detect ABI changes.
+
+@DPATCH@
+diff -urNad parted-1.8.8.git.2009.06.03~/scripts/data/abi/baseline_symbols.txt parted-1.8.8.git.2009.06.03/scripts/data/abi/baseline_symbols.txt
+--- parted-1.8.8.git.2009.06.03~/scripts/data/abi/baseline_symbols.txt	2009-10-05 11:09:12.000000000 +0100
++++ parted-1.8.8.git.2009.06.03/scripts/data/abi/baseline_symbols.txt	2009-10-05 12:11:51.000000000 +0100
+@@ -38,6 +38,7 @@
+ FUNC:ext2_commit_metadata
+ FUNC:ext2_copy_block
+ FUNC:ext2_destroy_dev_handle
++FUNC:ext2_determine_itoffset
+ FUNC:ext2_do_inode
+ FUNC:ext2_find_free_block
+ FUNC:ext2_find_free_inode
+@@ -325,6 +326,9 @@
+ FUNC:ped_exception_rethrow
+ FUNC:ped_exception_set_handler
+ FUNC:ped_exception_throw
++FUNC:ped_file_system_alias_get_next
++FUNC:ped_file_system_alias_register
++FUNC:ped_file_system_alias_unregister
+ FUNC:ped_file_system_amiga_done
+ FUNC:ped_file_system_amiga_init
+ FUNC:ped_file_system_check

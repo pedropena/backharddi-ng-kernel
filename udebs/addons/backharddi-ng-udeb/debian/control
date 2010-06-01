@@ -1,0 +1,13 @@
+Source: backharddi-ng-udeb
+Section: debian-installer
+Priority: optional
+Maintainer: Pedro Peña Pérez <pedro.pena@open-phoenix.com>
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.6.1
+
+Package: backharddi-ng-udeb
+Architecture: any
+Depends: cdrom-detect (= 1.20etch1backharddi-ng1), di-utils (= 1.45etch1backharddi-ng1), e2fsprogs-udeb (= 1.39+1.40-WIP-2006.11.14+dfsg-2etch1backharddi-ng1), fdisk-udeb (= 2.12r-19etch1backharddi-ng1), lshw (= 02.12.01-2backharddi-ng1), lzma (>= 4.43-3), lzop (>= 1.01-4), main-menu (= 1.18backharddi-ng1), netcfg (= 1.36backharddi-ng1), partimage (= 0.6.4-17backharddi-ng1), partman-base (= 105backharddi-ng2), partman-basicfilesystems (= 53backharddi-ng1), partman-ext3 (= 46backharddi-ng1), partman-jfs (= 21backharddi-ng1), partman-lvm, partman-md, partman-partitioning (= 48etch1backharddi-ng1), partman-reiserfs (= 35backharddi-ng1), partman-target (= 49backharddi-ng1), partman-xfs (= 33backharddi-ng1), udev-udeb (= 0.105-4backharddi-ng1), udpcast (= 20100130backharddi-ng1)
+XB-installer-menu-item: 945
+Description: Backharddi NG
+XC-Package-Type: udeb

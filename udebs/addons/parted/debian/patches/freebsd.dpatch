@@ -1,0 +1,92 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## kfreebsd-gnu.dpatch by Otavio Salvador <otavio@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: This dpatch was make to include the patch built by Robert Millan.
+## DP: Closes: #363381
+## DP: Upstream: not merged
+## DP: Status: broken part of kfreebsd-gnu.dpatch, separated for reference, but not applied.
+
+@DPATCH@
+diff -urNad parted-1.7.0~/parted/strlist.h parted-1.7.0/parted/strlist.h
+--- parted-1.7.0~/parted/strlist.h	2004-02-23 22:02:20.000000000 -0300
++++ parted-1.7.0/parted/strlist.h	2006-05-19 03:54:02.000000000 -0300
+@@ -20,7 +20,18 @@
+ #ifndef STRLIST_H_INCLUDED
+ #define STRLIST_H_INCLUDED
+ 
+-#include <wchar.h>
++
++#ifdef ENABLE_NLS
++#       define _GNU_SOURCE
++#       include <wchar.h>
++#else
++#       ifdef wchar_t
++#               undef wchar_t
++#       endif
++#       define _GNU_SOURCE
++#       include <string.h>
++#       define wchar_t char
++#endif
+ 
+ typedef struct _StrList StrList;
+ struct _StrList {
+diff -urNad parted-1.7.0~/parted/table.c parted-1.7.0/parted/table.c
+--- parted-1.7.0~/parted/table.c	2006-05-19 03:54:01.000000000 -0300
++++ parted-1.7.0/parted/table.c	2006-05-19 03:54:36.000000000 -0300
+@@ -25,6 +25,7 @@
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <string.h>
+ 
+ #include <assert.h>
+ 
+@@ -48,8 +49,24 @@
+         size_t strnlen (const char *, size_t);
+ #endif
+ 
+-#include "strlist.h"
++size_t strnlen (const char *s, size_t maxlen)
++{
++        size_t len = 0;
++        const char *tp = s;
++
++        if(s == NULL)
++             return 0;
++
++        while(*tp && len < maxlen)
++        {
++             len++;
++             tp++;
++        }
+ 
++        return len;
++}
++
++#include "strlist.h"
+ 
+ static const unsigned int       MAX_WIDTH = 512;
+ #ifdef ENABLE_NLS
+@@ -186,7 +203,8 @@
+ {
+         wchar_t** row = t->rows[rownum];
+         int len = 1, i;
+-        size_t newsize;
++        size_t newsize, oldsize;
++		wchar_t *temps;
+ 
+         assert(t);
+         assert(s != NULL);
+@@ -197,7 +215,11 @@
+         len += wcslen(COLSUFFIX);
+ 
+         newsize = (wcslen(*s) + len + 1) * sizeof(wchar_t);
++		oldsize = (wcslen(*s) + 1) * sizeof(wchar_t);
++
++		temps = *s;
+         *s = realloc (*s, newsize);
++		memcpy(*s, temps, oldsize);
+ 
+         for (i = 0; i < ncols; ++i)
+         {

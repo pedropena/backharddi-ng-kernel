@@ -1,0 +1,115 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 10debian.dpatch by  <lamont@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Debian specific configuration changes
+
+@DPATCH@
+diff -urNad util-linux/MCONFIG /tmp/dpep.BP9ADw/util-linux/MCONFIG
+--- util-linux/MCONFIG	2004-12-15 11:41:41.633346075 -0700
++++ /tmp/dpep.BP9ADw/util-linux/MCONFIG	2004-12-15 17:01:42.932876625 -0700
+@@ -22,7 +22,7 @@
+ # If HAVE_PAM is set to "yes", then login, chfn, chsh, and newgrp
+ # will use PAM for authentication. Additionally, passwd will not be
+ # installed as it is not PAM aware.
+-HAVE_PAM=no
++HAVE_PAM=yes
+ 
+ # If HAVE_SELINUX is set to "yes", the login will make sure the user is
+ # logged into an appropriate security context
+@@ -59,7 +59,7 @@
+ # not be built or installed from the login-utils subdirectory.  (The
+ # shutdown and init from the SysVinit package do not depend on the last,
+ # mesg, and wall from that package.)
+-HAVE_SYSVINIT_UTILS=yes
++HAVE_SYSVINIT_UTILS=no
+ 
+ # If HAVE_WRITE is set to "yes", then write will not be built or
+ # installed from the misc-utils subdirectory.
+@@ -155,7 +155,7 @@
+ 
+ # Set HAVE_SLANG to yes if you have slang (and prefer to use that for cfdisk)
+ # (If neither HAVE_NCURSES nor HAVE_SLANG is defined, cfdisk is not made.)
+-# HAVE_SLANG=yes
++HAVE_SLANG=yes
+ # There is a subdirectory /usr/include/slang containing slcurses.h
+ # SLANGFLAGS=-I/usr/include/slang
+ # No such subdirectory - slcurses.h lives in /usr/include
+@@ -172,7 +172,7 @@
+ USRLIB_DIR=	/usr/lib
+ USRBIN_DIR=	/usr/bin
+ USRGAMES_DIR=	/usr/games
+-USRSHAREMISC_DIR=/usr/share/misc
++USRSHAREMISC_DIR=/usr/share/util-linux
+ LOCALE_DIR=	/usr/share/locale
+ BIN_DIR=        /bin
+ VAR_PATH=	/var
+diff -urNad util-linux/getopt/getopt.1 /tmp/dpep.BP9ADw/util-linux/getopt/getopt.1
+--- util-linux/getopt/getopt.1	2004-12-15 11:41:41.634345860 -0700
++++ /tmp/dpep.BP9ADw/util-linux/getopt/getopt.1	2004-12-15 17:01:42.932876625 -0700
+@@ -403,9 +403,10 @@
+ Example scripts for (ba)sh and (t)csh are provided with the
+ .BR getopt (1)
+ distribution, and are optionally installed in 
+-.B /usr/local/lib/getopt 
++.BR /usr/lib/getopt 
+ or 
+-.BR /usr/lib/getopt .
++.B /usr/local/lib/getopt 
++(if you have created it).
+ .SH ENVIRONMENT
+ .IP POSIXLY_CORRECT
+ This environment variable is examined by the
+diff -urNad util-linux/hwclock/hwclock.8 /tmp/dpep.BP9ADw/util-linux/hwclock/hwclock.8
+--- util-linux/hwclock/hwclock.8	2004-12-15 16:33:16.000000000 -0700
++++ /tmp/dpep.BP9ADw/util-linux/hwclock/hwclock.8	2004-12-15 17:01:42.932876625 -0700
+@@ -578,8 +578,6 @@
+ .SH FILES
+ .I /etc/adjtime
+ .I /usr/share/zoneinfo/
+-.RI ( /usr/lib/zoneinfo
+-on old systems)
+ .I /dev/rtc
+ .I /dev/port
+ .I /dev/tty1
+@@ -592,6 +590,9 @@
+ .BR settimeofday (2),
+ .BR crontab (1),
+ .BR tzset (3)
++.BR /etc/init.d/hwclock.sh,
++.BR /usr/share/doc/util-linux/README.Debian.hwclock
++
+ 
+ .SH AUTHORS
+ Written by Bryan Henderson, September 1996 (bryanh@giraffe-data.com),
+diff -urNad util-linux/mount/README.mount /tmp/dpep.BP9ADw/util-linux/mount/README.mount
+--- util-linux/mount/README.mount	2004-12-15 11:41:41.634345860 -0700
++++ /tmp/dpep.BP9ADw/util-linux/mount/README.mount	2004-12-15 17:01:42.933876410 -0700
+@@ -8,3 +8,4 @@
+ Presently maintained by Andries Brouwer <aeb@cwi.nl>.
+ Ftp site: ftp.win.tue.nl:/pub/linux/utils/util-linux
+ 
++http://freshmeat.net/projects/util-linux/ tends to be current as well.
+diff -urNad util-linux/mount/my_dev_t.h /tmp/dpep.BP9ADw/util-linux/mount/my_dev_t.h
+--- util-linux/mount/my_dev_t.h	2004-12-15 11:41:41.635345645 -0700
++++ /tmp/dpep.BP9ADw/util-linux/mount/my_dev_t.h	2004-12-15 17:01:42.933876410 -0700
+@@ -2,19 +2,4 @@
+ /* glibc uses a different dev_t */
+ 
+ #include <linux/posix_types.h>
+-#include <linux/version.h>
+-
+-#ifndef KERNEL_VERSION
+-#define KERNEL_VERSION(a,b,c) (((a) << 16) + ((b) << 8) + (c))
+-#endif
+-
+-#if LINUX_VERSION_CODE < KERNEL_VERSION(1,3,78)
+-/* for i386 - alpha uses unsigned int */
+-#define my_dev_t unsigned short
+-#else
+-#if LINUX_VERSION_CODE < KERNEL_VERSION(2,5,68)
+-#define my_dev_t __kernel_dev_t
+-#else
+ #define my_dev_t __kernel_old_dev_t
+-#endif
+-#endif

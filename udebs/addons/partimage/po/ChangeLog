@@ -1,0 +1,53 @@
+2003-10-21 - Danish and French translations updated
+        * translations updated from 0.6.3-beta12.
+
+2003-10-09 - Translation fixed
+	* pt translation: added some missing '\n'.
+        * fr translation: fixed 'Cancel' translation.
+        * br translation: removed.
+	* partimage.pot updated.
+
+2003-09-25 - Portuguese translation added
+	* pt translation for 0.6.3_beta8. Thanks to Manuel Padilha.
+        * da translation updated from 0.6.3-beta9.
+
+2003-07-19 - Danish translation updated
+        * da translation updated from 0.6.3-beta6.
+
+2002-10-24 - Danish translation updated
+        * da translation updated from 0.6.2-rc10.
+
+2002-09-16 - Slovak translation added
+	* sk translation for 0.6.1. Thanks to Plzik Milan.
+
+2002-09-16 - Finnish translation added
+	* fi translation for 0.6.1. Thanks to Henri Westerberg.
+
+2002-05-20 - Danish translation updated
+        * da translation updated from 0.6.2rc1.
+
+2001-10-25  gettextize  <bug-gnu-utils@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.10.40.
+
+2001-10-18  gettextize  <bug-gnu-utils@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.10.39.
+
+2001-08-14 - Polish translation added
+	* pl translation from 0.6.0-rc1. Thanks to Marek L. Kozak.
+
+2001-07-09 - Danish translation updated
+        * da translation updated from current cvs build.
+
+2001-07-07 - Danish translation added
+        * da translation from 0.5.7.1. Thanks to Gunner Poulsen.
+
+2001-06-26 - gettextize  <bug-gnu-utils@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.10.37.
+        * fr translation updated from 0.5.5
+
+2001-05-21 - Initial release (added for make dist)
+        * includes fr, de, it translations from 0.3.5
+          and gl from 0.5.4

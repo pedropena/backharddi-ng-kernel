@@ -1,0 +1,9 @@
+02 backup
+05 number
+10 type
+15 size
+20 bootable
+30 parted_fs
+35 filesystem
+40 oldfilesystem
+50 accion

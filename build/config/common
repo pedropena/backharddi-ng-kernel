@@ -1,0 +1,90 @@
+# Common configuration options for all images.
+#
+# Note that you might find it useful to create a config/local file and
+# override settings from this file there instead of modifying this file for
+# local setting such as EXTRAFILES. That way you won't accidentially commit
+# your local changes.
+
+# set DEBUG to y if you want to get the source for and compile 
+# debug versions of the needed udebs
+#DEBUG = y
+
+# List here any extra udebs that are not in the list file but that
+# should still be included on the system.
+#EXTRAS =
+
+# This variable can be used to copy in additional files from the system
+# that is doing the build. Useful if you need to include strace, or gdb,
+# etc.
+#EXTRAFILES = /usr/bin/strace
+
+# This variable can be used to add a preseed file to the initrd itself.
+# It will be loaded by the initrd-preseed udeb.
+PRESEED = preseed.cfg
+
+# Right now we want all d-i development and daily builds to use udebs from
+# unstable, so load the unstable.cfg. This is disabled for official builds.
+PRESEED_SUITE ?=
+
+# The library reducer to use. Can be mklibs.sh or mklibs.py.
+MKLIBS = mklibs 
+
+# Normally the sources.list for building d-i will be derived from your
+# "normal" sources.list. However, you can specify a mirror here to override
+# this. You can use copy:/ to use a local mirror
+MIRROR = http://localhost:3142/ftp.debian.org/debian
+
+# Define here if debian-installer should be built with modules from
+# stable, testing or unstable.
+SUITE ?= etch
+
+# Archive components from which to fetch debian-installer modules.
+UDEB_COMPONENTS ?= main/debian-installer
+
+# Options to pass to dpkg when it is unpacking the udebs to create the
+# image. None should be needed, but --force-overwrite might need to be
+# enabled from time to time if udebs have conflicting files.
+DPKG_UNPACK_OPTIONS = --force-overwrite
+
+# The version of Debian targeted by the installation images.
+#DEBIAN_VERSION = 4.0
+DEBIAN_VERSION = etch
+
+# The date the installer is built.
+BUILD_DATE ?= $(shell date -u '+%Y%m%d-%H:%M')
+
+# Filesystem type for the initrd, currently valid values are ext2, cramfs,
+# and initramfs.
+# NOTE: Your kernel must support this filesystem, not just a module. 
+INITRD_FS = initramfs
+
+# What device to write floppies on
+FLOPPYDEV = /dev/fd0
+
+# What qemu to use, with any options.
+QEMU = qemu
+
+# media where images may be written to (via dd).
+WRITE_MEDIA = floppy
+
+# HACK Alert:
+# pkg-lists is still sorted by type, so we have to provide
+# some mapping MEDIUM -> TYPE
+TYPE = $(MEDIUM)
+
+# Used to write a /etc/lsb-release file in the installer initrd.
+LSB_DISTRIB_ID=Debian
+LSB_DISTRIB_DESCRIPTION="Debian GNU/Linux installer"
+# Inlude the build date of the installer in here.
+LSB_DISTRIB_RELEASE="4.0 (installer build $(BUILD_DATE))"
+
+# This keyring is copied into the install image to allow d-i to verify
+# signatures of things it downloads. This is probably temporary, and it
+# will probably later move to a udeb. If your archive uses some other key,
+# you can change this.
+KEYRING=/usr/share/keyrings/debian-archive-keyring.gpg
+
+# All images that include cdebconf should include symbols needed by these
+# plugins.
+EXTRAUDEBS=cdebconf-newt-entropy
+OFFICIALBUILD=0

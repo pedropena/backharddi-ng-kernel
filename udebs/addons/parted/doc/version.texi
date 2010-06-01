@@ -1,0 +1,4 @@
+@set UPDATED 1 March 2009
+@set UPDATED-MONTH March 2009
+@set EDITION 1.8.8.1.159-1e0e
+@set VERSION 1.8.8.1.159-1e0e

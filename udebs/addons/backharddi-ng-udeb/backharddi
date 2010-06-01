@@ -1,0 +1,108 @@
+#!/bin/sh
+
+[ -f /var/log/backharddi ] && rm /var/log/backharddi
+. /lib/backharddi/definitions.sh
+
+abort () {
+    sendstatus Conectado Error
+    if [ -f /var/run/parted_server.pid ]; then
+	stop_parted_server
+    fi
+    rm /var/lib/partman/* -rf
+    exit $1
+}
+
+db_capb backup
+
+db_metaget partman/text/number description
+RET=$(printf "$RET" '')
+RET=$(stralign 50 "$RET" | sed 's/[^ ]//g')
+number_width=$((2 + 50 - ${#RET}))
+export number_width
+
+deci='.'
+
+[ -d /var/lib/partman ] && rm /var/lib/partman/* -rf || mkdir /var/lib/partman
+
+while true; do
+	initcount=$(ls /lib/backharddi/inicio.d/* | wc -l)
+	db_progress START 0 $initcount backharddi/progress/inicio/title
+
+	for s in /lib/backharddi/inicio.d/*; do
+		if [ -x $s ]; then
+			base=$(basename $s | sed 's/[0-9]*//')
+			if ! db_progress INFO backharddi/progress/inicio/$base; then
+				db_progress INFO backharddi/progress/inicio/fallback
+			fi
+
+			if ! $s; then
+				db_progress STOP
+				abort 10
+			fi
+		fi
+		db_progress STEP 1
+	done
+	db_progress STOP
+
+	autocount=$(ls /lib/backharddi/auto/* | wc -l)
+	db_capb progresscancel
+	db_progress START 0 $((autocount*10)) backharddi/progress/auto/title
+	skip_choose_partition=no
+	count=0
+	for s in /lib/backharddi/auto/*; do
+		if [ -x $s ]; then
+			base=$(basename $s | sed 's/[0-9]*//')
+			if ! db_progress INFO backharddi/progress/auto/$base; then
+				db_progress INFO backharddi/progress/auto/fallback
+			fi
+
+			$s $count
+			exitcode=$?
+			if [ $exitcode -eq 255 ]; then
+				db_progress STOP
+				abort 10 # back up to main menu
+			elif [ $exitcode -ge 100 ]; then
+				skip_choose_partition=yes
+			elif [ $exitcode -ne 0 ]; then
+				db_progress STOP
+				abort 0
+			fi
+		fi
+		count=$((count+10))
+		db_progress SET $count
+	done
+	db_progress STOP
+
+	db_capb backup
+	while true; do
+		if [ "$skip_choose_partition" != yes ]; then
+			ask_user /lib/backharddi/escoge_backup /target
+			exitcode=$?
+		else
+			exitcode=100
+		fi
+		if [ $exitcode -eq 255 ]; then
+			abort 10 # back up to main menu
+		elif [ $exitcode -ge 100 ]; then
+			break
+		fi
+		skip_choose_partition=no
+		for pattern in gen rest compresion; do
+			for file in $(find $DEVICES -name $pattern); do
+				rm $file
+			done
+		done
+	done
+
+	for s in /lib/backharddi/fin.d/*; do
+	if [ -x $s ]; then
+		$s || {
+		status=$?
+		abort $status
+		}
+	fi
+	done
+
+	break
+done    
+sendstatus Conectado Completado

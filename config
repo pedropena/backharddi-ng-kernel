@@ -1,0 +1,16 @@
+KVERSION = 2.6.32-5-486
+UDEBS = "$(shell cat pkg-list modules-list)"
+SUITE = etch
+MIRROR = http://localhost:3142/ftp.debian.org/debian
+MIRROR2 = $(MIRROR)
+SUITE2 = unstable
+ARCH = i386
+COMPONENTS = main
+ROOTCMD = sudo
+BUILDER = pbuilder
+BUILDDIR= udebs/$(BUILDER)
+BUILDEREXT = tar.gz
+BUILDERBASE = --basetgz
+#BUILDEROPTS = --buildplace $(BUILDDIR)/build --hookdir $(BUILDDIR)/hooks
+BUILDEROPTS = --buildplace $(BUILDDIR)/build
+PDEBUILDOPTS= --pbuilderroot $(ROOTCMD) --buildsourceroot fakeroot --pbuilder $(BUILDER) --buildresult $(BUILDDIR)/result/$(SUITE)

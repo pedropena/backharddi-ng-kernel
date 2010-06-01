@@ -1,0 +1,83 @@
+#!/bin/sh -e
+
+[ ! "$1" = "configure" ] && exit 0
+
+opensslpath=/usr/bin/openssl
+target=/var/lib/partimaged
+
+clean()
+{
+        rm -f /etc/partimaged/privkey.pem
+        rm -f /etc/partimaged/partimaged.rand
+}
+		
+	
+create_user()
+{
+	if ! getent group partimag >/dev/null; then
+		addgroup --system partimag >/dev/null 
+	fi
+	if ! getent passwd partimag >/dev/null; then
+		adduser --system \
+			--disabled-password \
+			--shell /bin/false \
+			--gecos "Partimage Server" \
+			--ingroup partimag \
+			--no-create-home \
+			--home /var/lib/partimaged/ \
+			partimag >/dev/null
+	fi
+	
+}
+	
+create_certificates()
+{
+        $opensslpath req -new -x509 -nodes -config \
+      		/etc/partimaged/partimage-certs.cnf \
+		-out /etc/partimaged/partimaged.cert -keyout \
+		/etc/partimaged/partimaged.key
+
+	rm -f /etc/partimaged/partimaged.csr
+
+	chmod 750 /etc/partimaged
+	chown partimag:partimag /etc/partimaged
+	chmod 600 /etc/partimaged/partimaged.key
+	chmod 600 /etc/partimaged/partimaged.cert
+	chown partimag:partimag /etc/partimaged/partimaged.key
+	chown partimag:partimag /etc/partimaged/partimaged.cert
+}
+
+fix_permissions()
+{
+	chown partimag:partimag $target
+	chmod 750 $target
+
+	chown partimag:partimag /etc/partimaged/partimagedusers
+	chmod 0600 /etc/partimaged/partimagedusers
+
+	chown partimag:partimag /var/log/partimage
+}
+
+# Create a system user/group partimag
+create_user
+
+# Now that we have a user/group partimag set the appropriate access rights
+fix_permissions
+
+# SSL Certs
+if [ -s "/etc/partimaged/partimaged.key" ]; then 
+	echo "OpenSSL certificate already exists. Leaving..."
+else
+	if [ ! -s "/etc/partimaged/partimage-certs.cnf" ]; then
+		echo "I cannot find the /etc/partimaged/partimage-certs.cnf file."
+		echo "SSL certificate will not be created!"
+	else
+		echo "Creating certificates for partimage-server"
+		create_certificates
+	fi
+fi
+
+#DEBHELPER#
+
+exit 0
+

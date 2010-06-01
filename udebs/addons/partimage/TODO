@@ -1,0 +1,35 @@
+TODO for Partition Image:
+-------------------------
+
+* possibilite d'avoir des tailles differentes pour les volumes:
+  ~680Mo pour le premier cd et 700Mo pour les suivants
+  (cela permet d'ajouter pi+divers sur le premier cd)
+
+* update BUG section du site web
+* update des .md5
+
+* changer le fichier PACKAGE pour retirer la mauvaise version de bootcd
+
+* test de sauvegarde/restauration mbr en ligne de commande
+
+* effacer le fichier temporaire s'il y a une erreur
+en mode batch (au moins) le fichier reste
+
+* imginfo ne fonctionne pas si l'image est compressée avec bzip2
+
+* la restauration d'une image compressee (gzip, bzip2?) en multivolume
+  suite a la fin d'espace disque sur la partition destination
+  ne fonctionne pas : erreur de verification d'un magic (erreur -64)
+  la restauration est bonne si le multivolume est demande pour une taille limite
+  -> erreur lors de la detection de la fin d'espace disque ?
+
+* corriger le repertoire debian avec celui de la version 0.6.1-diff19
+* ajouter ext3fs comme fs supporte (dans le fichier man)
+
+* corriger le repertoire debian du partimage-user-doc pour supprimer les
+  doublons des fichiers
+
+* la verification des tailles de structure est faite mais les resultats sont 
+  perdus. a changer.
+
+* other features are reported to developpement branch 0_7.

@@ -1,0 +1,63 @@
+#! /bin/sh -e
+## devfs.dpatch by Joey Hess <joeyh@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: If /proc/partition probing fails, don't assume standard
+## DP: partitions, but try out devfs style partitions too.
+## DP: Closes: #243635
+## DP: Candidate for upstream integration.
+
+. `dirname $0`/DPATCH
+
+@DPATCH@
+diff -urN parted-1.6.99+1.7.0rc5/libparted/arch/linux.c parted-1.6.99+1.7.0rc5-devfs/libparted/arch/linux.c
+--- parted-1.6.99+1.7.0rc5/libparted/arch/linux.c     2004-03-09 11:16:18.000000000 +0100
++++ parted-1.6.99+1.7.0rc5-devfs/libparted/arch/linux.c       2004-04-14 10:01:05.000000000 +0200
+@@ -28,7 +28,8 @@
+ #include <fcntl.h>
+ #include <libgen.h>
+ #include <stdio.h>
++#include <ftw.h>
+ #include <syscall.h>
+ #include <unistd.h>
+ #include <dirent.h>
+ #include <sys/ioctl.h>
+diff -Nur parted-1.6.99+1.7.0rc5/libparted/arch/linux.c parted-1.6.99+1.7.0rc5-devfs/libparted/arch/linux.c
+--- parted-1.6.99+1.7.0rc5/libparted/arch/linux.c       2006-04-06 17:56:29.000000000 -0300
++++ parted-1.6.99+1.7.0rc5-devfs/libparted/arch/linux.c 2006-05-08 15:08:37.000000000 -0300
+@@ -1589,6 +1589,23 @@
+ }
+
+ static int
++_probe_devfs_entry (const char *file, const struct stat *sb, int flag)
++{
++       int len=strlen(file);
++       if (flag == FTW_F && file[len-1] == 'c' && file[len-2] == 's' &&
++           file[len-3] == 'i' && file[len-4] == 'd' && file[len-5] == '/') {
++               _ped_device_probe(file);
++       }
++       return 0;
++}
++
++static void
++_probe_devfs_devices ()
++{
++       ftw ("/dev", _probe_devfs_entry, 32);
++}
++
++static int
+ _probe_standard_devices ()
+ {
+         _ped_device_probe ("/dev/hda");
+@@ -1617,7 +1634,10 @@
+          * because /proc/partitions might return devfs stuff, and we might not
+          * have devfs available
+          */
+-        _probe_standard_devices ();
++       if (_have_devfs ())
++               _probe_devfs_devices ();
++       else
++               _probe_standard_devices ();
+
+        /* /sys/block is more reliable and consistent; fall back to using
+         * /proc/partitions if the former is unavailable, however.

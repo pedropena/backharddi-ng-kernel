@@ -1,0 +1,30 @@
+#!/bin/sh
+
+. /lib/partman/definitions.sh
+
+db_metaget backharddi/text/label description
+label="$RET"
+[ -z "$label" ] && label="backharddi"
+
+no_backharddi() {
+	mountpoints=$(
+		/lib/partman/fstab.d/ext3 | 
+		while read path mp type options dump pass; do
+			echo $path,$mp
+		done
+	)
+
+	for mp in $mountpoints; do
+		path=${mp%,*}
+		mp=${mp#*,}
+		if [ "$mp" = "/" -a "$(e2label $path)" = "$label" ]; then
+			return 0
+		fi
+	done
+    
+	db_input critical backharddi/no_part || true
+	db_go || true
+	exit 1
+}
+
+no_backharddi

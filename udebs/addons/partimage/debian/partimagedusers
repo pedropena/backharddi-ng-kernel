@@ -1,0 +1,2 @@
+# Add all users which shall be allowed to connect to the partimage server.
+# One user per line. See "man partimagedusers" for more information.

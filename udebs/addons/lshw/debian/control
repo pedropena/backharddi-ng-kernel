@@ -1,0 +1,31 @@
+Source: lshw
+Section: utils
+Priority: optional
+Maintainer: Ghe Rivero <ghe@debian.org>
+Build-Depends: debhelper (>> 3.0.0), libgtk2.0-dev, dpatch 
+Standards-Version: 3.7.2
+
+Package: lshw
+Architecture: any
+XC-Package-Type: udeb
+Depends: ${shlibs:Depends}
+Description: information about hardware configuration
+ A small tool to provide detailed information on the hardware
+ configuration of the machine. It can report exact memory
+ configuration, firmware version, mainboard configuration, CPU version
+ and speed, cache configuration, bus speed, etc. on DMI-capable x86
+ systems, on some PowerPC machines (PowerMac G4 is known to work) and AMD64.
+ .
+ Information can be output in plain text, HTML or XML.
+
+Package: lshw-gtk
+Architecture: any
+Depends: ${shlibs:Depends}, pciutils, usbutils
+Description: information about hardware configuration
+ A small tool to provide detailed information on the hardware
+ configuration of the machine. It can report exact memory
+ configuration, firmware version, mainboard configuration, CPU version
+ and speed, cache configuration, bus speed, etc. on DMI-capable x86
+ systems, on some PowerPC machines (PowerMac G4 is known to work) and AMD64.
+ .
+ This package provides lshw-gtk (the GTK+ version)

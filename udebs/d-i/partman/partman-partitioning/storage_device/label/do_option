@@ -1,0 +1,95 @@
+#!/bin/sh -e
+
+. /lib/partman/definitions.sh
+
+dev="$2"
+cd $dev
+
+[ -f size ] || exit 1
+
+db_input critical partman/confirm_new_label
+db_go || exit 0
+db_get partman/confirm_new_label
+if [ "$RET" = false ]; then
+	db_reset partman/confirm_new_label
+	exit 1
+fi
+db_reset partman/confirm_new_label
+
+open_dialog LABEL_TYPES
+types=$(read_list)
+close_dialog
+
+db_subst partman-partitioning/choose_label CHOICES "$types"
+PRIORITY=critical
+
+default_label=$(default_disk_label)
+
+# Use gpt instead of msdos disklabel for disks larger than 2TB
+if expr "$types" : ".*gpt.*" >/dev/null; then
+	if [ "$default_label" = msdos ] ; then
+		disksize=$(cat size)
+		if $(longint_le $(human2longint 2TB) $disksize) ; then
+			default_label=gpt
+		fi
+	fi
+fi
+
+if expr "$types" : ".*${default_label}.*" >/dev/null; then
+	db_set partman-partitioning/choose_label "$default_label"
+	PRIORITY=low
+fi
+db_input $PRIORITY partman-partitioning/choose_label || true
+db_go || exit 1
+db_get partman-partitioning/choose_label
+
+chosen_type="$RET"
+
+if [ "$chosen_type" = sun ]; then
+	db_input critical partman/confirm_write_new_label
+	db_go || exit 0
+	db_get partman/confirm_write_new_label
+	if [ "$RET" = false ]; then
+		db_reset partman/confirm_write_new_label
+		exit 1
+	fi
+	db_reset partman/confirm_write_new_label
+fi
+
+open_dialog NEW_LABEL "$chosen_type"
+close_dialog
+
+if [ "$chosen_type" = sun ]; then
+	# write the partition table to the disk
+	disable_swap
+	open_dialog COMMIT
+	close_dialog
+	sync
+	# reread it from there
+	open_dialog UNDO
+	close_dialog
+	enable_swap
+fi
+
+# Different types partition tables support different visuals.  Some
+# have partition names other don't have, some have extended and
+# logical partitions, others don't.  Hence we have to regenerate the
+# list of the visuals
+rm -f visuals
+
+partitions=''
+open_dialog PARTITIONS
+while { read_line num id size type fs path name; [ "$id" ]; }; do
+	partitions="$partitions $id"
+done
+close_dialog
+
+for id in $partitions; do
+	update_partition $dev $id
+done
+
+if [ "$chosen_type" = sun ]; then
+	backupdir=../../backup/`basename $dev`
+	rm -rf "$backupdir"
+	cp -a . "$backupdir"
+fi

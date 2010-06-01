@@ -1,0 +1,15 @@
+# Temporary hacks to work around directfb breakage on powerpc
+
+# Enable keyboard and ps2mouse DFB modules
+sed -i "s/^\(disable-module=linux_input\)/#\1/" /etc/directfbrc
+sed -i "s/^\(disable-module=ps2mouse\)/#\1/" /etc/directfbrc
+
+# Disable linux_input DFB module except for "PowerBook6,7"
+if ! grep -q "machine.*:.*PowerBook6,7" /proc/cpuinfo 2>/dev/null; then
+	sed -i "s/^#\(disable-module=linux_input\)/\1/" /etc/directfbrc
+fi
+
+# Disable radeon DFB module for all radeon-based cards
+if grep -q "Radeon" /proc/fb 2>/dev/null; then
+	echo "disable-module=radeon" >>/etc/directfbrc
+fi

@@ -1,0 +1,31 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+for dev in $DEVICES/*; do
+    [ -d "$dev" ] || continue
+    cd $dev
+    [ -f sti ] || dd if=$(cat device) of=mbr count=63 bs=512
+    partitions=
+    open_dialog PARTITIONS
+    while { read_line partinfo; [ "$partinfo" ]; }; do
+	if [ "$partitions" ]; then
+	    partitions="$partitions
+$partinfo"
+	else
+	    partitions="$partinfo"
+	fi
+    done
+    close_dialog
+    [ "x$partitions" != "x" ] && sfdisk -d $(cat device) >pt
+
+    IFS="$NL"
+    for partinfo in $partitions; do
+	restore_ifs
+	for u in /lib/backharddi/update.d/*; do
+	    [ -x "$u" ] || continue
+	    $u $dev $partinfo
+	done
+    done
+done
+

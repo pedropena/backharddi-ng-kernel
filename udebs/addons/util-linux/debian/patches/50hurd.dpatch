@@ -1,0 +1,2362 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 50hurd.dpatch by LaMont Jones <lamont@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Add hurd support
+
+@DPATCH@
+diff -urNad util-linux/login-utils/agetty.c /tmp/dpep.xj6GpA/util-linux/login-utils/agetty.c
+--- util-linux/login-utils/agetty.c	2002-07-29 01:36:42.000000000 -0600
++++ /tmp/dpep.xj6GpA/util-linux/login-utils/agetty.c	2004-12-15 07:03:54.720029395 -0700
+@@ -17,8 +17,7 @@
+ #include <unistd.h>
+ #include <stdlib.h>
+ #include <string.h>
+-#include <sys/ioctl.h>
+-#include <termio.h>
++#include <termios.h>
+ #include <signal.h>
+ #include <errno.h>
+ #include <sys/types.h>
+@@ -93,27 +95,6 @@
+ #define DEF_SWITCH	0		/* default switch char */
+ 
+  /*
+-  * SunOS 4.1.1 termio is broken. We must use the termios stuff instead,
+-  * because the termio -> termios translation does not clear the termios
+-  * CIBAUD bits. Therefore, the tty driver would sometimes report that input
+-  * baud rate != output baud rate. I did not notice that problem with SunOS
+-  * 4.1. We will use termios where available, and termio otherwise.
+-  */
+-
+-/* linux 0.12 termio is broken too, if we use it c_cc[VERASE] isn't set
+-   properly, but all is well if we use termios?! */
+-
+-#ifdef	TCGETS
+-#undef	TCGETA
+-#undef	TCSETA
+-#undef	TCSETAW
+-#define	termio	termios
+-#define	TCGETA	TCGETS
+-#define	TCSETA	TCSETS
+-#define	TCSETAW	TCSETSW
+-#endif
+-
+- /*
+   * This program tries to not use the standard-i/o library.  This keeps the
+   * executable small on systems that do not have shared libraries (System V
+   * Release <3).
+@@ -221,13 +202,13 @@
+ void parse_args P_((int argc, char **argv, struct options *op));
+ void parse_speeds P_((struct options *op, char *arg));
+ void update_utmp P_((char *line));
+-void open_tty P_((char *tty, struct termio *tp, int local));
+-void termio_init P_((struct termio *tp, int speed, struct options *op));
+-void auto_baud P_((struct termio *tp));
+-void do_prompt P_((struct options *op, struct termio *tp));
+-void next_speed P_((struct termio *tp, struct options *op));
+-char *get_logname P_((struct options *op, struct chardata *cp, struct termio *tp));
+-void termio_final P_((struct options *op, struct termio *tp, struct chardata *cp));
++void open_tty P_((char *tty, struct termios *tp, int local));
++void termios_init P_((struct termios *tp, int speed, struct options *op));
++void auto_baud P_((struct termios *tp));
++void do_prompt P_((struct options *op, struct termios *tp));
++void next_speed P_((struct termios *tp, struct options *op));
++char *get_logname P_((struct options *op, struct chardata *cp, struct termios *tp));
++void termios_final P_((struct options *op, struct termios *tp, struct chardata *cp));
+ int caps_lock P_((char *s));
+ int bcode P_((char *s));
+ void usage P_((void));
+@@ -256,7 +237,7 @@
+ {
+     char   *logname = NULL;		/* login name, given to /bin/login */
+     struct chardata chardata;		/* set by get_logname() */
+-    struct termio termio;		/* terminal mode bits */
++    struct termios termios;		/* terminal mode bits */
+     static struct options options = {
+ 	F_ISSUE,			/* show /etc/issue (SYSV_STYLE) */
+ 	0,				/* no timeout */
+@@ -311,19 +292,19 @@
+ 
+     debug(_("calling open_tty\n"));
+     /* Open the tty as standard { input, output, error }. */
+-    open_tty(options.tty, &termio, options.flags & F_LOCAL);
++    open_tty(options.tty, &termios, options.flags & F_LOCAL);
+ 
+ #ifdef __linux__
+ 	{
+ 		int iv;
+ 		
+ 		iv = getpid();
+-		(void) ioctl(0, TIOCSPGRP, &iv);
++		(void) tcsetpgrp(0, iv);
+ 	}
+ #endif
+-    /* Initialize the termio settings (raw mode, eight-bit, blocking i/o). */
+-    debug(_("calling termio_init\n"));
+-    termio_init(&termio, options.speeds[FIRST_SPEED], &options);
++    /* Initialize the termios settings (raw mode, eight-bit, blocking i/o). */
++    debug(_("calling termios_init\n"));
++    termios_init(&termios, options.speeds[FIRST_SPEED], &options);
+ 
+     /* write the modem init string and DON'T flush the buffers */
+     if (options.flags & F_INITSTRING) {
+@@ -339,7 +320,7 @@
+     /* Optionally detect the baud rate from the modem status message. */
+     debug(_("before autobaud\n"));
+     if (options.flags & F_PARSE)
+-	auto_baud(&termio);
++	auto_baud(&termios);
+ 
+     /* Set the optional timer. */
+     if (options.timeout)
+@@ -363,8 +344,8 @@
+     if (!(options.flags & F_NOPROMPT)) {
+ 	/* Read the login name. */
+ 	debug(_("reading login name\n"));
+-	while ((logname = get_logname(&options, &chardata, &termio)) == 0)
+-	  next_speed(&termio, &options);
++	while ((logname = get_logname(&options, &chardata, &termios)) == 0)
++	  next_speed(&termios, &options);
+     }
+ 
+     /* Disable timer. */
+@@ -372,9 +353,9 @@
+     if (options.timeout)
+ 	(void) alarm(0);
+ 
+-    /* Finalize the termio settings. */
++    /* Finalize the termios settings. */
+ 
+-    termio_final(&options, &termio, &chardata);
++    termios_final(&options, &termios, &chardata);
+ 
+     /* Now the newline character should be properly written. */
+ 
+@@ -629,7 +610,7 @@
+ void
+ open_tty(tty, tp, local)
+      char   *tty;
+-     struct termio *tp;
++     struct termios *tp;
+      int    local;
+ {
+     /* Get rid of the present standard { output, error} if any. */
+@@ -678,7 +744,7 @@
+ 	error(_("%s: dup problem: %m"), tty);	/* we have a problem */
+ 
+     /*
+-     * The following ioctl will fail if stdin is not a tty, but also when
++     * The following function will fail if stdin is not a tty, but also when
+      * there is noise on the modem control lines. In the latter case, the
+      * common course of action is (1) fix your cables (2) give the modem more
+      * time to properly reset after hanging up. SunOS users can achieve (2)
+@@ -686,8 +752,8 @@
+      * 5 seconds seems to be a good value.
+      */
+ 
+-    if (ioctl(0, TCGETA, tp) < 0)
+-	error("%s: ioctl: %m", tty);
++    if (tcgetattr(0, tp) < 0)
++	error("%s: tcgetattr: %m", tty);
+ 
+     /*
+      * It seems to be a terminal. Set proper protections and ownership. Mode
+@@ -705,27 +771,27 @@
+     errno = 0;					/* ignore above errors */
+ }
+ 
+-/* termio_init - initialize termio settings */
++/* termios_init - initialize termios settings */
+ 
+ char gbuf[1024];
+ char area[1024];
+ 
+ void
+-termio_init(tp, speed, op)
+-     struct termio *tp;
++termios_init(tp, speed, op)
++     struct termios *tp;
+      int     speed;
+      struct options *op;
+ {
+ 
+     /*
+-     * Initial termio settings: 8-bit characters, raw-mode, blocking i/o.
++     * Initial termios settings: 8-bit characters, raw-mode, blocking i/o.
+      * Special characters are set after we have read the login name; all
+      * reads will be done in raw mode anyway. Errors will be dealt with
+      * lateron.
+      */
+ #ifdef __linux__
+     /* flush input and output queues, important for modems! */
+-    (void) ioctl(0, TCFLSH, TCIOFLUSH);
++    (void) tcflush(0, TCIOFLUSH);
+ #endif
+ 
+     tp->c_cflag = CS8 | HUPCL | CREAD | speed;
+@@ -733,7 +799,8 @@
+ 	tp->c_cflag |= CLOCAL;
+     }
+ 
+-    tp->c_iflag = tp->c_lflag = tp->c_oflag = tp->c_line = 0;
++    tp->c_iflag = tp->c_lflag = tp->c_oflag = 0;
++    tp->c_line = 0;
+     tp->c_cc[VMIN] = 1;
+     tp->c_cc[VTIME] = 0;
+ 
+@@ -744,7 +811,7 @@
+ 	tp->c_cflag |= CRTSCTS;
+ #endif
+ 
+-    (void) ioctl(0, TCSETA, tp);
++    (void) tcsetattr(0, TCSANOW, tp);
+ 
+     /* go to blocking input even in local mode */
+     fcntl(0, F_SETFL, fcntl(0, F_GETFL, 0) & ~O_NONBLOCK);
+@@ -755,7 +822,7 @@
+ /* auto_baud - extract baud rate from modem status message */
+ void
+ auto_baud(tp)
+-     struct termio *tp;
++     struct termios *tp;
+ {
+     int     speed;
+     int     vmin;
+@@ -788,7 +855,7 @@
+     tp->c_iflag |= ISTRIP;			/* enable 8th-bit stripping */
+     vmin = tp->c_cc[VMIN];
+     tp->c_cc[VMIN] = 0;				/* don't block if queue empty */
+-    (void) ioctl(0, TCSETA, tp);
++    (void) tcsetattr(0, TCSANOW, tp);
+ 
+     /*
+      * Wait for a while, then read everything the modem has said so far and
+@@ -801,8 +868,7 @@
+ 	for (bp = buf; bp < buf + nread; bp++) {
+ 	    if (isascii(*bp) && isdigit(*bp)) {
+ 		if ((speed = bcode(bp))) {
+-		    tp->c_cflag &= ~CBAUD;
+-		    tp->c_cflag |= speed;
++		    (void) cfsetospeed(tp, speed);
+ 		}
+ 		break;
+ 	    }
+@@ -812,14 +878,14 @@
+ 
+     tp->c_iflag = iflag;
+     tp->c_cc[VMIN] = vmin;
+-    (void) ioctl(0, TCSETA, tp);
++    (void) tcsetattr(0, TCSANOW, tp);
+ }
+ 
+ /* do_prompt - show login prompt, optionally preceded by /etc/issue contents */
+ void
+ do_prompt(op, tp)
+      struct options *op;
+-     struct termio *tp;
++     struct termios *tp;
+ {
+ #ifdef	ISSUE
+     FILE    *fd;
+@@ -835,7 +901,7 @@
+     if ((op->flags & F_ISSUE) && (fd = fopen(op->issue, "r"))) {
+ 	oflag = tp->c_oflag;			/* save current setting */
+ 	tp->c_oflag |= (ONLCR | OPOST);		/* map NL in output to CR-NL */
+-	(void) ioctl(0, TCSETAW, tp);
++	(void) tcsetattr(0, TCSADRAIN, tp);
+ 
+ 
+ 	while ((c = getc(fd)) != EOF)
+@@ -915,7 +981,7 @@
+ 			int i;
+ 
+ 			for (i = 0; speedtab[i].speed; i++) {
+-			    if (speedtab[i].code == (tp->c_cflag & CBAUD)) {
++			    if (speedtab[i].code == cfgetospeed(tp)) {
+ 				printf("%ld", speedtab[i].speed);
+ 				break;
+ 			    }
+@@ -947,7 +1013,7 @@
+ 	fflush(stdout);
+ 
+ 	tp->c_oflag = oflag;			/* restore settings */
+-	(void) ioctl(0, TCSETAW, tp);		/* wait till output is gone */
++	(void) tcsetattr(0, TCSADRAIN, tp);	/* wait till output is gone */
+ 	(void) fclose(fd);
+     }
+ #endif
+@@ -965,15 +1031,14 @@
+ /* next_speed - select next baud rate */
+ void
+ next_speed(tp, op)
+-     struct termio *tp;
++     struct termios *tp;
+      struct options *op;
+ {
+     static int baud_index = FIRST_SPEED;/* current speed index */
+ 
+     baud_index = (baud_index + 1) % op->numspeed;
+-    tp->c_cflag &= ~CBAUD;
+-    tp->c_cflag |= op->speeds[baud_index];
+-    (void) ioctl(0, TCSETA, tp);
++    (void) cfsetospeed(0, op->speeds[baud_index]);
++    (void) tcsetattr(0, TCSANOW, tp);
+ }
+ 
+ /* get_logname - get user name, establish parity, speed, erase, kill, eol */
+@@ -981,7 +1046,7 @@
+ char   *get_logname(op, cp, tp)
+      struct options *op;
+      struct chardata *cp;
+-     struct termio *tp;
++     struct termios *tp;
+ {
+     static char logname[BUFSIZ];
+     char   *bp;
+@@ -1003,7 +1068,7 @@
+     /* Flush pending input (esp. after parsing or switching the baud rate). */
+ 
+     (void) sleep(1);
+-    (void) ioctl(0, TCFLSH, TCIFLUSH);
++    (void) tcflush(0, TCIFLUSH);
+ 
+     /* Prompt for and read a login name. */
+ 
+@@ -1087,11 +1152,11 @@
+     return (logname);
+ }
+ 
+-/* termio_final - set the final tty mode bits */
++/* termios_final - set the final tty mode bits */
+ void
+-termio_final(op, tp, cp)
++termios_final(op, tp, cp)
+      struct options *op;
+-     struct termio *tp;
++     struct termios *tp;
+      struct chardata *cp;
+ {
+     /* General terminal-independent stuff. */
+@@ -1107,7 +1172,7 @@
+     tp->c_cc[VEOL] = DEF_EOL;
+ #ifdef __linux__
+     tp->c_cc[VSWTC] = DEF_SWITCH;		/* default switch character */
+-#else
++#elif defined(VSWTCH)
+     tp->c_cc[VSWTCH] = DEF_SWITCH;		/* default switch character */
+ #endif
+ 
+@@ -1139,11 +1204,13 @@
+     }
+     /* Account for upper case without lower case. */
+ 
++#if defined(IUCLC) && defined(XCASE) && defined(OLCUC)
+     if (cp->capslock) {
+ 	tp->c_iflag |= IUCLC;
+ 	tp->c_lflag |= XCASE;
+ 	tp->c_oflag |= OLCUC;
+     }
++#endif
+     /* Optionally enable hardware flow control */
+ 
+ #ifdef	CRTSCTS
+@@ -1153,8 +1220,8 @@
+ 
+     /* Finally, make the new settings effective */
+ 
+-    if (ioctl(0, TCSETA, tp) < 0)
+-	error("%s: ioctl: TCSETA: %m", op->tty);
++    if (tcsetattr(0, TCSADRAIN, tp) < 0)
++	error("%s: tcsetattr: %m", op->tty);
+ }
+ 
+ /* caps_lock - string contains upper case without lower case */
+diff -urNad util-linux/disk-utils/Makefile /tmp/dpep.Eu8Nvo/util-linux/disk-utils/Makefile
+--- util-linux/disk-utils/Makefile	2004-12-15 10:41:00.757980700 -0700
++++ /tmp/dpep.Eu8Nvo/util-linux/disk-utils/Makefile	2004-12-15 11:00:55.733111453 -0700
+@@ -50,6 +50,8 @@
+ 
+ fsck.minix.o mkfs.minix.o: bitops.h minix.h
+ 
++mkfs.minix mkfs.bfs mkswap: $(LIB)/get_blocks.o
++
+ install: all
+ 	$(INSTALLDIR) $(SBINDIR) $(USRBINDIR) $(ETCDIR)
+ 	$(INSTALLBIN) $(SBIN) $(SBINDIR)
+diff -urNad util-linux/disk-utils/mkfs.bfs.c /tmp/dpep.Eu8Nvo/util-linux/disk-utils/mkfs.bfs.c
+--- util-linux/disk-utils/mkfs.bfs.c	2004-12-15 10:41:00.758980485 -0700
++++ /tmp/dpep.Eu8Nvo/util-linux/disk-utils/mkfs.bfs.c	2004-12-15 11:00:55.733111453 -0700
+@@ -10,17 +10,12 @@
+ #include <stdarg.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+-#include <sys/ioctl.h>
+ #include <fcntl.h>
+ #include <errno.h>
+ #include <string.h>
+ #include <time.h>
+ #include "nls.h"
+-
+-/* cannot include <linux/fs.h> */
+-#ifndef BLKGETSIZE
+-#define BLKGETSIZE _IO(0x12,96)    /* return device size */
+-#endif
++#include "get_blocks.h"
+ 
+ #define BFS_ROOT_INO		2
+ #define BFS_NAMELEN		14
+@@ -181,13 +176,9 @@
+ 	else if (optind != argc)
+ 		usage();
+ 
+-	if (ioctl(fd, BLKGETSIZE, &total_blocks) == -1) {
+-		if (!user_specified_total_blocks) {
+-			perror("BLKGETSIZE");
+-			fatal(_("cannot get size of %s"), device);
+-		}
+-		total_blocks = user_specified_total_blocks;
+-	} else if (user_specified_total_blocks) {
++	total_blocks = get_blocks(fd);
++
++	if (user_specified_total_blocks) {
+ 		if (user_specified_total_blocks > total_blocks)
+ 			fatal(_("blocks argument too large, max is %lu"),
+ 			      total_blocks);
+diff -urNad util-linux/disk-utils/mkfs.minix.c /tmp/dpep.Eu8Nvo/util-linux/disk-utils/mkfs.minix.c
+--- util-linux/disk-utils/mkfs.minix.c	2004-12-15 10:41:00.758980485 -0700
++++ /tmp/dpep.Eu8Nvo/util-linux/disk-utils/mkfs.minix.c	2004-12-15 11:00:55.734111238 -0700
+@@ -68,16 +68,12 @@
+ #include <stdlib.h>
+ #include <termios.h>
+ #include <sys/stat.h>
+-#include <sys/ioctl.h>
+ #include <mntent.h>
+ #include <getopt.h>
+ 
+ #include "minix.h"
+ #include "nls.h"
+-
+-#ifndef BLKGETSIZE
+-#define BLKGETSIZE _IO(0x12,96)    /* return device size */
+-#endif
++#include "get_blocks.h"
+ 
+ #ifndef __GNUC__
+ #error "needs gcc for the bitop-__asm__'s"
+@@ -188,37 +184,6 @@
+ }
+ 
+ static long
+-valid_offset (int fd, int offset) {
+-	char ch;
+-
+-	if (lseek (fd, offset, 0) < 0)
+-		return 0;
+-	if (read (fd, &ch, 1) < 1)
+-		return 0;
+-	return 1;
+-}
+-
+-static int
+-count_blocks (int fd) {
+-	int high, low;
+-
+-	low = 0;
+-	for (high = 1; valid_offset (fd, high); high *= 2)
+-		low = high;
+-	while (low < high - 1)
+-	{
+-		const int mid = (low + high) / 2;
+-
+-		if (valid_offset (fd, mid))
+-			low = mid;
+-		else
+-			high = mid;
+-	}
+-	valid_offset (fd, 0);
+-	return (low + 1);
+-}
+-
+-static int
+ get_size(const char  *file) {
+ 	int	fd;
+ 	long	size;
+@@ -228,12 +193,8 @@
+ 		perror(file);
+ 		exit(1);
+ 	}
+-	if (ioctl(fd, BLKGETSIZE, &size) >= 0) {
+-		close(fd);
+-		return (size * 512);
+-	}
+-		
+-	size = count_blocks(fd);
++	size = get_blocks(fd);
++
+ 	close(fd);
+ 	return size;
+ }
+@@ -676,8 +637,10 @@
+      }
+   }
+ 
+-  if (device_name && !BLOCKS)
+-    BLOCKS = get_size (device_name) / 1024;
++  if (device_name && !BLOCKS) {
++    int sectors_per_block = 1024 / 512;
++    BLOCKS = get_size (device_name) / sectors_per_block;
++  }
+   if (!device_name || BLOCKS<10) {
+     usage();
+   }
+diff -urNad util-linux/disk-utils/mkswap.c /tmp/dpep.Eu8Nvo/util-linux/disk-utils/mkswap.c
+--- util-linux/disk-utils/mkswap.c	2004-12-15 10:41:00.760980055 -0700
++++ /tmp/dpep.Eu8Nvo/util-linux/disk-utils/mkswap.c	2004-12-15 11:00:55.734111238 -0700
+@@ -36,10 +36,10 @@
+ #include <string.h>
+ #include <fcntl.h>
+ #include <stdlib.h>
+-#include <sys/ioctl.h>		/* for _IO */
+ #include <sys/utsname.h>
+ #include <sys/stat.h>
+ #include "nls.h"
++#include "get_blocks.h"
+ 
+ /* Try to get PAGE_SIZE from libc or kernel includes */
+ #ifdef HAVE_sys_user_h
+@@ -52,14 +52,6 @@
+ #endif
+ #endif
+ 
+-#ifndef _IO
+-/* pre-1.3.45 */
+-#define BLKGETSIZE 0x1260
+-#else
+-/* same on i386, m68k, arm; different on alpha, mips, sparc, ppc */
+-#define BLKGETSIZE _IO(0x12,96)
+-#endif
+-
+ static char * program_name = "mkswap";
+ static char * device_name = NULL;
+ static int DEV = -1;
+@@ -382,39 +374,11 @@
+ 		printf(_("%lu bad pages\n"), badpages);
+ }
+ 
+-static long
+-valid_offset (int fd, off_t offset) {
+-	char ch;
+-
+-	if (lseek (fd, offset, 0) < 0)
+-		return 0;
+-	if (read (fd, &ch, 1) < 1)
+-		return 0;
+-	return 1;
+-}
+-
+-static off_t
+-find_size (int fd) {
+-	off_t high, low;
+-
+-	low = 0;
+-	for (high = 1; high > 0 && valid_offset (fd, high); high *= 2)
+-		low = high;
+-	while (low < high - 1) {
+-		const off_t mid = (low + high) / 2;
+-
+-		if (valid_offset (fd, mid))
+-			low = mid;
+-		else
+-			high = mid;
+-	}
+-	return (low + 1);
+-}
+-
+ /* return size in pages, to avoid integer overflow */
+ static unsigned long
+ get_size(const char  *file) {
+ 	int	fd;
++	int	sectors_per_page = pagesize / 512;
+ 	unsigned long	size;
+ 
+ 	fd = open(file, O_RDONLY);
+@@ -422,14 +386,10 @@
+ 		perror(file);
+ 		exit(1);
+ 	}
+-	if (ioctl(fd, BLKGETSIZE, &size) >= 0) {
+-		int sectors_per_page = pagesize/512;
+-		size /= sectors_per_page;
+-	} else {
+-		size = find_size(fd) / pagesize;
+-	}
++	size = get_blocks(fd);
++
+ 	close(fd);
+-	return size;
++	return (size / sectors_per_page);
+ }
+ 
+ static int
+@@ -554,8 +514,11 @@
+ 		maxpages = PAGES;
+ 	else if (linux_version_code() >= MAKE_VERSION(2,2,1))
+ 		maxpages = V1_MAX_PAGES;
+-	else
++	else {
+ 		maxpages = V1_OLD_MAX_PAGES;
++		if (maxpages > V1_MAX_PAGES)
++			maxpages = V1_MAX_PAGES;
++	}
+ 
+ 	if (PAGES > maxpages) {
+ 		PAGES = maxpages;
+diff -urNad util-linux/fdisk/cfdisk.c /tmp/dpep.Eu8Nvo/util-linux/fdisk/cfdisk.c
+--- util-linux/fdisk/cfdisk.c	2004-12-15 10:41:00.762979625 -0700
++++ /tmp/dpep.Eu8Nvo/util-linux/fdisk/cfdisk.c	2004-12-15 11:00:55.735111023 -0700
+@@ -80,6 +80,7 @@
+ 
+ #include "nls.h"
+ #include "xstrncpy.h"
++#include "get_blocks.h"
+ #include "common.h"
+ 
+ extern long long ext2_llseek(unsigned int fd, long long offset,
+diff -urNad util-linux/fdisk/fdisk.c /tmp/dpep.Eu8Nvo/util-linux/fdisk/fdisk.c
+--- util-linux/fdisk/fdisk.c	2004-12-15 10:41:00.764979195 -0700
++++ /tmp/dpep.Eu8Nvo/util-linux/fdisk/fdisk.c	2004-12-15 11:00:55.736110808 -0700
+@@ -21,6 +21,7 @@
+ 
+ #include "nls.h"
+ #include "common.h"
++#include "get_blocks.h"
+ #include "fdisk.h"
+ 
+ #include "fdisksunlabel.h"
+diff -urNad util-linux/fdisk/sfdisk.c /tmp/dpep.Eu8Nvo/util-linux/fdisk/sfdisk.c
+--- util-linux/fdisk/sfdisk.c	2004-12-15 10:41:00.765978980 -0700
++++ /tmp/dpep.Eu8Nvo/util-linux/fdisk/sfdisk.c	2004-12-15 11:00:55.738110378 -0700
+@@ -51,6 +51,7 @@
+ #include <linux/unistd.h>	/* _syscall */
+ #include "nls.h"
+ #include "common.h"
++#include "get_blocks.h"
+ 
+ #define SIZE(a)	(sizeof(a)/sizeof(a[0]))
+ 
+diff -urNad util-linux/lib/Makefile /tmp/dpep.Eu8Nvo/util-linux/lib/Makefile
+--- util-linux/lib/Makefile	2004-12-15 10:41:00.766978765 -0700
++++ /tmp/dpep.Eu8Nvo/util-linux/lib/Makefile	2004-12-15 11:00:55.738110378 -0700
+@@ -9,6 +9,8 @@
+ 
+ env.o: env.h
+ 
++get_blocks.o: get_blocks.h
++
+ setproctitle.o: setproctitle.h
+ 
+ carefulputc.o: carefulputc.h
+diff -urNad util-linux/lib/get_blocks.c /tmp/dpep.Eu8Nvo/util-linux/lib/get_blocks.c
+--- util-linux/lib/get_blocks.c	1969-12-31 17:00:00.000000000 -0700
++++ /tmp/dpep.Eu8Nvo/util-linux/lib/get_blocks.c	2004-12-15 11:00:55.738110378 -0700
+@@ -0,0 +1,117 @@
++/*
++ * unsigned long get_blocks(int fd)
++ *
++ * 	returns the number of 512-byte blocks of fd
++ *
++ * Most code ripped from:
++ * 
++ * 	mkswap.c
++ * 	mkfs.bfs.c
++ * 	mkfs.minix.c
++ *
++ * by Guillem Jover <guillem.jover@menta.net>
++ * 
++ */
++
++#include "../defines.h"
++#include "get_blocks.h"
++#include <sys/types.h>
++#include <sys/stat.h>
++#include <unistd.h>
++
++#include <sys/ioctl.h>
++
++/* can't #include <linux/fs.h>, because it uses u64... */
++#ifndef BLKGETSIZE
++/* return device size */
++#ifndef _IO
++/* pre-1.3.45 */
++#define BLKGETSIZE 0x1260
++#else
++/* same on i386, m68k, arm; different on alpha, mips, sparc, ppc */
++#define BLKGETSIZE _IO(0x12,96)
++#define BLKGETSIZE64 _IOR(0x12,114,long long)
++#endif
++#endif
++
++static int
++valid_offset (int fd, off_t offset)
++{
++	char	ch;
++
++	if (lseek (fd, offset, 0) < 0)
++		return 0;
++	if (read (fd, &ch, 1) < 1)
++		return 0;
++	return 1;
++}
++
++static off_t 
++count_blocks (int fd)
++{
++	off_t	high, low, blocks;
++
++	low = 0;
++	for (high = 1; high > 0 && valid_offset (fd, high); high *= 2)
++		low = high;
++	while (low < high - 1)
++	{
++		const off_t	mid = (low + high) / 2;
++
++		if (valid_offset (fd, mid))
++			low = mid;
++		else
++			high = mid;
++	}
++	blocks = (low + 1) / 512;
++	return blocks;
++}
++
++unsigned long
++get_blocks (int fd)
++{
++	struct stat	st;
++
++	{
++		unsigned long longsectors;
++		unsigned long long bytes;	/* really u64 */
++		unsigned long long total_number_of_sectors;
++
++		/* stat fd to see if it is a regular file or a block device */
++		if ( fstat(fd, &st) != 0 )
++			return 0;
++			
++		/* fd is a regular file */
++		if (S_ISREG(st.st_mode)) 
++		{
++			bytes = st.st_size;
++		}
++		/* fd is a block device */
++		else if (S_ISBLK(st.st_mode))
++		{
++			if (ioctl(fd, BLKGETSIZE, &longsectors))
++				longsectors = 0;
++			if (ioctl(fd, BLKGETSIZE64, &bytes))
++				bytes = 0;
++
++			/*
++			 * If BLKGETSIZE64 was unknown or broken, use longsectors.
++			 * (Kernels 2.4.15-2.4.17 had a broken BLKGETSIZE64
++			 * that returns sectors instead of bytes.)
++			 */
++			if (bytes == 0 || bytes == longsectors)
++				bytes = ((unsigned long long) longsectors) << 9;
++		}
++		else /* fd is neither a regalar file nor a block device */
++			return 0;
++
++		total_number_of_sectors = (bytes >> 9);
++		return total_number_of_sectors;
++	}
++
++	if (fstat(fd, &st) == 0)
++		return st.st_size / 512;
++
++	return count_blocks(fd);
++}
++
+diff -urNad util-linux/lib/get_blocks.h /tmp/dpep.Eu8Nvo/util-linux/lib/get_blocks.h
+--- util-linux/lib/get_blocks.h	1969-12-31 17:00:00.000000000 -0700
++++ /tmp/dpep.Eu8Nvo/util-linux/lib/get_blocks.h	2004-12-15 11:00:55.738110378 -0700
+@@ -0,0 +1,7 @@
++#ifndef GET_BLOCKS_H
++#define GET_BLOCKS_H
++
++extern unsigned long get_blocks (int fd);
++
++#endif
++
+diff -urNad util-linux/disk-utils/mkfs.c /tmp/dpep.q8UfTz/util-linux/disk-utils/mkfs.c
+--- util-linux/disk-utils/mkfs.c	2004-09-06 11:06:21.000000000 -0600
++++ /tmp/dpep.q8UfTz/util-linux/disk-utils/mkfs.c	2004-12-15 07:34:37.480762459 -0700
+@@ -36,7 +36,7 @@
+ 
+ int main(int argc, char *argv[])
+ {
+-  char progname[NAME_MAX];
++  char *progname;
+   char *fstype = NULL;
+   int i, more = 0, verbose = 0;
+   char *oldpath, *newpath;
+@@ -92,7 +92,12 @@
+   }
+   sprintf(newpath, "%s:%s\n", SEARCH_PATH, oldpath);
+   putenv(newpath);
+-  snprintf(progname, sizeof(progname), PROGNAME, fstype);
++  progname = (char *) malloc(sizeof(PROGNAME) + strlen(fstype) + 1);
++  if (!progname) {
++    fprintf(stderr, _("%s: Out of memory!\n"), "mkfs");
++    exit(1);
++  }
++  sprintf(progname, PROGNAME, fstype);
+   argv[--optind] = progname;
+ 
+   if (verbose) {
+diff -urNad util-linux/misc-utils/namei.c /tmp/dpep.q8UfTz/util-linux/misc-utils/namei.c
+--- util-linux/misc-utils/namei.c	2004-09-06 15:06:47.000000000 -0600
++++ /tmp/dpep.q8UfTz/util-linux/misc-utils/namei.c	2004-12-15 07:34:15.484428834 -0700
+@@ -73,7 +73,8 @@
+ main(int argc, char **argv) {
+     extern int optind;
+     int c;
+-    char curdir[MAXPATHLEN];
++    int curdir_size;
++    char *curdir;
+ 
+     setlocale(LC_ALL, "");
+     bindtextdomain(PACKAGE, LOCALEDIR);
+@@ -98,13 +99,28 @@
+ 	}
+     }
+ 
+-    if(getcwd(curdir, sizeof(curdir)) == NULL){
+-	(void)fprintf(stderr,
+-		      _("namei: unable to get current directory - %s\n"),
+-		      curdir);
++    curdir_size = 1024;
++    curdir = malloc(curdir_size);
++    if (curdir==NULL){
++	(void)fprintf(stderr, _("namei: out of memory\n"));
+ 	exit(1);
+     }
+ 
++    while (getcwd(curdir, curdir_size) == NULL){
++	if (errno!=ERANGE){
++	    (void)fprintf(stderr,
++			  _("namei: unable to get current directory - %s\n"),
++			  curdir);
++	    exit(1);
++	}
++	curdir_size *= 2;
++	realloc(curdir, curdir_size);
++	if (curdir==NULL){
++	    (void)fprintf(stderr, _("namei: out of memory\n"));
++	    exit(1);
++	}
++    }
++
+ 
+     for(; optind < argc; optind++){
+ 	(void)printf("f: %s\n", argv[optind]);
+diff -urNad util-linux/fdisk/fdiskbsdlabel.c /tmp/dpep.lVXZel/util-linux/fdisk/fdiskbsdlabel.c
+--- util-linux/fdisk/fdiskbsdlabel.c	2003-07-13 15:12:47.000000000 -0600
++++ /tmp/dpep.lVXZel/util-linux/fdisk/fdiskbsdlabel.c	2004-12-15 08:26:47.880009777 -0700
+@@ -515,7 +514,7 @@
+ xbsd_write_bootstrap (void)
+ {
+   char *bootdir = BSD_LINUX_BOOTDIR;
+-  char path[MAXPATHLEN];
++  char *path;
+   char *dkbasename;
+   struct xbsd_disklabel dl;
+   char *d, *p, *e;
+@@ -532,9 +531,15 @@
+     line_ptr[strlen (line_ptr)-1] = '\0';
+     dkbasename = line_ptr;
+   }
+-  snprintf (path, sizeof(path), "%s/%sboot", bootdir, dkbasename);
+-  if (!xbsd_get_bootstrap (path, disklabelbuffer, (int) xbsd_dlabel.d_secsize))
++  path = (char *) malloc (sizeof("/boot") + 1 + strlen (bootdir) +
++			  strlen (dkbasename));
++  if (!path)
++    fatal (out_of_memory);
++  sprintf (path, "%s/%sboot", bootdir, dkbasename);
++  if (!xbsd_get_bootstrap (path, disklabelbuffer, (int) xbsd_dlabel.d_secsize)) {
++    free (path);
+     return;
++  }
+ 
+   /* We need a backup of the disklabel (xbsd_dlabel might have changed). */
+   d = &disklabelbuffer[BSD_LABELSECTOR * SECTOR_SIZE];
+@@ -543,10 +548,13 @@
+   /* The disklabel will be overwritten by 0's from bootxx anyway */
+   bzero (d, sizeof (struct xbsd_disklabel));
+ 
++  sprintf (path, "%s/boot%s", bootdir, dkbasename);
+   snprintf (path, sizeof(path), "%s/boot%s", bootdir, dkbasename);
+   if (!xbsd_get_bootstrap (path, &disklabelbuffer[xbsd_dlabel.d_secsize],
+-			  (int) xbsd_dlabel.d_bbsize - xbsd_dlabel.d_secsize))
++			  (int) xbsd_dlabel.d_bbsize - xbsd_dlabel.d_secsize)) {
++    free(path);
+     return;
++  }
+ 
+   e = d + sizeof (struct xbsd_disklabel);
+   for (p=d; p < e; p++)
+@@ -579,6 +587,8 @@
+ #endif
+ 
+   sync_disks ();
++
++  free(path);
+ }
+ 
+ static void
+diff -urNad util-linux/MCONFIG /tmp/dpep.lVXZel/util-linux/MCONFIG
+--- util-linux/MCONFIG	2004-12-15 08:26:36.601434195 -0700
++++ /tmp/dpep.lVXZel/util-linux/MCONFIG	2004-12-15 08:26:47.875010852 -0700
+@@ -17,7 +17,8 @@
+ # Select for CPU i386 if the binaries must be able to run on an intel 386
+ # (by default i486 code is generated, see below)
+ CPU=$(shell uname -m)
+-ARCH=$(shell echo $(CPU) | sed 's/i.86/intel/;s/arm.*/arm/')
++ARCH=$(shell echo $(CPU) | sed 's/i.86.*/intel/;s/arm.*/arm/')
++OS=$(shell uname -s | tr '[:upper:]' '[:lower:]')
+ 
+ # If HAVE_PAM is set to "yes", then login, chfn, chsh, and newgrp
+ # will use PAM for authentication. Additionally, passwd will not be
+diff -urNad util-linux/configure /tmp/dpep.lVXZel/util-linux/configure
+--- util-linux/configure	2004-12-12 12:36:03.000000000 -0700
++++ /tmp/dpep.lVXZel/util-linux/configure	2004-12-15 08:26:47.875010852 -0700
+@@ -304,6 +304,7 @@
+ 
+ #
+ # F6. For agetty.c: is updwtmp() available?
++# F7. For mcookie.c: is gettimeofday() available?
+ #
+ echo '
+ #include <string.h>
+@@ -504,7 +505,7 @@
+ #include <libintl.h>
+ int main(int a, char **v){
+   if (a == -1)  /* false */
+-        gettext("There is no gettext man page\n");
++        gettext("There is no gettext man page");
+   exit(0);
+ }
+ ' > conftest.c
+@@ -520,6 +521,28 @@
+ fi
+ rm -f conftest conftest.c
+ 
++#
++# F7. For mcookie.c: is gettimeofday() available?
++#
++echo '
++#include <sys/time.h>
++#include <unistd.h>
++main(int a, char **v){
++  struct timeval    tv;
++  struct timezone   tz;
++  gettimeofday( &tv, &tz );
++  exit(0);
++}
++' > conftest.c
++eval $compile
++if test -s conftest && ./conftest 2>/dev/null; then
++        echo "#define HAVE_gettimeofday" >> defines.h
++        echo "You have gettimeofday()"
++else
++        echo "You don't have gettimeofday()"
++fi
++rm -f conftest conftest.c
++
+ 
+ #
+ # 7. Does xgettext exist and take the option --foreign-user?
+diff -urNad util-linux/disk-utils/Makefile /tmp/dpep.lVXZel/util-linux/disk-utils/Makefile
+--- util-linux/disk-utils/Makefile	2004-12-15 08:26:36.633427318 -0700
++++ /tmp/dpep.lVXZel/util-linux/disk-utils/Makefile	2004-12-15 08:26:47.876010637 -0700
+@@ -8,24 +8,34 @@
+ 
+ # Where to put man pages?
+ 
+-MAN8= 	blockdev.8 fdformat.8 isosize.8 mkfs.8 mkswap.8 elvtune.8 \
+-	fsck.minix.8 mkfs.minix.8 mkfs.bfs.8
++MAN8= 	isosize.8 mkfs.8 mkswap.8 fsck.minix.8 mkfs.minix.8 mkfs.bfs.8
++ifeq "$(OS)" "linux"
++MAN8:=$(MAN8) fdformat.8 blockdev.8 elvtune.8
++endif
+ 
+ # Where to put binaries?
+ # See the "install" rule for the links. . .
+ 
+-SBIN= 	mkfs mkswap blockdev elvtune fsck.minix mkfs.minix mkfs.bfs
++SBIN= 	mkfs mkswap fsck.minix mkfs.minix mkfs.bfs
++ifeq "$(OS)" "linux"
++SBIN:=$(SBIN) blockdev elvtune
++endif
+ 
+-USRBIN=	fdformat isosize
++USRBIN=	isosize
++ifeq "$(OS)" "linux"
++USRBIN:=$(USRBIN) fdformat
++endif
+ 
+ ETC=	fdprm
+ 
+ MAYBE=  setfdprm raw fsck.cramfs mkfs.cramfs
+ 
++ifeq "$(OS)" "linux"
+ ifneq "$(HAVE_FDUTILS)" "yes"
+ USRBIN:=$(USRBIN) setfdprm
+ MAN8:=$(MAN8) setfdprm.8
+ endif
++endif
+ 
+ ifeq "$(HAVE_RAW_H)" "yes"
+ USRBIN:=$(USRBIN) raw
+@@ -56,9 +66,11 @@
+ 	$(INSTALLDIR) $(SBINDIR) $(USRBINDIR) $(ETCDIR)
+ 	$(INSTALLBIN) $(SBIN) $(SBINDIR)
+ 	$(INSTALLBIN) $(USRBIN) $(USRBINDIR)
++ifeq "$(OS)" "linux"
+ ifneq "$(HAVE_FDUTILS)" "yes"
+ 	$(INSTALLDAT) $(ETC) $(ETCDIR)
+ endif
++endif
+ 	$(INSTALLDIR) $(MAN8DIR)
+ 	$(INSTALLMAN) $(MAN8) $(MAN8DIR)
+ 
+diff -urNad util-linux/disk-utils/mkswap.c /tmp/dpep.lVXZel/util-linux/disk-utils/mkswap.c
+--- util-linux/disk-utils/mkswap.c	2004-12-15 08:26:36.635426888 -0700
++++ /tmp/dpep.lVXZel/util-linux/disk-utils/mkswap.c	2004-12-15 08:26:47.876010637 -0700
+@@ -36,7 +36,9 @@
+ #include <string.h>
+ #include <fcntl.h>
+ #include <stdlib.h>
++#ifdef __linux__
+ #include <sys/utsname.h>
++#endif /* __linux__ */
+ #include <sys/stat.h>
+ #include "nls.h"
+ #include "get_blocks.h"
+@@ -60,6 +62,7 @@
+ static int check = 0;
+ static int version = -1;
+ 
++#ifdef __linux__
+ #define MAKE_VERSION(p,q,r)	(65536*(p) + 256*(q) + (r))
+ 
+ static int
+@@ -75,6 +78,7 @@
+ 	}
+ 	return 0;
+ }
++#endif /* __linux__ */
+ 
+ #ifdef __sparc__
+ # ifdef __arch64__
+@@ -488,8 +492,10 @@
+ 		/* use version 1 as default, if possible */
+ 		if (PAGES <= V0_MAX_PAGES && PAGES > V1_MAX_PAGES)
+ 			version = 0;
++#ifdef __linux__
+ 		else if (linux_version_code() < MAKE_VERSION(2,1,117))
+ 			version = 0;
++#endif
+ 		else if (pagesize < 2048)
+ 			version = 0;
+ 		else
+@@ -510,10 +516,12 @@
+ 
+ 	if (version == 0)
+ 		maxpages = V0_MAX_PAGES;
++#ifdef __linux__
+ 	else if (linux_version_code() >= MAKE_VERSION(2,3,4))
+ 		maxpages = PAGES;
+ 	else if (linux_version_code() >= MAKE_VERSION(2,2,1))
+ 		maxpages = V1_MAX_PAGES;
++#endif
+ 	else {
+ 		maxpages = V1_OLD_MAX_PAGES;
+ 		if (maxpages > V1_MAX_PAGES)
+diff -urNad util-linux/fdisk/cfdisk.c /tmp/dpep.lVXZel/util-linux/fdisk/cfdisk.c
+--- util-linux/fdisk/cfdisk.c	2004-12-15 08:26:36.636426673 -0700
++++ /tmp/dpep.lVXZel/util-linux/fdisk/cfdisk.c	2004-12-15 08:26:47.878010207 -0700
+@@ -75,8 +75,10 @@
+ #include <math.h>
+ #include <string.h>
+ #include <sys/stat.h>
++#ifdef __linux__
+ #include <sys/ioctl.h>
+ #include <linux/types.h>
++#endif
+ 
+ #include "nls.h"
+ #include "xstrncpy.h"
+@@ -88,8 +90,16 @@
+ 
+ #define VERSION UTIL_LINUX_VERSION
+ 
++#ifdef __GNU__
++#define DEFAULT_DEVICE "/dev/hd0"
++#define ALTERNATE_DEVICE "/dev/sd0"
++#elif defined(__FreeBSD__)
++#define DEFAULT_DEVICE "/dev/ad0"
++#define ALTERNATE_DEVICE "/dev/da0"
++#else
+ #define DEFAULT_DEVICE "/dev/hda"
+ #define ALTERNATE_DEVICE "/dev/sda"
++#endif
+ 
+ /* With K=1024 we have `binary' megabytes, gigabytes, etc.
+    Some misguided hackers like that.
+@@ -1616,6 +1626,7 @@
+ 	 opentype = O_RDWR;
+     opened = TRUE;
+ 
++#ifdef __linux__
+     /* Blocks are visible in more than one way:
+        e.g. as block on /dev/hda and as block on /dev/hda3
+        By a bug in the Linux buffer cache, we will see the old
+@@ -1625,6 +1636,7 @@
+        so this only plays a role if we want to show volume labels. */
+     ioctl(fd, BLKFLSBUF);	/* ignore errors */
+ 				/* e.g. Permission Denied */
++#endif
+ 
+     if (disksize(fd, &llsectors))
+ 	    fatal(_("Cannot get disk size"), 3);
+@@ -1834,12 +1846,14 @@
+ 	}
+ 
+     if (is_bdev) {
++#ifdef __linux__
+ 	 sync();
+ 	 sleep(2);
+ 	 if (!ioctl(fd,BLKRRPART))
+ 	      changed = TRUE;
+ 	 sync();
+ 	 sleep(4);
++#endif
+ 
+ 	 clear_warning();
+ 	 if (changed)
+@@ -2936,6 +2950,19 @@
+ 	disk_device = ALTERNATE_DEVICE;
+     else close(fd);
+ 
++#ifndef __linux__
++    /* XXX Temporal hack to force user or partition table to supply
++     * what the system cannot
++     */
++    if (!use_partition_table_geometry
++	&& (!user_cylinders || !user_heads || !user_sectors)) {
++	fprintf(stderr, "%s: %s\n", argv[0],
++		_("Geometry must be supplied, by the user (-c -h -s) or\n"
++		  "by the existing partition table (-g)\n"));
++    	exit(1);
++    }
++#endif
++
+     if (print_only) {
+ 	fill_p_info();
+ 	if (print_only & PRINT_RAW_TABLE)
+diff -urNad util-linux/fdisk/fdisk.c /tmp/dpep.lVXZel/util-linux/fdisk/fdisk.c
+--- util-linux/fdisk/fdisk.c	2004-12-15 08:26:36.638426243 -0700
++++ /tmp/dpep.lVXZel/util-linux/fdisk/fdisk.c	2004-12-15 08:26:47.879009992 -0700
+@@ -734,6 +734,7 @@
+ 	get_boot(create_empty_dos);
+ }
+ 
++#ifdef __linux__
+ #include <sys/utsname.h>
+ #define MAKE_VERSION(p,q,r)     (65536*(p) + 256*(q) + (r))
+ 
+@@ -751,10 +752,11 @@
+         }
+         return kernel_version;
+ }
++#endif
+ 
+ static void
+ get_sectorsize(int fd) {
+-#if defined(BLKSSZGET)
++#if defined(BLKSSZGET) && defined(__linux__)
+ 	if (!user_set_sector_size &&
+ 	    linux_version_code() >= MAKE_VERSION(2,3,3)) {
+ 		int arg;
+@@ -2160,6 +2162,7 @@
+ 	int error = 0;
+ 	int i;
+ 
++#ifdef __linux__
+ 	printf(_("Calling ioctl() to re-read partition table.\n"));
+ 	sync();
+ 	sleep(2);
+@@ -2174,6 +2177,10 @@
+                 if ((i = ioctl(fd, BLKRRPART)) != 0)
+                         error = errno;
+         }
++#else
++	error = ENOSYS;
++	i = 1;
++#endif
+ 
+ 	if (i) {
+ 		printf(_("\nWARNING: Re-reading the partition table "
+diff -urNad util-linux/fdisk/fdiskaixlabel.h /tmp/dpep.lVXZel/util-linux/fdisk/fdiskaixlabel.h
+--- util-linux/fdisk/fdiskaixlabel.h	2003-07-13 08:10:55.000000000 -0600
++++ /tmp/dpep.lVXZel/util-linux/fdisk/fdiskaixlabel.h	2004-12-15 08:26:47.879009992 -0700
+@@ -1,4 +1,3 @@
+-#include <linux/types.h>   /* for __u32 etc */
+ /*
+  * Copyright (C) Andreas Neuper, Sep 1998.
+  *	This file may be redistributed under
+diff -urNad util-linux/fdisk/fdiskbsdlabel.c /tmp/dpep.Eu8Nvo/util-linux/fdisk/fdiskbsdlabel.c
+--- util-linux/fdisk/fdiskbsdlabel.c	2004-12-15 08:32:52.962532435 -0700
++++ /tmp/dpep.Eu8Nvo/util-linux/fdisk/fdiskbsdlabel.c	2004-12-15 11:01:49.655520409 -0700
+@@ -52,7 +52,6 @@
+ #include <errno.h>
+ #include "nls.h"
+ 
+-#include <sys/ioctl.h>
+ #include <sys/param.h>
+ 
+ #include "common.h"
+diff -urNad util-linux/fdisk/fdiskbsdlabel.h /tmp/dpep.lVXZel/util-linux/fdisk/fdiskbsdlabel.h
+--- util-linux/fdisk/fdiskbsdlabel.h	2002-10-31 06:45:34.000000000 -0700
++++ /tmp/dpep.lVXZel/util-linux/fdisk/fdiskbsdlabel.h	2004-12-15 08:26:47.881009562 -0700
+@@ -31,10 +31,10 @@
+  * SUCH DAMAGE.
+  */
+ 
+-#include <linux/types.h>	/* for __u32, __u16, __u8, __s16 */
++#include <stdint.h>	/* for uint32_t, uint16_t, uint8_t, int16_t */
+ 
+ #ifndef BSD_DISKMAGIC
+-#define BSD_DISKMAGIC     ((__u32) 0x82564557)
++#define BSD_DISKMAGIC     ((uint32_t) 0x82564557)
+ #endif
+ 
+ #ifndef BSD_MAXPARTITIONS
+@@ -60,31 +60,31 @@
+ #define	BSD_SBSIZE        8192		/* max size of fs superblock */
+ 
+ struct xbsd_disklabel {
+-	__u32	d_magic;		/* the magic number */
+-	__s16	d_type;			/* drive type */
+-	__s16	d_subtype;		/* controller/d_type specific */
+-	char	d_typename[16];		/* type name, e.g. "eagle" */
+-	char	d_packname[16];			/* pack identifier */ 
++	uint32_t	d_magic;		/* the magic number */
++	int16_t		d_type;			/* drive type */
++	int16_t		d_subtype;		/* controller/d_type specific */
++	char		d_typename[16];		/* type name, e.g. "eagle" */
++	char		d_packname[16];		/* pack identifier */ 
+ 			/* disk geometry: */
+-	__u32	d_secsize;		/* # of bytes per sector */
+-	__u32	d_nsectors;		/* # of data sectors per track */
+-	__u32	d_ntracks;		/* # of tracks per cylinder */
+-	__u32	d_ncylinders;		/* # of data cylinders per unit */
+-	__u32	d_secpercyl;		/* # of data sectors per cylinder */
+-	__u32	d_secperunit;		/* # of data sectors per unit */
++	uint32_t	d_secsize;		/* # of bytes per sector */
++	uint32_t	d_nsectors;		/* # of data sectors per track */
++	uint32_t	d_ntracks;		/* # of tracks per cylinder */
++	uint32_t	d_ncylinders;		/* # of data cylinders per unit */
++	uint32_t	d_secpercyl;		/* # of data sectors per cylinder */
++	uint32_t	d_secperunit;		/* # of data sectors per unit */
+ 	/*
+ 	 * Spares (bad sector replacements) below
+ 	 * are not counted in d_nsectors or d_secpercyl.
+ 	 * Spare sectors are assumed to be physical sectors
+ 	 * which occupy space at the end of each track and/or cylinder.
+ 	 */
+-	__u16	d_sparespertrack;	/* # of spare sectors per track */
+-	__u16	d_sparespercyl;		/* # of spare sectors per cylinder */
++	uint16_t	d_sparespertrack;	/* # of spare sectors per track */
++	uint16_t	d_sparespercyl;		/* # of spare sectors per cylinder */
+ 	/*
+ 	 * Alternate cylinders include maintenance, replacement,
+ 	 * configuration description areas, etc.
+ 	 */
+-	__u32	d_acylinders;		/* # of alt. cylinders per unit */
++	uint32_t	d_acylinders;		/* # of alt. cylinders per unit */
+ 
+ 			/* hardware characteristics: */
+ 	/*
+@@ -103,30 +103,30 @@
+ 	 * Finally, d_cylskew is the offset of sector 0 on cylinder N
+ 	 * relative to sector 0 on cylinder N-1.
+ 	 */
+-	__u16	d_rpm;			/* rotational speed */
+-	__u16	d_interleave;		/* hardware sector interleave */
+-	__u16	d_trackskew;		/* sector 0 skew, per track */
+-	__u16	d_cylskew;		/* sector 0 skew, per cylinder */
+-	__u32	d_headswitch;		/* head switch time, usec */
+-	__u32	d_trkseek;		/* track-to-track seek, usec */
+-	__u32	d_flags;		/* generic flags */
++	uint16_t	d_rpm;			/* rotational speed */
++	uint16_t	d_interleave;		/* hardware sector interleave */
++	uint16_t	d_trackskew;		/* sector 0 skew, per track */
++	uint16_t	d_cylskew;		/* sector 0 skew, per cylinder */
++	uint32_t	d_headswitch;		/* head switch time, usec */
++	uint32_t	d_trkseek;		/* track-to-track seek, usec */
++	uint32_t	d_flags;		/* generic flags */
+ #define NDDATA 5
+-	__u32	d_drivedata[NDDATA];	/* drive-type specific information */
++	uint32_t	d_drivedata[NDDATA];	/* drive-type specific information */
+ #define NSPARE 5
+-	__u32	d_spare[NSPARE];	/* reserved for future use */
+-	__u32	d_magic2;		/* the magic number (again) */
+-	__u16	d_checksum;		/* xor of data incl. partitions */
++	uint32_t	d_spare[NSPARE];	/* reserved for future use */
++	uint32_t	d_magic2;		/* the magic number (again) */
++	uint16_t	d_checksum;		/* xor of data incl. partitions */
+ 			/* filesystem and partition information: */
+-	__u16	d_npartitions;	        /* number of partitions in following */
+-	__u32	d_bbsize;	        /* size of boot area at sn0, bytes */
+-	__u32	d_sbsize;	        /* max size of fs superblock, bytes */
++	uint16_t	d_npartitions;	        /* number of partitions in following */
++	uint32_t	d_bbsize;	        /* size of boot area at sn0, bytes */
++	uint32_t	d_sbsize;	        /* max size of fs superblock, bytes */
+ 	struct xbsd_partition	 {	/* the partition table */
+-		__u32	p_size;	        /* number of sectors in partition */
+-		__u32	p_offset;       /* starting sector */
+-		__u32	p_fsize;        /* filesystem basic fragment size */
+-		__u8	p_fstype;       /* filesystem type, see below */
+-		__u8	p_frag;	        /* filesystem fragments per block */
+-		__u16	p_cpg;	        /* filesystem cylinders per group */
++		uint32_t	p_size;	        /* number of sectors in partition */
++		uint32_t	p_offset;       /* starting sector */
++		uint32_t	p_fsize;        /* filesystem basic fragment size */
++		uint8_t		p_fstype;       /* filesystem type, see below */
++		uint8_t		p_frag;	        /* filesystem fragments per block */
++		uint16_t	p_cpg;	        /* filesystem cylinders per group */
+ 	} d_partitions[BSD_MAXPARTITIONS]; /* actually may be more */
+ };
+ 
+diff -urNad util-linux/fdisk/fdisksgilabel.c /tmp/dpep.lVXZel/util-linux/fdisk/fdisksgilabel.c
+--- util-linux/fdisk/fdisksgilabel.c	2004-11-04 10:19:17.000000000 -0700
++++ /tmp/dpep.lVXZel/util-linux/fdisk/fdisksgilabel.c	2004-12-15 08:26:47.881009562 -0700
+@@ -16,13 +16,11 @@
+ #include <stdlib.h>		/* exit */
+ #include <string.h>             /* strstr */
+ #include <unistd.h>             /* write */
+-#include <sys/ioctl.h>          /* ioctl */
+ #include <sys/stat.h>           /* stat */
+ #include <assert.h>             /* assert */
+ 
+ #include <endian.h>
+ #include "nls.h"
+-#include <linux/major.h>        /* FLOPPY_MAJOR */
+ 
+ #include "common.h"
+ #include "fdisk.h"
+@@ -100,11 +98,11 @@
+ 
+ static inline unsigned short
+ __swap16(unsigned short x) {
+-        return (((__u16)(x) & 0xFF) << 8) | (((__u16)(x) & 0xFF00) >> 8);
++        return (((uint16_t)(x) & 0xFF) << 8) | (((uint16_t)(x) & 0xFF00) >> 8);
+ }
+ 
+-static inline __u32
+-__swap32(__u32 x) {
++static inline uint32_t
++__swap32(uint32_t x) {
+         return (((x & 0xFF) << 24) |
+ 		((x & 0xFF00) << 8) |
+ 		((x & 0xFF0000) >> 8) |
+@@ -220,8 +218,8 @@
+ 	       w + 1, _("Device"));
+ 	for (i = 0 ; i < partitions; i++) {
+ 		if (sgi_get_num_sectors(i) || debug) {
+-			__u32 start = sgi_get_start_sector(i);
+-			__u32 len = sgi_get_num_sectors(i);
++			uint32_t start = sgi_get_start_sector(i);
++			uint32_t len = sgi_get_num_sectors(i);
+ 			kpi++;		/* only count nonempty partitions */
+ 			printf(
+ 				"%2d: %s %4s %9ld %9ld %9ld  %2x  %s\n",
+@@ -242,8 +240,8 @@
+ 	       sgilabel->boot_file);
+ 	for (i = 0 ; i < volumes; i++) {
+ 		if (sgilabel->directory[i].vol_file_size) {
+-			__u32 start = SSWAP32(sgilabel->directory[i].vol_file_start);
+-			__u32 len = SSWAP32(sgilabel->directory[i].vol_file_size);
++			uint32_t start = SSWAP32(sgilabel->directory[i].vol_file_start);
++			uint32_t len = SSWAP32(sgilabel->directory[i].vol_file_size);
+ 			char *name = sgilabel->directory[i].vol_file_name;
+ 			printf(_("%2d: %-10s sector%5u size%8u\n"),
+ 			       i, name, (unsigned int) start,
+diff -urNad util-linux/fdisk/fdisksgilabel.h /tmp/dpep.lVXZel/util-linux/fdisk/fdisksgilabel.h
+--- util-linux/fdisk/fdisksgilabel.h	2003-07-13 08:11:41.000000000 -0600
++++ /tmp/dpep.lVXZel/util-linux/fdisk/fdisksgilabel.h	2004-12-15 08:26:47.881009562 -0700
+@@ -1,4 +1,4 @@
+-#include <linux/types.h>   /* for __u32 etc */
++#include <stdint.h>	/* for uint32_t, uint16_t, uint8_t, int16_t */
+ /*
+  * Copyright (C) Andreas Neuper, Sep 1998.
+  *	This file may be modified and redistributed under
+@@ -96,9 +96,9 @@
+ #define	SGI_INFO_MAGIC		0x00072959
+ #define	SGI_INFO_MAGIC_SWAPPED	0x59290700
+ #define SSWAP16(x) (other_endian ? __swap16(x) \
+-                                 : (__u16)(x))
++                                 : (uint16_t)(x))
+ #define SSWAP32(x) (other_endian ? __swap32(x) \
+-                                 : (__u32)(x))
++                                 : (uint32_t)(x))
+ 
+ /* fdisk.c */
+ #define sgilabel ((sgi_partition *)MBRbuffer)
+diff -urNad util-linux/fdisk/fdisksunlabel.c /tmp/dpep.lVXZel/util-linux/fdisk/fdisksunlabel.c
+--- util-linux/fdisk/fdisksunlabel.c	2003-07-13 08:11:55.000000000 -0600
++++ /tmp/dpep.lVXZel/util-linux/fdisk/fdisksunlabel.c	2004-12-15 08:26:47.882009347 -0700
+@@ -27,7 +27,9 @@
+ #include <scsi/scsi.h>		/* SCSI_IOCTL_GET_IDLUN */
+ #undef u_char
+ #endif
++#ifdef __linux__
+ #include <linux/major.h>	/* FLOPPY_MAJOR */
++#endif
+ 
+ #include "common.h"
+ #include "fdisk.h"
+@@ -60,10 +62,10 @@
+ };
+ 
+ static inline unsigned short __swap16(unsigned short x) {
+-        return (((__u16)(x) & 0xFF) << 8) | (((__u16)(x) & 0xFF00) >> 8);
++        return (((uint16_t)(x) & 0xFF) << 8) | (((uint16_t)(x) & 0xFF00) >> 8);
+ }
+-static inline __u32 __swap32(__u32 x) {
+-        return (((__u32)(x) & 0xFF) << 24) | (((__u32)(x) & 0xFF00) << 8) | (((__u32)(x) & 0xFF0000) >> 8) | (((__u32)(x) & 0xFF000000) >> 24);
++static inline uint32_t __swap32(uint32_t x) {
++        return (((uint32_t)(x) & 0xFF) << 24) | (((uint32_t)(x) & 0xFF00) << 8) | (((uint32_t)(x) & 0xFF0000) >> 8) | (((uint32_t)(x) & 0xFF000000) >> 24);
+ }
+ 
+ int
+@@ -71,18 +73,21 @@
+ 	return SSWAP32(p.num_sectors);
+ }
+ 
++#ifdef __linux__
+ #ifndef IDE0_MAJOR
+ #define IDE0_MAJOR 3
+ #endif
+ #ifndef IDE1_MAJOR
+ #define IDE1_MAJOR 22
+ #endif
++#endif
+ void guess_device_type(int fd) {
+ 	struct stat bootstat;
+ 
+ 	if (fstat (fd, &bootstat) < 0) {
+                 scsi_disk = 0;
+                 floppy = 0;
++#ifdef __linux__
+ 	} else if (S_ISBLK(bootstat.st_mode)
+ 		   && (major(bootstat.st_rdev) == IDE0_MAJOR ||
+ 		       major(bootstat.st_rdev) == IDE1_MAJOR)) {
+@@ -92,6 +97,7 @@
+ 		   && major(bootstat.st_rdev) == FLOPPY_MAJOR) {
+                 scsi_disk = 0;
+                 floppy = 1;
++#endif
+ 	} else {
+                 scsi_disk = 1;
+                 floppy = 0;
+@@ -674,8 +680,8 @@
+ 	       w + 1, _("Device"));
+ 	for (i = 0 ; i < partitions; i++) {
+ 		if (sunlabel->partitions[i].num_sectors) {
+-			__u32 start = SSWAP32(sunlabel->partitions[i].start_cylinder) * heads * sectors;
+-			__u32 len = SSWAP32(sunlabel->partitions[i].num_sectors);
++			uint32_t start = SSWAP32(sunlabel->partitions[i].start_cylinder) * heads * sectors;
++			uint32_t len = SSWAP32(sunlabel->partitions[i].num_sectors);
+ 			printf(
+ 			    "%s %c%c %9ld %9ld %9ld%c  %2x  %s\n",
+ /* device */		  partname(disk_device, i+1, w),
+diff -urNad util-linux/fdisk/fdisksunlabel.h /tmp/dpep.lVXZel/util-linux/fdisk/fdisksunlabel.h
+--- util-linux/fdisk/fdisksunlabel.h	2003-07-13 08:12:20.000000000 -0600
++++ /tmp/dpep.lVXZel/util-linux/fdisk/fdisksunlabel.h	2004-12-15 08:26:47.882009347 -0700
+@@ -1,4 +1,4 @@
+-#include <linux/types.h>   /* for __u16, __u32 */
++#include <stdint.h>	/* for uint32_t, uint16_t, uint8_t, int16_t */
+ 
+ typedef struct {
+ 	unsigned char info[128];   /* Informative text string */
+@@ -21,8 +21,8 @@
+ 	unsigned short nsect;      /* Sectors per track */
+ 	unsigned char spare3[4];   /* Even more magic... */
+ 	struct sun_partition {
+-		__u32 start_cylinder;
+-		__u32 num_sectors;
++		uint32_t start_cylinder;
++		uint32_t num_sectors;
+ 	} partitions[8];
+ 	unsigned short magic;      /* Magic number */
+ 	unsigned short csum;       /* Label xor'd checksum */
+@@ -32,9 +32,9 @@
+ #define SUN_LABEL_MAGIC_SWAPPED  0xBEDA
+ #define sunlabel ((sun_partition *)MBRbuffer)
+ #define SSWAP16(x) (other_endian ? __swap16(x) \
+-				 : (__u16)(x))
++				 : (uint16_t)(x))
+ #define SSWAP32(x) (other_endian ? __swap32(x) \
+-				 : (__u32)(x))
++				 : (uint32_t)(x))
+ 				 
+ /* fdisk.c */
+ extern char MBRbuffer[MAX_SECTOR_SIZE];
+diff -urNad util-linux/fdisk/sfdisk.c /tmp/dpep.lVXZel/util-linux/fdisk/sfdisk.c
+--- util-linux/fdisk/sfdisk.c	2004-12-15 08:26:36.639426028 -0700
++++ /tmp/dpep.lVXZel/util-linux/fdisk/sfdisk.c	2004-12-15 08:26:47.884008917 -0700
+@@ -48,7 +48,9 @@
+ #include <sys/ioctl.h>
+ #include <sys/stat.h>
+ #include <sys/utsname.h>
++#ifdef __linux__
+ #include <linux/unistd.h>	/* _syscall */
++#endif
+ #include "nls.h"
+ #include "common.h"
+ #include "get_blocks.h"
+@@ -448,11 +450,15 @@
+     unsigned long long sectors;
+     struct geometry R;
+ 
++#ifdef __linux__
+     if (ioctl(fd, HDIO_GETGEO, &g)) {
+ 	g.heads = g.sectors = g.cylinders = g.start = 0;
+ 	if (!silent)
+ 	    do_warn(_("Disk %s: cannot get geometry\n"), dev);
+     }
++#else
++    g.heads = g.sectors = g.cylinders = g.start = 0;
++#endif
+ 
+     R.start = g.start;
+     R.heads = g.heads;
+@@ -791,6 +797,7 @@
+ /* tell the kernel to reread the partition tables */
+ static int
+ reread_ioctl(int fd) {
++#ifdef __linux__
+     if (ioctl(fd, BLKRRPART)) {
+ 	perror("BLKRRPART");
+ 
+@@ -798,6 +805,7 @@
+ 	if (errno == EBUSY)
+ 		return -1;
+     }
++#endif
+     return 0;
+ }
+ 
+@@ -1501,6 +1509,7 @@
+ 	z->partno = pno;
+ }
+ 
++#ifdef __linux__
+ #define MAKE_VERSION(p,q,r)     (65536*(p) + 256*(q) + (r))
+ 
+ static int
+@@ -1516,6 +1525,7 @@
+         }
+         return 0;
+ }
++#endif
+ 
+ static int
+ msdos_partition(char *dev, int fd, unsigned long start, struct disk_desc *z) {
+@@ -1525,7 +1535,11 @@
+     struct sector *s;
+     struct part_desc *partitions = &(z->partitions[0]);
+     int pno = z->partno;
++#ifdef __linux__   
+     int bsd_later = (linux_version_code() >= MAKE_VERSION(2,3,40));
++#else
++    int bsd_later = 0;
++#endif
+ 
+     if (!(s = get_sector(dev, fd, start)))
+ 	return 0;
+diff -urNad util-linux/hwclock/Makefile /tmp/dpep.lVXZel/util-linux/hwclock/Makefile
+--- util-linux/hwclock/Makefile	2002-07-06 15:23:58.000000000 -0600
++++ /tmp/dpep.lVXZel/util-linux/hwclock/Makefile	2004-12-15 08:26:47.884008917 -0700
+@@ -3,6 +3,7 @@
+ include ../make_include
+ include ../MCONFIG
+ 
++ifeq "$(OS)" "linux"
+ # Where to put man pages?
+ 
+ MAN8= 		hwclock.8
+@@ -11,6 +12,7 @@
+ # See the "install" rule for the links. . .
+ 
+ SBIN= 		hwclock
++endif
+ 
+ 
+ all: $(SBIN)
+diff -urNad util-linux/lib/Makefile /tmp/dpep.lVXZel/util-linux/lib/Makefile
+--- util-linux/lib/Makefile	2004-12-15 08:26:36.801391213 -0700
++++ /tmp/dpep.lVXZel/util-linux/lib/Makefile	2004-12-15 08:26:47.884008917 -0700
+@@ -10,8 +10,6 @@
+ 
+ env.o: env.h
+ 
+-get_blocks.o: get_blocks.h
+-
+ setproctitle.o: setproctitle.h
+ 
+ carefulputc.o: carefulputc.h
+@@ -20,6 +18,8 @@
+ 
+ xgethostname.o: xgethostname.h
+ 
++get_blocks.o: get_blocks.h
++
+ md5.o: md5.c md5.h
+ 
+ .PHONY: clean
+diff -urNad util-linux/lib/get_blocks.c /tmp/dpep.lVXZel/util-linux/lib/get_blocks.c
+--- util-linux/lib/get_blocks.c	2004-12-15 08:26:36.640425813 -0700
++++ /tmp/dpep.lVXZel/util-linux/lib/get_blocks.c	2004-12-15 08:26:47.885008702 -0700
+@@ -19,6 +19,7 @@
+ #include <sys/stat.h>
+ #include <unistd.h>
+ 
++#ifdef __linux__
+ #include <sys/ioctl.h>
+ 
+ /* can't #include <linux/fs.h>, because it uses u64... */
+@@ -33,6 +34,7 @@
+ #define BLKGETSIZE64 _IOR(0x12,114,long long)
+ #endif
+ #endif
++#endif /* __linux__ */
+ 
+ static int
+ valid_offset (int fd, off_t offset)
+@@ -72,6 +74,7 @@
+ {
+ 	struct stat	st;
+ 
++#ifdef __linux__
+ 	{
+ 		unsigned long longsectors;
+ 		unsigned long long bytes;	/* really u64 */
+@@ -108,6 +111,7 @@
+ 		total_number_of_sectors = (bytes >> 9);
+ 		return total_number_of_sectors;
+ 	}
++#endif /*  __linux__ */
+ 
+ 	if (fstat(fd, &st) == 0)
+ 		return st.st_size / 512;
+diff -urNad util-linux/login-utils/Makefile /tmp/dpep.lVXZel/util-linux/login-utils/Makefile
+--- util-linux/login-utils/Makefile	2004-12-15 08:26:36.802390998 -0700
++++ /tmp/dpep.lVXZel/util-linux/login-utils/Makefile	2004-12-15 08:26:47.885008702 -0700
+@@ -18,8 +18,10 @@
+ 
+ MAN8.GETTY=	agetty.8
+ 
+-MAN8.INIT=	fastboot.8 fasthalt.8 halt.8 reboot.8 simpleinit.8 shutdown.8 \
+-		initctl.8
++MAN8.INIT=	simpleinit.8 initctl.8
++ifeq "$(OS)" "linux"
++MAN8.INIT:=	$(MAN8.INIT) fastboot.8 fasthalt.8 halt.8 reboot.8 shutdown.8
++endif
+ 
+ MAN8.PUTILS=	vipw.8 vigr.8
+ 
+@@ -28,7 +30,10 @@
+ 
+ SBIN.GETTY=	agetty
+ 
+-SBIN.INIT=	simpleinit shutdown initctl
++SBIN.INIT=	simpleinit initctl
++ifeq "$(OS)" "linux"
++SBIN.INIT:=	$(SBIN.INIT) shutdown
++endif
+ 
+ BIN.PUTILS=	login
+ 
+@@ -141,12 +146,14 @@
+ ifeq "$(USE_TTY_GROUP)" "yes"
+ 	LOGINFLAGS += -DUSE_TTY_GROUP
+ endif
++ifeq "$(OS)" "linux"
+ ifeq "$(ALLOW_VCS_USE)" "yes"
+ 	LOGINFLAGS += -DCHOWNVCS
+ endif
+ ifeq "$(DO_STAT_MAIL)" "yes"
+ 	LOGINFLAGS += -DDO_STAT_MAIL
+ endif
++endif
+ 
+ login.o: login.c $(LIB)/pathnames.h $(LIB)/setproctitle.c $(LIB)/setproctitle.h \
+ 		$(LIB)/xgethostname.h
+@@ -197,10 +204,12 @@
+ 	$(INSTALLDIR) $(MAN8DIR)
+ 	$(INSTALLMAN) $(MAN8.INIT) $(MAN8DIR)
+ 	# Make *relative* links for these
++ifeq "$(OS)" "linux"
+ 	(cd $(SHUTDOWNDIR); ln -sf shutdown reboot)
+ 	(cd $(SHUTDOWNDIR); ln -sf shutdown fastboot)
+ 	(cd $(SHUTDOWNDIR); ln -sf shutdown halt)
+ 	(cd $(SHUTDOWNDIR); ln -sf shutdown fasthalt)
++endif
+ 	(cd $(SHUTDOWNDIR); ln -sf initctl need)
+ 	(cd $(SHUTDOWNDIR); ln -sf initctl display-services)
+ 	(cd $(SHUTDOWNDIR); ln -sf initctl provide)
+diff -urNad util-linux/login-utils/agetty.c /tmp/dpep.lVXZel/util-linux/login-utils/agetty.c
+--- util-linux/login-utils/agetty.c	2004-12-15 08:26:36.803390783 -0700
++++ /tmp/dpep.lVXZel/util-linux/login-utils/agetty.c	2004-12-15 08:26:47.886008488 -0700
+@@ -32,10 +32,11 @@
+ #include <sys/ioctl.h>
+ #include <sys/vt.h>
+ #include <linux/tty.h>
++#include "xgethostname.h"
+ #include "xstrncpy.h"
+ #include "nls.h"
+ 
+-#ifdef __linux__
++#if defined(unix)
+ #include "pathnames.h"
+ #include <sys/param.h>
+ #define USE_SYSLOG
+@@ -280,7 +281,7 @@
+ 
+     parse_args(argc, argv, &options);
+ 
+-#ifdef __linux__
++#if defined(unix)
+ 	setsid();
+ #endif
+ 	
+@@ -294,7 +295,7 @@
+     /* Open the tty as standard { input, output, error }. */
+     open_tty(options.tty, &termios, options.flags & F_LOCAL);
+ 
+-#ifdef __linux__
++#if defined(unix)
+ 	{
+ 		int iv;
+ 		
+@@ -789,7 +790,7 @@
+      * reads will be done in raw mode anyway. Errors will be dealt with
+      * lateron.
+      */
+-#ifdef __linux__
++#if defined(unix)
+     /* flush input and output queues, important for modems! */
+     (void) tcflush(0, TCIOFLUSH);
+ #endif
+@@ -800,7 +801,9 @@
+     }
+ 
+     tp->c_iflag = tp->c_lflag = tp->c_oflag = 0;
++#if defined(__linux__)
+     tp->c_line = 0;
++#endif
+     tp->c_cc[VMIN] = 1;
+     tp->c_cc[VTIME] = 0;
+ 
+@@ -1017,7 +1020,7 @@
+ 	(void) fclose(fd);
+     }
+ #endif
+-#ifdef __linux__
++#ifdef unix
+ 	{
+ 		char *hn;
+ 
+diff -urNad util-linux/login-utils/checktty.c /tmp/dpep.lVXZel/util-linux/login-utils/checktty.c
+--- util-linux/login-utils/checktty.c	2001-05-19 15:53:18.000000000 -0600
++++ /tmp/dpep.lVXZel/util-linux/login-utils/checktty.c	2004-12-15 08:26:47.886008488 -0700
+@@ -138,7 +138,9 @@
+ isapty(const char *tty)
+ {
+     char devname[100];
++#if defined(__linux__)
+     struct stat stb;
++#endif
+ 
+     /* avoid snprintf - old systems do not have it */
+     if (strlen(tty) + 6 > sizeof(devname))
+diff -urNad util-linux/login-utils/login.c /tmp/dpep.lVXZel/util-linux/login-utils/login.c
+--- util-linux/login-utils/login.c	2004-12-04 19:37:12.000000000 -0700
++++ /tmp/dpep.lVXZel/util-linux/login-utils/login.c	2004-12-15 08:26:47.887008273 -0700
+@@ -149,7 +150,7 @@
+ }
+ #endif
+ 
+-#ifndef __linux__
++#if !defined(__linux__) && !defined(__GNU__)
+ #  include <tzfile.h>
+ #endif
+ #include <lastlog.h>
+@@ -202,18 +203,14 @@
+ 
+ #define	TTYGRPNAME	"tty"		/* name of group to own ttys */
+ 
+-#ifndef MAXPATHLEN
+-#  define MAXPATHLEN 1024
+-#endif
+-
+ /*
+  * This bounds the time given to login.  Not a define so it can
+  * be patched on machines where it's too small.
+  */
+-#ifndef __linux__
+-int	timeout = 300;
++#if defined(__linux__) || defined(__GNU__)
++int	timeout = 60;		/* used in cryptocard.c */
+ #else
+-int     timeout = 60;		/* used in cryptocard.c */
++int	timeout = 300;
+ #endif
+ 
+ struct	passwd *pwd;		/* used in cryptocard.c */
+@@ -223,7 +220,7 @@
+ char    hostaddress[4];		/* used in checktty.c */
+ char	*hostname;		/* idem */
+ static char	*username, *tty_name, *tty_number;
+-static char	thishost[100];
++static char	*thishost;
+ static int	failures = 1;
+ static pid_t	pid;
+ 
+@@ -288,6 +285,7 @@
+ 	}
+ }
+ 
++#ifdef CHOWNVCS
+ /* true if the filedescriptor fd is a console tty, very Linux specific */
+ static int
+ consoletty(int fd) {
+@@ -302,6 +300,7 @@
+ #endif
+     return 0;
+ }
++#endif
+ 
+ #if USE_PAM
+ /*
+@@ -861,23 +862,21 @@
+        having the BSD setreuid() */
+     
+     {
+-	char tmpstr[MAXPATHLEN];
++	char *tmpstr;
+ 	uid_t ruid = getuid();
+ 	gid_t egid = getegid();
+ 
+ 	/* avoid snprintf - old systems do not have it, or worse,
+ 	   have a libc in which snprintf is the same as sprintf */
+-	if (strlen(pwd->pw_dir) + sizeof(_PATH_HUSHLOGIN) + 2 > MAXPATHLEN)
+-		quietlog = 0;
+-	else {
+-		sprintf(tmpstr, "%s/%s", pwd->pw_dir, _PATH_HUSHLOGIN);
+-		setregid(-1, pwd->pw_gid);
+-		setreuid(0, pwd->pw_uid);
+-		quietlog = (access(tmpstr, R_OK) == 0);
+-		setuid(0); /* setreuid doesn't do it alone! */
+-		setreuid(ruid, 0);
+-		setregid(-1, egid);
+-	}
++	tmpstr = malloc(strlen(pwd->pw_dir) + sizeof(_PATH_HUSHLOGIN) + 2);
++	sprintf(tmpstr, "%s/%s", pwd->pw_dir, _PATH_HUSHLOGIN);
++	setregid(-1, pwd->pw_gid);
++	setreuid(0, pwd->pw_uid);
++	quietlog = (access(tmpstr, R_OK) == 0);
++	setuid(0); /* setreuid doesn't do it alone! */
++	setreuid(ruid, 0);
++	setregid(-1, egid);
++	free(tmpstr);
+     }
+     
+     /* for linux, write entries in utmp and wtmp */
+@@ -1028,12 +1027,13 @@
+     
+     /* mailx will give a funny error msg if you forget this one */
+     {
+-      char tmp[MAXPATHLEN];
++      char *tmp;
++
+       /* avoid snprintf */
+-      if (sizeof(_PATH_MAILDIR) + strlen(pwd->pw_name) + 1 < MAXPATHLEN) {
+-	      sprintf(tmp, "%s/%s", _PATH_MAILDIR, pwd->pw_name);
+-	      setenv("MAIL",tmp,0);
+-      }
++      tmp = malloc(sizeof(_PATH_MAILDIR) + strlen(pwd->pw_name) + 2);
++      sprintf(tmp, "%s/%s", _PATH_MAILDIR, pwd->pw_name);
++      setenv("MAIL", tmp, 0);
++      free(tmp);
+     }
+     
+     /* LOGNAME is not documented in login(1) but
+@@ -1191,13 +1191,15 @@
+ 	childArgv[childArgc++] = "-c";
+ 	childArgv[childArgc++] = buff;
+     } else {
+-	tbuf[0] = '-';
+-	xstrncpy(tbuf + 1, ((p = rindex(pwd->pw_shell, '/')) ?
+-			   p + 1 : pwd->pw_shell),
+-		sizeof(tbuf)-1);
++	char *tbuf, *shell_cmd;
++
++	tbuf = ((p = rindex(pwd->pw_shell, '/')) ? p + 1 : pwd->pw_shell);
++	shell_cmd = malloc(strlen(tbuf));
++	shell_cmd[0] = '-';
++	xstrncpy(shell_cmd + 1, tbuf, strlen(tbuf)-1);
+ 	
+ 	childArgv[childArgc++] = pwd->pw_shell;
+-	childArgv[childArgc++] = tbuf;
++	childArgv[childArgc++] = shell_cmd;
+     }
+ 
+     childArgv[childArgc++] = NULL;
+diff -urNad util-linux/login-utils/simpleinit.h /tmp/dpep.lVXZel/util-linux/login-utils/simpleinit.h
+--- util-linux/login-utils/simpleinit.h	2000-11-05 05:41:35.000000000 -0700
++++ /tmp/dpep.lVXZel/util-linux/login-utils/simpleinit.h	2004-12-15 08:26:47.888008058 -0700
+@@ -3,7 +3,7 @@
+ 
+ 
+ #define ERRSTRING strerror (errno)
+-#define COMMAND_SIZE  (PIPE_BUF - 4)
++#define COMMAND_SIZE  (_POSIX_PIPE_BUF - 4)
+ 
+ 
+ #define COMMAND_TEST       0  /*  No wait, signal                            */
+diff -urNad util-linux/misc-utils/mcookie.c /tmp/dpep.lVXZel/util-linux/misc-utils/mcookie.c
+--- util-linux/misc-utils/mcookie.c	2002-03-08 16:00:52.000000000 -0700
++++ /tmp/dpep.lVXZel/util-linux/misc-utils/mcookie.c	2004-12-15 08:26:47.888008058 -0700
+@@ -20,18 +20,16 @@
+  *
+  */
+ 
+-#ifdef __linux__
+-#define HAVE_GETTIMEOFDAY 1
+-#endif
+-
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <fcntl.h>
+ #include "md5.h"
+-#if HAVE_GETTIMEOFDAY
++#include "../defines.h"
++#ifdef HAVE_gettimeofday
+ #include <sys/time.h>
+-#include <unistd.h>
+ #endif
++#include <time.h>
++#include <unistd.h>
+ #include "nls.h"
+ 
+ #define BUFFERSIZE 4096
+@@ -79,7 +77,7 @@
+    pid_t             pid;
+    char              *file = NULL;
+    int               r;
+-#if HAVE_GETTIMEOFDAY
++#ifdef HAVE_gettimeofday
+    struct timeval    tv;
+    struct timezone   tz;
+ #else
+@@ -98,7 +96,7 @@
+ 
+    MD5Init( &ctx );
+    
+-#if HAVE_GETTIMEOFDAY
++#ifdef HAVE_gettimeofday
+    gettimeofday( &tv, &tz );
+    MD5Update( &ctx, (unsigned char *)&tv, sizeof( tv ) );
+ #else
+diff -urNad util-linux/misc-utils/script.c /tmp/dpep.lVXZel/util-linux/misc-utils/script.c
+--- util-linux/misc-utils/script.c	2004-03-26 10:07:16.000000000 -0700
++++ /tmp/dpep.lVXZel/util-linux/misc-utils/script.c	2004-12-15 08:26:47.888008058 -0700
+@@ -54,10 +54,8 @@
+ #include <sys/signal.h>
+ #include "nls.h"
+ 
+-#ifdef __linux__
+ #include <unistd.h>
+ #include <string.h>
+-#endif
+ 
+ #include "../defines.h"
+ #ifdef HAVE_openpty
+diff -urNad util-linux/misc-utils/setterm.c /tmp/dpep.lVXZel/util-linux/misc-utils/setterm.c
+--- util-linux/misc-utils/setterm.c	2003-10-17 10:17:51.000000000 -0600
++++ /tmp/dpep.lVXZel/util-linux/misc-utils/setterm.c	2004-12-15 08:26:47.889007843 -0700
+@@ -107,16 +107,14 @@
+ #else
+ #include <curses.h>
+ #endif
++#ifdef __linux__
+ #include <sys/param.h>		/* for MAXPATHLEN */
++#endif
+ #include <sys/ioctl.h>
+ #include <sys/time.h>
+ #include "nls.h"
+ 
+-#ifndef TCGETS
+-/* TCGETS is either defined in termios.h, or here: */
+-#include <asm/ioctls.h>
+-#endif
+-
++#ifdef __linux__
+ #if __GNU_LIBRARY__ < 5
+ #ifndef __alpha__
+ # include <linux/unistd.h>
+@@ -127,6 +125,7 @@
+ #endif
+ #endif
+ extern int klogctl(int type, char *buf, int len);
++#endif /* __linux__ */
+ 
+ /* Constants. */
+ 
+@@ -165,19 +164,24 @@
+ int opt_term, opt_reset, opt_initialize, opt_cursor;
+ int opt_linewrap, opt_snow, opt_softscroll, opt_default, opt_foreground;
+ int opt_background, opt_bold, opt_blink, opt_reverse, opt_underline;
+-int opt_store, opt_clear, opt_blank, opt_snap, opt_snapfile, opt_standout;
+-int opt_append, opt_ulcolor, opt_hbcolor, opt_halfbright, opt_repeat;
++int opt_store, opt_clear, opt_blank, opt_standout;
++int opt_ulcolor, opt_hbcolor, opt_halfbright, opt_repeat;
+ int opt_tabs, opt_clrtabs, opt_regtabs, opt_appcursorkeys, opt_inversescreen;
+-int opt_msg, opt_msglevel, opt_powersave, opt_powerdown;
++int opt_powerdown;
+ int opt_blength, opt_bfreq;
++#ifdef __linux__
++int opt_append, opt_snap, opt_snapfile;
++int opt_powersave;
++int opt_msg, opt_msglevel;
++#endif /* __linux__ */
+ 
+ /* Option controls.  The variable names have been contracted to ensure
+  * uniqueness.
+  */
+ char *opt_te_terminal_name;	/* Terminal name. */
+-int opt_cu_on, opt_li_on, opt_sn_on, opt_so_on, opt_bo_on, opt_hb_on, opt_bl_on;
+-int opt_re_on, opt_un_on, opt_rep_on, opt_appck_on, opt_invsc_on;
+-int opt_msg_on;			/* Boolean switches. */
++int opt_cu_on, opt_li_on, opt_sn_on, opt_so_on, opt_bo_on, opt_hb_on;
++int opt_bl_on, opt_re_on, opt_un_on, opt_rep_on, opt_appck_on;
++int opt_invsc_on;		/* Boolean switches. */
+ int opt_ke_type;		/* Keyboard type. */
+ int opt_fo_color, opt_ba_color;	/* Colors. */
+ int opt_ul_color, opt_hb_color;
+@@ -185,16 +189,20 @@
+ int opt_bl_min;			/* Blank screen. */
+ int opt_blength_l;
+ int opt_bfreq_f;
+-int opt_sn_num;			/* Snap screen. */
+ int opt_st_attr;
+ int opt_rt_len;			/* regular tab length */
+ int opt_tb_array[161];		/* Array for tab list */
+-int opt_msglevel_num;
+ int opt_ps_mode, opt_pd_min;	/* powersave mode/powerdown time */
+ 
++#ifdef __linux__
++int opt_msg_on;
++int opt_msglevel_num;
++
++int opt_sn_num;			/* Snap screen. */
+ char opt_sn_name[200] = "screen.dump";
+ 
+ static void screendump(int vcnum, FILE *F);
++#endif /* __linux__ */
+ 
+ /* Command line parsing routines.
+  *
+@@ -402,6 +410,7 @@
+ 	}
+ }
+ 
++#ifdef __linux__
+ static void
+ parse_powersave(int argc, char **argv, int *option, int *opt_mode, int *bad_arg) {
+ 	/* argc: Number of arguments for this option. */
+@@ -432,6 +441,7 @@
+ 		*opt_mode = 0;
+ 	}
+ }
++#endif /* __linux__ */
+ 
+ #if 0
+ static void
+@@ -454,6 +464,7 @@
+ }
+ #endif
+ 
++#ifdef __linux__
+ static void
+ parse_msglevel(int argc, char **argv, int *option, int *opt_all, int *bad_arg) {
+ 	/* argc: Number of arguments for this option. */
+@@ -512,6 +523,7 @@
+ 	if (argc == 1)
+ 		strcpy((char *)opt_all, argv[0]);
+ }
++#endif /* __linux__ */
+ 
+ static void
+ parse_tabs(int argc, char **argv, int *option, int *tab_array, int *bad_arg) {
+@@ -709,6 +721,7 @@
+ 		parse_regtabs(argc, argv, &opt_regtabs, &opt_rt_len, bad_arg);
+ 	else if (STRCMP(option, "blank") == 0)
+ 		parse_blank(argc, argv, &opt_blank, &opt_bl_min, bad_arg);
++#ifdef __linux__
+ 	else if (STRCMP(option, "dump") == 0)
+ 		parse_snap(argc, argv, &opt_snap, &opt_sn_num, bad_arg);
+ 	else if (STRCMP(option, "append") == 0)
+@@ -721,6 +734,7 @@
+ 		parse_msglevel(argc, argv, &opt_msglevel, &opt_msglevel_num, bad_arg);
+ 	else if (STRCMP(option, "powersave") == 0)
+ 		parse_powersave(argc, argv, &opt_powersave, &opt_ps_mode, bad_arg);
++#endif /* __linux__ */
+ 	else if (STRCMP(option, "powerdown") == 0)
+ 		parse_blank(argc, argv, &opt_powerdown, &opt_pd_min, bad_arg);
+ 	else if (STRCMP(option, "blength") == 0)
+@@ -783,12 +797,14 @@
+ 	fprintf(stderr, _("  [ -clrtabs [ tab1 tab2 tab3 ... ] ]   (tabn = 1-160)\n"));
+ 	fprintf(stderr, _("  [ -regtabs [1-160] ]\n"));
+ 	fprintf(stderr, _("  [ -blank [0-60] ]\n"));
++#ifdef __linux__
+ 	fprintf(stderr, _("  [ -dump   [1-NR_CONSOLES] ]\n"));
+ 	fprintf(stderr, _("  [ -append [1-NR_CONSOLES] ]\n"));
+ 	fprintf(stderr, _("  [ -file dumpfilename ]\n"));
+ 	fprintf(stderr, _("  [ -msg [on|off] ]\n"));
+ 	fprintf(stderr, _("  [ -msglevel [0-8] ]\n"));
+ 	fprintf(stderr, _("  [ -powersave [on|vsync|hsync|powerdown|off] ]\n"));
++#endif /* __linux__ */
+ 	fprintf(stderr, _("  [ -powerdown [0-60] ]\n"));
+ 	fprintf(stderr, _("  [ -blength [0-2000] ]\n"));
+ 	fprintf(stderr, _("  [ -bfreq freqnumber ]\n"));
+@@ -811,8 +827,9 @@
+ static void
+ perform_sequence(int vcterm) {
+ 	/* vcterm: Set if terminal is a virtual console. */
+-
++#ifdef __linux__
+ 	int result;
++#endif
+ /* Perform the selected options. */
+ 
+ 	/* -reset. */
+@@ -1039,7 +1056,8 @@
+ 	/* -blank [0-60]. */
+ 	if (opt_blank && vcterm) 
+ 		printf("\033[9;%d]", opt_bl_min);
+-    
++
++#ifdef __linux__
+ 	/* -powersave [on|vsync|hsync|powerdown|off] (console) */
+ 	if (opt_powersave) {
+ 		char ioctlarg[2];
+@@ -1048,6 +1066,7 @@
+ 		if (ioctl(0,TIOCLINUX,ioctlarg))
+ 			fprintf(stderr,_("cannot (un)set powersave mode\n"));
+ 	}
++#endif /* __linux__ */
+ 
+ 	/* -powerdown [0-60]. */
+ 	if (opt_powerdown) {
+@@ -1060,6 +1079,7 @@
+ 		/* nothing */;
+ #endif
+ 
++#ifdef __linux__
+ 	/* -snap [1-NR_CONS]. */
+ 	if (opt_snap || opt_append) {
+ 		FILE *F;
+@@ -1095,6 +1115,7 @@
+ 		if (result != 0)
+ 			printf(_("klogctl error: %s\n"), strerror(errno));
+ 	}
++#endif /* __linux__ */
+ 
+ 	/* -blength [0-2000] */
+ 	if (opt_blength && vcterm) {
+@@ -1108,6 +1129,7 @@
+ 
+ }
+ 
++#ifdef __linux__
+ static void
+ screendump(int vcnum, FILE *F) {
+     char infile[MAXPATHLEN];
+@@ -1193,6 +1215,7 @@
+ 	}
+     }
+ }
++#endif /* __linux__ */
+ 
+ int
+ main(int argc, char **argv) {
+diff -urNad util-linux/mount/Makefile /tmp/dpep.lVXZel/util-linux/mount/Makefile
+--- util-linux/mount/Makefile	2004-12-15 08:26:36.704412059 -0700
++++ /tmp/dpep.lVXZel/util-linux/mount/Makefile	2004-12-15 08:26:47.890007628 -0700
+@@ -10,10 +10,12 @@
+ COMPILE = $(CC) -c $(CFLAGS) $(DEFINES)
+ LINK = $(CC) $(LDFLAGS)
+ 
++ifeq "$(OS)" "linux"
+ SUID_PROGS = mount umount
+ NOSUID_PROGS = swapon losetup
+ MAN5 = fstab.5 nfs.5
+ MAN8 = mount.8 swapoff.8 swapon.8 umount.8 losetup.8
++endif
+ 
+ ifeq "$(HAVE_PIVOT_ROOT)" "yes"
+ NOSUID_PROGS := $(NOSUID_PROGS) pivot_root
+diff -urNad util-linux/sys-utils/Makefile /tmp/dpep.lVXZel/util-linux/sys-utils/Makefile
+--- util-linux/sys-utils/Makefile	2004-11-15 10:47:47.000000000 -0700
++++ /tmp/dpep.lVXZel/util-linux/sys-utils/Makefile	2004-12-15 08:26:47.890007628 -0700
+@@ -10,20 +10,30 @@
+ 
+ MAN1=		arch.1 flock.1 readprofile.1
+ 
+-MAN8= 		ctrlaltdel.8 cytune.8 dmesg.8 \
+-		ipcrm.8 ipcs.8 renice.8 \
+-		setsid.8 sln.8 tunelp.8
++MAN8= 		ipcrm.8 ipcs.8 renice.8 \
++		setsid.8 sln.8
++
++ifeq "$(OS)" "linux"
++MAN1:= $(MAN1) readprofile.1
++MAN8:= $(MAN8) ctrlaltdel.8 cytune.8 dmesg.8 tunelp.8
++endif
+ 
+ # Where to put binaries?
+ # See the "install" rule for the links. . .
+ 
+-BIN=            arch dmesg
++BIN=            arch
++
++ifeq "$(OS)" "linux"
++BIN:= $(BIN) dmesg
++endif
+ 
+ USRBIN=		cytune flock ipcrm ipcs renice setsid
+ 
++ifeq "$(OS)" "linux"
++USRBIN:= $(USRBIN) cytune
+ USRSBIN=	readprofile tunelp
+-
+ SBIN= 		ctrlaltdel
++endif
+ 
+ NOTMADE=
+ 
+@@ -37,10 +47,12 @@
+ endif
+ endif
+ 
++ifeq "$(OS)" "linux"
+ ifeq "$(ARCH)" "intel"
+ MAN8:=$(MAN8) rdev.8 ramsize.8 rootflags.8 vidmode.8
+ USRSBIN:=$(USRSBIN) rdev
+ endif
++endif
+ 
+ # Where to put datebase files?
+ 
+@@ -87,11 +99,13 @@
+ 	$(INSTALLBIN) $(BIN) $(BINDIR)
+ 	$(INSTALLBIN) $(USRBIN) $(USRBINDIR)
+ 	$(INSTALLBIN) $(USRSBIN) $(USRSBINDIR)
++ifeq "$(OS)" "linux"
+ ifeq "$(ARCH)" "intel"
+ 	(cd $(USRSBINDIR); ln -sf rdev ramsize)
+ 	(cd $(USRSBINDIR); ln -sf rdev vidmode)
+ 	(cd $(USRSBINDIR); ln -sf rdev rootflags)
+ endif
++endif
+ 	$(INSTALLDIR) $(MAN1DIR) $(MAN8DIR) $(INFODIR)
+ 	$(INSTALLMAN) $(MAN1) $(MAN1DIR)
+ 	$(INSTALLMAN) $(MAN8) $(MAN8DIR)
+diff -urNad util-linux/sys-utils/ipcrm.c /tmp/dpep.lVXZel/util-linux/sys-utils/ipcrm.c
+--- util-linux/sys-utils/ipcrm.c	2002-04-24 08:42:54.000000000 -0600
++++ /tmp/dpep.lVXZel/util-linux/sys-utils/ipcrm.c	2004-12-15 08:26:47.890007628 -0700
+@@ -26,7 +26,7 @@
+ /* for tolower and isupper */
+ #include <ctype.h>
+ 
+-#if defined (__GNU_LIBRARY__) && !defined(_SEM_SEMUN_UNDEFINED)
++#if defined (__GLIBC__) && !defined(_SEM_SEMUN_UNDEFINED)
+ /* union semun is defined by including <sys/sem.h> */
+ #else
+ /* according to X/OPEN we have to define it ourselves */
+diff -urNad util-linux/sys-utils/ipcs.c /tmp/dpep.lVXZel/util-linux/sys-utils/ipcs.c
+--- util-linux/sys-utils/ipcs.c	2004-03-04 12:28:42.000000000 -0700
++++ /tmp/dpep.lVXZel/util-linux/sys-utils/ipcs.c	2004-12-15 08:26:47.891007413 -0700
+@@ -78,7 +78,7 @@
+ /* The last arg of semctl is a union semun, but where is it defined?
+    X/OPEN tells us to define it ourselves, but until recently
+    Linux include files would also define it. */
+-#if defined (__GNU_LIBRARY__) && !defined(_SEM_SEMUN_UNDEFINED)
++#if defined (__GLIBC__) && !defined(_SEM_SEMUN_UNDEFINED)
+ /* union semun is defined by including <sys/sem.h> */
+ #else
+ /* according to X/OPEN we have to define it ourselves */
+@@ -95,7 +95,7 @@
+    <linux/ipc.h>, which defines a struct ipc_perm with such fields.
+    glibc-1.09 has no support for sysv ipc.
+    glibc 2 uses __key, __seq */
+-#if defined (__GNU_LIBRARY__) && __GNU_LIBRARY__ > 1
++#if defined (__GLIBC__) && __GLIBC__ > 1
+ #define KEY __key
+ #else
+ #define KEY key
+diff -urNad util-linux/text-utils/more.c /tmp/dpep.lVXZel/util-linux/text-utils/more.c
+--- util-linux/text-utils/more.c	2004-12-05 09:57:57.000000000 -0700
++++ /tmp/dpep.lVXZel/util-linux/text-utils/more.c	2004-12-15 08:26:47.892007198 -0700
+@@ -76,6 +76,14 @@
+ 
+ #define stty(fd,argp)  tcsetattr(fd,TCSANOW,argp)
+ 
++/* TAB3 and TABDLY are in XPG3 and up */
++#if !defined(TABDLY) && defined(TBDELAY)
++#define TABDLY		TBDELAY
++#endif
++#if !defined(TAB3) && defined(XTABS)
++#define TAB3		XTABS
++#endif
++
+ /* some function declarations */
+ void initterm(void);
+ void kill_line(void);
+@@ -1561,7 +1569,7 @@
+     }
+     if (feof (file)) {
+ 	if (!no_intty) {
+-#ifndef __linux__
++#ifdef STDIO_S_EOF_SEEN
+ 				/* No longer in libc 4.5.8. . . */
+ 	    file->_flags &= ~STDIO_S_EOF_SEEN; /* why doesn't fseek do this ??!!??! */
+ #endif
+@@ -1805,8 +1813,8 @@
+     no_intty = tcgetattr(fileno(stdin), &otty);
+     tcgetattr(fileno(stderr), &otty);
+     savetty0 = otty;
+-    slow_tty = (otty.c_cflag & CBAUD) < B1200;
+-    hardtabs = (otty.c_oflag & TABDLY) != XTABS;
++    slow_tty = cfgetospeed(&otty) < B1200;
++    hardtabs = (otty.c_oflag & TABDLY) != TAB3;
+     if (!no_tty) {
+ 	otty.c_lflag &= ~(ICANON|ECHO);
+ 	otty.c_cc[VMIN] = 1;

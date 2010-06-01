@@ -1,0 +1,36 @@
+#!/bin/sh -e
+## amiga_raid_lvm_fix.dpatch by Sven Luther <luther@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Use real partition types instead of flags for RAID/LVM, as partition types they are.
+
+. `dirname $0`/DPATCH
+
+@DPATCH@
+--- parted-1.6.23/libparted/disk_amiga.c.orig	2005-07-11 12:24:01.000000000 +0200
++++ parted-1.6.23/libparted/disk_amiga.c	2005-07-11 12:37:30.464024848 +0200
+@@ -941,12 +942,20 @@
+ 			else partition->pb_Flags &= ~(PED_CPU_TO_BE32(PBFF_NOMOUNT));
+ 			return 1;
+ 		case PED_PARTITION_RAID:
+-			if (state) partition->pb_Flags |= PED_CPU_TO_BE32(PBFF_RAID);
+-			else partition->pb_Flags &= ~(PED_CPU_TO_BE32(PBFF_RAID));
++			if (state) partition->de_DosType = PED_CPU_TO_BE32(0x52414944); /* 'RAID' */
++			else partition->de_DosType = PED_CPU_TO_BE32(0x00000000);
++			if (state) {
++				partition->pb_Flags |= PED_CPU_TO_BE32(PBFF_RAID);
++				partition->pb_Flags &= ~(PED_CPU_TO_BE32(PBFF_LVM));
++			} else partition->pb_Flags &= ~(PED_CPU_TO_BE32(PBFF_RAID));
+ 			return 1;
+ 		case PED_PARTITION_LVM:
+-			if (state) partition->pb_Flags |= PED_CPU_TO_BE32(PBFF_LVM);
+-			else partition->pb_Flags &= ~(PED_CPU_TO_BE32(PBFF_LVM));
++			if (state) partition->de_DosType = PED_CPU_TO_BE32(0x4c564d00); /* 'LVM\0' */
++			else partition->de_DosType = PED_CPU_TO_BE32(0x00000000);
++			if (state) {
++				partition->pb_Flags |= PED_CPU_TO_BE32(PBFF_LVM);
++				partition->pb_Flags &= ~(PED_CPU_TO_BE32(PBFF_RAID));
++			} else partition->pb_Flags &= ~(PED_CPU_TO_BE32(PBFF_LVM));
+ 			return 1;
+ 		default:
+ 			return 0;

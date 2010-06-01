@@ -1,0 +1,76 @@
+udev (0.098-1) experimental; urgency=low
+
+  Starting with this release the rules files keys BUS, ID, SYSFS and DRIVER
+  have been deprecated. While rules using the old syntax will continue to
+  work, custom rules files using these keys should be updated.
+  For details please consult /usr/share/doc/udev/RELEASE-NOTES.gz .
+
+ -- Marco d'Itri <md@linux.it>  Thu, 24 Aug 2006 17:21:16 +0200
+
+udev (0.097-1) unstable; urgency=low
+
+  The %e parameter is not supported anymore and rules using it must be
+  converted to use a different method.
+  The cd-aliases.rules rules file has been replaced by the
+  cd-aliases-generator.rules rules file which will automatically create
+  rules for the /dev/cdrom* aliases.
+
+  Scripts in /etc/dev.d/ and /etc/hotplug.d/ are not supported anymore
+  unless the hotplugd.rules rules file is manually enabled.
+
+ -- Marco d'Itri <md@linux.it>  Thu, 17 Aug 2006 14:40:34 +0200
+
+udev (0.090-1) unstable; urgency=low
+
+  Starting with this release the z45_persistent-net-generator.rules rules
+  file is installed by default.
+  For every new network interface detected it will use the write_net_rules
+  program to write to the z25_persistent-net.rules rules file a rule to
+  make the interface name persistent across reboots.
+
+ -- Marco d'Itri <md@linux.it>  Wed, 19 Apr 2006 20:26:25 +0200
+
+udev (0.072-2) unstable; urgency=medium
+
+  All files in /etc/udev/scripts/ and /lib/hotplug/ and some files
+  in /sbin/ have been moved to /lib/udev/.
+  Any custom rules referencing programs in these directories must be updated.
+
+ -- Marco d'Itri <md@linux.it>  Sat,  5 Nov 2005 20:43:26 +0100
+
+udev (0.070-3) unstable; urgency=low
+
+  * hotplug and coldplug support has been merged in the udev package, which
+    will load all the drivers needed as the beginning of the boot process
+    and handle hotplug events later.
+    The hotplug package has been disabled and should be manually purged.
+
+    This makes the following configuration files obsolete:
+    + /etc/hotplug/*.rc and *.agent: the old hotplug files are not used
+      anymore. udev rules may be used to selectively disable coldplugging.
+    + /etc/hotplug/usb/*.usermap: must be replaced by udev rules.
+    + /etc/hotplug/blacklist*: should be replaced by modprobe configuration
+      directives (but now /etc/hotplug/blacklist.d/ will be processed by
+      modprobe).
+
+  * Because all modules will be loaded erliear hotplug scripts must use
+    only files not in /usr or wait for /usr to be mounted.
+    Firmwares must be moved to /lib/firmware/.
+
+  * udevtrigger does not guarantee anymore the loading order of modules,
+    so if you have multiple CD readers, network cards, sound cards, etc
+    they may change their name after a reboot. The package provides
+    solutions to generate persistent names in most of these situations.
+
+ -- Marco d'Itri <md@linux.it>  Sun,  9 Oct 2005 17:12:54 +0200
+
+udev (0.060-1) unstable; urgency=low
+
+  * All rules are applied now, but only the first matching NAME attribute
+    will be considered. It may be needed to add OPTIONS="last_rule" to
+    custom rules to restore the precedent behavior.
+  * The rules keys now support more operations, as documented in the
+    man page. Rules which previously used "=" to add a value to a
+    list-like variable should be changed to use "+=".
+
+ -- Marco d'Itri <md@linux.it>  Wed, 22 Jun 2005 21:42:22 +0200

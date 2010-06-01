@@ -1,0 +1,40 @@
+#!/bin/sh
+set -e
+. /lib/chroot-setup.sh
+
+queue=/var/lib/apt-install/queue
+
+# If we don't have a working mirror yet, only queue the package;
+# it will be installed later by the postinst in base-installer.
+if [ ! -f /target/etc/apt/sources.list ]; then
+	# Add to list of extra packages to be installed into /target/.
+	mkdir -p /var/lib/apt-install
+	touch $queue
+	for pkg in $@ ; do
+		if ! grep -q "^$pkg$" $queue; then
+			logger -t apt-install "Queueing package $pkg for later installation"
+			echo "$pkg" >> $queue
+		fi
+	done
+
+	exit 1 # Return error as the package is not ready to be used yet.
+fi
+
+if ! chroot_setup; then
+	logger -t apt-install "Unexpected error; skipped processing of: $@"
+	exit 1
+fi
+
+# Disable debconf questions.
+DEBIAN_FRONTEND=noninteractive
+export DEBIAN_FRONTEND
+
+ERRCODE=0
+log-output -t apt-install chroot /target apt-get -y --no-remove install $@ < /dev/null || ERRCODE=$?
+chroot_cleanup
+
+if [ "$ERRCODE" != 0 ]; then
+	exit 1
+else
+	exit 0
+fi

@@ -1,0 +1,57 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+exec 2>/var/log/debug
+set -xv
+db_get backharddi/medio
+medio="$RET"
+if [ "$medio" = net ]; then
+	[ -d /target ] || mkdir /target
+	LEASES=/var/lib/dhcp/dhclient.leases 
+	
+	db_get backharddi/net/server
+	server="$RET"
+	db_get backharddi/net/service_port
+	service_port="$RET"
+	if [ x"$service_port" = x ]; then
+		service_port=4600
+	fi
+	while true; do
+		if [ -z "$server" ]; then
+			server="$(grep dhcp-server-identifier $LEASES | tail -n 1 | cut -d " " -f 5 | tr -d ";")"
+		fi
+		if [ -z "$server" ]; then
+			server="$(route -n | grep ^0.0.0.0 | tail -n 1 | cut -d " " -f 10)"
+		fi
+		db_set backharddi/net/server "$server"
+		for i in 1 2 3; do
+			wget -q -O /dev/null http://$server:$service_port/listPartition && mount=true && break
+		done
+		[ "$mount" = true ] && break
+		db_capb backup
+		db_input critical backharddi/net/server || true
+		db_go || exit 10
+		db_get backharddi/net/server
+		server="$RET"
+	done
+fi
+
+backharddi
+
+dev=$(mount | grep "on /target" | cut -d ' ' -f 1)
+fs=$(mount | grep "on /target" | cut -d ' ' -f 5)
+opt=$(mount | grep "on /target" | cut -d ' ' -f 6 | tr -d "()")
+[ ! -f /proc/sys/dev/cdrom/autoeject ] || echo "1" > /proc/sys/dev/cdrom/autoeject
+[ -z "$dev" ] || umount /target
+[ ! -f /proc/sys/dev/cdrom/autoeject ] || echo "0" > /proc/sys/dev/cdrom/autoeject
+db_input critical backharddi/reboot || true
+if db_go; then
+	/lib/debian-installer/exit
+else
+	db_reset backharddi/modo
+	[ ! -f /proc/sys/dev/cdrom/autoeject ] || echo "1" > /proc/sys/dev/cdrom/autoclose
+	[ -z "$dev" ] || mount -t $fs -o $opt $dev /target
+	[ ! -f /proc/sys/dev/cdrom/autoeject ] || echo "0" > /proc/sys/dev/cdrom/autoclose
+	exit 10
+fi

@@ -1,0 +1,26 @@
+* How to create a boot disk:
+-----------------------------
+1. compile a recent kernel with many harware support,
+   and many file systems (as ext2, fat, reiser, ntfs)
+   with make bzImage (do not use DMA by default)
+2. use rdev on the image:
+   rdev bzImage /dev/fd0
+   rdev -r bzImage 49152 (49152 = ask disk, and read from 0)
+   rdev -R bzImage 0 (to make the root RW and allow to login)
+3. dd if=bzImage of=/dev/fd0
+
+
+* How to create a root disk:
+-----------------------------
+1. dd if=/dev/zero of=image count=3733 bs=1k
+2. mkfs.minix image
+3. mount -o loop -t minix image /mnt/image
+4. remove debug data from binaries executables
+   libraries and programs to save space:
+   program:...............objcopy --strip-all program
+   shared library:........objcopy --stripdebug library.so
+5. copy all files to /mnt/image
+6. umount /mnt/image
+7. cat image | gzip -9 > image.gz
+8. dd if=image.gz of=/dev/fd0
+

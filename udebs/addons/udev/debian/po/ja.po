@@ -1,0 +1,77 @@
+# Copyright (C) 2006 md@linux.it
+# This file is distributed under the same license as the udev package.
+# Hideki Yamane (Debian-JP) <henrich@debian.or.jp>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: udev 0.103-1\n"
+"Report-Msgid-Bugs-To: md@linux.it\n"
+"POT-Creation-Date: 2006-11-15 15:13+0000\n"
+"PO-Revision-Date: 2006-11-29 21:37+0900\n"
+"Last-Translator: Hideki Yamane (Debian-JP) <henrich@debian.or.jp>\n"
+"Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: note
+#. Description
+#: ../udev.templates:1001
+msgid "Reboot needed after this upgrade"
+msgstr "今回、アップグレード後に再起動が必要です"
+
+#. Type: note
+#. Description
+#: ../udev.templates:1001
+msgid ""
+"You are currently upgrading udev using an incompatible kernel version. A "
+"compatible version is installed or being installed on your system, but  you "
+"need to reboot using this new kernel as soon as the upgrade is  complete."
+msgstr ""
+"現在 udev をアップグレードしようとしていますが、これとは互換性の無いバージョンの"
+"カーネルを利用しています。互換性のあるバージョンのカーネルは、インストールされてい"
+"る、あるいはこれからインストールするところですが、アップグレード完了後"
+"すぐにこの新しいカーネルを使って再起動する必要があります。"
+
+#. Type: note
+#. Description
+#: ../udev.templates:1001
+msgid ""
+"Without a reboot with this new kernel version, your system may become  "
+"UNUSABLE."
+msgstr ""
+"この新しいバージョンのカーネルを使って再起動しなければ、システムは「利用不可"
+"能」になるでしょう。"
+
+#. Type: boolean
+#. Description
+#: ../udev.templates:2001
+msgid "Proceed with the upgrade nevertheless?"
+msgstr "それでもアップグレードを実行しますか?"
+
+#. Type: boolean
+#. Description
+#: ../udev.templates:2001
+msgid ""
+"You are currently upgrading udev using an incompatible kernel version. You "
+"MUST install a compatible kernel version (2.6.15 or more) before proceeding "
+"with the upgrade, otherwise your system may become UNUSABLE. Packages with a "
+"name starting with \"linux-image-2.6-\" provide a kernel image usable with "
+"this new udev version."
+msgstr ""
+"現在 udev をアップグレードしようとしていますが、互換性の無いバージョンのカー"
+"ネルを利用しています。アップグレードを実行する前に互換性があるバージョン "
+"(2.6.15 以上) のカーネルをインストールする「必要」があります。そうしないと、"
+"システムは「利用不可能」になります。\"linux-image-2.6-\" で始まる名前のパッ"
+"ケージが、新しいバージョンの udev で使えるカーネルイメージを提供してくれま"
+"す。"
+
+#. Type: boolean
+#. Description
+#: ../udev.templates:2001
+msgid ""
+"If you choose to upgrade udev nevertheless, you should install a  compatible "
+"kernel and reboot on it as soon as possible. You have been  warned."
+msgstr ""
+"警告します。それでも udev をアップグレードするという場合、互換性のあるバージョン"
+"のカーネルをインストールして、できるだけ早めに再起動する必要があります。"

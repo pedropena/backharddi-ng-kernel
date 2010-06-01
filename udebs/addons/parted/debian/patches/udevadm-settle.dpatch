@@ -1,0 +1,77 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## udevadm-settle.dpatch by Colin Watson <cjwatson@ubuntu.com>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Run udevadm settle around partition table rereads, to avoid races.
+
+@DPATCH@
+diff -urNad parted-1.8.8.git.2008.03.24~/libparted/arch/linux.c parted-1.8.8.git.2008.03.24/libparted/arch/linux.c
+--- parted-1.8.8.git.2008.03.24~/libparted/arch/linux.c	2009-03-10 21:06:10.000000000 +0000
++++ parted-1.8.8.git.2008.03.24/libparted/arch/linux.c	2009-03-10 21:08:01.000000000 +0000
+@@ -24,6 +24,7 @@
+ #include <parted/debug.h>
+ #include <parted/linux.h>
+ 
++#include <stdlib.h>
+ #include <ctype.h>
+ #include <errno.h>
+ #include <fcntl.h>
+@@ -2661,12 +2662,29 @@
+ static int
+ linux_disk_commit (PedDisk* disk)
+ {
++        int ret = 1;
++
+ 	if (!_has_partitions (disk))
+ 		return 1;
+ 
++        /* Modern versions of udev may notice the write activity on
++         * partition devices caused by _flush_cache, and may decide to
++         * synthesise some change events as a result. These may in turn run
++         * programs that open partition devices, which will race with us
++         * trying to remove those devices. To avoid this, we need to wait
++         * until udevd has finished processing its event queue.
++         * TODO: for upstream submission, this should check whether udevadm
++         * exists on $PATH.
++         */
++        if (system ("udevadm settle") != 0) {
++                /* ignore failures */
++        }
++
+ #ifdef ENABLE_DEVICE_MAPPER
+-        if (disk->dev->type == PED_DEVICE_DM)
+-                return _dm_reread_part_table (disk);
++        if (disk->dev->type == PED_DEVICE_DM) {
++                ret = _dm_reread_part_table (disk);
++                goto out;
++        }
+ #endif
+         if (disk->dev->type != PED_DEVICE_FILE) {
+                 /* The ioctl() command BLKPG_ADD_PARTITION does not notify
+@@ -2679,13 +2697,23 @@
+                 if (disk->dev->type != PED_DEVICE_DASD &&
+                     _have_blkpg () && !_have_devfs ()) {
+                         if (_disk_sync_part_table (disk))
+-                                return 1;
++                                goto out;
+                 }
+ 
+-                return _kernel_reread_part_table (disk->dev);
++                ret = _kernel_reread_part_table (disk->dev);
+         }
+ 
+-        return 1;
++out:
++        /* Now we wait for udevd to finish creating device nodes based on
++         * the above activity, so that callers can reliably use them.
++         * TODO: for upstream submission, this should check whether udevadm
++         * exists on $PATH.
++         */
++        if (system ("udevadm settle") != 0) {
++                /* ignore failures */
++        }
++
++        return ret;
+ }
+ 
+ static PedDeviceArchOps linux_dev_ops = {

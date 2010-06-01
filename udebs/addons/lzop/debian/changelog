@@ -1,0 +1,90 @@
+lzop (1.01-4backharddi-ng1) unstable; urgency=low
+
+  * Primera versión de backharddi-ng
+
+ --  <pedro.pena@open-phoenix.com>  Wed, 09 Sep 2009 13:00:11 +0200
+
+lzop (1.01-4backharddi1) unstable; urgency=low
+
+  * Se construye un paquete udeb en lugar de un paquete deb.
+
+ -- Pedro Peña Pérez <pedro.pena@edmanufacturer.es>  Fri, 28 Dec 2007 12:02:05 +0000
+
+lzop (1.01-4) unstable; urgency=low
+
+  * Changed maintainer address
+  * Updated standards version
+  * Changed build system to CDBS
+  * Changed to debhelper level 5
+
+ -- Peter Eisentraut <petere@debian.org>  Mon, 23 Jan 2006 13:26:11 +0100
+
+lzop (1.01-3) unstable; urgency=medium
+
+  * Tightened dependencies, because lzop does a run-time check requiring
+    the exact library version that it was compiled with (closes: #273948)
+  * Added lintian override because of the above
+
+ -- Peter Eisentraut <peter_e@gmx.net>  Thu, 30 Sep 2004 00:34:42 +0200
+
+lzop (1.01-2) unstable; urgency=medium
+
+  * New maintainer (closes: #265727)
+  * Used DESTDIR for installation, so files get installed properly under
+    /usr (closes: #231310)
+  * Removed content-free README.debian
+  * Completed copyright information
+  * Revised descriptions
+  * Added watch file
+  * Removed redundant documentation that just copied the man page.
+  * NEWS now installed as changelog
+  * Forced LFS compilation flags onto the command line (closes: #200334)
+  * Updated rules to debhelper 4 conventions
+  * Updated standards version
+
+ -- Peter Eisentraut <peter_e@gmx.net>  Fri, 17 Sep 2004 22:52:00 +0200
+
+lzop (1.01-1) unstable; urgency=low
+
+  * New upstream release (big file support included: closes: bug#196593).
+  * Better formatting of description (closes: bug#129488).
+  * The tarball no longer includes dubious copyrighted code (closes: bug#131733).
+  * New upstream package builds fine with gcc-3.3 (closes: bug#195155).
+  * --no-stdin should not be necessary any longer (closes: bug#91225).
+
+ -- Paolo Molaro <lupus@debian.org>  Sun,  8 Jun 2003 13:21:07 +0200
+
+lzop (1.00-4) unstable; urgency=low
+
+  * Update config.sub config.guess to allow for new archs.
+  * Add build-depends (Closes: bug#102278).
+  * Rebuilt with new debhelper (Closes: bug#91206, #91573).
+
+ -- Paolo Molaro <lupus@debian.org>  Sat, 30 Jun 2001 16:07:36 +0200
+
+lzop (1.00-3) frozen unstable; urgency=low
+
+  * Upload to frozen as well.
+  * Note to release manager: the last two revisions only remove
+  an ugly directory and add the frozen distribution, so no new code.
+
+ -- Paolo Molaro <lupus@debian.org>  Tue,  3 Nov 1998 17:25:55 +0100
+
+lzop (1.00-2) unstable; urgency=low
+
+  * Remove /man directory: bug #28803 and #28800.
+
+ -- Paolo Molaro <lupus@debian.org>  Mon,  2 Nov 1998 09:49:13 +0100
+
+lzop (1.00-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Paolo Molaro <lupus@debian.org>  Fri, 16 Oct 1998 14:22:19 +0200
+
+lzop (0.95-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Paolo Molaro <lupus@debian.org>  Wed, 18 Feb 1998 13:47:29 +0100
+

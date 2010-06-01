@@ -1,0 +1,28 @@
+# Debian specific patches
+doc-package
+reiserfs-libname
+
+# Patch susceptible to be merged upstream
+devfs
+#kfreebsd-gnu
+unpartitioned-disks
+preserve-hidden-parts
+update-ext4-code
+
+# Ubuntu additions
+swap-uuid
+gptsync
+loop-partitions
+udevadm-settle
+sparc-new-label
+disable_o_direct
+dmraid
+rationalise-linux-swap
+
+# Patch which may be obsolet.
+#amiga-raid-lvm_fix
+
+#########################
+# ABI checking symbols update
+########################
+baseline-symbols-update

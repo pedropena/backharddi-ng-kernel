@@ -1,0 +1,267 @@
+Source: parted@BINPKGVER@
+Section: admin
+Priority: optional
+Maintainer: Ubuntu Core developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Parted Maintainer Team <parted-maintainers@lists.alioth.debian.org>
+Uploaders: Sven Luther <luther@debian.org>, Otavio Salvador <otavio@debian.org>, Bastian Blank <waldi@debian.org>, Xavier Oswald <x.oswald@free.fr>
+Standards-Version: 3.8.1
+Vcs-Git: git://git.debian.org/git/parted/debian/parted.git
+Vcs-Browser: http://git.debian.org/?p=parted/debian/parted.git
+Build-Depends:
+ debhelper (>= 5.0.22),
+ dpatch,
+ libncurses-dev | libncurses5-dev,
+ libreadline-dev,
+ libdevmapper-dev,
+ uuid-dev,
+ gettext,
+ texinfo (>= 4.2),
+ debianutils (>= 1.13.1),
+ libgeom-dev [kfreebsd-i386 kfreebsd-amd64],
+ po4a,
+ pkg-config
+
+Package: parted@BINPKGVER@
+Architecture: any
+Section: admin
+Depends: ${shlibs:Depends}
+Suggests: parted@BINPKGVER@-doc
+Conflicts: fsresize, parted1.6
+Replaces: fsresize, parted1.6
+Description: The GNU Parted disk partition resizing program
+ GNU Parted is a program that allows you to create, destroy,
+ resize, move and copy hard disk partitions. This is useful
+ for creating space for new operating systems, reorganising
+ disk usage, and copying data to new hard disks. This package
+ contains the Parted binary and manual page.
+ .
+ Parted currently supports DOS, Mac, Sun, BSD, GPT, MIPS and
+ PC98 disklabels/partition tables, as well as a 'loop' (raw
+ disk) type which allows use on RAID/LVM. Filesystems which
+ are currently fully supported are ext2, ext3, fat (FAT16
+ and FAT32), ReiserFS (with libreiserfs) and linux-swap.
+ Parted can also detect and remove HFS (Mac OS), JFS, NTFS,
+ UFS (Sun and HP), XFS and ASFS/AFFS/APFS (Amiga) filesystems,
+ but cannot create, resize or check these filesystems yet.
+ .
+ Note that ReiserFS support is only enabled if you install
+ the libreiserfs0.3-0 package. Since libreiserfs0.3-0 has been
+ removed from sarge, ReiserFS support is not compiled in the
+ default package.
+ .
+ The nature of this software means that any bugs could cause
+ massive data loss. While there are no known bugs at the moment,
+ they could exist, so please back up all important files before
+ running it, and do so at your own risk.
+
+Package: parted@BINPKGVER@-udeb
+XC-Package-Type: udeb
+Architecture: any
+Section: debian-installer
+Priority: extra
+XB-Installer-Menu-Item: 99999
+Depends: ${shlibs:Depends}
+Description: Manually partition a hard drive (parted)
+
+Package: libparted@SHAREDLIBPKGVER@
+Architecture: any
+Section: libs
+Depends: ${shlibs:Depends}
+Suggests: parted | nparted, libparted@LIBPKGVER@-dev, libparted@LIBPKGVER@-i18n (= ${source:Version})
+Conflicts: parted (<< 1.4.13+14pre1), libparted0, libparted1, libparted2
+Replaces: libparted0, libparted1, libparted2, libparted1.4 (<< 1.4.24-2)
+Provides: libparted
+Description: The GNU Parted disk partitioning shared library
+ GNU Parted is a program that allows you to create, destroy,
+ resize, move and copy hard disk partitions. This is useful
+ for creating space for new operating systems, reorganising
+ disk usage, and copying data to new hard disks. This package
+ contains the Parted binary and manual page.
+ .
+ This package contains libparted, the required shared library
+ used by Parted.
+ .
+ Parted currently supports DOS, Mac, Sun, BSD, GPT, MIPS and
+ PC98 disklabels/partition tables, as well as a 'loop' (raw
+ disk) type which allows use on RAID/LVM. Filesystems which
+ are currently fully supported are ext2, ext3, fat (FAT16
+ and FAT32), ReiserFS (with libreiserfs) and linux-swap.
+ Parted can also detect and remove HFS (Mac OS), JFS, NTFS,
+ UFS (Sun and HP), XFS and ASFS/AFFS/APFS (Amiga) filesystems,
+ but cannot create, resize or check these filesystems yet.
+ .
+ Note that ReiserFS support is only enabled if you install
+ the libreiserfs0.3-0 package. Since libreiserfs0.3-0 has been
+ removed from sarge, ReiserFS support is not compiled in the
+ default package.
+ .
+ The nature of this software means that any bugs could cause
+ massive data loss. While there are no known bugs at the moment,
+ they could exist, so please back up all important files before
+ running it, and do so at your own risk.
+
+Package: libparted@LIBPKGVER@-udeb
+XC-Package-Type: udeb
+Architecture: any
+Section: debian-installer
+Priority: extra
+Depends: ${shlibs:Depends}
+Description: The GNU Parted disk partitioning shared library
+ GNU Parted is a program that allows you to create, destroy,
+ resize, move and copy hard disk partitions. This is useful
+ for creating space for new operating systems, reorganising
+ disk usage, and copying data to new hard disks. This package
+ contains the Parted binary and manual page.
+ .
+ This package contains libparted, the required shared library
+ used by Parted. This is a cut-down package with no normal
+ documentation intended to be used in debian-installer.
+ .
+ Parted currently supports DOS, Mac, Sun, BSD, GPT, MIPS and
+ PC98 disklabels/partition tables, as well as a 'loop' (raw
+ disk) type which allows use on RAID/LVM. Filesystems which
+ are currently fully supported are ext2, ext3, fat (FAT16
+ and FAT32), ReiserFS (with libreiserfs) and linux-swap.
+ Parted can also detect and remove HFS (Mac OS), JFS, NTFS,
+ UFS (Sun and HP), XFS and ASFS/AFFS/APFS (Amiga) filesystems,
+ but cannot create, resize or check these filesystems yet.
+ .
+ Note that ReiserFS support is only enabled if you install
+ the libreiserfs0.3-0 package. Since libreiserfs0.3-0 has been
+ removed from sarge, ReiserFS support is not compiled in the
+ default package.
+ .
+ The nature of this software means that any bugs could cause
+ massive data loss. While there are no known bugs at the moment,
+ they could exist, so please back up all important files before
+ running it, and do so at your own risk.
+
+Package: libparted@LIBPKGVER@-i18n
+Architecture: all
+Section: libs
+Depends: libparted@SHAREDLIBPKGVER@
+Replaces: libparted0, libparted1, libparted2, libparted1.4 (<< 1.4.24-2), libparted1.6 (<< 1.5+1.6.0-pre3-2), libparted1.4-i18n, parted (<< 1.4.13+14pre1)
+Conflicts: libparted-i18n
+Provides: libparted-i18n
+Description: The GNU Parted disk partitioning library i18n support
+ GNU Parted is a program that allows you to create, destroy,
+ resize, move and copy hard disk partitions. This is useful
+ for creating space for new operating systems, reorganising
+ disk usage, and copying data to new hard disks. This package
+ contains the Parted binary and manual page.
+ .
+ This package contains the i18n message catalogs for
+ libparted and parted.
+ .
+ Parted currently supports DOS, Mac, Sun, BSD, GPT, MIPS and
+ PC98 disklabels/partition tables, as well as a 'loop' (raw
+ disk) type which allows use on RAID/LVM. Filesystems which
+ are currently fully supported are ext2, ext3, fat (FAT16
+ and FAT32), ReiserFS (with libreiserfs) and linux-swap.
+ Parted can also detect and remove HFS (Mac OS), JFS, NTFS,
+ UFS (Sun and HP), XFS and ASFS/AFFS/APFS (Amiga) filesystems,
+ but cannot create, resize or check these filesystems yet.
+ .
+ Note that ReiserFS support is only enabled if you install
+ the libreiserfs0.3-0 package. Since libreiserfs0.3-0 has been
+ removed from sarge, ReiserFS support is not compiled in the
+ default package.
+ .
+ The nature of this software means that any bugs could cause
+ massive data loss. While there are no known bugs at the moment,
+ they could exist, so please back up all important files before
+ running it, and do so at your own risk.
+
+Package: libparted@LIBPKGVER@-dev
+Architecture: any
+Section: libdevel
+Depends: libc6-dev, libparted@SHAREDLIBPKGVER@ (= ${binary:Version})
+Suggests: parted@BINPKGVER@ (= ${binary:Version}), parted-doc
+Conflicts: libparted-dev, parted (<< 1.2.11)
+Replaces: libparted-dev, libparted0-dev, libparted2-dev
+Provides: libparted-dev
+Description: The GNU Parted disk partitioning library development files
+ GNU Parted is a program that allows you to create, destroy,
+ resize, move and copy hard disk partitions. This is useful
+ for creating space for new operating systems, reorganising
+ disk usage, and copying data to new hard disks. This package
+ contains the Parted binary and manual page.
+ .
+ This package contains the static library and header files
+ for libparted, which are really only of interest to parted
+ developers.
+ .
+ Parted currently supports DOS, Mac, Sun, BSD, GPT, MIPS and
+ PC98 disklabels/partition tables, as well as a 'loop' (raw
+ disk) type which allows use on RAID/LVM. Filesystems which
+ are currently fully supported are ext2, ext3, fat (FAT16
+ and FAT32), ReiserFS (with libreiserfs) and linux-swap.
+ Parted can also detect and remove HFS (Mac OS), JFS, NTFS,
+ UFS (Sun and HP), XFS and ASFS/AFFS/APFS (Amiga) filesystems,
+ but cannot create, resize or check these filesystems yet.
+ .
+ Note that ReiserFS support is only enabled if you install
+ the libreiserfs0.3-0 package. Since libreiserfs0.3-0 has been
+ removed from sarge, ReiserFS support is not compiled in the
+ default package.
+ .
+ The nature of this software means that any bugs could cause
+ massive data loss. While there are no known bugs at the moment,
+ they could exist, so please back up all important files before
+ running it, and do so at your own risk.
+
+Package: libparted@LIBPKGVER@-dbg
+Architecture: any
+Section: libdevel
+Priority: extra
+Depends: libparted@SHAREDLIBPKGVER@ (= ${binary:Version}), libparted@LIBPKGVER@-dev (= ${binary:Version})
+Conflicts: libparted-dbg
+Replaces: libparted-dbg
+Provides: libparted-dbg
+Description: The GNU Parted disk partitioning library debug development files
+ GNU Parted is a program that allows you to create, destroy,
+ resize, move and copy hard disk partitions. This is useful
+ for creating space for new operating systems, reorganising
+ disk usage, and copying data to new hard disks. This package
+ contains the Parted binary and manual page.
+ .
+ This package contains the debugging static library for
+ libparted, which are really only of interest to parted
+ developers who need to debug their programs.
+ .
+ The debugging libraries are installed as /usr/lib/libparted_g.a
+ Link specifically with them if you want to debug.
+ .
+ Parted currently supports DOS, Mac, Sun, BSD, GPT, MIPS and
+ PC98 disklabels/partition tables, as well as a 'loop' (raw
+ disk) type which allows use on RAID/LVM. Filesystems which
+ are currently fully supported are ext2, ext3, fat (FAT16
+ and FAT32), ReiserFS (with libreiserfs) and linux-swap.
+ Parted can also detect and remove HFS (Mac OS), JFS, NTFS,
+ UFS (Sun and HP), XFS and ASFS/AFFS/APFS (Amiga) filesystems,
+ but cannot create, resize or check these filesystems yet.
+ .
+ Note that ReiserFS support is only enabled if you install
+ the libreiserfs0.3-0 package. Since libreiserfs0.3-0 has been
+ removed from sarge, ReiserFS support is not compiled in the
+ default package.
+ .
+ The nature of this software means that any bugs could cause
+ massive data loss. While there are no known bugs at the moment,
+ they could exist, so please back up all important files before
+ running it, and do so at your own risk.
+
+Package: parted@BINPKGVER@-doc
+Architecture: all
+Section: doc
+Suggests: parted@BINPKGVER@ | libparted@LIBPKGVER@-dev
+Conflicts: parted1.6-doc
+Replaces: parted1.6-doc
+Description: The GNU Parted disk partition resizing program documentation
+ GNU Parted is a program that allows you to create, destroy,
+ resize, move and copy hard disk partitions. This is useful
+ for creating space for new operating systems, reorganising
+ disk usage, and copying data to new hard disks. This package
+ contains user documentation for parted (for the 'parted@BINPKGVER@'
+ package) and API documentation for libparted (for the
+ 'libparted@LIBPKGVER@' and 'libparted@LIBPKGVER@-dev' packages).

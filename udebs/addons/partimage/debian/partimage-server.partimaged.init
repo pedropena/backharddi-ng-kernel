@@ -1,0 +1,69 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          partimaged
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      S 0 1 6
+# Short-Description: Partition Image Server
+# Description:       Partition Image Server let's you backup partitions from
+#                    a client to a server.
+#                    All data is transferred encrypted using SSL.
+### END INIT INFO
+
+# Author: Michael Biebl <biebl@debian.org>
+
+DAEMON=/usr/sbin/partimaged
+OPTS="-D"
+NAME=partimaged
+DESC="Partition Image Server"
+
+test -x $DAEMON || exit 0
+
+. /lib/lsb/init-functions
+
+# Default configuration
+LAUNCH=1
+TARGET=/var/lib/partimaged/
+
+# Overwrite default configuration if available 
+if [ -f /etc/default/partimaged ]; then
+	. /etc/default/partimaged
+fi
+
+[ "$LAUNCH" = 0 ] && exit 0
+
+start() {
+	log_daemon_msg "Starting $DESC" $NAME
+	start-stop-daemon --start --quiet --exec $DAEMON -- $OPTS -d $TARGET
+	status=$?
+	log_end_msg $status
+}
+
+stop() {
+	log_daemon_msg "Stopping $DESC" $NAME
+	start-stop-daemon --stop --quiet --oknodo --exec $DAEMON
+	status=$?
+	log_end_msg $status
+}
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|force-reload)
+  	stop
+	sleep 1
+	start
+	;;
+  *)
+	N=/etc/init.d/$NAME
+	echo "Usage: $N {start|stop|restart|force-reload}" >&2
+	exit 1
+	;;
+esac
+
+exit 0

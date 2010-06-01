@@ -1,0 +1,815 @@
+? BOOTDSK.sh
+? ROADMAP
+? error_less.diff
+? intl/plural.c
+? macros/Makefile.in
+? po/.pot
+? po/partimage.pot
+? src/client/interface_none.cpp
+? src/client/interface_none.h
+Index: PACKAGES
+===================================================================
+RCS file: /cvsroot/partimage/partimage-cvs-newtree/PACKAGES,v
+retrieving revision 1.11
+diff -u -r1.11 PACKAGES
+--- PACKAGES	9 Apr 2003 10:33:27 -0000	1.11
++++ PACKAGES	7 Sep 2003 09:46:41 -0000
+@@ -47,7 +47,7 @@
+ 	./configure --prefix=/tmp --enable-devel \
+ 		--with-log-dir=/tmp \
+ 		--disable-login --disable-cheuid --disable-ssl \
+-		--with-debug-level=10 --enable-all-static --enable-efence
++		--with-debug-level=10 --enable-all-static
+ 
+ tests-ssl:
+ 	./configure --prefix=/tmp --enable-devel \
+Index: configure.ac
+===================================================================
+RCS file: /cvsroot/partimage/partimage-cvs-newtree/configure.ac,v
+retrieving revision 1.19
+diff -u -r1.19 configure.ac
+--- configure.ac	26 Jun 2003 18:49:10 -0000	1.19
++++ configure.ac	7 Sep 2003 09:46:41 -0000
+@@ -1,8 +1,8 @@
+ # Process this file with autoconf to produce a configure script.
+ 
+ # PARTIMAGE (Partition Image): tool which saves and restores a partition
+-# Copyright (C) 2000, 2001, 2002 Fracois Dupoux
+-# Copyright (C) 2000, 2001, 2002 Franck Ladurelle
++# Copyright (C) 2000, 2001, 2002, 2003 Fracois Dupoux
++# Copyright (C) 2000, 2001, 2002, 2003 Franck Ladurelle
+ 
+ AC_REVISION([[$Revision: 1.1 $]])
+ 
+Index: po/ChangeLog
+===================================================================
+RCS file: /cvsroot/partimage/partimage-cvs-newtree/po/ChangeLog,v
+retrieving revision 1.19
+diff -u -r1.19 ChangeLog
+--- po/ChangeLog	24 Oct 2002 20:36:41 -0000	1.19
++++ po/ChangeLog	7 Sep 2003 09:46:41 -0000
+@@ -1,3 +1,6 @@
++2003-07-19 - Danish translation updated
++        * da translation updated from 0.6.3-beta6.
++
+ 2002-10-24 - Danish translation updated
+         * da translation updated from 0.6.2-rc10.
+ 
+Index: po/da.po
+===================================================================
+RCS file: /cvsroot/partimage/partimage-cvs-newtree/po/da.po,v
+retrieving revision 1.26
+diff -u -r1.26 da.po
+--- po/da.po	26 Jun 2003 18:49:17 -0000	1.26
++++ po/da.po	7 Sep 2003 09:46:42 -0000
+@@ -1,18 +1,20 @@
++# Translation of partimage-da.po to Dansk
++# Translation of da.po to Dansk
+ # Danish translation of Partition Image.
+-# Copyright (C) 2001 Free Software Foundation, Inc.
+-# Gunner Poulsen <gp@lyngbjerggaardskolen.dk>, 2001.
++# Copyright (C) 2001,2003 Free Software Foundation, Inc.
++# Gunner Poulsen <gp@lyngbjerggaardskolen.dk>, 2001,2003.
+ #
+ msgid ""
+ msgstr ""
+-"Project-Id-Version: Partition Image 0.6.2\n"
++"Project-Id-Version: partimage-da\n"
+ "POT-Creation-Date: 2003-06-21 12:13+0200\n"
+-"PO-Revision-Date: 2002-10-24 18:41+0200\n"
++"PO-Revision-Date: 2003-07-16 21:54+0200\n"
+ "Last-Translator: Gunner Poulsen <gp@lyngbjerggaardskolen.dk>\n"
+ "Language-Team: Dansk <dansk@klid.dk>\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+-"X-Generator: KBabel 0.9.6\n"
++"X-Generator: KBabel 1.0.1\n"
+ 
+ #: src/client/gui_text.cpp:56
+ msgid "Restore an MBR to the hard disk"
+@@ -97,7 +99,7 @@
+ 
+ #: src/client/gui_text.cpp:342
+ msgid "MiB"
+-msgstr ""
++msgstr "MB"
+ 
+ #: src/client/gui_text.cpp:343
+ msgid "Wait after each volume change"
+@@ -125,7 +127,7 @@
+ 
+ #: src/client/gui_text.cpp:350
+ msgid "Last"
+-msgstr ""
++msgstr "Sidste"
+ 
+ #: src/client/gui_text.cpp:458
+ #, c-format
+@@ -378,11 +380,11 @@
+ 
+ #: src/client/imagefile.cpp:1020
+ msgid "Wrong volume inserted"
+-msgstr ""
++msgstr "Forkert volume indsat"
+ 
+ #: src/client/imagefile.cpp:1021
+ msgid "You will be prompted to remove this media and insert the right one"
+-msgstr ""
++msgstr "Du vil blive bedt om af fjerne mediet og indsætte det rigtige"
+ 
+ #: src/client/imagefile.cpp:1028
+ #, c-format
+@@ -609,8 +611,7 @@
+ 
+ #: src/client/interface_base.cpp:131
+ msgid "Error while writing image file: disk full !"
+-msgstr ""
+-"Der opstod en fejl under skrivningen af spejlbilledfilen: disken er fuld!"
++msgstr "Der opstod en fejl under skrivningen af spejlbilledfilen: disken er fuld!"
+ 
+ #: src/client/interface_base.cpp:137
+ #, c-format
+@@ -642,8 +643,7 @@
+ msgid ""
+ "%s is not the first volume of an image. Please, retry with the volume number "
+ "000"
+-msgstr ""
+-"%s er ikke det første volume af dette spejlbillede. Start med volume nr. 000"
++msgstr "%s er ikke det første volume af dette spejlbillede. Start med volume nr. 000"
+ 
+ #: src/client/interface_base.cpp:176
+ #, c-format
+@@ -686,8 +686,7 @@
+ #: src/client/interface_base.cpp:213
+ #, c-format
+ msgid "The partition %s is already locked by another process. Can't work on it"
+-msgstr ""
+-"Partitionen %s er allerede låst af en anden proces. Kan ikke arbejde med den"
++msgstr "Partitionen %s er allerede låst af en anden proces. Kan ikke arbejde med den"
+ 
+ #: src/client/interface_base.cpp:226
+ #, c-format
+@@ -717,13 +716,15 @@
+ 
+ #: src/client/interface_base.cpp:278
+ msgid "Know bug"
+-msgstr ""
++msgstr "Kendt fejl"
+ 
+ #: src/client/interface_base.cpp:278
+ msgid ""
+ "Cannot restore the MBR from an image compressed with bzip2. You have to "
+ "change the compression level."
+ msgstr ""
++"Kan ikke genoprette MBR fra en spejlbilledefil komprimeret med bzip2. Du skal "
++"ændre kompressionsniveau."
+ 
+ #. return = newtWinChoice(i18n("Warning"), i18n("Continue"), i18n("Cancel"),
+ #. i18n("You are not logged as root. You may have \"access denied\" errors"
+@@ -811,8 +812,7 @@
+ 
+ #: src/client/interface_base.cpp:353
+ msgid "You are using simulation mode: no write will be performed"
+-msgstr ""
+-"Du er i simuleringstilstand: Der vil ikke blive skrevet noget på disken"
++msgstr "Du er i simuleringstilstand: Der vil ikke blive skrevet noget på disken"
+ 
+ #: src/client/interface_base.cpp:369
+ #, c-format
+@@ -912,8 +912,7 @@
+ 
+ #: src/client/interface_base.cpp:477
+ msgid "the current volume doesn't fit with current image: wrong identificator"
+-msgstr ""
+-"det nuværende volume passer ikke til spejlbilledet: forkert identifikation"
++msgstr "det nuværende volume passer ikke til spejlbilledet: forkert identifikation"
+ 
+ #: src/client/interface_base.cpp:482
+ msgid "Out of memory."
+@@ -940,10 +939,8 @@
+ 
+ #: src/client/interface_base.cpp:500
+ #, c-format
+-msgid ""
+-"The partition %s id already locked by anotherprocess. You can't work on it"
+-msgstr ""
+-"Partitionen %s er allerede låst af en anden proces. Kan ikke arbejde med den"
++msgid "The partition %s id already locked by anotherprocess. You can't work on it"
++msgstr "Partitionen %s er allerede låst af en anden proces. Kan ikke arbejde med den"
+ 
+ #: src/client/interface_base.cpp:509
+ msgid ""
+@@ -968,8 +965,7 @@
+ 
+ #: src/client/interface_base.cpp:559
+ msgid "No MBR was found in this imagefile. We can't continue"
+-msgstr ""
+-"Der blev ikke fundet nogen MBR i dette spejlbillede. Kan ikke fortsætte"
++msgstr "Der blev ikke fundet nogen MBR i dette spejlbillede. Kan ikke fortsætte"
+ 
+ #: src/client/interface_base.cpp:563
+ msgid "Partition checks found error(s) on partitions"
+@@ -1023,8 +1019,7 @@
+ 
+ #: src/client/interface_base.cpp:612
+ #, c-format
+-msgid ""
+-"%s is not a valid Partition Image file or it's damaged. Sorry, can't continue"
++msgid "%s is not a valid Partition Image file or it's damaged. Sorry, can't continue"
+ msgstr ""
+ "%s er ikke en brugbar partitions-spejlbilledfil, eller den er beskadiget. "
+ "Kan ikke fortsætte"
+@@ -1032,8 +1027,7 @@
+ #: src/client/interface_base.cpp:617
+ #, c-format
+ msgid "File %s is not a regular file. For security reasons, we can't continue"
+-msgstr ""
+-"Filen %s er ikke en almindelig fil. Af sikkerhedsgrunde fortsættes der ikke"
++msgstr "Filen %s er ikke en almindelig fil. Af sikkerhedsgrunde fortsættes der ikke"
+ 
+ #: src/client/interface_base.cpp:622
+ #, c-format
+@@ -1061,10 +1055,8 @@
+ 
+ #: src/client/interface_base.cpp:639
+ #, c-format
+-msgid ""
+-"Cannot create temp file in [%s]. Write access is denied for user 'partimag'"
+-msgstr ""
+-"Kan ikke oprette temp-fil i [%s]. Brugeren 'partimag' har ikke skriveadgang"
++msgid "Cannot create temp file in [%s]. Write access is denied for user 'partimag'"
++msgstr "Kan ikke oprette temp-fil i [%s]. Brugeren 'partimag' har ikke skriveadgang"
+ 
+ #: src/client/interface_base.cpp:642
+ #, c-format
+@@ -1229,16 +1221,15 @@
+ "eller 3(afslut)\n"
+ 
+ #: src/client/main.cpp:271
+-msgid ""
+-"The debug level must be 0(none), 1(user), 2(developer) or 3(debugging)\n"
++msgid "The debug level must be 0(none), 1(user), 2(developer) or 3(debugging)\n"
+ msgstr ""
+ "Fejlfindings niveauet skal enten være 0(intet), 1(bruger), 2(udvikler) eller "
+ "3(fejlsøgning)\n"
+ 
+ #: src/client/main.cpp:280
+-#, fuzzy, c-format
++#, c-format
+ msgid "Volume size: %llu bytes (%ld kiB)\n"
+-msgstr "Volumets størrelse: %ld byte (%ld kb)\n"
++msgstr "Volumets størrelse: %llu bytes (%ld kb)\n"
+ 
+ #. version
+ #: src/client/main.cpp:310
+@@ -1251,13 +1242,12 @@
+ msgstr "Kan ikke åbne fejlfindingsfil.\n"
+ 
+ #: src/client/main.cpp:535
+-#, fuzzy
+ msgid ""
+ "You have devfs enabled but not mounted. You have to do it to continue. You "
+ "can also boot with non-devfs kernel if you have one."
+ msgstr ""
+ "Du har slået devfs til men ikke monteret det. Det skal gøres før du "
+-"fortsætter. Vil du montere devfs nu? (Hvis du er i tvivl, vælg \"Fortryd\")"
++"fortsætter. Du kan også starte op på en kerne ude devfs, hvis du har en."
+ 
+ #: src/client/main.cpp:656 src/client/main.cpp:669
+ msgid "commiting buffer cache to disk."
+@@ -1286,17 +1276,15 @@
+ msgstr "Fejl: Kan ikke genstarte computeren"
+ 
+ #: src/client/main.cpp:787 src/client/main.cpp:794 src/client/main.cpp:820
+-#, fuzzy
+ msgid "Error: Cannot count remaining partimages"
+-msgstr "Fejl: Kan ikke genstarte computeren"
++msgstr "Fejl: Kan optælle de resterende partimages"
+ 
+ #. 	      nRes = system("/sbin/shutdown -r now");
+ #.              nRes = system("/sbin/reboot");
+ #. if we reach this point, it's because shutdown failed
+ #: src/client/main.cpp:809
+-#, fuzzy
+ msgid "DEBUG: reboot the computer"
+-msgstr "Fejl: Kan ikke genstarte computeren"
++msgstr "FEJLHÅRNDTERING: genstart din computer"
+ 
+ #: src/client/main.cpp:848
+ #, c-format
+@@ -1460,13 +1448,15 @@
+ 
+ #: src/client/misc.cpp:415
+ msgid "Bzip2 bug workaround"
+-msgstr ""
++msgstr "Omgå bzip2-fejl"
+ 
+ #: src/client/misc.cpp:416
+ msgid ""
+ "Because of a bug, you won't be able to restore MBR from any bzip2 compressed "
+ "image unless you manualy run bzip2 -d on them"
+ msgstr ""
++"På grund af en fejl kan du ikke gendanne MBR fra en spejlbilledfil komprimeret med "
++"bzip2 med mindre du kører bzip2 -d på den"
+ 
+ #: src/client/misc.cpp:593
+ msgid "Saving partition to the image file..."
+@@ -1513,8 +1503,7 @@
+ "\"umount %s\""
+ 
+ #: src/client/misc.cpp:1897
+-msgid ""
+-"Split volumes size must be an integer greater than 1024 (size >= 1024 KB)"
++msgid "Split volumes size must be an integer greater than 1024 (size >= 1024 KB)"
+ msgstr ""
+ "Størrelsen på opsplittede volumer skal være et heltal større end 1024 (size "
+ ">= 1024 kb)"
+@@ -1561,8 +1550,7 @@
+ msgid ""
+ "There was a CRC error in CCheck. Data may be damaged. Do you want to "
+ "continue ?"
+-msgstr ""
+-"Der var en CRC fejl i CCheck. Dataene er måske beskadigede. Vil du fortsætte?"
++msgstr "Der var en CRC fejl i CCheck. Dataene er måske beskadigede. Vil du fortsætte?"
+ 
+ #: src/client/fs/fs_base.cpp:463
+ msgid "reading partition properties"
+@@ -1690,8 +1678,7 @@
+ msgstr "Kan ikke læse boot-sektoren"
+ 
+ #: src/client/fs/fs_fat.cpp:343
+-msgid ""
+-"m_cSectorsPerCluster can't be null. Check the partition to save is a FAT one."
++msgid "m_cSectorsPerCluster can't be null. Check the partition to save is a FAT one."
+ msgstr ""
+ "m_cSectorsPerCluster må ikke være null. Undersøg om partitionen du vil gemme "
+ "nu også er en FAT-partition."
+@@ -1923,8 +1910,7 @@
+ 
+ #: src/server/partimaged-main.cpp:106
+ #, c-format
+-msgid ""
+-"Segmentation fault. Please report the bug and send the [%s] file to authors\n"
++msgid "Segmentation fault. Please report the bug and send the [%s] file to authors\n"
+ msgstr ""
+ "Forkert segmentation. Send en beskrivelse og filen [%s] til programmets "
+ "forfattere\n"
+@@ -2018,6 +2004,8 @@
+ "\n"
+ "* Version is %s.\n"
+ msgstr ""
++"\n"
++"* Version %s.\n"
+ 
+ #: src/shared/common.cpp:78
+ msgid ""
+@@ -2137,22 +2125,22 @@
+ msgstr "%lld byte"
+ 
+ #: src/shared/common.cpp:259
+-#, fuzzy, c-format
++#, c-format
+ msgid "%.2f KiB"
+ msgstr "%.2f kb"
+ 
+ #: src/shared/common.cpp:264
+-#, fuzzy, c-format
++#, c-format
+ msgid "%.2f MiB"
+ msgstr "%.2f MB"
+ 
+ #: src/shared/common.cpp:269
+-#, fuzzy, c-format
++#, c-format
+ msgid "%.2f GiB"
+ msgstr "%.2f GB"
+ 
+ #: src/shared/common.cpp:274
+-#, fuzzy, c-format
++#, c-format
+ msgid "%.2f TiB"
+ msgstr "%.2f TB"
+ 
+@@ -2167,3 +2155,4 @@
+ 
+ #~ msgid "  - PARTIMAGE_LOCAL_DEBUG=%s\n"
+ #~ msgstr "  - PARTIMAGE_LOCAL_DEBUG=%s\n"
++
+Index: src/client/buffer.cpp
+===================================================================
+RCS file: /cvsroot/partimage/partimage-cvs-newtree/src/client/buffer.cpp,v
+retrieving revision 1.15
+diff -u -r1.15 buffer.cpp
+--- src/client/buffer.cpp	18 Jul 2001 15:30:12 -0000	1.15
++++ src/client/buffer.cpp	7 Sep 2003 09:46:43 -0000
+@@ -152,9 +152,14 @@
+       //showDebug(1, "EOF2: dwRes=%lu and total=%lu\n", dwRes, (DWORD)sizeof(cBuf));
+       if (dwRes > 0)
+ 	{
+-	  //showDebug(3, "C\n");
++          if (dwRes != sizeof(cBuf))
++            {
++              showDebug(1, "unexpected end of file, trying to resync...\n");
++	      showDebug(1, "%ld missing bytes\n", sizeof(cBuf)-dwRes);
++	      memset(cBuf+dwRes, 0, sizeof(cBuf)-dwRes);
++	      dwRes = sizeof(cBuf);
++	    }
+ 	  nRes = write(nFd, cBuf, dwRes);
+-	  //showDebug(3, "D\n");
+ 	  if (nRes == -1)
+ 	    {
+ 	      // MBD
+Index: src/client/imagefile.cpp
+===================================================================
+RCS file: /cvsroot/partimage/partimage-cvs-newtree/src/client/imagefile.cpp,v
+retrieving revision 1.53
+diff -u -r1.53 imagefile.cpp
+--- src/client/imagefile.cpp	9 Apr 2003 10:33:35 -0000	1.53
++++ src/client/imagefile.cpp	7 Sep 2003 09:46:43 -0000
+@@ -386,7 +386,7 @@
+   int nRes;
+  
+   if (dwLength != 1) // avoid having BUFFER_BLOCK_SIZE messages with imginfo and restmbr
+-    showDebug(3, "begin of ci::read: %lu\n", dwLength);
++    showDebug(4, "begin of ci::read: size=%lu, pos=%lld\n", dwLength, qwTotalBytes);
+ 
+   if (m_options.dwCompression == COMPRESS_NONE)
+     nRes = fread(cBuf, 1, dwLength, m_fImageFile);
+@@ -409,10 +409,11 @@
+ 
+   if (dwRes != dwLength)
+     {
+-      if (dwLength != 1)
++//      if (dwLength != 1)
+ 	showDebug(1, "READ ERROR: dwLength=%lu and dwRes=%lu and g_nThreadState=%d\n", dwLength, dwRes, g_nThreadState);
+ 
+       if (g_nThreadState == THREAD_EOF)
++//	if (0 == 1)
+ 	{
+ 	  DWORD dwFirstRead = dwRes;
+ 	  try { splitChangeImageFileRead(); }
+@@ -422,7 +423,7 @@
+ 	      showDebug(1, "ci::read: exception raised from splitChangeImageFileRead()\n");
+ 	      throw excep;
+ 	    }
+-
++          qwTotalBytes = 0LL;
+ 	  read(cBuf+dwFirstRead, dwLength-dwFirstRead, bUpdateCRC);
+ 	  m_guiRestore -> showImageFileInfo(get_szImageFilename(), m_options.dwCompression);
+ 	}
+@@ -444,6 +445,8 @@
+ 	m_guiRestore -> showImageFileInfo(get_szImageFilename(), m_options.dwCompression);
+     }
+ 
++  if (dwLength != 1)
++    showDebug(4, "end of ci::read: %lu/%lu\n", dwRes, dwLength);
+   RETURN;
+ }
+ 
+@@ -564,8 +567,9 @@
+     nRes = fclose(m_fImageFile);	
+   else if (m_options.dwCompression == COMPRESS_GZIP) // Gzip compression
+     { 
++      char szTemp[2048];
+       nRes = gzclose(m_gzImageFile);
+-      //showDebug(3, "GZCLOSE: result=%s\n", formatGzipError(nRes, szTemp, sizeof(szTemp)));
++      showDebug(3, "GZCLOSE: result=%s\n", formatGzipError(nRes, szTemp, sizeof(szTemp)));
+     }
+   else if (m_options.dwCompression == COMPRESS_BZIP2) // Bzip2 compression
+     BZ2_bzclose(m_bzImageFile);
+Index: src/client/misc.cpp
+===================================================================
+RCS file: /cvsroot/partimage/partimage-cvs-newtree/src/client/misc.cpp,v
+retrieving revision 1.83
+diff -u -r1.83 misc.cpp
+--- src/client/misc.cpp	15 Nov 2002 21:20:58 -0000	1.83
++++ src/client/misc.cpp	7 Sep 2003 09:46:44 -0000
+@@ -995,31 +995,24 @@
+     }
+   catch (CExceptions * excep)
+     {
+-      closeFilesRestore(true, *options, &image, fDeviceFile);
+-      throw excep;
++      showDebug(1,"ERROR reading MAGIC-BEGIN-TAIL\n");
++//      closeFilesRestore(true, *options, &image, fDeviceFile);
++//      throw excep;
+     }
+   
+-  // check the magic string
+-  /*if (strncmp(tailMain.szMagicString, MAGIC_TAIL, strlen(MAGIC_TAIL)) != 0)
+-    {
+-    closeFilesRestore(true, *options, &image, fDeviceFile);
+-    showDebug(1, "\n*****************\n%20s\n********instead of **************\n%20s\n**************\n", tailMain.szMagicString, MAGIC_TAIL);
+-    RETURN_int(-1);
+-    }*/
+-  
+   // check CRC 64
+   if (image.get_qwCRC() != tailMain.qwCRC)
+     {
+       showDebug(1, "CRC64 are differents: image.get_qwCRC()=%llu, tailMain.qwCRC=%llu\n",image.get_qwCRC(), tailMain.qwCRC);
+       closeFilesRestore(true, *options, &image, fDeviceFile);
+-      THROW(ERR_CHECK_CRC, image.get_qwCRC(), tailMain.qwCRC);
++//      THROW(ERR_CHECK_CRC, image.get_qwCRC(), tailMain.qwCRC);
+     }
+   
+   // check volumes number
+   if (image.get_dwVolumeNumber() != tailMain.dwVolumeNumber)
+     {
+       closeFilesRestore(true, *options, &image, fDeviceFile);
+-      THROW(ERR_VOLUMENUMBER, image.get_dwVolumeNumber(), tailMain.dwVolumeNumber);
++//      THROW(ERR_VOLUMENUMBER, image.get_dwVolumeNumber(), tailMain.dwVolumeNumber);
+     }
+ 
+   // ---- close files
+@@ -1060,7 +1053,8 @@
+   if (fDeviceFile)
+     {
+       if (flock(fileno(fDeviceFile), LOCK_UN) == -1)
+-        THROW(ERR_ERRNO, errno);
++	      showDebug(1, "WARNING: unlocking file failed %s\n", strerror(errno));
++//        THROW(ERR_ERRNO, errno);
+       fclose(fDeviceFile);
+       fDeviceFile = 0;
+     }
+@@ -1069,7 +1063,8 @@
+     {
+       try { image->closeReading(); }
+       catch ( CExceptions * excep)
+-        { throw excep; }
++      { showDebug(1, "WARNING: closeReading failed\n"); }
++//        { throw excep; }
+     }
+   RETURN;
+ }
+Index: src/client/partimage.h
+===================================================================
+RCS file: /cvsroot/partimage/partimage-cvs-newtree/src/client/partimage.h,v
+retrieving revision 1.37
+diff -u -r1.37 partimage.h
+--- src/client/partimage.h	26 Jun 2003 18:49:18 -0000	1.37
++++ src/client/partimage.h	7 Sep 2003 09:46:44 -0000
+@@ -190,7 +190,7 @@
+ #define OPTIONS_DEFAULT_SYNC                  true
+ #define OPTIONS_DEFAULT_SSL                   true
+ #define OPTIONS_DEFAULT_BACKUP_MBR            true
+-#define OPTIONS_DEFAULT_SIMULATE_MODE         false
++#define OPTIONS_DEFAULT_SIMULATE_MODE         true
+ #define OPTIONS_DEFAULT_SERVERNAME	      ""
+ #define OPTIONS_DEFAULT_AUTOMOUNT             ""
+ 
+Index: src/client/fs/fs_base.cpp
+===================================================================
+RCS file: /cvsroot/partimage/partimage-cvs-newtree/src/client/fs/fs_base.cpp,v
+retrieving revision 1.31
+diff -u -r1.31 fs_base.cpp
+--- src/client/fs/fs_base.cpp	26 Oct 2002 10:23:03 -0000	1.31
++++ src/client/fs/fs_base.cpp	7 Sep 2003 09:46:44 -0000
+@@ -35,6 +35,8 @@
+   m_bCheckSuperBlockUsedSize = false;
+   m_bCheckSuperBlockFreeSize = false;
+   m_bCanBeMore = false;
++  m_bInErrorMode = true;
++//  m_bInErrorMode = false;
+ 
+   RETURN;
+ }
+@@ -187,7 +189,7 @@
+ 		  showDebug(3, "CHECKING(%lu): check=%lu and CRC=%lu\n", i, dwCheckCount, check.dwCRC);
+ 	      
+ 		  check.qwPos = i; 
+-                  showDebug(1, "BEFORE WRITING CHK\n");
++                  showDebug(3, "BEFORE WRITING CHK\n");
+ 		  try { m_image->write((char*)&check, sizeof(CCheck), true); }
+ 		  catch (CExceptions * excep)
+ 		    {
+@@ -284,7 +286,7 @@
+   i = 0;
+   while (i < m_header.qwBlocksCount)
+     {
+-      showDebug(1, "i = %lld, m_header.qwBlocksCount = %lld\n", i,
++      showDebug(2, "i = %lld, m_header.qwBlocksCount = %lld\n", i,
+         m_header.qwBlocksCount);
+ 
+       m_bitmap.readBitmap(i, &bUsed, &dwCount);
+@@ -322,10 +324,11 @@
+ 	      showDebug(3, "CRC = %lu\n", dwCRC);
+ 
+ 	      dwCheckCount += dwTemp;
++	      showDebug(3, "dwCheckCount= %ld\n", dwCheckCount);
+ 
+ 	      if (dwCheckCount == CHECK_FREQUENCY)
+ 		{
+-                  showDebug(1, "BEFORE READING CHK\n");
++                  showDebug(3, "BEFORE READING CHK\n");
+ 		  try { m_image->read((char*)&check, sizeof(CCheck), true); }
+ 		  catch (CExceptions * excep)
+ 		    {
+@@ -342,31 +345,39 @@
+                      || (check.cMagic[2] != 'K'))
+ 		    {
+ 		      showDebug(1, "CHECK-MAGIC error %3s %3s\n", "CHK", check.cMagic);
+-		      THROW(ERR_WRONGMAGIC);
+-		    }
+-	      
+-		  if (i != check.qwPos)
+-		    {
+-		      showDebug(1, "CHECK-POS: old=%llu and new=%llu\n",
+-                         check.qwPos, i);
+-		      
+-		      nRes = g_interface->msgBoxYesNo(i18n("local CRC error"),
+-                         i18n("There was a position error in CCheck. "
+-                         "Data may be damaged. Do you want to continue ?"));
+-		      if (nRes == MSGBOX_NO)
+-			THROW(ERR_CHECK_NUM, i, check.qwPos);
+-		    }
+-
+-		  if (dwCRC != check.dwCRC)
+-		    {
+-		      showDebug(1, "CHECK-CRC(%lu): old=%lu and new=%lu\n", i, 
+-                         check.dwCRC, dwCRC);
+-
+-		      nRes = g_interface->msgBoxYesNo(i18n("local CRC error"), i18n("There was a CRC error in CCheck. "
+-										    "Data may be damaged. Do you want to continue ?"));
+-		      if (nRes == MSGBOX_NO)
+-			THROW(ERR_CHECK_CRC, dwCRC, check.dwCRC);
++//                      resync();
++//		      THROW(ERR_WRONGMAGIC);
+ 		    }
++                  else
++                    {
++		      if (i != check.qwPos)
++    		        {
++		          showDebug(1, "CHECK-POS: old=%llu and new=%llu\n",
++                             check.qwPos, i);
++		     
++			  if (!m_bInErrorMode) {
++		          nRes=g_interface->msgBoxYesNo(i18n("local CRC error"),
++                             i18n("There was a position error in CCheck. "
++                             "Data may be damaged. Do you want to continue ?"));
++		          if (nRes == MSGBOX_NO)
++			    THROW(ERR_CHECK_NUM, i, check.qwPos);
++			  }
++		        }
++
++		      if (dwCRC != check.dwCRC)
++		        {
++		          showDebug(1, "CHECK-CRC(%lu): old=%lu and new=%lu\n", 
++                             i, check.dwCRC, dwCRC);
++
++			  if (!m_bInErrorMode) {
++		          nRes=g_interface->msgBoxYesNo(i18n("local CRC error"),
++                             i18n("There was a CRC error in CCheck. "
++                             "Data may be damaged. Do you want to continue ?"));
++		          if (nRes == MSGBOX_NO)
++			    THROW(ERR_CHECK_CRC, dwCRC, check.dwCRC);
++			  }
++		        }
++                    }
+ 
+                   dwCRC = increaseCrc32(0, NULL, 0);
+ 		  dwCheckCount = 0;
+@@ -375,8 +386,10 @@
+ 		  if (dwStats == 8)
+ 		    {
+ 		      // update stats
+-		      m_guiRestore->showStats(g_timeStart, m_header.qwBlockSize, dwSavedBlocks,
+-					      m_header.qwUsedBlocks,m_header.qwBlocksCount, options->bEraseWithNull);
++		      m_guiRestore->showStats(g_timeStart,
++                         m_header.qwBlockSize, dwSavedBlocks,
++                         m_header.qwUsedBlocks,m_header.qwBlocksCount,
++			 options->bEraseWithNull);
+ 		      dwStats = 0;
+ 		    }
+ 		  dwStats++;
+@@ -445,6 +458,49 @@
+   g_qwCopiedBytesCount = m_header.qwBlockSize * dwSavedBlocks; // for final message box
+   
+   RETURN;
++}
++
++// =======================================================
++void CFSBase::resync()
++{
++  char cByte;
++  CCheck check;
++  QWORD qwLost=0LL;
++
++  m_bInErrorMode = true;
++read_first:
++  try { m_image->read(&cByte, 1, true); }
++  catch (CExceptions * excep)
++    {
++      showDebug(1, "resync: except %d\n", excep->GetExcept());
++      throw excep;
++    }
++  ++qwLost;
++check_c:
++  if (cByte != 'C')
++    goto read_first;
++
++  try { m_image->read(&cByte, 1, true); }
++  catch (CExceptions * excep)
++    {
++      showDebug(1, "resync: except %d\n", excep->GetExcept());
++      throw excep;
++    }
++  ++qwLost;
++  if (cByte != 'H')
++    goto check_c;
++ 
++  try { m_image->read(&cByte, 1, true); }
++  catch (CExceptions * excep)
++    {
++      showDebug(1, "resync: except %d\n", excep->GetExcept());
++      throw excep;
++    }
++  ++qwLost;
++  if (cByte != 'K')
++    goto check_c;
++ 
++  showDebug(1, "CHK offset: %lld\n", qwLost-3);  
+ }
+ 
+ // =======================================================
+Index: src/client/fs/fs_base.h
+===================================================================
+RCS file: /cvsroot/partimage/partimage-cvs-newtree/src/client/fs/fs_base.h,v
+retrieving revision 1.8
+diff -u -r1.8 fs_base.h
+--- src/client/fs/fs_base.h	21 Sep 2001 18:47:37 -0000	1.8
++++ src/client/fs/fs_base.h	7 Sep 2003 09:46:45 -0000
+@@ -69,6 +69,7 @@
+ 
+   void saveToImage(CImage *image, COptions *options, CSavingWindow *gui);
+   void restoreFromImage(CImage *image, COptions *options, CRestoringWindow *gui);
++  void resync();
+ 
+   int getStdInfos(char *szDest, int nMaxLen, bool bShowBlocksInfo);
+   int readData(void *cBuffer, QWORD qwOffset, DWORD dwLength);
+@@ -82,6 +83,7 @@
+   BOOL m_bCheckSuperBlockUsedSize;
+   BOOL m_bCheckSuperBlockFreeSize;
+   BOOL m_bCanBeMore;
++  BOOL m_bInErrorMode;
+ 
+ public: // defined in CFSXXXXX
+   //static  int detect(BYTE *cBootSect, char *szFileSystem) {return 0;} // 1 if this is a XXX partition, 0 if not, -1 if error
+Index: src/client/fs/fs_reiser.cpp
+===================================================================
+RCS file: /cvsroot/partimage/partimage-cvs-newtree/src/client/fs/fs_reiser.cpp,v
+retrieving revision 1.8
+diff -u -r1.8 fs_reiser.cpp
+--- src/client/fs/fs_reiser.cpp	10 Sep 2001 16:18:47 -0000	1.8
++++ src/client/fs/fs_reiser.cpp	7 Sep 2003 09:46:45 -0000
+@@ -69,17 +69,20 @@
+ 	{
+ 	  dwBlock = (REISERFS_DISK_OFFSET_IN_BYTES / m_header.qwBlockSize) + 1; // Skipped blocks + super block
+ 	  nRes = fseek(m_fDeviceFile, (long) (dwBlock * m_header.qwBlockSize), SEEK_SET);
++	  showDebug(1, "REISER_BITMAP #0: %lld\n", (dwBlock*m_header.qwBlockSize));
+ 	}
+       else if (i == 1)
+ 	{
+ 	  dwBlock = i * m_header.qwBlockSize * 8;
+ 	  nRes = fseek(m_fDeviceFile, (long) (dwBlock * m_header.qwBlockSize), SEEK_SET);
++	  showDebug(1, "REISER_BITMAP #1: %lld\n", (dwBlock*m_header.qwBlockSize));
+ 	}
+       else // (i > 1)
+ 	{
+ 	  dwBlock = i * m_header.qwBlockSize * 8;
+ 	  dwOffset = ((m_header.qwBlockSize * 8) - 1) * m_header.qwBlockSize;		
+ 	  nRes = fseek(m_fDeviceFile, (long) dwOffset, SEEK_CUR);
++	  showDebug(1, "REISER_BITMAP #%ld: previous+%lld\n", i, (long) dwOffset);
+ 	}
+       
+       // go to the beginning of the block
+Index: src/shared/image_disk.cpp
+===================================================================
+RCS file: /cvsroot/partimage/partimage-cvs-newtree/src/shared/image_disk.cpp,v
+retrieving revision 1.50
+diff -u -r1.50 image_disk.cpp
+--- src/shared/image_disk.cpp	26 Jun 2003 18:49:18 -0000	1.50
++++ src/shared/image_disk.cpp	7 Sep 2003 09:46:45 -0000
+@@ -247,11 +247,12 @@
+ 
+   if (dwRes < dwLength)
+     {
+-      showDebug(1, "EOF: dwRes=%lu and dwLength=%lu\n", dwRes, dwLength);
++      showDebug(1, "EOF: dwRes=%lu and dwLength=%lu: MISSING: %lu\n", dwRes, dwLength, dwLength-dwRes);
+     }
+ 
+   m_qwTotal += (QWORD) dwRes; //dwLength;
+-  //showDebug(1, "m_qwTotal = %lld\n", m_qwTotal);
++  showDebug(1, "cid: %ld ; m_qwTotal = %lld\n", dwRes, m_qwTotal);
++
+   return dwRes; // important: must return dwRes even if EOF reached
+ }
+ 
+@@ -382,6 +383,7 @@
+ 
+   BEGIN;
+   showDebug(1, "ALREADY=%llu\n", m_qwTotal);
++  m_qwTotal=0LL;
+   if (m_bIsOpened == true)
+     THROW(ERR_OPENED);
+ 

@@ -1,0 +1,37 @@
+partimaged for Debian
+~~~~~~~~~~~~~~~~~~~~~
+
+Configuration
+~~~~~~~~~~~~~
+The partimage server uses SSL to encrypt the traffic between server and client.
+A default SSL certificate is created during package install. If you want to 
+use your own certificate you just have to copy it to /etc/partimaged and name
+it like the given certificate. In addition you have to set the owner to 
+partimag:partimag and set the access rights to 600.
+If you want to create your own certificate you can adapt
+/etc/partimaged/partimage-certs.cnf and use openssl like this:
+  openssl req -new -x509 -nodes -config \
+	/etc/partimaged/partimage-certs.cnf \
+	-out /etc/partimaged/partimaged.cert -keyout \
+        /etc/partimaged/partimaged.key
+Please read the openssl man page for more information.
+
+partimaged drops its privileges on startup and runs as user partimag.
+So if you change the default location /var/lib/partimaged, where the image
+files are stored, you have to give the user partimag write access to this 
+directory. You also have to change the value TARGET in 
+/etc/default/partimaged to the new location.
+
+Authentication
+~~~~~~~~~~~~~~
+partimaged can either authenticate clients against local user accounts or its 
+own user database. For the former method partimaged needs to access the 
+password file /etc/shadow. As partimaged runs under as user "partimag" you 
+have to add the user "partimag" to the group "shadow". In addition the users 
+have to be added to the file /etc/partimaged/partimagedusers.
+This method is not recommended because adding "partimag" to group "shadow" is
+a potential security risk.
+The recommended method is to use partimaged's own password file 
+/etc/partimaged/passwd.db. All users listed there have access to the partimaged
+server. The management of this user database can easily be done with the tool
+partimaged-passwd. See it's man page for further details.

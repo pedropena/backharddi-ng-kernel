@@ -1,0 +1,3 @@
+deb/etc/* etc
+deb/usr/lib/cdebconf usr/lib
+deb/usr/share usr

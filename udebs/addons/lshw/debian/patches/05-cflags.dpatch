@@ -1,0 +1,49 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 05cflags.dpatch by Ghe Rivero <Ghe Rivero <ghe@upsa.es>>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad lshw-02.11.01~/src/Makefile lshw-02.11.01/src/Makefile
+--- lshw-02.11.01~/src/Makefile	2007-09-12 09:31:24.000000000 +0200
++++ lshw-02.11.01/src/Makefile	2007-09-12 09:32:22.000000000 +0200
+@@ -18,8 +18,10 @@
+ CXX?=c++
+ INCLUDES=-I./core/
+ DEFINES=-DPREFIX=\"$(PREFIX)\" -DSBINDIR=\"$(SBINDIR)\" -DMANDIR=\"$(MANDIR)\" -DDATADIR=\"$(DATADIR)\"
+-CXXFLAGS=-g -Wall -g $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
+-LDFLAGS=-L./core/ -g
++#CXXFLAGS=-g -Wall -g $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
++CXXFLAGS=$(CXX_DEB_FLAGS) $(INCLUDES) $(DEFINES)
++#LDFLAGS=-L./core/ -g
++LDFLAGS=-L./core/
+ ifneq ($(shell $(LD) --help 2| grep -- --as-needed), )
+ 	LDFLAGS+= -Wl,--as-needed
+ endif
+diff -urNad lshw-02.11.01~/src/core/Makefile lshw-02.11.01/src/core/Makefile
+--- lshw-02.11.01~/src/core/Makefile	2007-08-05 23:11:59.000000000 +0200
++++ lshw-02.11.01/src/core/Makefile	2007-09-12 09:33:23.000000000 +0200
+@@ -3,7 +3,8 @@
+ CXX=c++
+ INCLUDES=
+ DEFINES=-DPREFIX=\"$(PREFIX)\" -DSBINDIR=\"$(SBINDIR)\" -DMANDIR=\"$(MANDIR)\" -DDATADIR=\"$(DATADIR)\"
+-CXXFLAGS=-g -Wall $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
++#CXXFLAGS=-g -Wall $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
++CXXFLAGS=$(CXX_DEB_FLAGS) $(INCLUDES) $(DEFINES)
+ LDFLAGS=
+ LDSTATIC=
+ LIBS=
+diff -urNad lshw-02.11.01~/src/gui/Makefile lshw-02.11.01/src/gui/Makefile
+--- lshw-02.11.01~/src/gui/Makefile	2007-08-05 23:11:59.000000000 +0200
++++ lshw-02.11.01/src/gui/Makefile	2007-09-12 09:34:12.000000000 +0200
+@@ -7,7 +7,8 @@
+ DEFINES=-DPREFIX=\"$(PREFIX)\" -DSBINDIR=\"$(SBINDIR)\" -DMANDIR=\"$(MANDIR)\" -DDATADIR=\"$(DATADIR)\"
+ GTKINCLUDES=$(shell pkg-config gtk+-2.0 --cflags)
+ INCLUDES=-I../core $(GTKINCLUDES)
+-CXXFLAGS=-g -Wall $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
++#CXXFLAGS=-g -Wall $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
++CXXFLAGS=$(CXX_DEB_FLAGS) $(INCLUDES) $(DEFINES)
+ CFLAGS=$(CXXFLAGS) $(DEFINES)
+ GTKLIBS=$(shell pkg-config gtk+-2.0 --libs)
+ LIBS=-L../core -llshw $(GTKLIBS)

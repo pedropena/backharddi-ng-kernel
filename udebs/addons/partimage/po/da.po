@@ -1,0 +1,2220 @@
+# Translation of partimage-da.po to Dansk
+# Translation of da.po to Dansk
+# Danish translation of Partition Image.
+# Copyright (C) 2001,2003 Free Software Foundation, Inc.
+# Gunner Poulsen <gp@lyngbjerggaardskolen.dk>, 2001,2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: da\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-08 21:17+0100\n"
+"PO-Revision-Date: 2003-10-14 06:34+0200\n"
+"Last-Translator: Gunner Poulsen <gp@lyngbjerggaardskolen.dk>\n"
+"Language-Team: Dansk <dansk@klid.dk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.2\n"
+
+#: src/client/gui_text.cpp:56
+msgid "Restore an MBR to the hard disk"
+msgstr "Gendan MBR (Master boot record) på harddisken"
+
+#: src/client/gui_text.cpp:59
+msgid "Disk with the MBR to restore"
+msgstr "Disk med den MBR du vil genoprette"
+
+#: src/client/gui_text.cpp:62
+msgid "Original MBR to use"
+msgstr "Hvilken original MBR skal bruges"
+
+#: src/client/gui_text.cpp:65
+msgid "What to restore:"
+msgstr "Hvad skal gendannes:"
+
+#: src/client/gui_text.cpp:67
+msgid "The whole MBR"
+msgstr "Hele MBR"
+
+#: src/client/gui_text.cpp:207 src/client/misc.cpp:1747
+#, c-format
+msgid ""
+"Cannot read \"/proc/partitions\" (%s). Then, you must use the command line "
+"to run Partition Image. Type \"partimage --help\" for help."
+msgstr ""
+"Kan ikke læse \"/proc/partitions\" (%s). Så du må køre Partion Image fra "
+"kommandolinjen. Tast \"partimage --help\" for hjælp."
+
+#: src/client/gui_text.cpp:313
+msgid "Continue (F5)"
+msgstr "Fortsæt (F5)"
+
+#: src/client/gui_text.cpp:314 src/client/interface_newt.cpp:240
+msgid "Exit (F6)"
+msgstr "Afslut (F6)"
+
+#: src/client/gui_text.cpp:315
+msgid "Main window (F7)"
+msgstr "Hovedvinduet (F7)"
+
+#: src/client/gui_text.cpp:325 src/client/gui_text.cpp:455
+msgid "save partition to image file"
+msgstr "gem partition som spejlbilledefil"
+
+#: src/client/gui_text.cpp:327
+msgid "Compression level"
+msgstr "Komprimeringsniveau"
+
+#: src/client/gui_text.cpp:328
+msgid "None (very fast + very big file)"
+msgstr "Ingen (meget hurtig + meget stor fil)"
+
+#: src/client/gui_text.cpp:332 src/client/gui_text.cpp:607
+msgid "Options"
+msgstr "Indstillinger"
+
+#: src/client/gui_text.cpp:333
+msgid "Check partition before saving"
+msgstr "Kontrollér partition før gemning"
+
+#: src/client/gui_text.cpp:334
+msgid "Enter description"
+msgstr "Tilføj beskrivelse"
+
+#: src/client/gui_text.cpp:335
+msgid "Overwrite without prompt"
+msgstr "Overskriv uden at spørge"
+
+#: src/client/gui_text.cpp:337
+msgid "Image split mode"
+msgstr "Spejlbilledeopdelingstilstand"
+
+#: src/client/gui_text.cpp:338
+msgid "Automatic split (when no space left)"
+msgstr "Opdel automatisk (når der ikke er mere plads)"
+
+#: src/client/gui_text.cpp:339
+msgid "Into files whose size is:............"
+msgstr "Intro-filer hvis størrelse er............"
+
+#: src/client/gui_text.cpp:342
+msgid "MiB"
+msgstr "MB"
+
+#: src/client/gui_text.cpp:343
+msgid "Wait after each volume change"
+msgstr "Vent efter hvert volumeskift"
+
+#: src/client/gui_text.cpp:345 src/client/gui_text.cpp:612
+msgid "If finished successfully:"
+msgstr "Hvis alt lykkedes:"
+
+#: src/client/gui_text.cpp:346 src/client/gui_text.cpp:613
+msgid "Wait"
+msgstr "Vent"
+
+#: src/client/gui_text.cpp:347 src/client/gui_text.cpp:614
+msgid "Halt"
+msgstr "Luk ned"
+
+#: src/client/gui_text.cpp:348 src/client/gui_text.cpp:615
+msgid "Reboot"
+msgstr "Genstart"
+
+#: src/client/gui_text.cpp:349 src/client/gui_text.cpp:616
+msgid "Quit"
+msgstr "Afslut"
+
+#: src/client/gui_text.cpp:350
+msgid "Last"
+msgstr "Sidste"
+
+#: src/client/gui_text.cpp:458
+#, c-format
+msgid "Partition to save:...........%s"
+msgstr "Partition der skal gemmes:...........%s"
+
+#: src/client/gui_text.cpp:461
+#, c-format
+msgid "Size of the Partition:.......%s = %llu bytes"
+msgstr "Partitionens størrelse:.......%s = %llu byte"
+
+#: src/client/gui_text.cpp:464
+#, c-format
+msgid "Image file to create.........%s"
+msgstr "Spejlbilledfil der skal oprettes.........%s"
+
+#: src/client/gui_text.cpp:470
+#, c-format
+msgid "Detected file system:........%s"
+msgstr "Finder filsystem:........%s"
+
+#: src/client/gui_text.cpp:476
+msgid "Compression level:...........None"
+msgstr "Komprimeringsniveau:...........ingen"
+
+#: src/client/gui_text.cpp:479
+msgid "Compression level:...........gzip"
+msgstr "Komprimeringsniveau:...........gzip"
+
+#: src/client/gui_text.cpp:482
+msgid "Compression level:...........bzip2"
+msgstr "Komprimeringsniveau:...........bzip2"
+
+#: src/client/gui_text.cpp:485
+msgid "Compression level:...........lzo"
+msgstr "Komprimeringsniveau:...........lzo"
+
+#: src/client/gui_text.cpp:539
+#, c-format
+msgid "Time elapsed:................%s"
+msgstr "Brugt tid:................%s"
+
+#: src/client/gui_text.cpp:542
+#, c-format
+msgid "Estimated time remaining:....%s"
+msgstr "Resterende tid:.........%s"
+
+#: src/client/gui_text.cpp:547
+#, c-format
+msgid "Speed:.......................%s/min"
+msgstr "Hastighed:.......................%s/min"
+
+#: src/client/gui_text.cpp:550
+#, c-format
+msgid "Data copied:.................%s / %s"
+msgstr "Data kopieret:.................%s / %s"
+
+#: src/client/gui_text.cpp:582
+#, c-format
+msgid "Current image file:..........%s"
+msgstr "Nuværende spejlbilledfil:..........%s"
+
+#: src/client/gui_text.cpp:587
+#, c-format
+msgid "Image file size:.............%s"
+msgstr "Spejlbilledfilens størrelse:.............%s"
+
+#: src/client/gui_text.cpp:591
+#, c-format
+msgid "Available space for image:...%s = %llu bytes"
+msgstr "Tilgængelig plads til spejlbilledet:...%s = %llu byte"
+
+#: src/client/gui_text.cpp:604 src/client/gui_text.cpp:664
+msgid "restore partition from image file"
+msgstr "gendan partition fra spejlbilledfil"
+
+#: src/client/gui_text.cpp:609
+msgid "Erase free blocks with zero values"
+msgstr "Fjern frie blokke med værdien nul"
+
+#: src/client/gui_text.cpp:610
+msgid "Simulation of the restoration (nothing is written)"
+msgstr "Simulering af gendannelsen (der skrives ingenting)"
+
+#: src/client/gui_text.cpp:662
+#, fuzzy
+msgid "simulate partition restoration from image file"
+msgstr "gendan partition fra spejlbilledfil"
+
+#: src/client/gui_text.cpp:667
+#, c-format
+msgid "Partition to restore:.............%s"
+msgstr "Partition som skal gendannes:.............%s"
+
+#: src/client/gui_text.cpp:670
+#, c-format
+msgid "Size of partition to restore:.....%s = %llu bytes"
+msgstr "Størrelse af den partition der skal gendannes:.....%s = %llu byte"
+
+#: src/client/gui_text.cpp:673
+#, c-format
+msgid "Image file to use.................%s"
+msgstr "Spejlbilledfil der skal bruges.................%s"
+
+#: src/client/gui_text.cpp:676
+#, c-format
+msgid "File system:......................%s"
+msgstr "Filsystem:......................%s"
+
+#: src/client/gui_text.cpp:681
+#, c-format
+msgid "Partition was on device:..........%s\n"
+msgstr "Partitionen var på enheden:..........%s\n"
+
+#: src/client/gui_text.cpp:684
+#, c-format
+msgid "Image created on:.................%s\n"
+msgstr "Spejlbillede oprettet på:.................%s\n"
+
+#: src/client/gui_text.cpp:687
+#, c-format
+msgid "Size of the original partition:...%s = %llu bytes"
+msgstr "Den oprindelige partitionsstørrelse:...%llu = %s byte"
+
+#: src/client/gui_text.cpp:754
+#, c-format
+msgid "Time elapsed:.....................%s"
+msgstr "Brugt tid:................%s"
+
+# c-format
+#: src/client/gui_text.cpp:757
+#, c-format
+msgid "Estimated time remaining:.........%s"
+msgstr "Spejlbilledfil der skal oprettes.........%s"
+
+#: src/client/gui_text.cpp:762
+#, c-format
+msgid "Speed:............................%s/min"
+msgstr "Hastighed:.......................%s/min"
+
+#: src/client/gui_text.cpp:765
+#, c-format
+msgid "Data copied:......................%s / %s"
+msgstr "Data kopieret:.................%s / %s"
+
+#: src/client/gui_text.cpp:796
+#, c-format
+msgid "Current image file:...............%s"
+msgstr "Nuværende spejlbilledfil:..........%s"
+
+#: src/client/gui_text.cpp:804
+msgid "Compression level:................None\n"
+msgstr "Komprimeringsniveau:................Ingen\n"
+
+#: src/client/gui_text.cpp:807
+msgid "Compression level:................gzip"
+msgstr "Komprimeringsniveau:...........gzip"
+
+#: src/client/gui_text.cpp:810
+msgid "Compression level:................bzip2"
+msgstr "Komprimeringsniveau:...........bzip2"
+
+#: src/client/gui_text.cpp:813
+msgid "Compression level:................lzo"
+msgstr "Komprimeringsniveau:...........lzo"
+
+#: src/client/gui_text.cpp:839
+msgid "Change"
+msgstr "Skift"
+
+#: src/client/gui_text.cpp:840 src/client/interface_newt.cpp:123
+#: src/client/interface_newt.cpp:134 src/client/interface_newt.cpp:151
+#: src/client/interface_newt.cpp:379 src/client/interface_newt.cpp:432
+msgid "Cancel"
+msgstr "Annullér"
+
+#: src/client/gui_text.cpp:842
+msgid "Enter new filename"
+msgstr "Indtast nyt filnavn"
+
+#: src/client/gui_text.cpp:886
+#, c-format
+msgid ""
+"The following imagefile already exist.\n"
+"Do you want to overwrite or change image filename ?\n"
+"File: %s\n"
+"To change the filename, please enter a full path\n"
+"(location + filename) without volume number at the end, \n"
+"and press \"Change\""
+msgstr ""
+"Følgende spejlbilledfil eksisterer allerede.\n"
+"Vil du overskrive den eller ændre filnavn?\n"
+"Fil: %s\n"
+"Hvis du vil ændre filnavnet skrives den fulde sti\n"
+"(sti + filnavn) uden volumenummer til sidst, \n"
+"og tryk \"�dr\""
+
+#: src/client/gui_text.cpp:891 src/client/interface_base.cpp:433
+msgid "Overwrite image?"
+msgstr "Overskriv spejlbilledet?"
+
+#: src/client/gui_text.cpp:891
+msgid "Overwrite"
+msgstr "Overskriv"
+
+#: src/client/gui_text.cpp:903
+#, c-format
+msgid ""
+"The following imagefile is locked.\n"
+"Do you want to wait and retry or change image filename ?\n"
+"File: %s\n"
+"To change the filename, please enter a full path\n"
+"(location + filename) without volume number at the end, \n"
+"and press \"Change\""
+msgstr ""
+"Følgende spejlbilledfil er låst.\n"
+"�sker du at vente og prøve igen eller ændre filnavnet?\n"
+"Fil: %s\n"
+"Hvis du vil ændre filnavnet skrives den fulde sti\n"
+"(sti + filnavn) uden volumenummer til sidst, \n"
+"og tryk \"�dr\""
+
+#: src/client/gui_text.cpp:908
+msgid "imagefile locked"
+msgstr "spejlbilledfilen er låst"
+
+#: src/client/gui_text.cpp:908
+msgid "Retry"
+msgstr "Prøv igen"
+
+#: src/client/gui_text.cpp:921
+#, c-format
+msgid ""
+"unable to access to %s\n"
+"\n"
+"Please, enteranother directory path (without filename):"
+msgstr ""
+"adgang til %s nægtet\n"
+"\n"
+"Vælg et andet katalog (sti uden filnavn):"
+
+#: src/client/gui_text.cpp:924
+msgid "wrong path"
+msgstr "forkert sti"
+
+#. warning
+#: src/client/imagefile.cpp:631
+msgid "Automatic mount"
+msgstr "Montér automatisk"
+
+#: src/client/imagefile.cpp:632
+#, c-format
+msgid "Please, press \"ok\" to mount [%s] on [%s]"
+msgstr "Tryk \"o.k.\" for at montere [%s] på [%s]"
+
+#: src/client/imagefile.cpp:1000
+msgid "Wrong volume inserted"
+msgstr "Forkert volume indsat"
+
+#: src/client/imagefile.cpp:1001
+msgid "You will be prompted to remove this media and insert the right one"
+msgstr "Du vil blive bedt om af fjerne mediet og indsætte det rigtige"
+
+#: src/client/imagefile.cpp:1008
+#, c-format
+msgid ""
+"Can't read the following volume file:\n"
+"%s\n"
+"%s"
+msgstr ""
+"Kan ikke læse følgende volumefil:\n"
+"%s\n"
+"%s"
+
+#: src/client/imagefile.cpp:1010
+msgid "Enter another full path (directory & name)"
+msgstr "Skriv en anden komplet sti (katalog og filnavn)"
+
+#: src/client/imagefile.cpp:1011
+msgid "Volume not found"
+msgstr "Volume ikke fundet"
+
+#: src/client/imginfo.cpp:44
+msgid "No flag set"
+msgstr "Intet flag sat"
+
+#: src/client/imginfo.cpp:50
+msgid "No description"
+msgstr "Ingen beskrivelse"
+
+#: src/client/imginfo.cpp:56 src/client/imginfo.cpp:110
+msgid "none"
+msgstr "ingen"
+
+#: src/client/imginfo.cpp:60 src/client/imginfo.cpp:126
+msgid "unknown"
+msgstr "ukendt"
+
+#: src/client/imginfo.cpp:64
+#, c-format
+msgid ""
+"Filesystem:............%s\n"
+"Description:...........%s\n"
+"Original device:.......%s\n"
+"Original filepath:.... %s\n"
+"Flags:.................%ld: %s\n"
+"Creation date:.........%sPartition size:........%s\n"
+"Hostname:..............%s\n"
+"Compatible Version:....%s\n"
+"Encryption algorithm:..%ld -> %s\n"
+"MBR saved count:.......%lu\n"
+"\n"
+"System of the backup:\n"
+"- machine:.............%s\n"
+"- operating system:....%s\n"
+"- release:.............%s\n"
+"\n"
+"\n"
+msgstr ""
+"Filsystem:......................%s\n"
+"Beskrivelse:...................%s\n"
+"Oprindelig enhed:...........%s\n"
+"Oprindelig sti til filen:.....%s\n"
+"Flag:................................%ld: %s\n"
+"Oprettelsesdato:.............%s\n"
+"Partitionsstørrelse:.........%s\n"
+"Værtsnavn (Hostname):.%s\n"
+"Kompatibel version:........%s\n"
+"Krypteringsalgoritme:.....%ld -> %s\n"
+"Antal MBR gemt:............%lu\n"
+"\n"
+"Sikkerhedskopieret system:\n"
+"- maskine:.....................%s\n"
+"- styresystem :.............%s\n"
+"- version:......................%s\n"
+"\n"
+"\n"
+
+#: src/client/imginfo.cpp:89
+#, c-format
+msgid ""
+"-------------------- MBR %.3d -------------------\n"
+"Device:................%s\n"
+"Device blocks count:...%llu\n"
+"Device model:..........%s\n"
+"\n"
+msgstr ""
+"-------------------- MBR %.3d -------------------\n"
+"Enhed:................%s\n"
+"Enhedsbloktal:...%llu\n"
+"Enhedsmodel:....%s\n"
+"\n"
+
+#: src/client/imginfo.cpp:130
+#, c-format
+msgid ""
+"Volume number:.........%lu\n"
+"Volume size:...........%s\n"
+"Compression level: ....%ld -> %s\n"
+"Identificator:.........%llu=%llX\n"
+"\n"
+msgstr ""
+"volumenummer:...........%lu\n"
+"Volumestørrelse:..........%s\n"
+"Komprimeringsniveau:.%ld -> %s\n"
+"Identifikation:.................%llu=%llX\n"
+"\n"
+
+#: src/client/imginfo.cpp:155
+#, c-format
+msgid "The image file \"%s\" cannot be found"
+msgstr "Spejlbilledfilen \"%s\" kan ikke findes"
+
+#: src/client/imginfo.cpp:176
+msgid "Cannot read image file"
+msgstr "Kan ikke læse spejlbilledfil"
+
+#: src/client/imginfo.cpp:231
+msgid "Image informations"
+msgstr "Informationer om spejlbilledet"
+
+#: src/client/interface_base.cpp:40 src/client/interface_newt.cpp:134
+#: src/client/misc.cpp:1888 src/client/fs/fs_ntfs.cpp:184
+msgid "Error"
+msgstr "Fejl"
+
+#: src/client/interface_base.cpp:48
+#, c-format
+msgid "About Partition Image %s"
+msgstr "Om Partition Image %s"
+
+#: src/client/interface_base.cpp:50
+#, c-format
+msgid ""
+"Partition Image is distributed under the GNU GPL 2 (General Public License)\n"
+"\n"
+"version:...%s\n"
+"web:.......http://www.partimage.org/\n"
+"\n"
+"Authors:\n"
+"Francois Dupoux  <fdupoux@partimage.org>\n"
+"Franck Ladurelle <ladurelf@partimage.org>"
+msgstr ""
+"Partition Image distribueres under GNU GPL 2 (General Public License)\n"
+"\n"
+"version:...%s\n"
+"hjemmeside:.......http://www.partimage.org/\n"
+"\n"
+"Forfattere:\n"
+"Francois Dupoux <fdupoux@partimage.org>\n"
+"Franck Ladurelle <ladurelf@partimage.org>"
+
+#: src/client/interface_base.cpp:61
+#, c-format
+msgid "Can't write block %ld to image"
+msgstr "Kan ikke skrive blok %ld til spejlbilledet"
+
+#: src/client/interface_base.cpp:65
+#, c-format
+msgid "Can't write %s to image"
+msgstr "Kan ikke skrive %s til spejlbilledet"
+
+#: src/client/interface_base.cpp:69
+#, c-format
+msgid "Can't write bitmap block %ld to image"
+msgstr "Kan ikke skrive bitmapblok %ld til spejlbilledet"
+
+#: src/client/interface_base.cpp:73
+#, c-format
+msgid "Can't read bitmap block %ld from image"
+msgstr "Kan ikke læse bitmapblok %ld fra spejlbilledet"
+
+#: src/client/interface_base.cpp:77
+#, c-format
+msgid "Can't write block %ld to harddrive"
+msgstr "Kan ikke skrive blok %ld på harddisken"
+
+#: src/client/interface_base.cpp:81
+#, c-format
+msgid "Can't read block %ld from image (%d)"
+msgstr "Kan ikke læse blok %ld fra spejlbillede (%d)"
+
+#: src/client/interface_base.cpp:85
+#, c-format
+msgid "Can't read %s from image"
+msgstr "Kan ikke læse %s fra spejlbilledet"
+
+#: src/client/interface_base.cpp:89
+msgid "Can't read SuperBlock"
+msgstr "Kan ikke læse superblok"
+
+#: src/client/interface_base.cpp:93
+msgid "Can't write SuperBlock"
+msgstr "Kan ikke skrive superblok"
+
+#: src/client/interface_base.cpp:97
+#, c-format
+msgid "Can't read block %ld from harddrive partition"
+msgstr "Kan ikke læse blok %ld fra harddisk-partition"
+
+#: src/client/interface_base.cpp:101
+#, c-format
+msgid "Can't read bitmap block %ld from harddrive partition (%s)"
+msgstr "Kan ikke læse bitmapblok %ld fra harddisk-partition (%s)"
+
+#: src/client/interface_base.cpp:106
+msgid "Can't write the MBR"
+msgstr "Kan ikke skrive MBR"
+
+#: src/client/interface_base.cpp:112
+msgid "Can't read the MBR"
+msgstr "Kan ikke læse MBR"
+
+#: src/client/interface_base.cpp:118
+#, c-format
+msgid "Not a %s partition. Check the filesystem type"
+msgstr "Det er ikke en %s partition. Tjek filsystemtypen"
+
+#: src/client/interface_base.cpp:124
+msgid ""
+"The partition was saved with a newer version of Partion Image. Please "
+"download the last one."
+msgstr ""
+"Denne partition er gemt med en nyere version af Partion Image. Hent venligst "
+"en nyere version."
+
+#: src/client/interface_base.cpp:131
+msgid "Error while writing image file: disk full !"
+msgstr ""
+"Der opstod en fejl under skrivningen af spejlbilledfilen: disken er fuld!"
+
+#: src/client/interface_base.cpp:137
+#, c-format
+msgid "Can't detect file system of partition %s"
+msgstr "Ude af stand til at fastslå filsystemtypen for partitionen %s"
+
+#: src/client/interface_base.cpp:143
+msgid "Can't write main header"
+msgstr "Kan ikke skrive hovedindledningen"
+
+#: src/client/interface_base.cpp:149
+msgid "Can't write main tail"
+msgstr "Kan ikke skrive filafslutningen (main tail)"
+
+#: src/client/interface_base.cpp:155
+msgid "Can't read main tail"
+msgstr "Kan ikke læse filafslutningen (main tail)"
+
+#: src/client/interface_base.cpp:161
+msgid ""
+"The image you try to restore was encrypted. The current version doesn't "
+"support encryption. Please, download the latest version of partimage."
+msgstr ""
+"Dette spejlbilled er gemt krypteret. Denne version af Partition Image "
+"understøtter ikke kryptering. Hent venligst en nyere version."
+
+#: src/client/interface_base.cpp:169
+#, c-format
+msgid ""
+"%s is not the first volume of an image. Please, retry with the volume number "
+"000"
+msgstr ""
+"%s er ikke det første volume af dette spejlbillede. Start med volume nr. 000"
+
+#: src/client/interface_base.cpp:176
+#, c-format
+msgid "%s is not a valid partition image file."
+msgstr "%s er ikke en brugbar partitions-spejlbilledfil."
+
+#: src/client/interface_base.cpp:182
+#, c-format
+msgid ""
+"The partition is to small to be restored:\n"
+"Original partition size:........%llu bytes\n"
+"Destination partition size:.....%llu bytes"
+msgstr ""
+"Denne partition er for lille til at blive gendannet:\n"
+"Den oprindelige partitions størrelse:...%llu byte\n"
+"Slutpartitionens størrelse:...................%llu byte"
+
+#: src/client/interface_base.cpp:190
+#, c-format
+msgid ""
+"There was an error while restoring partition:\n"
+"CRC64 are differents, the imagefile was damaged:\n"
+"Original CRC64:.....%llu\n"
+"Current CRC64:......%llu"
+msgstr ""
+"Der opstod en fejl under gendannelsen:\n"
+"CRC64 er forskellige, spejlbilledfilen er beskadiget:\n"
+"Oprindelig CRC64:........%llu\n"
+"Nuværende CRC64:......%llu"
+
+#: src/client/interface_base.cpp:199
+#, c-format
+msgid "Invalid volume number (%ld instead of %ld)."
+msgstr "Forkert volumenummer (%ld i stedet for %ld)."
+
+#: src/client/interface_base.cpp:206
+msgid "Error on close"
+msgstr "Fejl ved lukning"
+
+#: src/client/interface_base.cpp:213
+#, c-format
+msgid "The partition %s is already locked by another process. Can't work on it"
+msgstr ""
+"Partitionen %s er allerede låst af en anden proces. Kan ikke arbejde med den"
+
+#: src/client/interface_base.cpp:226
+#, c-format
+msgid "Can't open partition %s"
+msgstr "Kan ikke åbne partition %s"
+
+#: src/client/interface_base.cpp:232
+#, c-format
+msgid "Can't lock partition %s"
+msgstr "Kan ikke låse partition %s"
+
+#: src/client/interface_base.cpp:238
+msgid "Can't read main header: imagefile was damaged"
+msgstr "Kan ikke læse hovedindledningen: Spejlbilledfilen er beskadiget"
+
+#: src/client/interface_base.cpp:244
+msgid "Can't write informations"
+msgstr "Kan ikke skrive spejlbilledinformationen"
+
+#: src/client/interface_base.cpp:250
+msgid "Can't read informations"
+msgstr "Kan ikke læse spejlbilledinformationen"
+
+#: src/client/interface_base.cpp:256
+msgid "Can't read MBR Magic: imagefile was damaged"
+msgstr "Kan ikke læse MBR Magic: Spejlbilledfilen er beskadiget"
+
+#: src/client/interface_base.cpp:278
+msgid "Know bug"
+msgstr "Kendt fejl"
+
+#: src/client/interface_base.cpp:278
+msgid ""
+"Cannot restore the MBR from an image compressed with bzip2. You have to "
+"change the compression level."
+msgstr ""
+"Kan ikke genoprette MBR fra en spejlbilledefil komprimeret med bzip2. Du "
+"skal ændre kompressionsniveau."
+
+#. return = newtWinChoice(i18n("Warning"), i18n("Continue"), i18n("Cancel"),
+#. i18n("You are not logged as root. You may have \"access denied\" errors"
+#. " when working."));
+#. newtWinMessage(i18n("Warning"), i18n("Ok"), i18n("The current %s support is experimental !"), szFileSys);
+#. return newtWinChoice(i18n("Warning"), i18n("Continue"), i18n("Cancel"),
+#. i18n("The MBR is a very important data of the hard disk. If you write "
+#. "a bad MBR, you will lose all the partitions of your hard drive. "
+#. "Don't continue unless you know what you are doing. Press 'Continue' "
+#. "to restore.\n"
+#. "Device with MBR to restore:.........%s [%llu]\n"
+#. "Original MBR:.......................%s [%llu]"),
+#. szCurrentDevice, qwCurrentSize, szOriginalDevice, qwOriginalSize);
+#. return newtWinChoice(i18n("Warning"), i18n("Continue"), i18n("Cancel"),
+#. i18n("The original hard disk does not fit with the current hard disk. "
+#. "The MBR you are trying to restore was saved from another hard disk. "
+#. "This means the original and current hard disks does not have the same "
+#. "size or they are not on the same device (%s and %s). "
+#. "Do you want to continue?"), szOriginalDevice, szCurrentDevice);
+#: src/client/interface_base.cpp:288 src/client/interface_base.cpp:316
+#: src/client/interface_base.cpp:323 src/client/interface_base.cpp:330
+#: src/client/interface_base.cpp:338 src/client/interface_base.cpp:345
+#: src/client/interface_base.cpp:368 src/client/interface_base.cpp:388
+#: src/client/main.cpp:528 src/client/misc.cpp:1880
+msgid "Warning"
+msgstr "Advarsel"
+
+#: src/client/interface_base.cpp:288 src/client/misc.cpp:1880
+msgid ""
+"You are not logged as root. You may have \"access denied\" errors when "
+"working."
+msgstr ""
+"Du er ikke logget ind som root. Du får muligvis \"adgang nægtet\"-fejl hvis "
+"du fortsætter"
+
+#. return newtWinChoice(i18n("New Volume"), i18n("Continue"), i18n("Stop"),
+#. i18n("The volume has been changed.\nOld: %s\nNew: %s/%s.%.3ld\n"
+#. "Press Enter to continue"), szOld, szNewPath, szOriginalFilename, Volume);
+#: src/client/interface_base.cpp:298
+msgid "New Volume"
+msgstr "Nyt volume"
+
+#: src/client/interface_base.cpp:298
+#, c-format
+msgid ""
+"The volume has been changed.\n"
+"Old: %s\n"
+"New: %s/%s.%.3ld\n"
+"Press Enter to continue"
+msgstr ""
+"Volumet er ændret.\n"
+"Gammelt: %s\n"
+"Nyt:.......... %s/%s.%.3ld\n"
+"Tryk Retur for at fortsætte"
+
+#. return newtWinChoice(i18n("Confirmation"), i18n("Yes"), i18n("No"),
+#. i18n("Do you really want to restore %s from the image file %s ?"),
+#. szDevice, szImageFilename);
+#: src/client/interface_base.cpp:308
+msgid "Confirmation"
+msgstr "Bekræftelse"
+
+#: src/client/interface_base.cpp:309
+#, c-format
+msgid "Do you really want to restore %s from the image file %s ?"
+msgstr "�sker du virkeligt at gendanne %s fra denne spejlbilledfil %s?"
+
+#: src/client/interface_base.cpp:317
+#, c-format
+msgid "%s found errors on the file system."
+msgstr "%s fandt fejl i filsystemet."
+
+#: src/client/interface_base.cpp:324
+#, c-format
+msgid "Partimage will not check partition because %s does't exist."
+msgstr "Partimage vil ikke undersøge partionen fordi %s ikke eksisterer,"
+
+#: src/client/interface_base.cpp:331
+#, c-format
+msgid "Partimage will not check partition because of run access denied for %s."
+msgstr ""
+"Partimage vil ikke undersøge partionen. Eksekveringsrettigheder mangler på %"
+"s."
+
+#: src/client/interface_base.cpp:338
+#, c-format
+msgid "The current %s support is experimental !"
+msgstr "Den nuværende understøttelse af %s er kun eksperimentel!"
+
+#: src/client/interface_base.cpp:345
+#, c-format
+msgid "The current %s support is beta !"
+msgstr "Understøttelse af %s er kun eksperimentel!"
+
+#. newtWinMessage(i18n("Simulation mode"), i18n("Ok"),
+#. i18n("You are using simulation mode: no write will be performed"));
+#: src/client/interface_base.cpp:353
+msgid "Simulation mode"
+msgstr "Simuleringstilstand"
+
+#: src/client/interface_base.cpp:353
+msgid "You are using simulation mode: no write will be performed"
+msgstr ""
+"Du er i simuleringstilstand: Der vil ikke blive skrevet noget på disken"
+
+#: src/client/interface_base.cpp:369
+#, c-format
+msgid ""
+"The MBR is a very important data of the hard disk. If you write a bad MBR, "
+"you will lose all the partitions of your hard drive. Don't continue unless "
+"you know what you are doing. Press 'Continue' to restore.\n"
+"Device with MBR to restore:.........%s [%llu]\n"
+"Original MBR:.......................%s [%llu]"
+msgstr ""
+"MBR er en meget vigtig del af harddisken. Hvis du skriver en defekt MBR, vil "
+"du miste alle partitioner på harddisken. Fortsæt IKKE, med mindre du ved "
+"hvad du laver. Tryk på 'Fortsæt' for at gendanne.\n"
+"Enhed med den MBR der skal gendannes:...%s [%llu]\n"
+"Oprindelig MBR:.............................................%s [%llu]"
+
+#: src/client/interface_base.cpp:389
+#, c-format
+msgid ""
+"The original hard disk does not fit with the current hard disk. The MBR you "
+"are trying to restore was saved from another hard disk. This means the "
+"original and current hard disks does not have the same size or they are not "
+"on the same device (%s and %s). Do you want to continue?"
+msgstr ""
+"Den oprindelige harddisk er ikke den samme som denne. Den MBR du er i gang "
+"med at genoprette er gemt fra en anden harddisk. Det betyder at den "
+"oprindelige og den nuværende harddisk ikke er lige store, eller de er ikke "
+"tilsluttet samme enhed (%s og %s). Vil du fortsætte?"
+
+#: src/client/interface_base.cpp:399 src/client/main.cpp:730
+msgid "Success"
+msgstr "Succes"
+
+#: src/client/interface_base.cpp:399
+#, c-format
+msgid ""
+"The MBR of [%s] has beensuccessfully restored. You might need to reboot your "
+"computer if you wantthe operating system to use the new MBR."
+msgstr ""
+"Det er lykkedes at gendanne MBR på [%s]. Du skal sikkert genstarte "
+"computeren,hvis du vil have styresystemet til at bruge den nye MBR."
+
+#: src/client/interface_base.cpp:420 src/client/interface_base.cpp:430
+#, c-format
+msgid "Error: %s"
+msgstr "Fejl: %s"
+
+#: src/client/interface_base.cpp:427
+msgid "Action canceled as user required"
+msgstr "Handlingen blev afbrudt af brugeren"
+
+#: src/client/interface_base.cpp:433
+#, c-format
+msgid "The %s imagefile already exist. Do you want to overwrite it?"
+msgstr "Spejlbilledfilen %s eksisterer allerede. Skal den overskrives?"
+
+#: src/client/interface_base.cpp:440
+msgid "Access denied"
+msgstr "Adgang nægtet"
+
+#: src/client/interface_base.cpp:440
+#, c-format
+msgid "You don't have write access on %s"
+msgstr "Du har ikke skriveadgang til %s"
+
+#: src/client/interface_base.cpp:444
+#, c-format
+msgid "Invalid compression level for %s"
+msgstr "Forkert komprimeringsniveau for %s"
+
+#: src/client/interface_base.cpp:448
+#, c-format
+msgid "imagefile %s is already open"
+msgstr "Spejlbilledfilen %s er allerede åben"
+
+#: src/client/interface_base.cpp:458
+#, c-format
+msgid "file %s is too short to be a partimage volume: can't read header"
+msgstr ""
+"filen %s er for kort til at være et partimage-volume: kan ikke læse "
+"filindledningen"
+
+#. case ERR_PARTITIONVOLUME:
+#. msgBoxError(i18n("file %s is not an partimage volume: "
+#. "magic string does not match"), szFilename);
+#. return ERR_QUIT;
+#. ERR_WRONGMAGIC:
+#: src/client/interface_base.cpp:468
+#, c-format
+msgid "file %s is not an partimage file: magic string does not match"
+msgstr "%s er ikke et partimage-volume: magic string passer ikke"
+
+#: src/client/interface_base.cpp:473
+#, c-format
+msgid "magic string does not match: error in the image file [%s]"
+msgstr "magic string er ikke identisk: fejl i spejlbilledfilen [%s]"
+
+#: src/client/interface_base.cpp:477
+msgid "the current volume doesn't fit with current image: wrong identificator"
+msgstr ""
+"det nuværende volume passer ikke til spejlbilledet: forkert identifikation"
+
+#: src/client/interface_base.cpp:482
+msgid "Out of memory."
+msgstr "Løb tør for hukommelse."
+
+#: src/client/interface_base.cpp:486
+msgid "incorrect password or user not in partimagedusers file"
+msgstr "forkert adgangskode eller brugeren er ikke filen partimagedusers"
+
+#: src/client/interface_base.cpp:490
+msgid "Too many clients connected to partimaged. Please, retry later"
+msgstr ""
+"Der er i øjeblikket for mange klienter tilsluttet partimaged. Prøv igen "
+"senere"
+
+#: src/client/interface_base.cpp:495
+#, c-format
+msgid ""
+"Only 4096 bytes per block %s volumes are supported. Current one is %lu bytes/"
+"block"
+msgstr ""
+"Der er kun understøttelse af %s volumener med 4096 byte per blok. Denne har %"
+"lu byte/blok"
+
+#: src/client/interface_base.cpp:500
+#, c-format
+msgid ""
+"The partition %s id already locked by anotherprocess. You can't work on it"
+msgstr ""
+"Partitionen %s er allerede låst af en anden proces. Kan ikke arbejde med den"
+
+#: src/client/interface_base.cpp:509
+msgid ""
+"Error while checking the data: Invalid block number.Maybe a volume or some "
+"data were skipped."
+msgstr ""
+"Der opstod en fejl under undersøgelse af data: Forkert blokantal. Måske er "
+"et volume eller nogle data sprunget over."
+
+#: src/client/interface_base.cpp:514
+#, c-format
+msgid "This volume (%ld) is not the expected one: %ld."
+msgstr "Dette volume (%ld) er ikke det forventede: %ld"
+
+#: src/client/interface_base.cpp:519
+msgid ""
+"Hostname/IP Error!\n"
+"Perhaps the hostname could not be resolved. (Try again using IP address)"
+msgstr ""
+"Fejl i værtsnavn/IP-adresse\n"
+"Måske kunne værtsmavnet ikke findes. (Prøv igen med IP-adressen)"
+
+#: src/client/interface_base.cpp:559
+msgid "No MBR was found in this imagefile. We can't continue"
+msgstr ""
+"Der blev ikke fundet nogen MBR i dette spejlbillede. Kan ikke fortsætte"
+
+#: src/client/interface_base.cpp:563
+msgid "Partition checks found error(s) on partitions"
+msgstr "Undersøgelsen af partitionen('erne) fandt fejl på partitionen('erne)"
+
+#: src/client/interface_base.cpp:578
+msgid "Impossible to read MBR from disk"
+msgstr "Kan ikke læse MBR fra disken"
+
+#: src/client/interface_base.cpp:581
+#, c-format
+msgid "Invalid or damaged filesystem %s"
+msgstr "Ugyldigt filsystem %s"
+
+#: src/client/interface_base.cpp:587
+#, c-format
+msgid "Impossible to zero the block on harddrive: %s"
+msgstr "Umuligt at nulstille denne blok på harddisken: %s"
+
+#: src/client/interface_base.cpp:591
+msgid ""
+"Connexion refused by server: incompatibles networking options.Try disabling "
+"login option for server with '-L'"
+msgstr ""
+"Forbindelse nægtet af serveren: netværksindstillingerne er forkerte. Prøv at "
+"fjerne login-muligheden for serveren med '-L'"
+
+#: src/client/interface_base.cpp:596
+msgid "Connexion refused by server: versions mismatch"
+msgstr "Forbindelse nægtet af serveren: forkert version"
+
+#: src/client/interface_base.cpp:600
+#, c-format
+msgid ""
+"The image file was created by a newer release (%s) of Partition Image. "
+"Please update this software and retry."
+msgstr ""
+"Dette spejlbillede er lavet med en nyere version af Partition Image (%s). "
+"Opdatér programmet og prøv igen."
+
+#: src/client/interface_base.cpp:605
+#, c-format
+msgid ""
+"The image file was created by an older release (%s) of Partition Image. You "
+"must use the old version to restoreyour image or you have to recreate it "
+"with current version"
+msgstr ""
+"Beklager, dette spejlbillede er lavet med en ældre version af Partition "
+"Image (%s).Du skal bruge den gamle version til at gendanne spejlbilledet, "
+"eller du må lave et nyt spejlbillede med denne version."
+
+#: src/client/interface_base.cpp:612
+#, c-format
+msgid ""
+"%s is not a valid Partition Image file or it's damaged. Sorry, can't continue"
+msgstr ""
+"%s er ikke en brugbar partitions-spejlbilledfil, eller den er beskadiget. "
+"Kan ikke fortsætte"
+
+#: src/client/interface_base.cpp:617
+#, c-format
+msgid "File %s is not a regular file. For security reasons, we can't continue"
+msgstr ""
+"Filen %s er ikke en almindelig fil. Af sikkerhedsgrunde fortsættes der ikke"
+
+#: src/client/interface_base.cpp:622
+#, c-format
+msgid "Cannot mount %s"
+msgstr "Kan ikke montere %s"
+
+#: src/client/interface_base.cpp:626
+#, c-format
+msgid "Cannot unmount %s"
+msgstr "Kan ikke afmontere %s"
+
+#: src/client/interface_base.cpp:630
+#, c-format
+msgid ""
+"Cannot create temp file [%s]. Please, check there is space enough and you "
+"have access rights."
+msgstr ""
+"Kan ikke oprette temp-fil [%s]. Undersøg om der er plads nok, og om du har "
+"skriveadgang."
+
+#: src/client/interface_base.cpp:634
+#, c-format
+msgid "Cannot create temp file [%s]. No space left on device."
+msgstr "Kan ikke oprette temp-fil [%s]. Der er ikke mere plads på enheden."
+
+#: src/client/interface_base.cpp:639
+#, c-format
+msgid ""
+"Cannot create temp file in [%s]. Write access is denied for user 'partimag'"
+msgstr ""
+"Kan ikke oprette temp-fil i [%s]. Brugeren 'partimag' har ikke skriveadgang"
+
+#: src/client/interface_base.cpp:642
+#, c-format
+msgid "Cannot create temp file in [%s]. Write access is denied."
+msgstr "Kan ikke oprette temp-fil i [%s]. Skriveadgang nægtet."
+
+#: src/client/interface_base.cpp:647
+msgid ""
+"File too large. (larger than 2 GB). Can't continue. This problem can come "
+"from the kernel, the glibc, the file system which where the image is written"
+msgstr ""
+"Kan ikke fortsætte. Filen er for stor. (Større end 2 GB). Problemet kan "
+"stamme fra din kerne, glibc eller det filsystem spejlbilledfilen skrives på"
+
+#: src/client/interface_base.cpp:651
+#, c-format
+msgid "Unknown error %d -> %s"
+msgstr "Ukendt fejl %d -> %s"
+
+#: src/client/interface_newt.cpp:37
+msgid "Newt debug information"
+msgstr "Newt fejlfindings-information"
+
+#: src/client/interface_newt.cpp:37 src/client/interface_newt.cpp:110
+#: src/client/interface_newt.cpp:346 src/client/interface_newt.cpp:378
+#: src/client/interface_newt.cpp:431
+msgid "Ok"
+msgstr "O.k."
+
+#: src/client/interface_newt.cpp:151
+msgid "Continue"
+msgstr "Fortsæt"
+
+#: src/client/interface_newt.cpp:174
+msgid "Yes"
+msgstr "Ja"
+
+#: src/client/interface_newt.cpp:174
+msgid "No"
+msgstr "Nej"
+
+#: src/client/interface_newt.cpp:213
+msgid "* Partition to save/restore"
+msgstr "* Partition der skal gemmes/gendannes"
+
+#: src/client/interface_newt.cpp:215
+msgid "* Image file to create/use"
+msgstr "* Spejlbilledfil der skal oprettes/bruges"
+
+#: src/client/interface_newt.cpp:217
+msgid "Action to be done:"
+msgstr "Handling der skal udføres:"
+
+#: src/client/interface_newt.cpp:218
+msgid "Save partition into a new image file"
+msgstr "Gem partitionen i en ny spejlbilledfil"
+
+#: src/client/interface_newt.cpp:219
+msgid "Restore partition from an image file"
+msgstr "Gendan partition fra en spejlbilledfil"
+
+#: src/client/interface_newt.cpp:220
+msgid "Restore an MBR from the imagefile"
+msgstr "Gendan en MBR fra spejlbilledfilen"
+
+#: src/client/interface_newt.cpp:222
+msgid "Connect to server"
+msgstr "Forbind til serveren"
+
+#: src/client/interface_newt.cpp:224
+msgid "Encrypt data on the network with SSL"
+msgstr "Krypter data på netværket med SSL"
+
+#: src/client/interface_newt.cpp:227
+msgid "SSL disabled at compile time"
+msgstr "SSL-understøttelse blev i sin tid slået fra ved oversættelsen"
+
+#: src/client/interface_newt.cpp:229
+msgid "SSL&login disabled at compile time"
+msgstr "SSL-&understøttelse slået fra ved kompileringen"
+
+#: src/client/interface_newt.cpp:232
+msgid "IP/name of the server:"
+msgstr "Serverens IP/navn:"
+
+#: src/client/interface_newt.cpp:234
+msgid "Port:"
+msgstr "Port: "
+
+#: src/client/interface_newt.cpp:238
+msgid "Next (F5)"
+msgstr "Næste (F5)"
+
+#: src/client/interface_newt.cpp:239
+msgid "About"
+msgstr "Om"
+
+#: src/client/interface_newt.cpp:270
+msgid "The \"Image\" filed is empty. Cannot continue"
+msgstr "\"Spejlbilled\"-feltet er tomt. Kan ikke fortsætte"
+
+#: src/client/interface_newt.cpp:278
+msgid "The \"Server IP/Name\" field is empty. Cannot continue"
+msgstr "\"Server IP-adresse/Navn\"-feltet er tomt. Kan ikke fortsætte"
+
+#: src/client/interface_newt.cpp:284
+msgid "The \"Server Port\" field is not a valid integer. Cannot continue"
+msgstr "\"Server Port\"-feltet er ikke et gyldigt heltal. Kan ikke fortsætte"
+
+#: src/client/interface_newt.cpp:342 src/client/misc.cpp:863
+msgid "Partition description"
+msgstr "partitionsbeskrivelse"
+
+#: src/client/interface_newt.cpp:344
+msgid "You can enter a description of the saved partition:"
+msgstr "Du kan tilføje en beskrivelse af den gemte partition"
+
+#: src/client/interface_newt.cpp:396 src/client/interface_newt.cpp:452
+msgid "Text cannot be empty"
+msgstr "Tekstfeltet må ikke være tomt"
+
+#: src/client/interface_newt.cpp:421
+msgid "Password required"
+msgstr "Adgangskode kræves"
+
+#: src/client/interface_newt.cpp:424
+msgid "Enter your login"
+msgstr "Skriv dit brugernavn"
+
+#: src/client/interface_newt.cpp:428
+msgid "Enter your password"
+msgstr "Skriv din adgangskode"
+
+#: src/client/interface_newt.cpp:468
+#, c-format
+msgid ""
+"Disk full! Can't write next volume file (%s.%.3ld)\n"
+"to %s\n"
+"Please, enter another directory path (without filename):"
+msgstr ""
+"Disk fuld! Kan ikke skrive næste volumefil (%s.%.3ld)\n"
+"til %s\n"
+"Skriv venligst stien til et nyt katalog (uden filnavnet):"
+
+#. *(szMess+2047) = '\0';
+#: src/client/interface_newt.cpp:473
+msgid "New Volume location"
+msgstr "Ny volumeplacering"
+
+#: src/client/main.cpp:240 src/client/misc.cpp:1915
+msgid "server's port must be between 1 and 65535\n"
+msgstr "serverporten skal ligge mellem 1 og 65535\n"
+
+#: src/client/main.cpp:249
+msgid "Compression mode must be 0 (none), 1(gzip), 2(bzip2)\n"
+msgstr "Komprimeringen skal enten være 0 (ingen), 1(gzip) eller 2(bzip2)\n"
+
+#: src/client/main.cpp:259
+msgid "Finish mode must be 0 (wait), 1(halt), 2(reboot) or 3(quit)\n"
+msgstr ""
+"Afslutningstilstanden skal enten være 0 (vent), 1(luk ned), 2(genstart) "
+"eller 3(afslut)\n"
+
+#: src/client/main.cpp:269
+msgid ""
+"The debug level must be 0(none), 1(user), 2(developer) or 3(debugging)\n"
+msgstr ""
+"Fejlfindings niveauet skal enten være 0(intet), 1(bruger), 2(udvikler) eller "
+"3(fejlsøgning)\n"
+
+#: src/client/main.cpp:278
+#, c-format
+msgid "Volume size: %llu bytes (%ld MiB)\n"
+msgstr "Volumets størrelse: %llu bytes (%ld MiB)\n"
+
+#. version
+#: src/client/main.cpp:308
+#, c-format
+msgid "Partition Image version %s (distributed under the GNU GPL2).\n"
+msgstr "Partition Image version %s (udgivet under GNU GPL2).\n"
+
+#: src/client/main.cpp:352
+msgid "Cannot open debug file.\n"
+msgstr "Kan ikke åbne fejlfindingsfil.\n"
+
+#: src/client/main.cpp:529
+msgid ""
+"You have devfs enabled but not mounted. You have to do it to continue. You "
+"can also boot with non-devfs kernel if you have one."
+msgstr ""
+"Du har slået devfs til men ikke monteret det. Det skal gøres før du "
+"fortsætter. Du kan også starte op på en kerne ude devfs, hvis du har en."
+
+#: src/client/main.cpp:651 src/client/main.cpp:664
+msgid "commiting buffer cache to disk."
+msgstr "gemmer buffer-cache på disken."
+
+#: src/client/main.cpp:719
+msgid "The MBR was successfully restored"
+msgstr "Det lykkedes at gendanne MBR"
+
+#: src/client/main.cpp:724
+msgid "Simulation"
+msgstr "Simulering"
+
+#: src/client/main.cpp:726
+msgid "Operation"
+msgstr "Handling"
+
+#. if we reach this point, it's because shutdown failed
+#: src/client/main.cpp:741
+msgid "Error: Cannot halt the computer"
+msgstr "Fejl: Kan ikke lukke computeren ned"
+
+#. if we reach this point, it's because shutdown failed
+#: src/client/main.cpp:751
+msgid "Error: Cannot reboot the computer"
+msgstr "Fejl: Kan ikke genstarte computeren"
+
+#: src/client/main.cpp:782 src/client/main.cpp:789 src/client/main.cpp:815
+msgid "Error: Cannot count remaining partimages"
+msgstr "Fejl: Kan optælle de resterende partimages"
+
+#. nRes = system("/sbin/shutdown -r now");
+#. nRes = system("/sbin/reboot");
+#. if we reach this point, it's because shutdown failed
+#: src/client/main.cpp:804
+msgid "DEBUG: reboot the computer"
+msgstr "FEJLHÅRNDTERING: genstart din computer"
+
+#: src/client/main.cpp:843
+#, c-format
+msgid ""
+"Partition Image (http://www.partimage.org/) version %s [%s]\n"
+"---- distributed under the GPL 2 license (GNU General Public License) ----\n"
+"\n"
+"Supported file systems:....ext2fs, reiserfs, fat16, fat32, ntfs(exp), hpfs\n"
+"\n"
+"usage: partimage [options] <action> <device> <image_file>\n"
+"       partimage <imginfo/restmbr> <image_file>\n"
+"\n"
+"ex: partimage -z1 -o -d save /dev/hda12 /mnt/backup/redhat-6.2.partimg.gz\n"
+"ex: partimage restore /dev/hda13 /mnt/backup/suse-6.4.partimg\n"
+"ex: partimage restmbr /mnt/backup/debian-potato-2.2.partimg.bz2\n"
+"ex: partimage -z1 -om save /dev/hda9 /mnt/backup/win95-osr2.partimg.gz\n"
+"ex: partimage imginfo /mnt/backup/debian-potato-2.2.partimg.bz2\n"
+"ex: partimage -a/dev/hda6#/mnt/partimg#vfat -V1440 save /dev/hda12 /mnt/"
+"partimg/redhat-6.2.partimg.gz\n"
+"\n"
+"Arguments:\n"
+"* <action>:\n"
+"  - save: save the partition datas in an image file\n"
+"  - restore: restore the partition from an image file\n"
+"  - restmbr: restore a MBR of the image file to an hard disk\n"
+"  - imginfo: show informations about the image file\n"
+"* <device>: partition to save/restore (example: /dev/hda1)\n"
+"* <image_file>: file where data will be read/written. can be very big\n"
+"\n"
+"Options:\n"
+"* -z,  --compress     (image file compression level):\n"
+"  -z0, --compress=0   don't compress: very fast but very big image file\n"
+"  -z1, --compress=1   compress using gzip: fast and small image file "
+"(default)\n"
+"  -z2, --compress=2   (compress using bzip2: very slow and very small image "
+"file):\n"
+"* -c,  --nocheck      don't check the partition before saving\n"
+"* -o,  --overwrite    overwrite the existing image file without "
+"confirmation\n"
+"* -d,  --nodesc       don't ask any description for the image file\n"
+"* -V,  --volume       (split image into multiple volumes files)\n"
+"  -VX, --volume=X     create volumes with a size of X KB\n"
+"* -w,  --waitvol      wait for a confirmation after each volume change\n"
+"* -e,  --erase        erase empty blocks on restore with zero bytes\n"
+"* -m,  --allowmnt     don't fail if the partition is mounted. Dangerous !\n"
+"* -M,  --nombr        don't create a backup of the MBR (Mast Boot Record) in "
+"the image file\n"
+"* -h,  --help         show help\n"
+"* -v,  --version      show version\n"
+"* -i,  --compilinfo   show compilation options used\n"
+"* -f,  --finish       (action to do if finished successfully):\n"
+"  -f0, --finish=0     wait: don't make anything\n"
+"  -f1, --finish=1     halt (power off) the computer\n"
+"  -f2, --finish=2     reboot (restart the computer):\n"
+"  -f3, --finish=3     quit\n"
+"* -b,  --batch        batch mode: the GUI won't wait for an user action\n"
+"* -y,  --nosync       don't synchronize the disks at the end of the "
+"operation (dangerous)\n"
+"* -sX, --server=X     give partimaged server's ip address\n"
+"* -pX, --port=X       give partimaged server's listening port\n"
+"* -g,  --debug=X      set the debug level to X (default: 1):\n"
+"* -n,  --nossl        disable SSL in network mode\n"
+"* -S,  --simulate     simulation of restoration mode\n"
+"* -aX, --automnt=X    Automatic mount with X options. Read the doc for more "
+"details\n"
+"* -UX  --username=X   Username to authenticate to server\n"
+"* -PX  --Password=X   Password for authentication of user to server\n"
+msgstr ""
+"Partition Image (http://www.partimage.org/) version %s [%s]\n"
+"---- udgivet under GPL 2 licensen (GNU General Public License) ----\n"
+"\n"
+"Understøttede filsystemer:....ext2fs, reiserfs, fat16, fat32, ntfs(exp), "
+"hpfs\n"
+"\n"
+"brug: partimage [tilvalg] <handling> <enhed> <spejlbilledfil>\n"
+"       partimage <imginfo/restmbr> <spejlbilledfil>\n"
+"\n"
+"fx: partimage -z1 -o -d save /dev/hda12 /mnt/backup/redhat-6.2.partimg.gz\n"
+"fx: partimage restore /dev/hda13 /mnt/backup/suse-6.4.partimg\n"
+"fx: partimage restmbr /mnt/backup/debian-potato-2.2.partimg.bz2\n"
+"fx: partimage -z1 -om save /dev/hda9 /mnt/backup/win95-osr2.partimg.gz\n"
+"fx: partimage imginfo /mnt/backup/debian-potato-2.2.partimg.bz2\n"
+"fx: partimage -a/dev/hda6#/mnt/partimg#vfat -V1440 save /dev/hda12 /mnt/"
+"partimg/redhat-6.2.partimg.gz\n"
+"\n"
+"Parametre:\n"
+"* <handling>:\n"
+"  - save: Gem partitionens data i en spejlbilledfil\n"
+"  - restore: genopret partitionen fra en spejlbilledfil\n"
+"  - restmbr: genopret MBR fra en spejlbilledfil til harddisken\n"
+"  - imginfo: vil  oplysninger om en spejlbilledfil\n"
+"* <enhed>: partition der skal gemmes/genoprettes (eksempel: /dev/hda1)\n"
+"* <spejlbilledfil>: fil hvor dataene læses/gemmes. Kan være meget stor\n"
+"\n"
+"tilvalg:\n"
+"* -z,  --compress     (spejlbilledfilens komprimeringsniveau):\n"
+"  -z0, --compress=0   komprimér ikke: meget hurtig, giver meget stor "
+"spejlbilledfil\n"
+"  -z1, --compress=1   komprimér med gzip: hurtig, giver lille spejlbilledfil "
+"(standard)\n"
+"  -z2, --compress=2   (komprimér med bzip2: meget langsom, giver meget lille "
+"spejlbilledfil):\n"
+"* -c,  --nocheck      undersøg ikke partitionen før den gemmes\n"
+"* -o,  --overwrite    overskriv den eksisterende spejlbilledfil uden at "
+"spørge\n"
+"* -d,  --nodesc       bed ikke om nogen oplysninger til spejlbilledfilen\n"
+"* -V,  --volume       (opdel spejlbilledfilen i flere volumefiler)\n"
+"  -VX, --volume=X     lav volumefiler af størrelsen X kb\n"
+"* -w,  --waitvol      vent på bekræftelse ved hvert skift af volume\n"
+"* -e,  --erase        fjern tomme blokke ved genoprettelse med zero byte\n"
+"* -m,  --allowmnt     fortsæt uanset om partitionen er monteret. Farligt!\n"
+"* -M,  --nombr        lav ingen sikkerhedskopi af MBR (Mast Boot Record) i "
+"spejlbilledfilen\n"
+"* -h,  --help         vis hjælp\n"
+"* -v,  --version      vis version\n"
+"* -f,  --finish       (handling der udføres hvis alt går godt):\n"
+"  -f0, --finish=0     vent: lad være med at gøre noget som helst\n"
+"  -f1, --finish=1     luk og sluk maskinen\n"
+"  -f2, --finish=2     genstart maskinen:\n"
+"  -f3, --finish=3     afslut.\n"
+"* -b,  --batch        automatisk tilstand: den grafiske grænseflade venter "
+"ikke på indtastninger\n"
+"* -y,  --nosync       lad være med at synkronisere diskene efter at "
+"programmet er færdigt (farligt)\n"
+"* -sX, --server=X     angiv partimaged-serverens IP-adresse\n"
+"* -pX, --port=X       angiv den port partimaged-serveren lytter på\n"
+"* -g,  --debug=X      sæt fejlfindings-niveauet til X (standard: 1):\n"
+"* -n,  --nossl        slå SSL fra i netværkstilstand\n"
+"* -S,  --simulate     simulation af gendannelse\n"
+"* -aX, --automnt=X    automatisk montering med X som tilvalg. Læs "
+"dokumentationen for flere detaljer\n"
+"* -UX  --username=X   Brugernavn for adgang til serveren\n"
+"* -PX  --Password=X   Adgangskode til serveren\n"
+
+#: src/client/main.cpp:894
+msgid "stable"
+msgstr "stable"
+
+#: src/client/main.cpp:894
+msgid "unstable"
+msgstr "ustabil"
+
+#: src/client/main.cpp:1050
+#, c-format
+msgid ""
+"%s  successfully finished:\n"
+"\n"
+"Time elapsed:...%s\n"
+"Speed:..........%s/min\n"
+"Data copied:....%s"
+msgstr ""
+"%s afslutteder problemfrit:\n"
+"\n"
+"Brugt tid:................%s\n"
+"Hastighed:..........%s/min\n"
+"Data kopieret:....%s"
+
+#: src/client/misc.cpp:374
+msgid "initializing the operation. Please wait..."
+msgstr "gør klar til at udføre handlingen handlingen. Vent venligst"
+
+#: src/client/misc.cpp:417
+msgid "Bzip2 bug workaround"
+msgstr "Omgå bzip2-fejl"
+
+#: src/client/misc.cpp:418
+msgid ""
+"Because of a bug, you won't be able to restore MBR from any bzip2 compressed "
+"image unless you manualy run bzip2 -d on them"
+msgstr ""
+"På grund af en fejl kan du ikke gendanne MBR fra en spejlbilledfil "
+"komprimeret med bzip2 med mindre du kører bzip2 -d på den"
+
+#: src/client/misc.cpp:595
+msgid "Saving partition to the image file..."
+msgstr "Gemmer partitionen i spejlbilledfil..."
+
+#: src/client/misc.cpp:711
+msgid "initializing the operation"
+msgstr "opstarter handlingen"
+
+#: src/client/misc.cpp:1001 src/client/misc.cpp:1015 src/client/misc.cpp:1025
+msgid "Error in Main Tail"
+msgstr "Fejl i hovedsporet"
+
+#: src/client/misc.cpp:1002
+msgid "Impossible to read the magic: the image is damaged"
+msgstr "Kan ikke læse magic: Spejlbilledfilen er beskadiget"
+
+#: src/client/misc.cpp:1016
+msgid "CRC changed: the image is damaged"
+msgstr "CRC er ændret: Spejlbilledfilen er beskadiget"
+
+#: src/client/misc.cpp:1026
+msgid "volume numbers changed: the image is damaged"
+msgstr "volume-nummeret er ændret: Spejlbilledfilen er beskadiget"
+
+#: src/client/misc.cpp:1639
+msgid "inode missing"
+msgstr "inode mangler"
+
+#: src/client/misc.cpp:1639
+#, c-format
+msgid ""
+"%s inode doesn't exists. Partimage can create it for you. You can also use "
+"the manual mknod command. Do you want this inode to be created for you now ?"
+msgstr ""
+"%s inode eksisterer ikke. Partimage kan lave den for dig. Du kan også lave "
+"den manuelt med kommandoen mknod. Skal denne inode laves for dig nu?"
+
+#: src/client/misc.cpp:1656
+#, c-format
+msgid "%s is not a block device."
+msgstr "%s er ikke en blokenhed."
+
+#: src/client/misc.cpp:1708
+msgid "You haven't access to /proc/mounts."
+msgstr "Du har ikke adgang til /proc/mounts."
+
+#: src/client/misc.cpp:1714
+msgid "An error occurred trying to read /proc/mounts."
+msgstr "Der opstod en fejl under læsningen af /proc/mounts."
+
+#: src/client/misc.cpp:1888
+#, c-format
+msgid ""
+"The %s partition is mounted. Partition Image can't work on mounted "
+"partitions. Please, unmount it before. You can do it with \"umount %s\""
+msgstr ""
+"partitionen %s er monteret. Partition Image kan ikke arbejde på monterede "
+"partitioner. Afmontér partitionen først. Du kan gøre det med kommandoen "
+"\"umount %s\""
+
+#: src/client/misc.cpp:1908
+msgid ""
+"Split volumes size must be an integer greater than 1024 (size >= 1024 KB)"
+msgstr ""
+"Størrelsen på opsplittede volumener skal være et heltal større end 1024 "
+"(størrelse >= 1024 kb)"
+
+#: src/client/misc.cpp:1928
+msgid "Invalid automount options. Read the manual for more details"
+msgstr "Ugyldige automount-tilvalg. Læs detaljer i manualen"
+
+#: src/client/misc.cpp:1936
+#, c-format
+msgid "The second argument [%s] must be a valid device (ex: /dev/hda1)"
+msgstr "Det andet argument [%s] skal være en gyldig enhed fx /dev/hda1"
+
+#: src/client/misc.cpp:1945
+#, c-format
+msgid ""
+"The third argument [%s] must be a valid regular file (not a directory, a "
+"symlink, ...)"
+msgstr ""
+"Det tredie argument [%s] skal være en almindelig fil (ikke et katalog, en "
+"symbolsk henvisning eller andet)"
+
+#: src/client/fs/fs_base.cpp:81
+msgid "Exit partimage ?"
+msgstr "Afslut Partimage?"
+
+#: src/client/fs/fs_base.cpp:81
+msgid "Do you really want to cancel the current operation ?"
+msgstr "�sker du virkeligt at standse den nuværende operation?"
+
+#: src/client/fs/fs_base.cpp:346
+msgid "local check error"
+msgstr "lokal tjekfejl"
+
+#: src/client/fs/fs_base.cpp:347
+msgid ""
+"Impossible to find a local check structure. Data may be damaged. Do you want "
+"to continue ?"
+msgstr ""
+"Det er umuligt at finde en lokal tjekstruktur. Dataene er måske beskadigede. "
+"Vil du fortsætte?"
+
+#: src/client/fs/fs_base.cpp:359 src/client/fs/fs_base.cpp:371
+msgid "local CRC error"
+msgstr "lokal CRC-fejl"
+
+#: src/client/fs/fs_base.cpp:360
+msgid ""
+"There was a position error in CCheck. Data may be damaged. Do you want to "
+"continue ?"
+msgstr ""
+"Der var en positionsfejl i CCheck. Dataene er måske beskadigede. Vil du "
+"fortsætte?"
+
+#: src/client/fs/fs_base.cpp:372
+msgid ""
+"There was a CRC error in CCheck. Data may be damaged. Do you want to "
+"continue ?"
+msgstr ""
+"Der var en CRC fejl i CCheck. Dataene er måske beskadigede. Vil du fortsætte?"
+
+#: src/client/fs/fs_base.cpp:473
+msgid "reading partition properties"
+msgstr "læser partitionsegenskaber"
+
+#: src/client/fs/fs_base.cpp:485
+msgid "checking the file system with fsck"
+msgstr "undersøger filsystemet med fsck"
+
+#: src/client/fs/fs_base.cpp:507
+msgid "writing header"
+msgstr "skriver filhoved"
+
+#: src/client/fs/fs_base.cpp:564 src/client/fs/fs_base.cpp:699
+msgid "copying used data blocks"
+msgstr "kopierer data blokke i brug"
+
+#: src/client/fs/fs_base.cpp:588
+msgid "reading partition informations"
+msgstr "læser partitionsoplysninger"
+
+#: src/client/fs/fs_base.cpp:724
+#, c-format
+msgid ""
+"Block size....................%llu bytes\n"
+"Total blocks count............%llu\n"
+"Used blocks count.............%llu\n"
+"Free blocks count.............%llu\n"
+msgstr ""
+"Blok størrelse...................%llu byte\n"
+"Totalt antal blokke............%llu\n"
+"Antal brugte blokke..........%llu\n"
+"Antal ledige blokke..........%llu\n"
+
+#: src/client/fs/fs_base.cpp:738
+#, c-format
+msgid ""
+"%sSpace usage:..................%llu %%\n"
+"Used space....................%s\n"
+"Free space....................%s\n"
+"Bitmap size...................%s\n"
+"Label.........................%s\n"
+msgstr ""
+"%spladsforbrug:..%llu %%\n"
+"Brugt plads....................%s\n"
+"Ubrugt plads..................%s\n"
+"Bitmap størrelse...........%s\n"
+"Etikette..........................%s\n"
+
+#: src/client/fs/fs_ext2.cpp:105
+#, c-format
+msgid ""
+"%sNumber of groups..............%lu\n"
+"First block...................%lu\n"
+"Ext3fs journalization.........%s\n"
+"Sparse super block............%s\n"
+"Large files support...........%s\n"
+"File system revision..........%lu\n"
+msgstr ""
+"%sAntal grupper......%lu\n"
+"Første blok...........................%lu\n"
+"Ext3fs-journalisering............%s\n"
+"Superblok med huller...........%s\n"
+"Understøttelse af store filer..%s\n"
+"Filsystemrevision................%lu\n"
+
+#: src/client/fs/fs_ext2.cpp:113 src/client/fs/fs_ext2.cpp:114
+#: src/client/fs/fs_ext2.cpp:115
+msgid "yes"
+msgstr "ja"
+
+#: src/client/fs/fs_ext2.cpp:113 src/client/fs/fs_ext2.cpp:114
+#: src/client/fs/fs_ext2.cpp:115
+msgid "no"
+msgstr "nej"
+
+#: src/client/fs/fs_ext2.cpp:119
+msgid "Ext3fs informations"
+msgstr "Ext3fs-information"
+
+#: src/client/fs/fs_ext2.cpp:121
+msgid "Ext2fs informations"
+msgstr "Ext2fs-information"
+
+#: src/client/fs/fs_ext2.cpp:331
+msgid "There was an error while reading the bitmap"
+msgstr "Der opstod en fejl under læsning af bitmappen"
+
+#: src/client/fs/fs_fat.cpp:123
+#, c-format
+msgid ""
+"%sSector Size...................%u\n"
+"Sectors per cluster...........%u\n"
+"Reserved Sectors count........%u\n"
+"Root directory sectors........%lu\n"
+"FAT tables count..............%u\n"
+"Total Sectors Count...........%lu\n"
+"Sectors per FAT...............%lu\n"
+"Clusters count:...............%lu\n"
+"Used clusters.................%lu\n"
+"Free clusters.................%lu\n"
+"Damaged clusters..............%lu\n"
+msgstr ""
+"%sSektorstørrelse..%u\n"
+"Sektorer per klynge..............%u\n"
+"Antal reserverede sektorer..%u\n"
+"Sektorer i rodkataloget.........%lu\n"
+"Antal FAT tabeller...............%u\n"
+"Totalt antal sektorer............%lu\n"
+"Sektorer per FAT................%lu\n"
+"Antal klynger.......................%lu\n"
+"Brugte klynger.....................%lu\n"
+"Ubrugte klynger...................%lu\n"
+"Beskadigede klynger..........%lu\n"
+
+#: src/client/fs/fs_fat.cpp:142
+msgid "FAT informations"
+msgstr "FAT-information"
+
+#: src/client/fs/fs_fat.cpp:288
+msgid "Can't read boot sector"
+msgstr "Kan ikke læse boot-sektoren"
+
+#: src/client/fs/fs_fat.cpp:343
+msgid ""
+"m_cSectorsPerCluster can't be null. Check the partition to save is a FAT one."
+msgstr ""
+"m_cSectorsPerCluster må ikke være null. Undersøg om partitionen du vil gemme "
+"nu også er en FAT-partition."
+
+#: src/client/fs/fs_fat.cpp:379
+msgid "Can't read FSInfo sector"
+msgstr "Kan ikke læse FSinfo-sektoren"
+
+#: src/client/fs/fs_ntfs.cpp:61
+#, c-format
+msgid "%s is not an NTFS file system partition"
+msgstr "%s er ikke en NTFS-partition"
+
+#: src/client/fs/fs_ntfs.cpp:134
+#, c-format
+msgid "Out of memory: need %lu bytes to read file record in readBitmap()"
+msgstr ""
+"Løb tør for hukommelse: skal bruge %lu byte for at læse file record i "
+"readBitmap()"
+
+#: src/client/fs/fs_ntfs.cpp:184
+msgid ""
+"Unable to read the $Bitmap MFT record. Do you want to make an experimental "
+"search for it ? (it can take a long time)"
+msgstr ""
+"Ude af stand til at læse $Bitmap MFT record. �sker du at foretage en "
+"eksperimentel søgning efter den? (det kan tage lang tid)"
+
+#: src/client/fs/fs_ntfs.cpp:199
+msgid "Cannot find the $bitmap with experimental search"
+msgstr "Kunne ikke finde $bitmap ved den eksperimentelle søgning"
+
+#: src/client/fs/fs_ntfs.cpp:211
+msgid "Cannot use $bitmap file record"
+msgstr "Kan ikke bruge $bitmap file record"
+
+#: src/client/fs/fs_ntfs.cpp:220
+msgid "NTFS $Bitmap is to small"
+msgstr "NTFS $Bitmap er for lille"
+
+#: src/client/fs/fs_ntfs.cpp:236 src/client/fs/fs_ntfs.cpp:605
+msgid "Out of memory"
+msgstr "Løb tør for hukommelse"
+
+#: src/client/fs/fs_ntfs.cpp:308
+#, c-format
+msgid ""
+"%sBytes per sector..............%u\n"
+"Sectors per cluster...........%u\n"
+"File record size..............%lu\n"
+"LCN of MFT Data attrib........%llu\n"
+msgstr ""
+"%sbyte per sektor.......%u\n"
+"Sektorer per klynge.............%u\n"
+"File record størrelse...........%lu\n"
+"LCN of MFT Data attribut....%llu\n"
+
+#: src/client/fs/fs_ntfs.cpp:316
+msgid "NTFS informations"
+msgstr "NTFS-information"
+
+#: src/client/fs/fs_ntfs.cpp:341
+#, c-format
+msgid "Out of memory: need %lu bytes to read file record in readVolumeLabel()"
+msgstr ""
+"Løb tør for hukommelse: skal bruge %lu byte for at læse file record i "
+"readVolumeLabel()"
+
+#: src/client/fs/fs_ntfs.cpp:444
+msgid "NTFS: \"Attribute List\" attribute is not yet supported."
+msgstr "NTFS: \"Attribut Liste\" attribut er endnu ikke understøttet"
+
+#: src/client/fs/fs_ntfs.cpp:478
+#, c-format
+msgid "NTFS: Compression flag for DATA attribute not null: %ld"
+msgstr "NTFS: Komprimeringsflag for DATA-attribut er ikke null: %ld"
+
+#. WORD nOffsetOfStream;
+#. nOffsetOfStream=NTFS_GETU16(cAttribData+0x14);
+#. qwDataSize = (QWORD) NTFS_GETU16(cAttribData+0x10);
+#: src/client/fs/fs_ntfs.cpp:493
+msgid "NTFS: Resident data attribute not supported"
+msgstr "NTFS: Resident data attribut er ikke understøttet"
+
+#: src/client/fs/fs_ntfs.cpp:506
+msgid "NTFS: processRunList() returned -1"
+msgstr "NTFS: processRunList() returnerede -1"
+
+#: src/client/fs/fs_ntfs.cpp:526
+msgid "Error in readFilenameAttribute"
+msgstr "Fejl i readFilenameAttribute"
+
+#: src/client/fs/fs_ntfs.cpp:526
+msgid "The \"filename\" attribute must be resident !"
+msgstr "\"filnavn\"-attributten skal være til stede!"
+
+#: src/client/fs/fs_ntfs.cpp:858
+msgid "$bitmap record search"
+msgstr "søger efter $bitmap record"
+
+#: src/client/fs/fs_ntfs.cpp:858
+msgid "experimental search succeed"
+msgstr "den eksperimentelle søgning lykkedes"
+
+#: src/client/fs/fs_hpfs.cpp:148
+#, c-format
+msgid "%sHPFS version:.................%d\n"
+msgstr "%sHPFS version:.................%d\n"
+
+#: src/client/fs/fs_hpfs.cpp:152
+msgid "HPFS informations"
+msgstr "HPFS-information"
+
+#: src/client/fs/fs_hpfs.cpp:176
+msgid "Can't read boot block"
+msgstr "Kan ikke læse opstartsblok"
+
+#: src/client/fs/fs_hpfs.cpp:188
+msgid "Can't read super block"
+msgstr "Kan ikke læse superblok"
+
+#: src/client/fs/fs_hpfs.cpp:200
+msgid "Can't read spare block"
+msgstr "Kan ikke læse reserveblok"
+
+#: src/client/fs/fs_hpfs.cpp:207
+msgid "Invalid HPFS magic numbers. Not a valid HPFS partition."
+msgstr "Ugyldige HPFS magic numbers. Dette er ikke en gyldig HPFS-partition."
+
+#: src/client/fs/fs_reiser.cpp:113
+msgid "ReiserFS informations"
+msgstr "ReiserFS-information"
+
+#: src/client/fs/fs_jfs.cpp:566
+msgid "JFS informations"
+msgstr "JFS-information"
+
+#: src/client/fs/fs_xfs.cpp:210
+#, c-format
+msgid ""
+"%sAllocation Group count:.......%lu\n"
+"Blocks per Allocation Group...%lu\n"
+"Allocation Group size:........%s\n"
+msgstr ""
+"%sAntal grupper allokeret:.......%lu\n"
+"Blokke per allokeret gruppe...%lu\n"
+"Størrelse af allokerede grupper:........%s\n"
+
+#: src/client/fs/fs_xfs.cpp:217
+msgid "XFS informations"
+msgstr "XFS-information"
+
+#: src/server/partimaged.cpp:77
+msgid "Waitting ..."
+msgstr "Venter..."
+
+#: src/server/partimaged.cpp:85
+msgid "error !"
+msgstr "fejl!"
+
+#: src/server/partimaged.cpp:104
+msgid "getspace ..."
+msgstr "hent pladsoplysninger..."
+
+#: src/server/partimaged.cpp:118
+msgid "writting ..."
+msgstr "skriver..."
+
+#: src/server/partimaged.cpp:146
+msgid "opening for write ..."
+msgstr "åbner til skrivning..."
+
+#: src/server/partimaged.cpp:157
+msgid "saving"
+msgstr "gemmer"
+
+#: src/server/partimaged.cpp:162
+msgid "reading ..."
+msgstr "læser..."
+
+#: src/server/partimaged.cpp:188
+msgid "closing ..."
+msgstr "lukker..."
+
+#: src/server/partimaged.cpp:200
+msgid "opening for read ..."
+msgstr "åbner for læsning..."
+
+#: src/server/partimaged.cpp:201
+msgid "restoring"
+msgstr "genskaber"
+
+#: src/server/partimaged.cpp:382
+msgid "finished"
+msgstr "færdig"
+
+#: src/server/partimaged-gui_newt.cpp:56 src/server/partimaged-gui_newt.cpp:58
+#: src/server/partimaged-gui_newt.cpp:62 src/server/partimaged-gui_newt.cpp:64
+#: src/server/partimaged-gui_newt.cpp:68 src/server/partimaged-gui_newt.cpp:70
+msgid "Partimaged"
+msgstr "Partimaged"
+
+#: src/server/partimaged-gui_newt.cpp:83
+msgid "Client #"
+msgstr "Klient #"
+
+#: src/server/partimaged-gui_newt.cpp:84
+msgid "State"
+msgstr "Tilstand"
+
+#: src/server/partimaged-gui_newt.cpp:85
+msgid "Host"
+msgstr "Vært (host)"
+
+#: src/server/partimaged-gui_newt.cpp:86
+msgid "Location"
+msgstr "Sted"
+
+#: src/server/partimaged-gui_newt.cpp:87
+msgid "Size"
+msgstr "Størrelse"
+
+#: src/server/partimaged-gui_newt.cpp:109
+msgid "waiting"
+msgstr "venter"
+
+#: src/server/partimaged-main.cpp:108
+#, c-format
+msgid ""
+"Segmentation fault. Please report the bug and send the [%s] file to authors\n"
+msgstr ""
+"Forkert segmentation. Send en beskrivelse og filen [%s] til programmets "
+"forfattere\n"
+
+#: src/server/partimaged-main.cpp:119
+#, c-format
+msgid ""
+"Partition Image Daemon (http://www.partimage.org/) version %s\n"
+"---- distributed under the GPL 2 license (GNU General Public License) ----\n"
+"\n"
+"usage: partimaged [options]\n"
+"\n"
+"Options:\n"
+"* -h,  --help            show help\n"
+"* -v,  --version         show version\n"
+"* -d,  --dest            destination directory\n"
+"* -pX, --port=X          server's port listening (defaults to %d)\n"
+"* -D,  --daemon          start in daemon mode, not foreground\n"
+"* -i,  --compilinfo      show compilation options used\n"
+"* -r dir, --chroot dir   use chroot to improve security\n"
+"* -g, --debug=X          set the debug level to X (default: 1)\n"
+"* -L, --nologin          disable login from clients\n"
+msgstr ""
+"Partition Image-dæmon (http://www.partimage.org/) version %s\n"
+"---- udgivet under GPL 2 licens (GNU General Public License) ----\n"
+"\n"
+"brug: partimaged [tilvalg]\n"
+"\n"
+"tilvalg:\n"
+"* -h,  --help            vis hjælp\n"
+"* -v,  --version         vis version\n"
+"* -d,  --dest            destinationsmappen\n"
+"* -pX, --port=X          den port serveren lytter på (standard er %d)\n"
+"* -D,  --daemon          start som dæmon, ikke i forgrunden\n"
+"* -r dir, --chroot dir   benyt chroot for at øge sikkerheden\n"
+"* -g, --debug=X          sæt fejlsøgningsniveauet til X (standard: 1)\n"
+"* -L, --nologin          slå log-på fra klienter fra\n"
+
+#: src/server/partimaged-main.cpp:150
+#, c-format
+msgid "Impossible to open logfile %s: %s\n"
+msgstr "Umuligt at åbne logfilen %s: %s\n"
+
+#: src/server/partimaged-main.cpp:152
+msgid "Fix this and retry.\n"
+msgstr "Ret dette og forsøg igen.\n"
+
+#: src/server/partimaged-main.cpp:173
+#, c-format
+msgid "impossible to find user \"%s\"\n"
+msgstr "kan ikke finde bruger \"%s\"\n"
+
+#: src/server/partimaged-main.cpp:174
+msgid "add it and retry\n"
+msgstr "tilføj og prøv igen\n"
+
+#: src/server/partimaged-main.cpp:177
+msgid ""
+"Warning: we couldn't changed euid because we weren't launched as root\n"
+"expect some access denied or troubles like this.\n"
+msgstr ""
+"Advarsel: Vi kunne ikke ændre euid fordi vi ikke var startet som root\n"
+"forvent at få nægtet adgang og problemer som disse.\n"
+
+#: src/server/partimaged-main.cpp:226
+#, c-format
+msgid "Partition Image Daemon version %s+SSL\n"
+msgstr "Partition Image-dæmon version %s+SSL\n"
+
+#: src/server/partimaged-main.cpp:228
+#, c-format
+msgid "Partition Image Daemon version %s\n"
+msgstr "Partition Image-dæmon version %s\n"
+
+#: src/server/partimaged-main.cpp:230
+msgid "(distributed under the GNU GPL 2)\n"
+msgstr "(udgivet under GNU GPL 2)\n"
+
+#: src/server/partimaged-main.cpp:373
+msgid "Waiting for client ..."
+msgstr "Venter på klienten..."
+
+#: src/server/partimaged-main.cpp:392
+msgid "too much client connected"
+msgstr "for mange klienter tilsluttet"
+
+#: src/shared/common.cpp:75
+msgid "==== Partition Image: compilation options used ====\n"
+msgstr "==== Partition Image: Tilvalg anvendt ved oversættelse ====\n"
+
+#: src/shared/common.cpp:76
+#, c-format
+msgid ""
+"\n"
+"* Version is %s [%s].\n"
+msgstr ""
+"\n"
+"* Version %s [%s.\n"
+
+#: src/shared/common.cpp:78
+msgid ""
+"\n"
+"* Supported file systems:\n"
+"  - "
+msgstr ""
+"\n"
+"* Understøttede filsystemer:\n"
+"  - "
+
+#: src/shared/common.cpp:80
+msgid "\n"
+msgstr "\n"
+
+#: src/shared/common.cpp:83
+msgid "  - Ext2fs support: based on libext2fs library\n"
+msgstr "  - understøttelse af Ext2fs : baseret på libext2fs biblioteket\n"
+
+#: src/shared/common.cpp:85
+msgid "  - Ext2fs support: internal code\n"
+msgstr "  - understøttelse af Ext2fs: intern kode\n"
+
+#: src/shared/common.cpp:88
+msgid ""
+"\n"
+"* Debug options:\n"
+msgstr ""
+"\n"
+"* Fejlfindingsindstillinger:\n"
+
+#: src/shared/common.cpp:91
+#, c-format
+msgid "  - PARTIMAGE_LOG=%s\n"
+msgstr "  - PARTIMAGE_LOG=%s\n"
+
+#: src/shared/common.cpp:94
+#, c-format
+msgid "  - PARTIMAGED_LOG=%s\n"
+msgstr "  - PARTIMAGED_LOG=%s\n"
+
+#: src/shared/common.cpp:98
+msgid "  - DEVEL ENABLED\n"
+msgstr "  - DEVEL ER SLÅET TIL\n"
+
+#: src/shared/common.cpp:100
+msgid "  - DEVEL DISABLED\n"
+msgstr "  - DEVEL ER SLÅET FRA\n"
+
+#: src/shared/common.cpp:103
+#, c-format
+msgid "  - DEFAULT_DEBUG_LEVEL=%d\n"
+msgstr "  - DEFAULT_DEBUG_LEVEL=%d\n"
+
+#: src/shared/common.cpp:105
+#, c-format
+msgid "  - APPEND_PID=%s\n"
+msgstr "  - APPEND_PID=%s\n"
+
+#: src/shared/common.cpp:105
+msgid "true"
+msgstr "sand"
+
+#: src/shared/common.cpp:106
+msgid "false"
+msgstr "falsk"
+
+#: src/shared/common.cpp:109
+msgid ""
+"\n"
+"* Other options:\n"
+msgstr ""
+"\n"
+"* Andre tilvalg:\n"
+
+#: src/shared/common.cpp:110
+#, c-format
+msgid "  - CURRENT_IMAGE_FORMAT=%s\n"
+msgstr "  - CURRENT_IMAGE_FORMAT=%s\n"
+
+#: src/shared/common.cpp:113
+msgid "  - USERS MUST LOGIN\n"
+msgstr "  - BRUGERE SKAL LOGGE IND\n"
+
+#: src/shared/common.cpp:114
+#, c-format
+msgid "  - PARTIMAGED_USERS=%s\n"
+msgstr "  - PARTIMAGED_USERS=%s\n"
+
+#: src/shared/common.cpp:116
+msgid "  - USERS DON'T LOGIN\n"
+msgstr "  - BRUGERE SKAL IKKE LOGGE IND\n"
+
+#: src/shared/common.cpp:117
+msgid "  - PARTIMAGED_USERS not used\n"
+msgstr "  - PARTIMAGED_USERS bruges ikke\n"
+
+#: src/shared/common.cpp:120
+msgid "  - SSL ENABLED\n"
+msgstr "  - SSL ER SLÅET TIL\n"
+
+#: src/shared/common.cpp:122
+msgid "  - SSL DISABLED\n"
+msgstr "  - SSL ER SLÅET FRA\n"
+
+#: src/shared/common.cpp:125
+msgid "  - CHEUID ENABLED\n"
+msgstr "  - CHEUID ER SLÅET TIL\n"
+
+#: src/shared/common.cpp:127
+msgid "  - CHEUID DISABLED\n"
+msgstr "  - CHEUID ER SLÅET FRA\n"
+
+#: src/shared/common.cpp:254
+#, c-format
+msgid "%lld bytes"
+msgstr "%lld byte"
+
+#: src/shared/common.cpp:259
+#, c-format
+msgid "%.2f KiB"
+msgstr "%.2f kb"
+
+#: src/shared/common.cpp:264
+#, c-format
+msgid "%.2f MiB"
+msgstr "%.2f MB"
+
+#: src/shared/common.cpp:269
+#, c-format
+msgid "%.2f GiB"
+msgstr "%.2f GB"
+
+#: src/shared/common.cpp:274
+#, c-format
+msgid "%.2f TiB"
+msgstr "%.2f TB"
+
+#~ msgid "Kilo-Bytes"
+#~ msgstr "Kilobyte"
+
+#~ msgid "mount: %s"
+#~ msgstr "montér: %s"
+
+#~ msgid "Overwrite image ?"
+#~ msgstr "Overskriv spejlbillede?"
+
+#~ msgid "  - PARTIMAGE_LOCAL_DEBUG=%s\n"
+#~ msgstr "  - PARTIMAGE_LOCAL_DEBUG=%s\n"

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+task=$1
+dev=$2
+id=$3
+
+cd $dev
+
+if [ -f $id/compresion ]; then
+	case "$(cat $id/compresion)" in
+		lzo) echo "lzma" > $id/compresion ;;
+		lzma) rm $id/compresion ;;
+	esac
+else
+	echo "lzo" > $id/compresion
+fi

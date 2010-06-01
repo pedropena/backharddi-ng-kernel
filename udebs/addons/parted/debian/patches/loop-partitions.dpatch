@@ -1,0 +1,21 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## loop-partitions.dpatch by Colin Watson <cjwatson@ubuntu.com>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Loop devices can only have one partition, so don't generate device
+## DP: names such as "/dev/loop0p1".
+
+@DPATCH@
+diff -urNad parted-1.8.8.git.2009.06.03~/libparted/arch/linux.c parted-1.8.8.git.2009.06.03/libparted/arch/linux.c
+--- parted-1.8.8.git.2009.06.03~/libparted/arch/linux.c	2009-06-16 18:38:50.000000000 +0100
++++ parted-1.8.8.git.2009.06.03/libparted/arch/linux.c	2009-06-16 18:39:41.000000000 +0100
+@@ -2123,6 +2123,9 @@
+                 /* replace /disc with /path%d */
+                 strcpy (result, dev->path);
+                 snprintf (result + path_len - 5, 16, "/part%d", num);
++        } else if (!strncmp (dev->path, "/dev/loop", 9)) {
++                /* Loop devices can only have one partition. */
++                strcpy (result, dev->path);
+         } else if (dev->type == PED_DEVICE_DAC960
+                         || dev->type == PED_DEVICE_CPQARRAY
+                         || dev->type == PED_DEVICE_ATARAID

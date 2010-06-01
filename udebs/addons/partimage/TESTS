@@ -1,0 +1,91 @@
+                              TESTS for Partition Image:
+                              --------------------------
+
+* 2000-09-17: saved hda12 (ReiserFS, 2008 MB)
+  <size of image.bz2> = 85 % <size of image.gz>
+
+* 2000-10-09: saved hda4 (ext2fs, 450MB)
+  <size of image.bz2> = 83 % <size of image.gz>
+
+===================================================================================
+local:
+
+0.5.4@cvs
+
+franck hda3 reiserfs-3.6 126M@61%  ->  528M nosplit nocomp nocheck nodesc
+cas normal
+franck hda3 reiserfs-3.6 126M@61%  ->  528M nosplit gzip nocheck nodesc
+cas normal
+franck hda3 reiserfs-3.6 126M@61%  ->  528M nosplit bzip2 nocheck nodesc
+cas normal
+
+franck hda3 reiserfs-3.6 126M@61%  ->  528M split1024 nocomp nocheck nodesc
+cas normal image=e, e.001-e.100, sizes < 1024k
+franck hda3 reiserfs-3.6 126M@61%  ->  528M split1024 gzip nocheck nodesc
+cas normal image=e, e.001-e.052, sizes < 1024k
+franck hda3 reiserfs-3.6 126M@61%  ->  528M split1024 bzip2 nocheck nodesc
+cas normal image=e, e.001-e.014, sizes > 1024k PROBLEM
+
+franck hda3 reiserfs-3.6 126M@61%  ->  528M nosplit nocomp nocheck nodesc
+imagefile already existed -> overwrite
+franck hda3 reiserfs-3.6 126M@61%  ->  528M nosplit gzip nocheck nodesc
+imagefile already existed -> overwrite
+franck hda3 reiserfs-3.6 126M@61%  ->  528M nosplit bzip2 nocheck nodesc
+imagefile already existed -> overwrite
+
+franck hda3 reiserfs-3.6 126M@61%  ->  528M nosplit nocomp nocheck nodesc
+imagefile already existed -> filename changed (same path) ext .000 added but OK
+franck hda3 reiserfs-3.6 126M@61%  ->  528M nosplit gzip nocheck nodesc
+imagefile already existed -> filename changed (same path) ext .000 added but OK
+franck hda3 reiserfs-3.6 126M@61%  ->  528M nosplit bzip2 nocheck nodesc
+imagefile already existed -> filename changed (same path) ext .000 added but OK
+
+franck hda3 reiserfs-3.6 126M@61%  ->  528M split1024 nocomp nocheck nodesc
+1st volume existed -> filename changed (same path) PROBLEM when restore
+franck hda3 reiserfs-3.6 126M@61%  ->  528M split1024 gzip nocheck nodesc
+1st volume existed -> filename changed (same path) PROBLEM when restore
+franck hda3 reiserfs-3.6 126M@61%  ->  528M split1024 bzip2 nocheck nodesc
+1st volume existed -> filename changed (same path) PROBLEM when restore
+franck hda3 reiserfs-3.6 126M@61%  ->  528M split1024 nocomp nocheck nodesc
+3td volume existed -> filename changed (same path) PROBLEM when restore
+
+===================================================================================
+
+In Results we can have:
+- OK -> there was no problem
+- BUGFIXES -> there was an important bug, and it is fixed
+- BUG -> there was a bug which is not fixed
+
+FINAL RESULTS|Date & Time|  Version  |Compress|FileSystem|Source & Dest|SizePart|UsedSize|Netwk(Save+Rest)|Volume|Erase@Rest|Batch|BlockSize| Options |BetaTester|
+-------------*-----------*-----------*--------*----------*-------------*--------*--------*----------------*------*----------*-----*---------*---------*----------*
+big bugfix   |2001-03-31 | 0.5.7@cvs | none   |Reiser-3.6|hda19->hda20 | 204 MB |unknown | Yes + No       |-V1440| Yes      | No  | 4096    | odme    | fdupoux  |
+OK           |2001-03-31 | 0.5.7@cvs | bzip2  |fat16     |hda16->hda17 | 306 MB |unknown | No + No        |-V2880| No       | No  | unknown | odm     | fdupoux  |
+OK           |2001-03-31 | 0.5.7@cvs | bzip2  |hpfs      |hda23->hda24 | 235 MB |unknown | Yes + Yes      |-V1440| Yes      | Yes | unknown | odmbe   | fdupoux  |
+OK           |2001-03-31 | 0.5.7@cvs | bzip2  |ext2fs    |hda29->hda30 | 306 MB |unknown | Yes + No       |-V3600| No       | No  | 4096    | odm     | fdupoux  |
+small bugfix |2001-03-31 | 0.5.7@cvs | none   |ext2fs    |hda27->hda28 | 204 MB |unknown | Yes + Yes      |-V4800| Yes      | No  | 2048    | odme    | fdupoux  |
+OK           |2001-03-31 | 0.5.7@cvs | gzip   |fat32     |hda25->hda26 | 1.7 GB |unknown | No + No        |-V9800| No       | No  | unknown | odm     | fdupoux  |
+OK           |2001-03-31 | 0.5.7@cvs | bzip2  |ext2fs    |hda31->hda32 | 250 MB |unknown | Yes + Yes      |-V5400| No       | No  | 1024    | odm     | fdupoux  |
+OK           |2001-03-31 | 0.5.7@cvs | bzip2  |ext2fs    |hda14->hda15 | 2 GB   |unknown | Yes + Yes      |-V9200| Yes      | Yes | 4096    | odmbe   | fdupoux  |
+OK           |2001-03-31 | 0.5.7@cvs | bzip2  |ntfs      |hdc6->hda26  | 1.2 GB |unknown | Yes + No       |-V2900| Yes      | No  | 2048    | odme    | fdupoux  |
+OK           |2001-03-31 | 0.5.7@cvs | bzip2  |fat32     |hdc1->hdc1   | 2 GB   |unknown | No + Yes       |-V6400| Yes      | Yes | unknown | odmbe   | fdupoux  |
+OK           |2001-04-06 | 0.5.7@cvs | gzip   |fat32     |hda25->hda26 | 1.7 GB |unknown | No + No        |-V3300| Yes      | No  | unknown | odme    | fdupoux  |
+OK           |2001-04-06 | 0.5.7@cvs | bzip2  |ext2fs    |hda31->hda32 | 250 MB |unknown | No + No        |-V3800| No       | No  | 1024    | odm     | fdupoux  |
+OK           |2001-04-06 | 0.5.7@cvs | bzip2  |ext2fs    |hda27->hda28 | 204 MB |unknown | No + No        |-V3941| No       | No  | 2048    | odm     | fdupoux  |
+OK           |2001-07-16 | 0.5.8@cvs | gzip   |jfs-1.0.1 |hdb7->hdb7   | 35 GB  | ~ 5 GB | No + No        |-V100K| No       | No  | 4096    | od      | fdupoux  |
+OK           |2001-07-16 | 0.5.8@cvs | none   |ext2fs    |hdb7->hdb7   | 35 GB  | ~ 5 GB | No + No        |-Vauto| No       | No  | 4096    | od      | fdupoux  |
+OK           |2001-07-17 | 0.5.8@cvs | none   |Reiser-3.6|hda7->hda7   | 35 GB  | ~ 5 GB | No + No        |-V100K| No       | No  | 4096    | od      | fdupoux  |
+             |           |           |        |          |             |        |        |                |      |          |     |         |         |          |
+             |           |           |        |          |             |        |        |                |      |          |     |         |         |          |
+             |           |           |        |          |             |        |        |                |      |          |     |         |         |          |
+             |           |           |        |          |             |        |        |                |      |          |     |         |         |          |
+             |           |           |        |          |             |        |        |                |      |          |     |         |         |          |
+             |           |           |        |          |             |        |        |                |      |          |     |         |         |          |
+
+
+TOTEST:
+- automount
+- auto-split -> no space left on device
+- CRC errors
+- volume of another image is used
+
+

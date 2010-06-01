@@ -1,0 +1,51 @@
+#!/bin/sh -e
+### BEGIN INIT INFO
+# Provides:          udev-mtab
+# Required-Start:    udev checkroot
+# Required-Stop:     
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Add to mtab the entries for /dev and /dev/.static/dev.
+### END INIT INFO
+
+PATH="/sbin:/bin"
+
+# copy the rules generated before / was mounted read-write
+for file in /dev/.udev/tmp-rules--*; do
+  dest=${file##*tmp-rules--}
+  [ "$dest" = '*' ] && break
+  cat $file >> /etc/udev/rules.d/$dest
+  rm -f $file
+done
+
+
+# if it's not, it's probably a symlink to /proc/mounts
+[ -w /etc/mtab ] || exit 0
+
+# defaults
+tmpfs_size="10M"
+udev_root="/dev/"
+
+. /etc/udev/udev.conf
+
+# strip the trailing slash
+udev_root=${udev_root%/}
+
+if mountpoint -q $udev_root; then
+  grep -E --quiet --no-messages "^[^ ]+ +$udev_root +" /etc/mtab || \
+    mount -f -o size=$tmpfs_size,mode=0755 -t tmpfs tmpfs $udev_root
+fi
+
+# /dev/.static/dev/ is not added to mtab because /dev/.static/ is not
+# world readable and some users are annoyed by the resulting error
+# message from df.
+exit 0
+
+# mountpoint(1) does not report bind mounts
+if [ -e /dev/.static/dev/null ]; then
+  grep -E --quiet --no-messages "^[^ ]+ +/dev/\.static/dev +" /etc/mtab || \
+    mount -f --bind /dev /dev/.static/dev
+fi
+
+exit 0
+

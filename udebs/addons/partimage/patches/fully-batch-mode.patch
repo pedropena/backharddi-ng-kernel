@@ -1,0 +1,460 @@
+// APPLIED 2003-APR-11
+diff -ru orig/partimage-0.6.2.final/src/client/Makefile.am partimage-0.6.2.final/src/client/Makefile.am
+--- orig/partimage-0.6.2.final/src/client/Makefile.am	2001-08-29 16:30:16.000000000 +0100
++++ partimage-0.6.2.final/src/client/Makefile.am	2003-04-06 20:31:09.000000000 +0100
+@@ -14,6 +14,7 @@
+ 
+ noinst_HEADERS =  buffer.h cbitmap.h gui_text.h image_base.h image_net.h \
+                   imagefile.h imginfo.h interface.h interface_newt.h \
++		  interface_none.h \
+                   mbr_backup.h misc.h netclient.h partimage.h
+ 
+ partimage_SOURCES =         \
+@@ -28,6 +29,7 @@
+     cbitmap.cpp             \
+     interface_base.cpp      \
+     interface_newt.cpp      \
++    interface_none.cpp      \
+     mbr_backup.cpp 
+ 
+ # all libs are added in LIBS, we needn't add them to partimage_LDADD 
+diff -ru orig/partimage-0.6.2.final/src/client/Makefile.in partimage-0.6.2.final/src/client/Makefile.in
+--- orig/partimage-0.6.2.final/src/client/Makefile.in	2002-11-19 14:24:13.000000000 +0000
++++ partimage-0.6.2.final/src/client/Makefile.in	2003-04-06 20:37:26.000000000 +0100
+@@ -278,6 +278,7 @@
+ 
+ noinst_HEADERS = buffer.h cbitmap.h gui_text.h image_base.h image_net.h \
+                   imagefile.h imginfo.h interface.h interface_newt.h \
++		  interface_none.h \
+                   mbr_backup.h misc.h netclient.h partimage.h
+ 
+ 
+@@ -293,6 +294,7 @@
+     cbitmap.cpp             \
+     interface_base.cpp      \
+     interface_newt.cpp      \
++    interface_none.cpp      \
+     mbr_backup.cpp 
+ 
+ 
+@@ -316,7 +318,8 @@
+ 	misc.$(OBJEXT) image_net.$(OBJEXT) buffer.$(OBJEXT) \
+ 	gui_text.$(OBJEXT) main.$(OBJEXT) imginfo.$(OBJEXT) \
+ 	cbitmap.$(OBJEXT) interface_base.$(OBJEXT) \
+-	interface_newt.$(OBJEXT) mbr_backup.$(OBJEXT)
++	interface_newt.$(OBJEXT) interface_none.$(OBJEXT) \
++	mbr_backup.$(OBJEXT)
+ partimage_OBJECTS = $(am_partimage_OBJECTS)
+ partimage_DEPENDENCIES = fs/libfs.a ../shared/libshared.a
+ DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
+@@ -328,7 +331,8 @@
+ @AMDEP_TRUE@	./$(DEPDIR)/gui_text.Po ./$(DEPDIR)/image_net.Po \
+ @AMDEP_TRUE@	./$(DEPDIR)/imagefile.Po ./$(DEPDIR)/imginfo.Po \
+ @AMDEP_TRUE@	./$(DEPDIR)/interface_base.Po \
+-@AMDEP_TRUE@	./$(DEPDIR)/interface_newt.Po ./$(DEPDIR)/main.Po \
++@AMDEP_TRUE@	./$(DEPDIR)/interface_newt.Po \
++@AMDEP_TRUE@	./$(DEPDIR)/interface_none.Po ./$(DEPDIR)/main.Po \
+ @AMDEP_TRUE@	./$(DEPDIR)/mbr_backup.Po ./$(DEPDIR)/misc.Po \
+ @AMDEP_TRUE@	./$(DEPDIR)/netclient.Po
+ CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+@@ -408,6 +412,7 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imginfo.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/interface_base.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/interface_newt.Po@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/interface_none.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mbr_backup.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/misc.Po@am__quote@
+Only in partimage-0.6.2.final/src/client: Makefile.in~
+diff -ru orig/partimage-0.6.2.final/src/client/interface.h partimage-0.6.2.final/src/client/interface.h
+--- orig/partimage-0.6.2.final/src/client/interface.h	2002-10-17 00:04:45.000000000 +0100
++++ partimage-0.6.2.final/src/client/interface.h	2003-04-06 20:54:37.000000000 +0100
+@@ -95,16 +95,16 @@
+ /**/  void ErrorInvalidFS(char * szFs);
+ /**/  void ErrorLocking(char * szFilename, signed int err);
+ 
+-  /*virtual void StatusLine(char * str)=0;
+-  virtual int guiInitMainWindow(char * szDevice, char * szImageFile, char *
+-     szNetworkIP, DWORD * dwServerPort, bool * bSsl)=0;
+-  virtual void askDescription(char * szDescription, DWORD dwMaxLen)=0;
+-  virtual int askText(char * szMessage, char * szTitle, char * szDestText)=0;
+-  virtual int askText(char * szMessage, char * szTitle, char * szDestText,
+-     WORD size)=0;
++  virtual void StatusLine(char * str)=0;
+   virtual int askLogin(char * szLogin, char * szPasswd, WORD size)=0;
+   virtual WORD askNewPath(char * szOriginalFilename, DWORD dwVolume,
+      char * szPath, char *szNewPath, WORD size)=0;
++  virtual int askText(char * szMessage, char * szTitle, char * szDestText,
++     WORD size)=0;
++  virtual void askDescription(char * szDescription, DWORD dwMaxLen)=0;
++  virtual int guiInitMainWindow(char * szDevice, char * szImageFile, char *
++     szNetworkIP, DWORD * dwServerPort, bool * bSsl)=0;
++  /*virtual int askText(char * szMessage, char * szTitle, char * szDestText)=0;
+   virtual void showAboutDialog()=0;
+   virtual WORD windowRoot()=0;
+   virtual WORD WaitKeyPressed(char * szOld, char * szNewPath,
+diff -ru orig/partimage-0.6.2.final/src/client/interface_newt.cpp partimage-0.6.2.final/src/client/interface_newt.cpp
+--- orig/partimage-0.6.2.final/src/client/interface_newt.cpp	2002-11-13 22:44:25.000000000 +0000
++++ partimage-0.6.2.final/src/client/interface_newt.cpp	2003-04-06 20:57:59.000000000 +0100
+@@ -452,7 +452,7 @@
+ }
+ 
+ // =======================================================
+-int CInterfaceNewt::askNewPath(char * szOrigFilename, DWORD dwVolume, 
++WORD CInterfaceNewt::askNewPath(char * szOrigFilename, DWORD dwVolume, 
+    char * szPath, char * szNewPath, WORD size)
+ {
+   char szMess[2048];
+diff -ru orig/partimage-0.6.2.final/src/client/interface_newt.h partimage-0.6.2.final/src/client/interface_newt.h
+--- orig/partimage-0.6.2.final/src/client/interface_newt.h	2001-07-08 19:17:37.000000000 +0100
++++ partimage-0.6.2.final/src/client/interface_newt.h	2003-04-06 20:52:41.000000000 +0100
+@@ -50,7 +50,7 @@
+   void askDescription(char * szDescription, DWORD dwMaxLen);
+   int askText(char *szMessage, char *szTitle, char *szDestText, WORD size);
+   int askLogin(char *szLogin, char *szPasswd, WORD size);
+-  int askNewPath(char * szOriginalFilename, DWORD dwVolume, char * szPath, char *szNewPath, WORD size);
++  WORD askNewPath(char * szOriginalFilename, DWORD dwVolume, char * szPath, char *szNewPath, WORD size);
+   //int askText(char *szMessage, char *szTitle, char *szDestText);
+   
+   //WORD ErrorLogAsRoot();
+Only in partimage-0.6.2.final/src/client: interface_none.cpp
+Only in partimage-0.6.2.final/src/client: interface_none.cpp~
+Only in partimage-0.6.2.final/src/client: interface_none.h
+Only in partimage-0.6.2.final/src/client: interface_none.h~
+diff -ru orig/partimage-0.6.2.final/src/client/main.cpp partimage-0.6.2.final/src/client/main.cpp
+--- orig/partimage-0.6.2.final/src/client/main.cpp	2002-10-19 23:30:56.000000000 +0100
++++ partimage-0.6.2.final/src/client/main.cpp	2003-04-06 21:09:15.000000000 +0100
+@@ -59,6 +59,7 @@
+ #include "buffer.h"
+ #include "exceptions.h"
+ #include "interface_newt.h"
++#include "interface_none.h"
+ #include "mbr_backup.h"
+ 
+ extern char *optarg;
+@@ -95,16 +96,17 @@
+   {"nombr", no_argument, NULL, 'M'},
+   {"simulate", no_argument, NULL, 'S'},
+   {"runshell", no_argument, NULL, 'X'},
++  {"fully-batch", required_argument, NULL, 'B'},
+   {"username", required_argument, NULL, 'U'},
+   {"password", required_argument, NULL, 'P'},
+   {NULL, 0, NULL, 0}
+ };
+ #endif
+ 
+-static char optstring[]="z:oV:ecmdhf:s:p:bwg:vynSMa:iU:P:X";
++static char optstring[]="z:oV:ecmdhf:s:p:bwg:vynSMa:iU:P:XB:";
+ FILE *g_fDebug; // debug file
+ FILE *g_fLocalDebug; // debug file
+-CInterfaceNewt* g_interface;
++CInterface* g_interface;
+ bool g_bSigInt = false;
+ bool g_bSigKill = false;
+ QWORD g_qwCopiedBytesCount=0;
+@@ -176,6 +178,7 @@
+   strncpy(options.szAutoMount, OPTIONS_DEFAULT_AUTOMOUNT, MAXPATHLEN);
+   strncpy(options.szUserName, OPTIONS_DEFAULT_USERNAME, MAX_USERNAMELEN);
+   strncpy(options.szPassWord, OPTIONS_DEFAULT_PASSWORD, MAX_PASSWORDLEN);
++  *(options.szFullyBatchMode)= 0;
+   
+   // initialize language for i18n
+   setlocale(LC_ALL, "");
+@@ -207,6 +210,10 @@
+             strncpy(options.szUserName, optarg, MAX_USERNAMELEN);
+             *(options.szUserName+MAX_USERNAMELEN-1) = '\0';
+             break;
++	  case 'B': // fully batchmode: don't do any newt or anything
++	    strncpy(options.szFullyBatchMode, optarg, 2047);
++	    options.bBatchMode = true;
++	    break;
+ 	  case 'P': // password for serverauth
+             strncpy(options.szPassWord, optarg, MAX_PASSWORDLEN);
+             *(options.szPassWord+MAX_PASSWORDLEN-1) = '\0';
+@@ -418,6 +425,7 @@
+   // init CRC table
+   initCrcTable(g_dwCrcTable);
+ 
++  if (!options.szFullyBatchMode || !strlen(options.szFulltBatchMode)) {
+   // signal
+   /*struct sigaction saOld, saNew;
+     saNew.sa_handler = catch_sigint;
+@@ -428,6 +436,7 @@
+   signal(SIGTERM, catch_sigint);
+   signal(SIGINT, catch_sigint);
+   signal(SIGSEGV, catch_sigint); // segmentation fault
++  }
+    
+   // endianess
+   switch(g_wEndian)
+@@ -447,7 +456,11 @@
+ 
+   // init interface
+   showDebug(8, "initialize interface\n");
+-  g_interface = new PARTIMAGE_INTERFACE(options.bBatchMode);
++  if (!options.szFullyBatchMode || !strlen(options.szFulltBatchMode))
++    g_interface = new PARTIMAGE_INTERFACE(options.bBatchMode);
++  else
++    g_interface = new CInterfaceNone(options.szFullyBatchMode);
++  
+   showDebug(8, "interface ok\n");
+ 
+   // ----------- check the user is logged as root
+diff -ru orig/partimage-0.6.2.final/src/client/partimage.h partimage-0.6.2.final/src/client/partimage.h
+--- orig/partimage-0.6.2.final/src/client/partimage.h	2002-10-21 16:50:47.000000000 +0100
++++ partimage-0.6.2.final/src/client/partimage.h	2003-04-06 20:49:45.000000000 +0100
+@@ -68,8 +68,8 @@
+ extern char g_szDebug[];
+ 
+ extern DWORD g_dwCrcTable[];
+-class CInterfaceNewt;
+-extern CInterfaceNewt *g_interface;
++class CInterface;
++extern CInterface *g_interface;
+ extern bool g_bSigInt;
+ extern bool g_bSigKill;
+ 
+Only in partimage-0.6.2.final/src/client: t.000
+diff -ru orig/partimage-0.6.2.final/src/shared/common.h partimage-0.6.2.final/src/shared/common.h
+--- orig/partimage-0.6.2.final/src/shared/common.h	2002-10-20 03:12:40.000000000 +0100
++++ partimage-0.6.2.final/src/shared/common.h	2003-04-06 20:31:08.000000000 +0100
+@@ -139,6 +139,7 @@
+   char szAutoMount[MAXPATHLEN];
+   char szUserName[MAX_USERNAMELEN];
+   char szPassWord[MAX_PASSWORDLEN];
++  char szFullyBatchMode[2048];
+ };
+ 
+ #define MAX_UNAMEINFOLEN 65 //SYS_NMLN
+Only in partimage-0.6.2.final: stamp-h1.in
+Only in partimage-0.6.2.final: stamp-h2.in
+Only in partimage-0.6.2.final: stamp-h3.in
+Only in partimage-0.6.2.final: stamp-h4.in
+Only in partimage-0.6.2.final: t
+--- orig/partimage-0.6.2.final/src/client/interface_none.h	1970-01-01 01:00:00.000000000 +0100
++++ partimage-0.6.2.final/src/client/interface_none.h	2003-04-06 20:59:40.000000000 +0100
+@@ -0,0 +1,65 @@
++/***************************************************************************
++                          interface_none.h  -  description
++                             -------------------
++    begin                : Sun 6 Apr 2003
++    copyright            : (C) 2003 by Ian Jackson
++    email                : ian@davenant.greenend.org.uk
++ ***************************************************************************/
++
++/***************************************************************************
++ *                                                                         *
++ *   This program is free software; you can redistribute it and/or modify  *
++ *   it under the terms of the GNU General Public License as published by  *
++ *   the Free Software Foundation; either version 2 of the License, or     *
++ *   (at your option) any later version.                                   *
++ *                                                                         *
++ ***************************************************************************/
++
++#ifndef _INTERFACE_NONE_H_
++#define _INTERFACE_NONE_H_
++
++#include "partimage.h"
++#include "exceptions.h"
++#include "interface.h"
++
++// =======================================================
++class CInterfaceNone : public CInterface
++{
++private:
++  char *optstring;
++  int count;
++public:
++  CInterfaceNone(char *a_optstring);
++  virtual ~CInterfaceNone() {}
++
++  // we specialise everything in CInterface
++  void msgBoxOk(char *szTitle, char *szText, ...);
++  void msgBoxCancel(char *szTitle, char *szText, ...);
++  void msgBoxError(char *szText, ...);
++  int msgBoxYesNo(char *szTitle, char *szText, ...);
++  int msgBoxContinueCancel(char *szTitle, char *szText, ...);
++  void showErrorInternal(char *szText);
++
++  int guiInitMainWindow(char * szDevice, char * szImageFile, char *
++			szNetworkIP, DWORD * dwServerPort, bool * bSsl)
++    {return 0;}
++  
++  void askDescription(char * szDescription, DWORD dwMaxLen);
++  int askText(char * szMessage, char * szTitle, char * szDestText);
++  int askText(char * szMessage, char * szTitle, char * szDestText,
++     WORD size);
++  int askLogin(char * szLogin, char * szPasswd, WORD size);
++  WORD askRestore(char * szDevice, char * szImageFilename);
++
++  void StatusLine(char * str);
++  WORD askNewPath(char * szOriginalFilename, DWORD dwVolume,
++			  char * szPath, char *szNewPath, WORD size);
++private:
++  void message_only(char *kind, char *title, char *format,
++		    va_list al, char *reslt);
++  char *lookup(char *title, char *text, char *deflt);
++  void invalid_programmed_response();
++  void flusherr();
++};
++
++#endif
+--- orig/partimage-0.6.2.final/src/client/interface_none.cpp	1970-01-01 01:00:00.000000000 +0100
++++ partimage-0.6.2.final/src/client/interface_none.cpp	2003-04-06 21:05:56.000000000 +0100
+@@ -0,0 +1,155 @@
++/***************************************************************************
++                          interface_none.h  -  description
++                             -------------------
++    begin                : Sun 6 Apr 2003
++    copyright            : (C) 2003 by Ian Jackson
++    email                : ian@davenant.greenend.org.uk
++ ***************************************************************************/
++
++/***************************************************************************
++ *                                                                         *
++ *   This program is free software; you can redistribute it and/or modify  *
++ *   it under the terms of the GNU General Public License as published by  *
++ *   the Free Software Foundation; either version 2 of the License, or     *
++ *   (at your option) any later version.                                   *
++ *                                                                         *
++ ***************************************************************************/
++
++#include <string.h>
++#include <stdlib.h>
++#include <stdarg.h>
++#include <fnmatch.h>
++
++#include "interface_none.h"
++            
++CInterfaceNone::CInterfaceNone(char *a_optstring) : CInterface(true) {
++  optstring= a_optstring;
++  count= 0;
++  char *where= optstring;
++  while (*where) {
++    char *semicolon= strchr(where,';');
++    if (semicolon) *semicolon= 0;
++
++    char *equals= strchr(where,'=');
++    if (!equals) {
++      fprintf(stderr,"partimage: no equals in `%s'\n",where);
++      invalid_programmed_response();
++    }
++    *equals= 0;
++    count++;
++
++    if (!semicolon) return;
++    where= semicolon+1;
++  }
++}
++
++void CInterfaceNone::invalid_programmed_response() {
++  fprintf(stderr,"partimage: invalid programmed response.\n");
++  flusherr();
++  exit(8);
++}
++
++char *CInterfaceNone::lookup(char *title, char *text, char *deflt) {
++  char *globfor= (char*)malloc(strlen(title) + strlen(text) + 5);
++  if (!globfor) { perror("malloc for lookup"); exit(16); }
++  sprintf(globfor, "%s/%s", title, text);
++  char *where= optstring;
++  char *value;
++  while (count) {
++    value= where + strlen(where) + 1;
++    if (!fnmatch(where,globfor,0)) { free(globfor); return value; }
++    where= value + strlen(value) + 1;
++    count--;
++  }
++  free(globfor);
++  if (deflt) return deflt;
++  fprintf(stderr,"partimage: %s (%s) no default\n", title, text);
++  exit(8);
++}
++      
++
++void CInterfaceNone::flusherr() {
++  if (ferror(stderr) || fflush(stderr)) exit(16);
++}
++
++void CInterfaceNone::message_only(char *kind, char *title,
++				  char *format, va_list al,
++				  char *result) {
++  fprintf(stderr,"partimage: %s [%s]\npartimage:  ", title, kind);
++  vfprintf(stderr,format,al);
++  fputc('\n',stderr);
++  if (result) fprintf(stderr,"partimage:  => %s\n",result);    
++  flusherr();
++}
++
++#define MB_1(KInd,Kind)							\
++  void CInterfaceNone::msgBox##KInd(char *title, char *text, ...) {	\
++    va_list al;								\
++    va_start(al,text);							\
++    message_only(#Kind, title, text, al, 0);				\
++    va_end(al);								\
++  }
++
++MB_1(Ok,OK)
++MB_1(Cancel,Cancel)
++
++void CInterfaceNone::msgBoxError(char *title, ...) {
++  va_list al;						
++  va_start(al,title);					
++  message_only("Error", title, "", al, 0);		
++  va_end(al);						
++}
++
++#define MB_2(One,Other,ONE,OTHER)					  \
++  int CInterfaceNone::msgBox##One##Other(char *title, char *text, ...) {  \
++    char *result= lookup(title,text,"(unspecified)");			  \
++    va_list al;								  \
++    va_start(al,text);							  \
++    message_only(#One "/" #Other, title, text, al, result);		  \
++    va_end(al);								  \
++    if (!strcasecmp(result,#One)) return MSGBOX_##ONE;			  \
++    if (!strcasecmp(result,#Other)) return MSGBOX_##OTHER;		  \
++    invalid_programmed_response();					  \
++    return 0;                                                             \
++  }
++
++MB_2(Continue,Cancel,CONTINUE,CANCEL)
++MB_2(Yes,No,YES,NO)
++
++void CInterfaceNone::showErrorInternal(char *text) {
++  fprintf(stderr,"partimage: internal error: %s\n", text);
++  flusherr();
++}
++
++void CInterfaceNone::askDescription(char * szDescription,
++					 DWORD size) {
++  askText("Description","Description",szDescription,size);
++}
++
++int CInterfaceNone::askText(char *message, char *title,
++				 char *resbuf, WORD size) {
++  char *result= lookup(title,message,0);
++  if (strlen(result) >= size) {
++    fprintf(stderr,"partimage: %s (%s) too long (>%lu)\n", title, message,
++	    (unsigned long)size);
++    exit(12);
++  }
++  strcpy(resbuf,result);
++  return 0;
++}
++
++void CInterfaceNone::StatusLine(char * str) {
++  fprintf(stderr,"partimage: status: %s\n", str);
++  flusherr();
++}
++
++#define DONT(rt,what,args)				\
++  rt CInterfaceNone::what args {			\
++    fprintf(stderr,"partimage: " #what			\
++	    " not supported in CInterfaceNone\n");	\
++    exit(8);						\
++  }
++
++DONT(int, askLogin,    (char * szLogin, char * szPasswd, WORD size))
++DONT(WORD, askNewPath, (char * szOriginalFilename, DWORD dwVolume,
++			  char * szPath, char *szNewPath, WORD size))
+

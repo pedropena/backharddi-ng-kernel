@@ -1,0 +1,17 @@
+# Log access to partimaged
+auth required pam_warn.so
+
+# partimaged user database
+auth sufficient pam_userdb.so db=/etc/partimaged/passwd
+
+# Only allow local users listed in partimagedusers to connect to partimaged
+auth required pam_listfile.so onerr=fail item=user sense=allow file=/etc/partimaged/partimagedusers
+
+# Standard Un*x authentication.
+@include common-auth
+
+# partimaged user database
+account sufficient pam_userdb.so debug db=/etc/partimaged/passwd
+# Standard Un*x authorization.
+@include common-account
+#

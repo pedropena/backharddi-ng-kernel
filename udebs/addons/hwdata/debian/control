@@ -1,0 +1,15 @@
+Source: hwdata
+Section: misc
+Priority: optional
+Maintainer: Noèl Köthe <noel@debian.org>
+Build-Depends: debhelper (>> 3.0.0)
+Standards-Version: 3.7.2
+
+Package: hwdata
+Architecture: all
+Depends: ${shlibs:Depends}
+Description: hardware identification / configuration data
+ This package contains various hardware identification and configuration data,
+ such as the pci.ids database, or the XFree86/xorg Cards database.
+ It's needed for the kudzu hardware detection.
+XC-Package-Type: udeb

@@ -1,0 +1,40 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 30nfs4-intr-default.dpatch by  <lamont@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad 2.12r-16~/mount/nfs.5 2.12r-16/mount/nfs.5
+--- 2.12r-16~/mount/nfs.5	2007-01-17 10:36:22.000000000 -0700
++++ 2.12r-16/mount/nfs.5	2007-01-17 10:39:37.000000000 -0700
+@@ -214,7 +214,7 @@
+ .I intr
+ If an NFS file operation has a major timeout and it is hard mounted,
+ then allow signals to interupt the file operation and cause it to
+-return EINTR to the calling program.  The default is to not
++return EINTR to the calling program.  The default is to
+ allow file operations to be interrupted.
+ .TP 1.5i
+ .I posix
+@@ -395,7 +395,7 @@
+ .I intr
+ If an NFS file operation has a major timeout and it is hard mounted,
+ then allow signals to interupt the file operation and cause it to
+-return EINTR to the calling program.  The default is to not
++return EINTR to the calling program.  The default is to
+ allow file operations to be interrupted.
+ .TP 1.5i
+ .I nocto
+diff -urNad 2.12r-16~/mount/nfsmount.c 2.12r-16/mount/nfsmount.c
+--- 2.12r-16~/mount/nfsmount.c	2007-01-17 10:36:23.000000000 -0700
++++ 2.12r-16/mount/nfsmount.c	2007-01-17 10:38:45.000000000 -0700
+@@ -572,7 +572,7 @@
+ 	char *mounthost = NULL;
+ 	char cbuf[128];
+ 
+-	data->flags = 0;
++	data->flags = NFS_MOUNT_INTR;
+ 	*bg = 0;
+ 
+ 	len = strlen(new_opts);

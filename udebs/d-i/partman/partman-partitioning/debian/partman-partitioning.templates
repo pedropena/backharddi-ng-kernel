@@ -1,0 +1,168 @@
+Template: partman-partitioning/progress_resizing
+Type: text
+_Description: Resizing partition...
+
+Template: partman-partitioning/progress_copying
+Type: text
+_Description: Copying partition...
+
+Template: partman-partitioning/new_state
+Type: text
+_Description: Computing the new state of the partition table...
+
+Template: partman-partitioning/confirm_copy
+Type: boolean
+_Description: Write previous changes to disk and continue?
+ Before you can select a partition to copy, any previous changes have to be
+ written to disk.
+ .
+ You cannot undo this operation.
+ .
+ Please note that the copy operation may take a long time.
+
+Template: partman-partitioning/source_partition
+Type: select
+Choices: ${CHOICES}
+_Description: Source partition:
+ Please choose the partition which contains the data you want to copy.
+
+Template: partman-partitioning/copy_commit_failed
+Type: error
+_Description: Copy operation failure
+ An error occurred while writing the changes to the storage devices.
+ .
+ The copy operation is aborted.
+
+Template: partman-partitioning/impossible_resize
+Type: error
+_Description: The resize operation is impossible
+ Because of an unknown reason it is impossible to resize this partition.
+ .
+ Check /var/log/syslog or see virtual console 4 for the details.
+
+Template: partman-partitioning/confirm_resize
+Type: boolean
+_Description: Write previous changes to disk and continue?
+ Before you can select a new partition size, any previous changes have to be
+ written to disk.
+ .
+ You cannot undo this operation.
+ .
+ Please note that the resize operation may take a long time.
+
+Template: partman-partitioning/new_size
+Type: string
+Default: some number
+_Description: New partition size:
+ The minimum size you can use is ${MINSIZE} or ${PERCENT} and the
+ maximum size is ${MAXSIZE}.
+ .
+ Hint: Use "20%" (or "30%", etc.) for 20% (resp. 30%, etc.) of the
+ available free space for this partition.  Use "max" as a shortcut for
+ the maximum allowed size.
+
+Template: partman-partitioning/bad_new_size
+Type: error
+_Description: Invalid size
+
+Template: partman-partitioning/big_new_size
+Type: error
+_Description: Too large size
+
+Template: partman-partitioning/small_new_size
+Type: error
+_Description: Too small size
+
+Template: partman-partitioning/new_size_commit_failed
+Type: error
+_Description: Resize operation failure
+ An error occurred while writing the changes to the storage devices.
+ .
+ The resize operation is aborted.
+
+Template: partman-partitioning/new_partition_size
+Type: string
+Default: some number
+_Description: New partition size:
+ The maximum size you can use is ${MAXSIZE}.
+ .
+ Hint: Use "20%" (or "30%", etc.) for 20% (resp. 30%, etc.) of the
+ available free space for this partition.  Use "max" as a shortcut for
+ the maximum allowed size.
+
+Template: partman-partitioning/bad_new_partition_size
+Type: error
+_Description: Invalid size
+
+Template: partman-partitioning/new_partition_place
+Type: select
+__Choices: Beginning, End
+_Description: Location for the new partition:
+ Please choose whether you want the new partition to be created at the
+ beginning or at the end of the available space.
+
+Template: partman-partitioning/new_partition_fs
+Type: select
+Choices: ${CHOICES}
+_Description: File system for the new partition:
+
+Template: partman-partitioning/new_partition_type
+Type: select
+__Choices: Primary, Logical
+_Description: Type for the new partition:
+
+Template: partman-partitioning/set_flags
+Type: multiselect
+Choices: ${CHOICES}
+_Description: Flags for the new partition:
+
+Template: partman-partitioning/set_name
+Type: string
+_Description: Partition name:
+
+Template: partman-partitioning/choose_label
+Type: select
+Choices: ${CHOICES}
+_Description: Partition table type:
+ Select the type of partition table to use.
+
+Template: partman-partitioning/text/set_flags
+Type: text
+_Description: Set the partition flags
+
+Template: partman-partitioning/text/set_name
+Type: text
+_Description: Name:
+
+Template: partman-partitioning/text/bootable
+Type: text
+_Description: Bootable flag:
+
+Template: partman-partitioning/text/on
+Type: text
+_Description: on
+
+Template: partman-partitioning/text/off
+Type: text
+_Description: off
+
+Template: partman-partitioning/text/resize
+Type: text
+_Description: Resize the partition (currently ${SIZE})
+
+Template: partman-partitioning/text/copy
+Type: text
+_Description: Copy data from another partition
+
+Template: partman-partitioning/text/delete
+Type: text
+_Description: Delete the partition
+
+Template: partman-partitioning/text/new
+Type: text
+_Description: Create a new partition
+
+Template: partman-partitioning/text/label
+Type: text
+_Description: Create a new empty partition table on this device
+

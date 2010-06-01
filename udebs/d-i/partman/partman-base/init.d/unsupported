@@ -1,0 +1,40 @@
+#!/bin/sh
+
+if [ -f /var/lib/partman/supported ]; then
+    exit 0
+fi
+
+. /lib/partman/definitions.sh
+
+[ -d /var/lib/partman ] || mkdir /var/lib/partman
+>/var/lib/partman/supported
+
+default_label=$(default_disk_label)
+
+case "$default_label" in
+    UNKNOWN)
+	db_input critical partman/unknown_label
+	db_go || exit 10
+	db_get partman/unknown_label
+	if [ "$RET" = false ]; then
+	    db_reset partman/unknown_label
+	    exit 10
+	fi
+	db_reset partman/unknown_label
+	exit 0
+	;;
+    UNSUPPORTED)
+	db_input critical partman/unsupported_label
+	db_go || exit 10
+	db_get partman/unsupported_label
+	if [ "$RET" = false ]; then
+	    db_reset partman/unsupported_label
+	    exit 10
+	fi
+	db_reset partman/unsupported_label
+	exit 0
+	;;
+    *)
+	exit 0
+	;;
+esac

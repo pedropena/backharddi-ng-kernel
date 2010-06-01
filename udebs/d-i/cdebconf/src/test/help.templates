@@ -1,0 +1,10 @@
+Template: test-help/boolean
+Type: boolean
+Default: true
+Description: Enter a boolean value
+ This is a boolean question.
+
+Template: test-help/error
+Type: error
+Description: Error message
+ This is an error message.

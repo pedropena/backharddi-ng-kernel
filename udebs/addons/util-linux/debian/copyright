@@ -1,0 +1,29 @@
+This is the Debian GNU/Linux prepackaged version of util-linux.
+
+This package was put together by Guy Maor <maor@debian.org> and later
+maintained by Sean 'Shaleh' Perry <shaleh@debian.org>, and Adrian Bunk
+<bunk@stusta.de>.
+
+The current maintainer is LaMont Jones <lamont@debian.org>.
+
+It was downloaded from:
+    ftp://ftp.us.kernel.org/pub/linux/utils/util-linux/
+and previously was at
+    ftp://ftp.win.tue.nl/pub/home/aeb/linux-local/utils/util-linux/
+
+Upstream maintainers include:
+Maintainer: Adrian Bunk <bunk@fs.tum.de>
+Maintainer: Andries Brouwer <aeb@cwi.nl>
+Maintainer address: util-linux@math.uio.no
+Maintainer of getopt: Frodo Looijaard <frodol@dds.nl>
+Maintainer of simpleinit: Richard Gooch <rgooch@atnf.csiro.au>
+
+Copyright:
+
+getopt, more, pg, wall, and whereis may be redistributed under the terms
+of the UCB BSD license found on Debian systems in the file
+/usr/share/common-licenses/BSD
+
+Everything else may be redistributed under the terms of the GNU GPL
+Version 2 or later found on Debian systems in the file
+/usr/share/common-licenses/GPL

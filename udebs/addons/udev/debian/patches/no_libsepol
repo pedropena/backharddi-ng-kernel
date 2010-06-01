@@ -1,0 +1,12 @@
+diff -ruNp udev-076.orig/Makefile udev-076/Makefile
+--- udev-076.orig/Makefile	2005-12-03 18:02:26.000000000 +0100
++++ udev-076/Makefile	2005-12-03 18:02:21.000000000 +0100
+@@ -180,7 +180,7 @@ endif
+ 
+ ifeq ($(strip $(USE_SELINUX)),true)
+ 	UDEV_OBJS += udev_selinux.o
+-	LIB_OBJS += -lselinux -lsepol
++	LIB_OBJS += -lselinux
+ 	CFLAGS += -DUSE_SELINUX
+ endif
+ 

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -- $1
+
+fs=$1
+mp=$2
+type=$3
+options=$4
+dump=$5
+pass=$6
+
+case $type in
+    reiserfs)
+	if expr "$options" : '.*notail.*' >/dev/null; then
+	    mount -o notail $fs /target$mp || exit 1
+	else
+	    mount $fs /target$mp || exit 1
+	fi
+	echo "umount /target$mp"
+	exit 0
+	;;
+esac
+
+exit 1

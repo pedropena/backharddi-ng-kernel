@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+cd $DEVICES
+if [ -f cmosrest ]; then
+	rm cmosrest
+else
+	touch cmosrest
+fi

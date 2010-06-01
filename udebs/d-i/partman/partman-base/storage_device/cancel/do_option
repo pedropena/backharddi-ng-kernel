@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+. /lib/partman/definitions.sh
+
+dev="$2"
+cd $dev
+
+exit 100

@@ -1,0 +1,122 @@
+#! /bin/sh -e
+TYPE="$1"
+
+case $TYPE in
+	cd|disk|partition|floppy|maybe-floppy|maybe-usb-floppy)	;;
+	*)
+		echo "Usage: $0 cd|disk|partition|floppy|maybe-floppy|maybe-usb-floppy" >&2
+		exit 2
+		;;
+esac
+
+if [ -d /sys/block ] && type udevinfo >/dev/null 2>&1; then
+	syspaths=
+	case $TYPE in
+		partition)
+			for x in /sys/block/*/*; do
+				[ -d "$x" ] || continue
+				syspaths="${syspaths:+$syspaths }$x"
+			done
+			TYPE=disk
+			;;
+		*)
+			for x in /sys/block/*; do
+				[ -d "$x" ] || continue
+				syspaths="${syspaths:+$syspaths }$x"
+			done
+			;;
+	esac
+	for x in $syspaths; do
+		devpath="${x#/sys}"
+		match=false
+		case $TYPE in
+			maybe-floppy)
+				TYPE=floppy
+				;;
+		esac
+		case $TYPE in
+			floppy)
+				# TODO ugly special case for non-IDE floppies
+				case $devpath in
+					/block/fd[0-9]*)
+						match=:
+						;;
+				esac
+				;;
+		esac
+		# Some USB sticks and CD drives are misdetected as floppy
+		# This allows to scan for those
+		if ! $match && [ "$TYPE" = maybe-usb-floppy ]; then
+			if udevinfo -q env -p "$devpath" 2>/dev/null | \
+			   grep -q '^ID_BUS=usb' && \
+			   udevinfo -q env -p "$devpath" 2>/dev/null | \
+			   grep -q '^ID_TYPE=floppy'; then
+				match=:
+			fi
+		fi
+		if ! $match && [ "$TYPE" = cd ]; then
+			if udevinfo -q env -p "$devpath" 2>/dev/null | \
+			   grep -q '^ID_CDROM='; then
+				match=:
+			fi
+		fi
+		if ! $match; then
+			if udevinfo -q env -p "$devpath" 2>/dev/null | \
+			   grep -q "^ID_TYPE=$TYPE"; then
+				match=:
+			fi
+		fi
+		if ! $match && [ "$TYPE" = disk ]; then
+			case $devpath in
+				/block/cciss\!*|/block/ida\!*|/block/rd\!*)
+					match=:
+					;;
+			esac
+		fi
+		if $match; then
+			if ! name="$(udevinfo -q name -p "$devpath" \
+					2>/dev/null)"; then
+				name="$(printf %s "${devpath##*/}" | \
+					sed 's,!,/,g')"
+			fi
+			echo "/dev/$name"
+		fi
+	done
+else
+	case $TYPE in
+		cd)
+			if [ -d /dev/cdroms ]; then
+				find /dev/cdroms -type b
+			fi
+			;;
+		disk)
+			if [ -d /dev/discs ]; then
+				# busybox find has no -maxdepth
+				find /dev/discs -type b | \
+					grep -v '/.*/.*/.*/' || true
+			fi
+			;;
+		partition)
+			if [ -d /dev/discs ]; then
+				# busybox find has no -mindepth
+				find /dev/discs -type b | \
+					grep '/.*/.*/.*/' || true
+			fi
+			;;
+		floppy)
+			if [ -d /dev/floppy ]; then
+				find /dev/floppy -type b
+			fi
+			;;
+		maybe-floppy)
+			# Without udev, we can't necessarily tell floppies
+			# from other kinds of disks, so we have to offer
+			# everything.
+			for x in /dev/floppy /dev/scsi /dev/ide /dev/discs; do
+				if [ -d "$x" ]; then
+					find "$x" -type b
+				fi
+			done
+			;;
+	esac
+fi

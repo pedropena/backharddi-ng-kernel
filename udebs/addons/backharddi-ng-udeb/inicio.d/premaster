@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+. /lib/backharddi/definitions.sh
+
+db_get backharddi/modo
+[ "$RET" = rest ] || exit 0
+
+db_get backharddi/imagenes
+imagenes="$RET"
+
+[ ! -f "$imagenes/premaster" ] || . $imagenes/premaster

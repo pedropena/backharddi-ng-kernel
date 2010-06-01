@@ -1,0 +1,17 @@
+
+              **************************************************
+              * IMPORTANT INFORMATION FROM THE UDEV MAINTAINER *
+              **************************************************
+
+Before filing bugs against udev please read carefully
+/usr/share/doc/udev/README.Debian.gz, which explains the most common
+issues which may happen when switching to udev.
+
+If some device is not created, not even with the wrong name, or it is
+created only after you do something, then what you are experiencing is
+probably NOT A BUG (or at least, not an udev bug).
+
+              **************************************************
+              * READ THE IMPORTANT INFORMATION ABOVE THIS LINE *
+              **************************************************
+

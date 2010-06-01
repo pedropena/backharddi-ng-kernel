@@ -1,0 +1,23 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+[ "$1" = nogenerar ] && exit 0
+
+dir="$1"
+while true; do
+	db_input critical backharddi/backup_nombre || true
+	if db_go; then
+		db_get backharddi/backup_nombre
+		backup="$dir/$(echo $RET | to_secure_string)"
+		if [ -d "$backup" ]; then
+			db_input critical backharddi/backup_existe || true
+			db_go || true
+			continue
+		fi
+		db_set backharddi/imagenes "$backup"
+		exit 100
+	else
+		break
+	fi
+done

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+db_metaget backharddi/text/label description
+label="$RET"
+[ -z "$label" ] && label="backharddi"
+
+for dev in $DEVICES/*; do
+	[ -d $dev ] || continue
+	cd $dev
+	for id in *; do
+		[ -d $id ] || continue
+		[ -f $id/detected_filesystem ] || continue
+		fs="$(cat $id/detected_filesystem)"
+		case $fs in
+			free) continue ;;
+			ext3) [ "$(e2label $(cat $id/path))" = "$label" ] && continue;;
+		esac
+		[ -f $id/rest ] && rm $id/rest
+		touch $id/gen
+		[ $fs != linux-swap ] && echo "lzo" > $id/compresion
+		update_partition $dev $id
+	done
+done

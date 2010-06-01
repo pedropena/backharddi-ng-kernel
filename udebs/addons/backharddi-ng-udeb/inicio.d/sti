@@ -1,0 +1,31 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+lspci -n | grep 0000:0059 || lspci -n | grep 0000:8000 || exit 0
+STI_SIG1="PILTpilt"
+STI_SIG2="X-MBR"
+TEMP=/tmp/sti
+
+for dev in $DEVICES/*; do
+	[ -d "$dev" ] || continue
+	cd $dev
+	device=$(cat device)
+	dd if=$device count=1 | grep -q $STI_SIG1 || dd if=$device count=1 | grep -q $STI_SIG2 || continue
+	dir=$TEMP/${PWD##*/}
+	pt=$dir/pt
+	sti=$dir/sti
+	mkdir -p $dir
+	stidump $device > $pt 2> $sti || continue
+	
+	mv $sti .
+	echo $device > $dir/device
+	restore_mbr $dir $dev
+	open_dialog COMMIT
+	close_dialog
+	break
+done
+
+rm -rf $TEMP
+
+exit 0

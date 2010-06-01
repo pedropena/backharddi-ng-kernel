@@ -1,0 +1,31 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 01wget.dpatch by  <Ghe Rivero <ghe@upsa.es>>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad --exclude=CVS --exclude=.svn ./src/Makefile /tmp/dpep-work.ddpISg/lshw-02.04/src/Makefile
+--- ./src/Makefile	2005-04-28 04:28:54.000000000 +0200
++++ /tmp/dpep-work.ddpISg/lshw-02.04/src/Makefile	2005-06-12 10:30:13.325457240 +0200
+@@ -56,16 +56,16 @@
+ 	docbook2man $<
+ 
+ pci.ids:
+-	wget http://pciids.sourceforge.net/pci.ids
++	#wget http://pciids.sourceforge.net/pci.ids
+ 
+ usb.ids:
+-	wget http://www.linux-usb.org/usb.ids
++	#wget http://www.linux-usb.org/usb.ids
+ 
+ oui.txt:
+-	wget http://standards.ieee.org/regauth/oui/oui.txt
++	#wget http://standards.ieee.org/regauth/oui/oui.txt
+ 
+ manuf.txt:
+-	wget http://www.ethereal.com/distribution/manuf.txt
++	#wget http://www.ethereal.com/distribution/manuf.txt
+ 
+ install: all
+ 	-mkdir -p $(DESTDIR)

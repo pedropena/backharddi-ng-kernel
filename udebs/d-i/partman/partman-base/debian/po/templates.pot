@@ -1,0 +1,491 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2007-01-06 22:47+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:3
+msgid "Starting up the partitioner"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:11
+msgid "Scanning disks..."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:15
+msgid "Detecting file systems..."
+msgstr ""
+
+#. Type: error
+#. Description
+#: ../partman-base.templates:20
+msgid "Device in use"
+msgstr ""
+
+#. Type: error
+#. Description
+#: ../partman-base.templates:20
+msgid ""
+"No modifications can be made to the device ${DEVICE} for the following "
+"reasons:"
+msgstr ""
+
+#. Type: error
+#. Description
+#: ../partman-base.templates:33
+msgid "Partition in use"
+msgstr ""
+
+#. Type: error
+#. Description
+#. This should be translated as "partition *number* ${PARTITION}"
+#. In short, ${PARTITION} will indeed contain the partition
+#. NUMBER and not the partition NAME
+#: ../partman-base.templates:33
+msgid ""
+"No modifications can be made to the partition #${PARTITION} of device "
+"${DEVICE} for the following reasons:"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:53
+msgid ""
+"This partitioner doesn't have information about the default type of the "
+"partition tables on your architecture.  Please send an e-mail message to "
+"debian-boot@lists.debian.org with information."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:53
+msgid ""
+"Please note that if the type of the partition table is unsupported by "
+"libparted, then this partitioner will not work properly."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:64
+msgid "Continue with partitioning?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:64
+msgid ""
+"This partitioner is based on the library libparted which doesn't have "
+"support for the partition tables used on your architecture.  It is strongly "
+"recommended that you exit this partitioner."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:64
+msgid ""
+"If you can, please help to add support for your partition table type to "
+"libparted."
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../partman-base.templates:75
+msgid ""
+"This is an overview of your currently configured partitions and mount "
+"points. Select a partition to modify its settings (file system, mount point, "
+"etc.), a free space to create partitions, or a device to initialise its "
+"partition table."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:80
+msgid "Create new empty partition table on this device?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:80
+msgid ""
+"You have selected an entire device to partition. If you proceed with "
+"creating a new partition table on the device, then all current partitions "
+"will be removed."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:80
+msgid "Note that you will be able to undo this operation later if you wish."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:90
+msgid "Write a new empty partition table?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:90
+msgid ""
+"Because of limitations in the current implementation of the Sun partition "
+"tables in libparted, the newly created partition table has to be written to "
+"the disk immediately."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:90
+msgid ""
+"You will NOT be able to undo this operation later and all existing data on "
+"the disk will be irreversibly removed."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:90
+msgid ""
+"Confirm whether you actually want to create a new partition table and write "
+"it to disk."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:104
+msgid "Continue with the installation?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:104
+msgid ""
+"No partition table changes and no creation of file systems have been planned."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:104
+msgid ""
+"If you plan on using already created file systems, be aware that existing "
+"files may prevent the successful installation of the base system."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:114
+msgid "Write the changes to disks?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:114
+msgid ""
+"If you continue, the changes listed below will be written to the disks. "
+"Otherwise, you will be able to make further changes manually."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:114
+msgid ""
+"WARNING: This will destroy all data on any partitions you have removed as "
+"well as on the partitions that are going to be formatted."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:125
+msgid "The following partitions are going to be formatted:"
+msgstr ""
+
+#. Type: text
+#. Description
+#. for example: "partition #6 of IDE0 master as ext3 journaling file system"
+#: ../partman-base.templates:130
+msgid "partition #${PARTITION} of ${DEVICE} as ${TYPE}"
+msgstr ""
+
+#. Type: text
+#. Description
+#. for devices which have no partitions
+#. for example: "LVM VG Debian, LV Root as ext3 journaling file system"
+#: ../partman-base.templates:136
+msgid "${DEVICE} as ${TYPE}"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:140
+msgid "The partition tables of the following devices are changed:"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../partman-base.templates:145
+msgid "What to do with this device:"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../partman-base.templates:150
+msgid "How to use this free space:"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../partman-base.templates:155
+msgid "Partition settings:"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../partman-base.templates:155
+msgid ""
+"You are editing partition #${PARTITION} of ${DEVICE}. ${OTHERINFO} "
+"${DESTROYED}"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:160
+msgid "This partition is formatted with the ${FILESYSTEM}."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:164
+msgid "No existing file system was detected in this partition."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:168
+msgid "All data in it WILL BE DESTROYED!"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../partman-base.templates:172
+msgid "The partition starts from ${FROMCHS} and ends at ${TOCHS}."
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../partman-base.templates:176
+msgid "The free space starts from ${FROMCHS} and ends at ${TOCHS}."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:180
+msgid "Please wait..."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:184
+msgid "Partitions formatting"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:188
+msgid "Processing..."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:200
+msgid "Done setting up the partition"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:204
+msgid "Finish partitioning and write changes to disk"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:208
+msgid "Undo changes to partitions"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:212
+msgid "Show Cylinder/Head/Sector information"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:216
+#, no-c-format
+msgid "Dump partition info in %s"
+msgstr ""
+
+#. Type: text
+#. Description
+#. Keep short
+#: ../partman-base.templates:221
+msgid "FREE SPACE"
+msgstr ""
+
+#. Type: text
+#. Description
+#. "unusable free space".  No more than 8 symbols.
+#: ../partman-base.templates:226
+msgid "unusable"
+msgstr ""
+
+#. Type: text
+#. Description
+#. "primary partition".  No more than 8 symbols.
+#: ../partman-base.templates:231
+msgid "primary"
+msgstr ""
+
+#. Type: text
+#. Description
+#. "logical partition".  No more than 8 symbols.
+#: ../partman-base.templates:236
+msgid "logical"
+msgstr ""
+
+#. Type: text
+#. Description
+#. "primary or logical".  No more than 8 symbols.
+#: ../partman-base.templates:241
+msgid "pri/log"
+msgstr ""
+
+#. Type: text
+#. Description
+#. How to print the partition numbers in your language
+#. Examples:
+#. %s.
+#. No %s
+#. N. %s
+#: ../partman-base.templates:250
+#, no-c-format
+msgid "#%s"
+msgstr ""
+
+#. Type: text
+#. Description
+#. For example IDE0 master (hda)
+#: ../partman-base.templates:255
+#, no-c-format
+msgid "IDE%s master (%s)"
+msgstr ""
+
+#. Type: text
+#. Description
+#. For example IDE1 slave (hdd)
+#: ../partman-base.templates:260
+#, no-c-format
+msgid "IDE%s slave (%s)"
+msgstr ""
+
+#. Type: text
+#. Description
+#. For example IDE1 master, partition #5 (hdc5)
+#: ../partman-base.templates:265
+#, no-c-format
+msgid "IDE%s master, partition #%s (%s)"
+msgstr ""
+
+#. Type: text
+#. Description
+#. For example IDE2 slave, partition #5 (hdf5)
+#: ../partman-base.templates:270
+#, no-c-format
+msgid "IDE%s slave, partition #%s (%s)"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:274
+#, no-c-format
+msgid "SCSI%s (%s,%s,%s) (%s)"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:278
+#, no-c-format
+msgid "SCSI%s (%s,%s,%s), partition #%s (%s)"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:282
+#, no-c-format
+msgid "RAID%s device #%s"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:286
+#, no-c-format
+msgid "Encrypted volume (%s)"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:290
+#, no-c-format
+msgid "LVM VG %s, LV %s"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:294
+#, no-c-format
+msgid "Loopback (loop%s)"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:298
+#, no-c-format
+msgid "DASD %s (%s)"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:302
+#, no-c-format
+msgid "DASD %s (%s), partition #%s"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:306
+msgid "Cancel this menu"
+msgstr ""
+
+#. Type: text
+#. Description
+#. Main menu entry
+#: ../partman-base.templates:311
+msgid "Partition disks"
+msgstr ""

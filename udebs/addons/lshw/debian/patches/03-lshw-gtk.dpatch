@@ -1,0 +1,21 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 03lshw-gtk.dpatch by Ghe Rivero <ghe@upsa.es>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad lshw-02.11.01~/src/Makefile lshw-02.11.01/src/Makefile
+--- lshw-02.11.01~/src/Makefile	2007-09-12 10:03:22.000000000 +0200
++++ lshw-02.11.01/src/Makefile	2007-09-12 10:04:00.000000000 +0200
+@@ -82,8 +82,8 @@
+ 
+ install-gui: gui
+ 	$(INSTALL) -d -m 0755 $(DESTDIR)/$(SBINDIR)
+-	$(INSTALL) -m 0755 gui/gtk-$(PACKAGENAME) $(DESTDIR)/$(SBINDIR)
+-	$(INSTALL) -d -m 0755 $(DESTDIR)/$(DATADIR)/$(PACKAGENAME)/artwork
++	$(INSTALL) -m 0755 -s gui/gtk-$(PACKAGENAME) $(DESTDIR)/$(SBINDIR)/$(PACKAGENAME)-gtk
++	$(INSTALL) -d -m 0754 $(DESTDIR)/$(DATADIR)/$(PACKAGENAME)/artwork
+ 	$(INSTALL) -m 0644 gui/artwork/*.svg $(DESTDIR)/$(DATADIR)/$(PACKAGENAME)/artwork
+ 	
+ clean:

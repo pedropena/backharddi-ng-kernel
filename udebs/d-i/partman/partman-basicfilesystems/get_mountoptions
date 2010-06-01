@@ -1,0 +1,26 @@
+#!/bin/sh
+
+. /usr/share/debconf/confmodule
+
+dev=$1
+id=$2
+part=$dev/$id
+filesystem=$(cat $part/acting_filesystem)
+
+cd $dev
+
+options=''
+for op in $(cat /lib/partman/mountoptions/$filesystem); do
+    if [ -f $part/options/$op ]; then
+	if [ "$options" ]; then
+	    options="$options,$op"
+	else
+	    options="$op"
+	fi
+    fi
+done
+if [ -z "$options" ]; then
+    options=defaults
+fi
+
+echo $options

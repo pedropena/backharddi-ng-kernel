@@ -1,0 +1,259 @@
+Template: backharddi/progress/auto/title
+Type: text
+Description: Autoconfigurando Sistema de Backup
+
+Template: backharddi/progress/auto/monitor
+Type: text
+Description: Esperando comandos desde el monitor...
+
+Template: backharddi/progress/auto/fallback
+Type: text
+Description: Espere por favor...
+
+Template: backharddi/progress/inicio/title
+Type: text
+Description: Iniciando Sistema de Backup
+
+Template: backharddi/progress/inicio/parted
+Type: text
+Description: Iniciando servidor parted. Espere por favor...
+
+Template: backharddi/progress/inicio/lvm
+Type: text
+Description: Escaneando particiones LVM. Espere por favor...
+
+Template: backharddi/progress/inicio/sti
+Type: text
+Description: Buscando metadatos de la Tarjeta de Backup. Espere por favor...
+
+Template: backharddi/progress/inicio/fallback
+Type: text
+Description: Espere por favor...
+
+Template: backharddi/progress/update/title
+Type: text
+Description: Actualizando datos de particiones
+
+Template: backharddi/progress/update/fallback
+Type: text
+Description: Espere por favor...
+
+Template: backharddi/medio
+Type: select
+Choices: hd-media, net, cdrom
+Description: Seleccione el medio de origen:
+
+Template: backharddi/modo
+Type: select
+Choices: gen, rest
+Description: Seleccione el modo de trabajo:
+
+Template: backharddi/imagenes
+Type: string
+Description: Directorio de imagenes
+
+Template: backharddi/escoge_dir
+Type: select
+Choices: ${CHOICES}
+Description: Este es el listado de directorios disponibles. Seleccione uno para acceder a él o genere la copia de seguridad en el directorio actual:
+
+Template: backharddi/escoge_backup
+Type: select
+Choices: ${CHOICES}
+Description: Este es el listado de copias de seguridad y directorios (empiezan por +) disponibles. Seleccione un directorio (para acceder a él) o una copia de seguridad:
+
+Template: backharddi/escoge_particion
+Type: select
+Choices: ${CHOICES}
+Description: Este es el listado de particiones disponibles en su sistema. Seleccione una partición para definir las acciones a realizar:
+
+Template: backharddi/particion_activa
+Type: select
+Choices: ${CHOICES}
+Description: ${ACCION}
+ Ha seleccionado la partición #${PARTITION} de ${DEVICE}. ${OTHERINFO} 
+
+Template: backharddi/text/label
+Type: text
+Description: backharddi
+
+Template: backharddi/text/accion
+Type: text
+Description: Defina la acción a realizar sobre la partición:
+
+Template: backharddi/text/no_accion
+Type: text
+Description: No se puede realizar ninguna acción sobre la partición. 
+
+Template: backharddi/text/eliminar
+Type: text
+Description: Eliminar copia de seguridad
+
+Template: backharddi/no_part
+Type: error
+Description: Atención
+ No se ha definido ninguna partición para albergar las copias de seguridad.
+ .
+ Por favor, corrija esto en el menú de particionado.
+
+Template: backharddi/reboot
+Type: note
+Description: Proceso Terminado
+ Las acciones definidas han terminado correctamente. El sistema se va a reiniciar.
+
+Template: debian-installer/backharddi-ng-udeb/title
+Type: text
+Description: Sistema de Backup
+
+Template: debian-installer/backharddi-udeb/title
+Type: text
+Description: Sistema de Backup
+
+Template: backharddi/progress/gen
+Type: text
+Description: Generando copia de seguridad de ${device}...\nTiempo transcurrido: ${etime}\nTiempo restante: ${rtime}\nRatio: ${rate}\nEspacio disponible: ${free}
+
+Template: backharddi/progress/rest
+Type: text
+Description: Restaurando copia de seguridad de ${device}...\nTiempo transcurrido: ${etime}\nTiempo restante: ${rtime}\nRatio: ${rate}\nEspacio disponible: ${free}
+
+Template: backharddi/net/nota
+Type: text
+Description: Pulse una tecla cuando todos los equipos a restaurar muestren este mensaje
+
+Template: backharddi/progress/t1sti
+Type: text
+Description: Reiniciando partición de restauración instantánea de ${device}...
+
+Template: backharddi/text/finalizar_seleccion
+Type: text
+Description: Realizar las acciones definidas
+
+Template: backharddi/text/generar
+Type: text
+Description: Generar copia de seguridad
+
+Template: backharddi/text/directorio_nuevo
+Type: text
+Description: Crear un directorio nuevo
+
+Template: backharddi/text/eliminar_directorio
+Type: text
+Description: Eliminar directorio actual
+
+Template: backharddi/text/restaurar
+Type: text
+Description: Restaurar
+
+Template: backharddi/text/generar_todo
+Type: text
+Description: Marcar todo para generar copia de seguridad
+
+Template: backharddi/text/restaurar_todo
+Type: text
+Description: Marcar todo para restaurar copia de seguridad
+
+Template: backharddi/backup_nombre
+Type: string
+Description: Introduzca el nombre para la nueva copia de seguridad
+
+Template: backharddi/directorio_nombre
+Type: string
+Description: Introduzca el nombre del nuevo directorio
+
+Template: backharddi/eliminar_directorio
+Type: boolean
+Default: false
+Description: Desea eliminar el directorio actual?
+
+Template: backharddi/backup_existe
+Type: error
+Description: Atención
+ Ya existe una copia de seguridad con ese nombre.
+ .
+ Por favor, seleccione otro.
+
+Template: backharddi/directorio_novacio
+Type: error
+Description: Atención
+ El directorio actual no está vacío.
+ .
+ Por favor, elimine antes cualquier backup del directorio.
+
+Template: backharddi/directorio_existe
+Type: error
+Description: Atención
+ Ya existe un directorio con ese nombre.
+ .
+ Por favor, seleccione otro.
+
+Template: backharddi/no_backharddi
+Type: error
+Description: Atención
+ La copia de seguridad seleccionada no contiene una partición de backup en la ubicación actual.
+ .
+ Por favor, seleccione otra copia de seguridad.
+
+Template: backharddi/no_dev
+Type: note
+Description: Atención
+ La copia de seguridad seleccionada contiene una imagen del dispositivo ${dev}.
+ Éste dispositivo no se encuentra actualmente en el equipo y por ello no se podrá restaurar sobre él.
+
+Template: backharddi/no_space
+Type: error
+Description: Atención
+ La copia de seguridad seleccionada contiene imagenes de particiones del dispositivo ${dev}.
+ Ésta imagen no coge en el dispositivo actual ${dev2}.
+
+Template: backharddi/no_devices
+Type: boolean
+Default: false
+Description: Desea eliminar la copia de seguridad seleccionada?
+ La copia de seguridad seleccionada no contiene imagenes de particiones de ningun dispositivo presente en el equipo actual.
+ Puede eliminar la copia de seguridad si no va a necesitarla.
+
+Template: backharddi/eliminar
+Type: boolean
+Default: false
+Description: Desea eliminar la copia de seguridad actual?
+ Puede eliminar la copia de seguridad si no va a necesitarla.
+
+Template: backharddi/cdrom/siguiente
+Type: note
+Description: Cambio de medio
+ Extraiga el medio del lector, introduzca el número ${numero} y pulse ENTER para continuar.
+
+Template: backharddi/cdrom/alert
+Type: boolean
+Default: false
+Description: Desea volcar la copia de seguridad del equipo?
+ Recuerde que si continúa se van a perder todos los datos que pudiera tener en su disco duro.
+ .
+ Si desea continuar marque Sí, de lo contrario marque No
+
+Template: backharddi/auto_no_devices
+Type: error
+Description: Atención
+ No se ha encontrado ningún dispositivo válido para volcar la copia de seguridad actual.
+
+Template: backharddi/net/server
+Type: string
+Description: Dirección IP:
+ La detección automática del servidor de red Backharddi ha fallado. Introduzca la dirección IP del servidor.
+
+Template: backharddi/net/port
+Type: string
+Description: Puerto:
+ Introduzca el puerto del servidor para recibir las imagenes.
+
+Template: backharddi/net/service_port
+Type: string
+Description: Puerto del Servicio:
+ Introduzca el puerto del servicio de imagenes a donde se enviaran las consultas.
+
+Template: backharddi/net/minclients
+Type: string
+Description: Número de clientes:
+ Introduzca el número de clientes minimos para autolanzar el grupo multicast. 
+

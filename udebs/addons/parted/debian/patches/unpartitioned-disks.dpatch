@@ -1,0 +1,70 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## unpartitioned-disks.dpatch by Colin Watson <cjwatson@ubuntu.com>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Don't try to call BLKPG ioctls or tell device-mapper to create
+## DP: partitions on disks that can't be partitioned.
+
+@DPATCH@
+diff -urNad parted-1.8.8.git.2008.03.24~/libparted/arch/linux.c parted-1.8.8.git.2008.03.24/libparted/arch/linux.c
+--- parted-1.8.8.git.2008.03.24~/libparted/arch/linux.c	2009-01-15 00:39:52.000000000 +0000
++++ parted-1.8.8.git.2008.03.24/libparted/arch/linux.c	2009-01-15 00:42:26.000000000 +0000
+@@ -2179,6 +2179,18 @@
+ }
+ 
+ static int
++_has_partitions (const PedDisk* disk)
++{
++        PED_ASSERT(disk != NULL, return 0);
++
++        /* Some devices can't be partitioned. */
++        if (!strcmp (disk->type->name, "loop"))
++                return 0;
++
++        return 1;
++}
++
++static int
+ _blkpg_part_command (PedDevice* dev, struct blkpg_partition* part, int op)
+ {
+         LinuxSpecific*          arch_specific = LINUX_SPECIFIC (dev);
+@@ -2203,6 +2215,9 @@
+         PED_ASSERT(disk->dev->sector_size % PED_SECTOR_SIZE_DEFAULT == 0,
+                    return 0);
+ 
++        if (!_has_partitions (disk))
++                return 0;
++
+         if (ped_disk_type_check_feature (disk->type,
+                                          PED_DISK_TYPE_PARTITION_NAME))
+                 vol_name = ped_partition_get_name (part);
+@@ -2251,6 +2266,9 @@
+ {
+         struct blkpg_partition  linux_part;
+ 
++        if (!_has_partitions (disk))
++                return 0;
++
+         memset (&linux_part, 0, sizeof (linux_part));
+         linux_part.pno = n;
+         return _blkpg_part_command (disk->dev, &linux_part,
+@@ -2430,6 +2448,9 @@
+         char*           dm_uuid = NULL;
+         int             uuid_len;
+ 
++        if (!_has_partitions(disk))
++                return 0;
++
+         dev_name = _device_get_part_path (disk->dev, part->num);
+         if (!dev_name)
+                 return 0;
+@@ -2635,6 +2656,9 @@
+ static int
+ linux_disk_commit (PedDisk* disk)
+ {
++	if (!_has_partitions (disk))
++		return 1;
++
+ #ifdef ENABLE_DEVICE_MAPPER
+         if (disk->dev->type == PED_DEVICE_DM)
+                 return _dm_reread_part_table (disk);

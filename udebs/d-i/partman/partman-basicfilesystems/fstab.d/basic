@@ -1,0 +1,45 @@
+#!/bin/sh
+
+. /lib/partman/definitions.sh
+
+for dev in $DEVICES/*; do
+	[ -d $dev ] || continue
+	cd $dev
+	open_dialog PARTITIONS
+	while { read_line num id size type fs path name; [ "$id" ]; }; do
+	    [ $fs != free ] || continue
+	    [ -f "$id/method" ] || continue
+	    method=$(cat $id/method)
+	    if [ "$method" = swap ]; then
+		echo "$path" none swap sw 0 0
+	    fi
+	    [ -f "$id/acting_filesystem" ] || continue
+	    filesystem=$(cat $id/acting_filesystem)
+	    case "$filesystem" in
+		ext2)
+		    [ -f "$id/mountpoint" ] || continue
+		    mountpoint=$(cat $id/mountpoint)
+                    # due to #249322, #255135, #258117:
+		    if [ "$mountpoint" = /tmp ]; then
+			rm -f $id/options/noexec
+		    fi
+		    options=$(get_mountoptions $dev $id)
+		    if [ "$mountpoint" = / ]; then
+			options="${options},errors=remount-ro"
+			pass=1
+		    else
+			pass=2
+		    fi
+		    echo "$path" "$mountpoint" ext2 $options 0 $pass
+		    ;;
+		fat16|fat32)
+		    [ -f "$id/mountpoint" ] || continue
+		    mountpoint=$(cat $id/mountpoint)
+		    options=$(get_mountoptions $dev $id)
+		    echo "$path" "$mountpoint" vfat $options 0 0
+		    ;;
+	    esac
+	done
+	close_dialog
+done
+

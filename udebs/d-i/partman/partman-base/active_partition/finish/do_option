@@ -1,0 +1,16 @@
+#!/bin/sh
+
+id=$3
+dev=$2
+
+cd $dev
+
+label=$(cat $id/label)
+filesystem=$(cat $id/filesystem)
+
+[ -f $id/mountpoint ] && rm $id/mountpoint
+if [ $label = "backharddi" -a $filesystem = "ext3" ]; then
+       echo "/" >$id/mountpoint
+fi
+
+exit 100

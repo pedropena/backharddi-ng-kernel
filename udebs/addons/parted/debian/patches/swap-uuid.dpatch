@@ -1,0 +1,32 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## swap-uuid.dpatch by Colin Watson <cjwatson@ubuntu.com>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Create UUIDs on new swap partitions.
+
+@DPATCH@
+diff -urNad parted-1.8.8.git.2008.03.24~/libparted/fs/linux_swap/linux_swap.c parted-1.8.8.git.2008.03.24/libparted/fs/linux_swap/linux_swap.c
+--- parted-1.8.8.git.2008.03.24~/libparted/fs/linux_swap/linux_swap.c	2008-03-24 22:29:03.000000000 +0000
++++ parted-1.8.8.git.2008.03.24/libparted/fs/linux_swap/linux_swap.c	2008-06-24 02:06:19.000000000 +0100
+@@ -31,6 +31,7 @@
+ #endif /* ENABLE_NLS */
+ 
+ #include <unistd.h>
++#include <uuid/uuid.h>
+ 
+ #define SWAP_SPECIFIC(fs) ((SwapSpecific*) (fs->type_specific))
+ #define BUFFER_SIZE 128
+@@ -388,9 +389,13 @@
+ 	if (fs_info->version == 0) {
+ 		memcpy (sig, "SWAP-SPACE", 10);
+ 	} else {
++		uuid_t uuid_dat;
+ 		fs_info->header->new.version = 1;
+ 		fs_info->header->new.last_page = fs_info->page_count - 1;
+ 		fs_info->header->new.nr_badpages = 0;
++		uuid_generate (uuid_dat);
++		memcpy (fs_info->header->new.sws_uuid, uuid_dat,
++			sizeof (fs_info->header->new.sws_uuid));
+ 		memcpy (sig, "SWAPSPACE2", 10);
+ 	}
+ 

@@ -1,0 +1,24 @@
+#! /bin/sh -e
+## doc-package.dpatch by Timshel Knoll <timshel@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Some small debian parted-doc fixup.
+## DP: Will stay as debian specific change.
+
+. `dirname $0`/DPATCH
+
+@DPATCH@
+diff --git a/doc/C/parted.8 b/doc/C/parted.8
+index 7040402..5affe32 100644
+--- a/doc/C/parted.8
++++ b/doc/C/parted.8
+@@ -133,7 +133,7 @@ The \fIparted\fP program is fully documented in the
+ .BR info(1) 
+ format
+ .IR "GNU partitioning software"
+-manual.
++manual which is distributed with the parted-doc Debian package.
+ .SH AUTHOR
+ This manual page was written by Timshel Knoll <timshel@debian.org>,
+ for the Debian GNU/Linux system (but may be used by others).
+You have new mail in /var/mail/otavio

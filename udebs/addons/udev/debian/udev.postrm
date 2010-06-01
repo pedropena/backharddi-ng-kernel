@@ -1,0 +1,40 @@
+#!/bin/sh -e
+
+cleanup_rulesd() {
+  [ -d /etc/udev/rules.d/ ] || return 0
+
+  # delete broken symlinks
+  find /etc/udev/rules.d/ -type l -not -exec test -e {} \; -print0 \
+	| xargs --no-run-if-empty --null rm
+  rmdir --ignore-fail-on-non-empty /etc/udev/rules.d/ /etc/udev/ || true
+}
+
+warn_user() {
+  echo
+  echo "**************************************************************"
+  echo "* Please reboot your system as soon as possible!"
+  echo "* After removing udev the system may not be fully functional."
+  echo "**************************************************************"
+  echo
+}
+
+case "$1" in
+    purge)
+    cleanup_rulesd
+    ;;
+
+    remove)
+    warn_user
+    ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+    echo "$0 called with unknown argument '$1'" >&2
+    exit 1
+    ;;
+esac
+
+#DEBHELPER#
+

@@ -1,0 +1,8 @@
+These are the patches we want to include upstream :
+
+s390.dpatch			* copyright *
+
+# Should be already merged on 1.6.25
+
+# Backport from 1.6.26
+fix_rescue_segfault.dpatch

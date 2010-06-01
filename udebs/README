@@ -1,0 +1,2 @@
+En el directorio d-i están los udebs que pertenecen a Debian Installer a los que ha sido necesaria alguna modificación para cumplir con los objetivos de Backharddi NG.
+En el directorio addons están los paquetes fuente que generan udebs necesarios para añadir alguna funcionalidad no presente en Debian Installer pero necesaria para Backharddi NG.

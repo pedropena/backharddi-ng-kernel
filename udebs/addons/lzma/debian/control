@@ -1,0 +1,22 @@
+Source: lzma
+Section: utils
+Priority: optional
+Maintainer: Mohammed Adnène Trojette <adn+deb@diwi.org>
+Build-Depends: debhelper (>= 4.0.0), quilt
+Standards-Version: 3.7.2
+
+Package: lzma
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Default and general compression method of 7z format in 7-Zip program
+ LZMA is a compression algorithm, based on the famous Lempel Ziv
+ compression method.
+ .
+ The main characteristics of the algorithm are very good compression,
+ fast decompression, use of lot of RAM for compression and low usage of
+ RAM for decompression.
+ .
+ LZMA provides high compression ratio and very fast decompression, so it
+ is very suitable for embedded applications. For example, it can be used
+ for ROM (firmware) compression.
+XC-Package-Type: udeb

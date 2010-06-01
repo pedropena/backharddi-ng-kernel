@@ -1,0 +1,87 @@
+// $Revision: 1.1.1.1 $
+Description of the image file format for Partition Image which will 
+be used in the 0.6 versions.                       
+                             -------------------                                         
+Web: http://www.partimage.org/
+
+========================= INFO ==========================
+
+* There will be a magic string between each important structures 
+  (for example between CVolumeHeader and the data)
+* The CRC must be increased if the current byte is null. For example, use:
+  for (i=0; i < size; i++)
+    qwCRC += (data[i] ^ 94);
+
+=============== GENERAL IMAGE FILE FORMAT ===============
+
+Volume 000:
+-----------
+* CVolumeHeader // The first volume is a regular volume
+* CMainHeader // contains the number of MBR saved
+* --mbr--
+* --data--
+
+Volume XXX:
+-----------
+* CVolumeHeader
+* --data--
+
+Volume last:
+------------
+* CVolumeHeader
+* --data--
+* CMainTail
+
+===================== DATA FORMAT ======================
+
+* Block 000:
+
+* ...
+
+* Block XXX:
+  + UINT nCRC:
+    [0..65500]: ((16 bits CRC of the data of the block) mod (65500))
+    65500 -> code001: it mean the size of the next variable used to encode 
+                      the block number is larger (24 bits -> 32 bits; 
+                      32 bits -> 40 bits; 40 bits -> 56 bits; 56 bits -> 64 bits)
+    [65502..65535] -> codeXXX: reserved for futur use
+    If a code was used, then another UINT is written for the real CRC
+  + ???? nBlockNumber: Number of the block which will be saved. This avoid to 
+                       restore the data of the block X
+                       in the block Y.
+  + --contents of the block-- // (between 512 and 32768 bytes in most cases)
+
+========================= MBR =============================
+* CMbr 000:
+  
+* ...
+
+* CMbr XXX:
+  struct CMBr
+  {
+    char m_cData[512];
+    char *szDevice[MAX_DEVICELEN]; // ex: "hda"
+    <type> m_DeviceIdentificator;
+  }
+
+When creating an image, all the MBR of the physical hard disks will be saved.
+If not useful, only a few KB will be lost. But it can be very useful. The number 
+of MBR saved in written in the MBR. With the 512 bytes of the MBR, we save the 
+identificator of the device. It can be a serial number, or the contents of 
+"/proc/ide/hda/model". It will be used to check the MBR we are restoring fit 
+with the original hard drive, to avoid errors. We will also add an option to 
+restore the MBR from an image file.
+
+======== STRUCTURES INFORMATIONS ===========
+
+* CVolumeHeader
+  Contains first a magic string "partimage" to check this is a partimage volume. 
+  It also contains the partition image version used to create it.
+
+* CMainHeader
+  Contains infos which describe all the partitions of the image file, as 
+  the date/time of the image creation, the description, ...
+ 
+* CMainTail
+  Contains informations to check the operation success, as the global 64 bits CRC
+

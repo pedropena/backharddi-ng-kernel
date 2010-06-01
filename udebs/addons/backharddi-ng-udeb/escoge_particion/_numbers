@@ -1,0 +1,9 @@
+55 divider_up
+60 partition_tree
+65 divider_down
+70 eliminar
+71 cmos_gen
+72 cmos_rest
+80 generar_todo
+85 restaurar_todo
+90 finish

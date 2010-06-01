@@ -1,0 +1,18 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+[ "$1" = nocrear_directorio ] && exit 0
+
+dir="$1"
+db_input critical backharddi/eliminar_directorio || true
+db_go || exit
+db_get backharddi/eliminar_directorio
+if [ "$RET" = true ]; then
+	if ! rmdir "$dir"; then
+		db_input critical backharddi/directorio_novacio || true
+		db_go || true
+	else
+		exit 255
+	fi
+fi

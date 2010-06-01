@@ -1,0 +1,16 @@
+#!/bin/sh
+
+. /usr/share/debconf/confmodule
+
+dir="$1"
+db_get backharddi/medio
+if [ "$RET" = cdrom ]; then
+	printf "noeliminar_directorio\t%s\n" "No se puede eliminar un directorio sobre un medio de solo lectura"
+else
+	if [ "$dir" = "/target" ]; then
+		printf "$dir\t%s\n" " "
+	else 
+		db_metaget backharddi/text/eliminar_directorio description
+		printf "$dir\t$RET"
+	fi
+fi

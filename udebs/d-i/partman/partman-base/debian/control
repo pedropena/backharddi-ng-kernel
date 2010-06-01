@@ -1,0 +1,15 @@
+Source: partman-base
+Section: debian-installer
+Priority: standard
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Uploaders: Anton Zinoviev <zinoviev@debian.org>, Joey Hess <joeyh@debian.org>, Colin Watson <cjwatson@debian.org>, Frans Pop <fjp@debian.org>
+Build-Depends: debhelper (>= 4.2.0), po-debconf (>= 0.5.0), libparted1.8-dev (>= 1.8.8.git.2009.06.03-1ubuntu6)
+XS-Vcs-Svn: svn://svn.debian.org/d-i/trunk/packages/partman/partman-base
+
+Package: partman-base
+XC-Package-Type: udeb
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, partman-partitioning, partman-target, archdetect, harddrive-detection, di-utils-mapdevfs, di-utils (>= 1.15)
+Provides: ${provides}
+XB-Installer-Menu-Item: ${menuitemnum}
+Description: Partition the storage devices (partman)

@@ -1,0 +1,88 @@
+#!/bin/sh
+
+
+. /lib/backharddi/definitions.sh
+
+db_get backharddi/modo
+modo="$RET"
+
+db_get backharddi/medio
+medio="$RET"
+
+db_get backharddi/imagenes
+backup="$RET"
+
+case $modo in
+	gen)
+		while true; do
+			if [ x"$backup" = x ]; then
+				while true; do
+					ask_user /lib/backharddi/escoge_dir /target
+					exitcode="$?"
+					if [ "$exitcode" -ge 100 ]; then
+						break
+					fi
+				done	
+				db_get backharddi/imagenes
+				backup="$RET"
+			fi
+
+			mkdir -p $backup
+			cp -r $DEVICES/* $backup
+			cat /proc/cmdline > $backup/cmdline
+			#touch $DEVICES/cmosgen
+			/lib/backharddi/escoge_particion/*generar_todo/do_option
+			exit 100
+		done
+	;;
+	rest)
+		if [ x"$backup" = x ]; then
+			while true; do
+				ask_user /lib/backharddi/escoge_backup /target auto
+				exitcode="$?"
+				if [ "$exitcode" -ge 100 ]; then
+					break
+				fi
+			done
+			db_get backharddi/imagenes
+			backup="$RET"
+		fi
+
+		case "$medio" in
+			net)
+				db_get backharddi/net/server
+				server="$RET"
+				db_get backharddi/net/minclients
+				minclients="$RET"
+				db_get backharddi/net/service_port
+				service_port="$RET"
+				if [ x"$service_port" = x ]; then
+					service_port=4600
+				fi
+				port="$(wget -q -O - http://$server:$service_port/get?backup=$(echo $backup | escape_string)\;minclients=$minclients)"
+				db_set backharddi/net/port "$port"
+			;;
+			cdrom)
+				db_input critical backharddi/cdrom/alert || true
+				db_go || exit 0
+				db_get backharddi/cdrom/alert
+				if [ "$RET" = false ]; then
+					exit 10
+				fi
+			;;
+		esac
+
+		if backup_ok $backup; then
+			update_metadata
+			/lib/backharddi/escoge_particion/*restaurar_todo/do_option
+			touch $DEVICES/cmosrest
+			exit 100
+		else
+			db_input critical backharddi/auto_no_devices
+			db_go || exit 0
+			[ "$medio" = cdrom ] && exit 10
+		fi
+	;;
+esac
+
+exit 0

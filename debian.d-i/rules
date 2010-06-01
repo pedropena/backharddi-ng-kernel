@@ -1,0 +1,51 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+include config
+
+build: build-stamp
+
+build-stamp: 
+	dh_testdir
+	dh_testroot
+	$(MAKE) -C build build_cdrom_gtk UDEBS=$(UDEBS) KERNELVERSION=$(KVERSION) SUITE2=$(SUITE2) MIRROR2=$(MIRROR2)
+	cp build/dest/cdrom/gtk/vmlinuz linux-$(KVERSION)-backharddi-ng
+	cp build/dest/cdrom/gtk/initrd.gz minirt-$(KVERSION)-backharddi-ng.gz 
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	$(MAKE) -C build reallyclean
+	rm -f build-stamp minirt-*-backharddi-ng.gz linux-*-backharddi-ng
+	dh_clean 
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+	dh_install minirt-$(KVERSION)-backharddi-ng.gz linux-$(KVERSION)-backharddi-ng boot
+	dh_link boot/minirt-$(KVERSION)-backharddi-ng.gz boot/minirt-backharddi-ng.gz boot/linux-$(KVERSION)-backharddi-ng boot/linux-backharddi-ng
+	dh_installdocs build/tmp/cdrom_gtk/udeb.list build/tmp/cdrom_gtk/diskusage.txt
+
+binary-indep: build install
+	dh_testdir
+	dh_testroot
+	dh_installdebconf
+	dh_installdocs
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary-arch: build install
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install 

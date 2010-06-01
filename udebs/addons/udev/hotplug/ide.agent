@@ -1,0 +1,40 @@
+#!/bin/sh -e
+# only needed for kernels < 2.6.16
+#
+# load the high level driver for IDE devices
+#
+
+cd /lib/udev/
+. ./hotplug.functions
+
+if [ -z "$DEVPATH" ]; then
+    echo "\$DEVPATH is not set!" >&2
+    exit 1
+fi
+
+device=${DEVPATH#/devices/*/ide?/}
+drive=${device#?.}
+bus=${device%.?}
+
+unitnum=$((96 + 1 + $drive + $bus * 2))
+name=$(printf "hd\\$(printf '%o' $unitnum)")
+
+procfile="/proc/ide/$name/media"
+
+wait_for_file $procfile
+
+read media < $procfile
+case "$media" in
+    cdrom)	module=ide-cd ;;
+    disk)	module=ide-disk ;;
+    floppy)	module=ide-floppy ;;
+    tape)	module=ide-tape ;;
+    *)		module=ide-generic ;;
+esac
+
+if [ "$module" ]; then
+    exec $MODPROBE $module
+fi
+
+exit 0
+

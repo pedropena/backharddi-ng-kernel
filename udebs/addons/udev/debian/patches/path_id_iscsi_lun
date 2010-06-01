@@ -1,0 +1,30 @@
+From: Kay Sievers <kay.sievers@vrfy.org>
+Date: Mon, 5 Feb 2007 15:15:52 +0000 (+0100)
+Subject: path_id: append LUN to iSCSI path
+X-Git-Url: http://www.kernel.org/git/?p=linux%2Fhotplug%2Fudev.git;a=commitdiff_plain;h=5ab2e3c2c3efe9b25861ddf560b3760b9384090d
+
+path_id: append LUN to iSCSI path
+---
+
+diff --git a/extras/path_id/path_id b/extras/path_id/path_id
+index 44754cd..8927d84 100644
+--- a/extras/path_id/path_id
++++ b/extras/path_id/path_id
+@@ -332,6 +332,7 @@ handle_iscsi() {
+ 	local iscsi_session_dir
+ 	local iscsi_session iscsi_session_path
+ 	local iscsi_connection iscsi_connection_path
++	local iscsi_scsi_lun
+ 	# iSCSI device
+ 	iscsi_session_dir="${DEV%%/target*}"
+ 	iscsi_session="${iscsi_session_dir##*/}"
+@@ -378,7 +379,8 @@ handle_iscsi() {
+ 	if [ -e "${iscsi_connection_path}/persistent_port" ] ; then
+ 	    read iscsi_port < ${iscsi_connection_path}/persistent_port
+ 	fi
+-	d="ip-${iscsi_address}:${iscsi_port}-iscsi-${iscsi_tgtname}"
++	iscsi_scsi_lun="${DEV##*:}"
++	d="ip-${iscsi_address}:${iscsi_port}-iscsi-${iscsi_tgtname}-lun-${iscsi_scsi_lun}"
+ 	RESULT=0
+ }
+ 

@@ -1,0 +1,27 @@
+This package was debianized by Timshel Knoll <timshel@debian.org> on
+Fri,  5 Nov 1999 18:11:28 +1100.
+
+It was downloaded from ftp://ftp.gnu.org/gnu/parted/
+
+Upstream Authors: Andrew Clausen <clausen@gnu.org>
+                  Lennert Buytanhek <buytenh@gnu.org>
+                  Matthew Wilson <msw@redhat.com>
+
+Copyright:
+
+    Copyright (C) 1998-2007  Free Software Foundation, Inc.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+On Debian GNU/Linux systems, the complete text of the GNU General
+Public License v3 can be found in `/usr/share/common-licenses/GPL-3'.
+
+ -- Otavio Salvador <otavio@debian.org> Mon, 24 Mar 2008 23:30:11 +0000

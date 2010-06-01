@@ -1,0 +1,56 @@
+# make -f PACKAGES
+##################
+
+#
+# Maybe, we should add NTFS writing support in bootdisk.
+#
+all:
+	@echo "usage: make -f PACKAGES [ debian | redhat | rootdisk | bootcd ]"
+debian: 
+	./configure --prefix=/usr --with-sysconfdir=/etc \
+		--with-log-dir=/var/log --disable-ssl --enable-all-static
+
+redhat: debian
+
+rootdisk:
+	./configure --prefix=/usr --sysconfdir=/etc \
+		--with-log-dir=/var/log --enable-all-static \
+		--disable-login --disable-cheuid --disable-ssl \
+		--with-debug-level=0
+
+bootcd:
+	./configure --prefix=/usr --sysconfdir=/etc \
+		--with-log-dir=/var/log --enable-all-static \
+		--disable-cheuid \
+		--with-debug-level=0
+
+tests:
+	./configure --prefix=/tmp --enable-devel \
+		--with-log-dir=/tmp \
+		--disable-login --disable-cheuid --disable-ssl \
+		--with-debug-level=10
+
+tests-pam:
+	./configure --prefix=/tmp --enable-devel \
+		--with-log-dir=/tmp \
+		--disable-ssl \
+		--enable-pam \
+		--with-debug-level=10 --enable-efence
+
+tests-cheuid:
+	./configure --prefix=/tmp --enable-devel \
+		--with-log-dir=/tmp \
+		--disable-login --disable-ssl \
+		--with-debug-level=10 --enable-efence
+
+tests-static:
+	./configure --prefix=/tmp --enable-devel \
+		--with-log-dir=/tmp \
+		--disable-login --disable-cheuid --disable-ssl \
+		--with-debug-level=10 --enable-all-static
+
+tests-ssl:
+	./configure --prefix=/tmp --enable-devel \
+		--with-log-dir=/tmp \
+		--disable-login --disable-cheuid \
+		--with-debug-level=10 --enable-efence

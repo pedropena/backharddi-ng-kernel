@@ -1,0 +1,26 @@
+#!/bin/sh
+
+. /usr/share/debconf/confmodule
+
+db_get backharddi/medio
+medio="$RET"
+
+db_get backharddi/net/server
+server="$RET"
+
+db_get backharddi/net/service_port
+service_port="$RET"
+if [ x"$service_port" = x ]; then
+	service_port=4600
+fi
+
+case "$medio" in
+	net)
+		if ! grep -q backharddi-monitor /etc/inittab; then
+			echo "vc/6::respawn:/bin/backharddi-monitor $server $service_port" >> /etc/inittab
+			kill -SIGHUP 1
+		fi
+	;;
+esac
+
+exit 0

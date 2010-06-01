@@ -1,0 +1,33 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+task=$1
+dev=$2
+id=$3
+
+cd $dev
+
+estado=0
+[ -f $id/gen ] && { rm $id/gen; estado=1; }
+[ -f $id/rest ] && { rm $id/rest; estado=2; }
+
+while true; do
+	estado=$((estado+1))
+	[ $estado -eq 3 ] && estado=0
+	case $estado in
+		0) break;;
+		1) 
+		   db_get backharddi/medio
+		   medio="$RET"
+		   [ -f $id/detected_filesystem -a ! "$medio" = cdrom ] && { touch $id/gen; break; }
+		;;
+		2)
+		   db_get backharddi/imagenes
+	           imagenes="$RET"
+		   [ -f $imagenes/${dev#$DEVICES/}/$id/img ] && { touch $id/rest; break; }
+		;;
+	esac
+done
+
+update_partition $dev $id

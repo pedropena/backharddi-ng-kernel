@@ -1,0 +1,11 @@
+#!/bin/sh
+
+. /usr/share/debconf/confmodule
+
+db_get backharddi/medio
+if [ "$RET" = cdrom ]; then
+	printf "nogenerar_todo\t"
+else
+	db_metaget backharddi/text/generar_todo description
+	printf "generar_todo\t$RET"
+fi

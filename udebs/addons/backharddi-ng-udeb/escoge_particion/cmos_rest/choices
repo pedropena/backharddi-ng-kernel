@@ -1,0 +1,14 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+imagenes=$1
+
+cd $DEVICES
+if [ -f $imagenes/cmosdump ]; then
+	if [ -f cmosrest ]; then
+		printf "cmosrest\tRestaurar copia de seguridad de la CMOS\n"
+	else
+		printf "cmosrest\tNo restaurar copia de seguridad de la CMOS\n"
+	fi
+fi

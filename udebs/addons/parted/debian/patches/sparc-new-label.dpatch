@@ -1,0 +1,214 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## sparc-new-label.dpatch by David S. Miller and
+## Fabio M. Di Nitto <fabbione@ubuntu.com>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Fix sparc disk label generation. This is required for LDOM and
+## DP: parallel installations with Solaris 10.
+
+@DPATCH@
+diff -urNad parted-1.8.8.git.2009.06.03~/libparted/labels/sun.c parted-1.8.8.git.2009.06.03/libparted/labels/sun.c
+--- parted-1.8.8.git.2009.06.03~/libparted/labels/sun.c	2009-06-16 18:41:06.000000000 +0100
++++ parted-1.8.8.git.2009.06.03/libparted/labels/sun.c	2009-06-16 18:42:57.000000000 +0100
+@@ -41,12 +41,30 @@
+ #define SUN_DISK_MAGIC		0xDABE	/* Disk magic number */
+ #define SUN_DISK_MAXPARTITIONS	8
+ 
+-#define WHOLE_DISK_ID		0x05
++#define SUN_TAG_UNASSIGNED	0x00	/* Unassigned partition */
++#define SUN_TAG_BOOT		0x01	/* Boot partition	*/
++#define SUN_TAG_ROOT		0x02	/* Root filesystem	*/
++#define SUN_TAG_SWAP		0x03	/* Swap partition	*/
++#define SUN_TAG_USR		0x04	/* /usr filesystem	*/
++#define SUN_TAG_BACKUP		0x05	/* Full-disk slice	*/
++#define SUN_TAG_STAND		0x06	/* Stand partition	*/
++#define SUN_TAG_VAR		0x07	/* /var filesystem	*/
++#define SUN_TAG_HOME		0x08	/* /home filesystem	*/
++#define SUN_TAG_ALTSCTR		0x09	/* Alt sector partition	*/
++#define SUN_TAG_CACHE		0x0a	/* Cachefs partition	*/
++#define SUN_TAG_RESERVED	0x0b	/* SMI reserved data	*/
++#define SUN_TAG_LINUX_SWAP	0x82	/* Linux SWAP		*/
++#define SUN_TAG_LINUX_NATIVE	0x83	/* Linux filesystem	*/
++#define SUN_TAG_LINUX_LVM	0x8e	/* Linux LVM		*/
++#define SUN_TAG_LINUX_RAID	0xfd	/* LInux RAID		*/
++
++#define SUN_FLAG_UNMNT		0x01	/* Unmountable partition*/
++#define SUN_FLAG_RONLY		0x10	/* Read only		*/
++
+ #define WHOLE_DISK_PART		2	/* as in 0, 1, 2 (3rd partition) */
+-#define LINUX_SWAP_ID		0x82
+ 
+ typedef struct _SunRawPartition     SunRawPartition;
+-typedef struct _SunPartitionInfo    SunPartitionInfo;
++typedef struct _SunPartInfo         SunPartInfo;
+ typedef struct _SunRawLabel         SunRawLabel;
+ typedef struct _SunPartitionData    SunPartitionData;
+ typedef struct _SunDiskData         SunDiskData;
+@@ -56,18 +74,31 @@
+ 	u_int32_t	num_sectors;	/* ...and it's length */
+ };
+ 
+-struct __attribute__ ((packed)) _SunPartitionInfo {
+-	u_int8_t	spare1;
+-	u_int8_t	id;		/* Partition type */
+-	u_int8_t	spare2;
+-	u_int8_t	flags;		/* Partition flags */
++struct __attribute__ ((packed)) _SunPartInfo {
++	u_int16_t	tag;		/* Tagged type */
++	u_int16_t	flags;		/* Partition flags */
+ };
+ 
++#define SUN_LABEL_ID_SIZE	128
++#define SUN_VOLUME_ID_SIZE	8
++
++#define SUN_LABEL_VERSION	0x00000001
++#define SUN_LABEL_SANE		0x600ddeee
++
+ struct __attribute__ ((packed)) _SunRawLabel {
+-	char 		info[128];	/* Informative text string */
+-	u_int8_t	spare0[14];
+-	SunPartitionInfo infos[SUN_DISK_MAXPARTITIONS];
+-	u_int8_t	spare1[246];	/* Boot information etc. */
++	char 		label_id[SUN_LABEL_ID_SIZE];	/* Informative text string */
++	u_int32_t	version;
++	char		volume_id[SUN_VOLUME_ID_SIZE];
++	u_int16_t	num_part;
++	SunPartInfo	infos[SUN_DISK_MAXPARTITIONS];
++	u_int16_t	pad1;
++	u_int32_t	bootinfo[3];
++	u_int32_t	sanity;
++	u_int32_t	resv[10];
++	u_int32_t	part_timestamps[SUN_DISK_MAXPARTITIONS];
++	u_int32_t	write_reinstruct;
++	u_int32_t	read_reinstruct;
++	u_int8_t	pad2[148];
+ 	u_int16_t	rspeed;		/* Disk rotational speed */
+ 	u_int16_t	pcylcount;	/* Physical cylinder count */
+ 	u_int16_t	sparecyl;	/* extra sects per cylinder */
+@@ -196,6 +227,9 @@
+ 
+ 	/* #gentoo-sparc people agree that nacyl = 0 is the best option */
+ 	label->magic	= PED_CPU_TO_BE16 (SUN_DISK_MAGIC);
++	label->version	= PED_CPU_TO_BE32 (SUN_LABEL_VERSION);
++	label->num_part	= PED_CPU_TO_BE16 (SUN_DISK_MAXPARTITIONS);
++	label->sanity	= PED_CPU_TO_BE32 (SUN_LABEL_SANE);
+ 	label->nacyl	= 0;
+ 	label->pcylcount	= PED_CPU_TO_BE16 (bios_geom->cylinders);
+ 	label->rspeed	= PED_CPU_TO_BE16 (5400);
+@@ -206,13 +240,13 @@
+ 	label->ncyl	= PED_CPU_TO_BE16 (bios_geom->cylinders - 0);
+ 
+ 	/* Add a whole disk partition at a minimum */
+-	label->infos[WHOLE_DISK_PART].id = WHOLE_DISK_ID;
++	label->infos[WHOLE_DISK_PART].tag = PED_CPU_TO_BE16 (SUN_TAG_BACKUP);
+ 	label->partitions[WHOLE_DISK_PART].start_cylinder = 0;
+ 	label->partitions[WHOLE_DISK_PART].num_sectors =
+ 		PED_CPU_TO_BE32(bios_geom->cylinders * cyl_size);
+ 
+ 	/* Now a neato string to describe this label */
+-	snprintf(label->info, sizeof(label->info) - 1,
++	snprintf(label->label_id, sizeof(label->label_id) - 1,
+ 		 "GNU Parted Custom cyl %d alt %d hd %d sec %d",
+ 		 PED_BE16_TO_CPU(label->ncyl),
+ 		 PED_BE16_TO_CPU(label->nacyl),
+@@ -329,9 +363,9 @@
+ 	for (i = 0; i < SUN_DISK_MAXPARTITIONS; i++) {
+ 		if (!PED_BE32_TO_CPU(label->partitions[i].num_sectors))
+ 			continue;
+-		if (!label->infos[i].id)
++		if (!label->infos[i].tag)
+ 			continue;
+-		if (label->infos[i].id == WHOLE_DISK_ID)
++		if (label->infos[i].tag == PED_CPU_TO_BE16 (SUN_TAG_BACKUP))
+ 	       		continue;
+ 
+ 		start = PED_BE32_TO_CPU(label->partitions[i].start_cylinder)
+@@ -345,11 +379,11 @@
+ 			goto error;
+ 
+ 		sun_data = part->disk_specific;
+-		sun_data->type = label->infos[i].id;
+-		sun_data->is_boot = sun_data->type == 0x1;
+-		sun_data->is_root = sun_data->type == 0x2;
+-		sun_data->is_lvm = sun_data->type == 0x8e;
+-		sun_data->is_raid = sun_data->type == 0xfd;
++		sun_data->type = PED_BE16_TO_CPU (label->infos[i].tag);
++		sun_data->is_boot = sun_data->type == SUN_TAG_BOOT;
++		sun_data->is_root = sun_data->type == SUN_TAG_ROOT;
++		sun_data->is_lvm = sun_data->type == SUN_TAG_LINUX_LVM;
++		sun_data->is_raid = sun_data->type == SUN_TAG_LINUX_RAID;
+ 
+ 		part->num = i + 1;
+ 		part->fs_type = ped_file_system_probe (&part->geom);
+@@ -377,7 +411,7 @@
+ 
+ 	if (!ped_device_read (disk->dev, &old_label, 0, 1))
+ 		return;
+-	if (old_label.info [0]
++	if (old_label.label_id [0]
+ 	    && PED_BE16_TO_CPU (old_label.magic) == SUN_DISK_MAGIC)
+ 		memcpy (&sun_specific->raw_label, &old_label, 512);
+ }
+@@ -402,7 +436,7 @@
+ 	memset (label->partitions, 0,
+ 		sizeof (SunRawPartition) * SUN_DISK_MAXPARTITIONS);
+ 	memset (label->infos, 0,
+-		sizeof (SunPartitionInfo) * SUN_DISK_MAXPARTITIONS);
++		sizeof (SunPartInfo) * SUN_DISK_MAXPARTITIONS);
+ 
+ 	for (i = 0; i < SUN_DISK_MAXPARTITIONS; i++) {
+ 		part = ped_disk_get_partition (disk, i + 1);
+@@ -412,7 +446,7 @@
+ 			   partition, so let's put it there for safety
+ 			   sake.  */
+ 
+-			label->infos[i].id = WHOLE_DISK_ID;
++			label->infos[i].tag = PED_CPU_TO_BE16 (SUN_TAG_BACKUP);
+ 			label->partitions[i].start_cylinder = 0;
+ 			label->partitions[i].num_sectors =
+ 				PED_CPU_TO_BE32(disk_data->length);
+@@ -422,7 +456,7 @@
+ 			continue;
+ 
+ 		sun_data = part->disk_specific;
+-		label->infos[i].id = sun_data->type;
++		label->infos[i].tag = PED_CPU_TO_BE16 (sun_data->type);
+ 		label->partitions[i].start_cylinder
+ 			= PED_CPU_TO_BE32 (part->geom.start
+ 				/ (disk->dev->bios_geom.sectors
+@@ -541,28 +575,28 @@
+ 	part->fs_type = fs_type;
+ 
+ 	if (sun_data->is_boot) {
+-		sun_data->type = 0x1;
++		sun_data->type = SUN_TAG_BOOT;
+ 		return 1;
+ 	}
+ 	if (sun_data->is_root) {
+-		sun_data->type = 0x2;
++		sun_data->type = SUN_TAG_ROOT;
+ 		return 1;
+ 	}
+ 	if (sun_data->is_lvm) {
+-		sun_data->type = 0x8e;
++		sun_data->type = SUN_TAG_LINUX_LVM;
+ 		return 1;
+ 	}
+ 	if (sun_data->is_raid) {
+-		sun_data->type = 0xfd;
++		sun_data->type = SUN_TAG_LINUX_RAID;
+ 		return 1;
+ 	}
+ 
+-	sun_data->type = 0x83;
++	sun_data->type = SUN_TAG_LINUX_NATIVE;
+ 	if (fs_type) {
+ 		if (is_linux_swap (fs_type->name))
+-			sun_data->type = 0x82;
++			sun_data->type = SUN_TAG_LINUX_SWAP;
+ 		else if (!strcmp (fs_type->name, "ufs"))
+-			sun_data->type = 0x6;
++			sun_data->type = SUN_TAG_STAND;
+ 	}
+ 
+ 	return 1;

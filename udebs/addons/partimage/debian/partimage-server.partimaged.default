@@ -1,0 +1,13 @@
+# /etc/default/partimaged
+
+# Change to 0 to disable partimaged.
+# If you only want to prevent partimaged from being started during system 
+# startup delete the links to partimaged in /etc/rc?.d/ manually or use a 
+# runlevel editor like sysv-rc-conf or bum.
+LAUNCH=1
+
+# Location where the image files created by partimaged are stored.
+# If you run partimaged as user "partimag" und you change this directory
+# you have to give the user "partimag" write access for this directory. 
+# Otherwise partimaged will fail.
+TARGET=/var/lib/partimaged/

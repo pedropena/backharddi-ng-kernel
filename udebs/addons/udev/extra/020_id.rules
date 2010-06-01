@@ -1,0 +1,2 @@
+KERNEL=="hd[a-z]|pcd[0-9]*", 			DRIVERS=="ide-cdrom|pcd", \
+	IMPORT{program}="cdrom_id --export $tempnode"

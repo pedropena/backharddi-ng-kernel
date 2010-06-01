@@ -1,0 +1,23 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+db_metaget backharddi/text/label description
+label="$RET"
+[ -z "$label" ] && label="backharddi"
+
+db_get backharddi/imagenes
+imagenes="$RET"
+
+for dev in $DEVICES/*; do
+	[ -d $dev ] || continue
+	cd $dev
+	for id in *; do
+		[ -d $id ] || continue
+		[ -f $id/gen ] && rm $id/gen
+		[ -f $id/rest ] && rm $id/rest
+		[ -f $id/compresion ] && rm $id/compresion
+		[ -f $imagenes/${dev#$DEVICES/}/$id/img ] && touch $id/rest
+		update_partition $dev $id
+	done
+done

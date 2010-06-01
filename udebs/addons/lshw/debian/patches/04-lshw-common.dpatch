@@ -1,0 +1,31 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 04lshw-gtk.dpatch by Ghe Rivero <ghe@upsa.es>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad lshw-02.10~/src/core/pci.cc lshw-02.10/src/core/pci.cc
+--- lshw-02.10~/src/core/pci.cc	2007-02-13 22:38:11.000000000 +0100
++++ lshw-02.10/src/core/pci.cc	2007-05-10 12:10:04.000000000 +0200
+@@ -12,7 +12,7 @@
+ 
+ #define PROC_BUS_PCI "/proc/bus/pci"
+ #define SYS_BUS_PCI "/sys/bus/pci"
+-#define PCIID_PATH "/usr/share/lshw/pci.ids:/usr/local/share/pci.ids:/usr/share/pci.ids:/etc/pci.ids:/usr/share/hwdata/pci.ids:/usr/share/misc/pci.ids"
++#define PCIID_PATH "/usr/share/lshw-common/pci.ids:/usr/local/share/pci.ids:/usr/share/pci.ids:/etc/pci.ids:/usr/share/hwdata/pci.ids:/usr/share/misc/pci.ids"
+ 
+ #define PCI_CLASS_REVISION      0x08              /* High 24 bits are class, low 8 revision */
+ #define PCI_VENDOR_ID           0x00    /* 16 bits */
+diff -urNad lshw-02.10~/src/core/usb.cc lshw-02.10/src/core/usb.cc
+--- lshw-02.10~/src/core/usb.cc	2007-02-13 22:38:11.000000000 +0100
++++ lshw-02.10/src/core/usb.cc	2007-05-10 12:09:38.000000000 +0200
+@@ -22,7 +22,7 @@
+ #include <dirent.h>
+ 
+ #define PROCBUSUSBDEVICES "/proc/bus/usb/devices"
+-#define USBID_PATH "/usr/share/lshw/usb.ids:/usr/local/share/usb.ids:/usr/share/usb.ids:/etc/usb.ids:/usr/share/hwdata/usb.ids:/usr/share/misc/usb.ids"
++#define USBID_PATH "/usr/share/lshw-common/usb.ids:/usr/local/share/usb.ids:/usr/share/usb.ids:/etc/usb.ids:/usr/share/hwdata/usb.ids:/usr/share/misc/usb.ids"
+ 
+ #define USB_CLASS_PER_INTERFACE         0         /* for DeviceClass */
+ #define USB_CLASS_AUDIO                 1

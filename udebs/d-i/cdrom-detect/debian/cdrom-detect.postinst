@@ -1,0 +1,122 @@
+#! /bin/sh
+
+set -e
+. /usr/share/debconf/confmodule
+#set -x
+
+log() {
+	logger -t cdrom-detect "$@"
+}
+
+fail () {
+	log "CDROM-detect failed; unmounting CD just to be sure"
+	umount /target 2>/dev/null || true
+	exit 1
+}
+
+db_get backharddi/medio
+medio="$RET"
+[ "$medio" = cdrom ] || exit 0
+
+# Is a cdrom already mounted?  If so, assume it's the right one..
+mount | grep -q 'on /target' && exit 0
+
+hw-detect cdrom-detect/detect_progress_title || true
+
+log "Searching for CDROM..."
+
+mkdir /target 2>/dev/null || true
+
+while true
+do
+	mounted=0
+
+	devices="$(list-devices cd; list-devices maybe-usb-floppy)"
+	for device in $devices; do
+		if mount -t iso9660 -o ro,exec $device /target; then
+			log "CD-ROM mount succeeded: device=$device"
+			mounted=1
+			db_set cdrom-detect/cdrom_device $device
+			break
+		else
+			log "CD-ROM mount failed: device=$device"
+		fi
+	done
+
+	if [ "$mounted" = "1" ]; then
+		break
+	fi
+
+	# If a device was detected but the mount failed, ask for the CD.
+	if [ -n "$devices" ]; then
+		db_input critical cdrom-detect/retry || [ $? -eq 30 ]
+		db_go
+		db_get cdrom-detect/retry
+		if [ "$RET" = "true" ]; then
+			log "Unmounting CD just to be sure"
+			umount /target 2>/dev/null || true
+			continue
+		else
+			fail
+		fi
+	fi
+ 
+	# If no device was detected, perhaps a driver floppy is needed.
+	if [ -e /usr/lib/debian-installer/retriever/floppy-retriever ]; then
+		db_input critical cdrom-detect/load_floppy
+		db_go
+		db_get cdrom-detect/load_floppy
+		if [ "$RET" = true ]; then
+			anna floppy-retriever
+			hw-detect cdrom-detect/detect_progress_title || true
+			continue
+		fi
+	fi
+
+	if [ "$count" -lt 5 ]; then
+		sleep 1
+		count=$((count+1))
+		continue
+	fi
+    
+	# Otherwise manual configuration may be needed
+	db_input critical cdrom-detect/manual_config || [ $? -eq 30 ]
+	db_go
+	db_get cdrom-detect/manual_config
+
+	modules=none
+	for i in `ls -1 /lib/modules/*/kernel/drivers/cdrom/ | sed 's/\.ko$//' | sed 's/\.o$//'`; do
+		modules="$modules, $i"
+	done
+    
+	if [ "$RET" = "true" ]; then
+		db_subst cdrom-detect/cdrom_module choices "$modules"
+		db_input critical cdrom-detect/cdrom_module || [ $? -eq 30 ]
+		db_go
+
+		db_get cdrom-detect/cdrom_module
+		module="$RET"
+
+		db_input critical cdrom-detect/cdrom_device || [ $? -eq 30 ]
+		db_go
+
+		db_get cdrom-detect/cdrom_device
+		device="$RET"
+
+		if [ "$module" != "none" ]; then
+			modprobe $module
+		fi
+		if mount -t iso9660 -o ro,exec $device /target; then
+			log "CD-ROM mount succeeded: device=$device"
+			mounted=1
+			break
+		else
+			log "CD-ROM mount failed: device=$device"
+			fail
+		fi
+	else
+		fail
+	fi
+done
+
+exit 0

@@ -1,0 +1,19 @@
+                              THANKS for Partition Image: (without any order)
+                              ---------------------------
+
+- <Jorgen Hoogendoorn> for NTFS bug reports and help debugging
+- <Matt Ware> for many tests in many file systems formats
+- <Theodore Ts'o> for his ext2fs library and his help on ext2fs
+- <Sergio Rua> for building the debian package, and adding it to woody and
+	       galician (gl) translation
+- <Mauro Colorio> for the italian (it) translation
+- <Saarsoft Kern Alexander> for the german (de) translation
+- <Michel Boissou> for his bootcd eltorito images
+- <Minju Lee> for the korean (ko) translation
+- <Arkadiusz Miskievicz> for the devfs patch and the PLD package
+- <Daniel Mueller> for LS120 bug reports, help debugging and german (de) translation
+- <Gunner Poulsen> for danish (da) translation
+- <Marek L. Kozak> for polish (pl) translation
+- <Manuel Padilha> for portuguese (pt) translation
+- <Henri Westerberg> for Suomi (fi) translation
+- <Ian Jackson> for fully-batch mode

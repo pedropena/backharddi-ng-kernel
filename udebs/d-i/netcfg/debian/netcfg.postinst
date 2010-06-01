@@ -1,0 +1,8 @@
+#!/bin/sh
+. /usr/share/debconf/confmodule
+
+db_get backharddi/medio
+medio="$RET"
+[ "$medio" = net ] || exit 0
+
+exec netcfg

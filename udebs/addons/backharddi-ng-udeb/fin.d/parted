@@ -1,0 +1,18 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+for dev in $DEVICES/*; do
+	[ -d $dev ] || continue
+	cd $dev
+	for id in $dev/*; do
+		[ -d $id ] || continue
+		if [ -f $id/rest ]; then
+			open_dialog COMMIT
+			close_dialog
+			break
+		fi
+	done
+done
+	
+stop_parted_server

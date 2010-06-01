@@ -1,0 +1,19 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 10misc.dpatch by  <lamont@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: miscellaneous patches of unknown origin
+
+@DPATCH@
+diff -urNad util-linux/disk-utils/mkswap.8 /tmp/dpep.X7zJbq/util-linux/disk-utils/mkswap.8
+--- util-linux/disk-utils/mkswap.8	2002-11-02 04:21:41.000000000 -0700
++++ /tmp/dpep.X7zJbq/util-linux/disk-utils/mkswap.8	2004-12-15 07:48:50.935307520 -0700
+@@ -109,7 +109,7 @@
+ 
+ Note that a swap file must not contain any holes (so, using
+ .BR cp (1)
+-to create the file is not acceptable).
++to create the file is not generally acceptable).
+ 
+ .SH OPTIONS
+ .TP

@@ -1,0 +1,29 @@
+#! /bin/sh -e
+## reiserfs-libname.dpatch by Timshel Knoll <timshel@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: loading proper reiserfs shared library names.
+## DP: Closes: #163107
+## DP: Debian specific patch, uneeded because libreiserfs is not in sarge.
+
+. `dirname $0`/DPATCH
+
+@DPATCH@
+--- parted-1.7.0rc5.orig/libparted/fs/reiserfs/reiserfs.c
++++ parted-1.7.0rc5/libparted/fs/reiserfs/reiserfs.c
+@@ -698,13 +698,13 @@
+ 
+ static int reiserfs_ops_init(void)
+ {
+-	if (!(libreiserfs_handle = dlopen("libreiserfs.so", RTLD_NOW)))
++	if (!(libreiserfs_handle = dlopen("libreiserfs-0.3.so.0", RTLD_NOW)))
+ 		goto error;
+ 
+ 	if (!reiserfs_ops_interface_version_check())
+ 		goto error_free_libreiserfs_handle;
+ 
+-	if (!(libdal_handle = dlopen("libdal.so", RTLD_NOW)))
++	if (!(libdal_handle = dlopen("libdal-0.3.so.0", RTLD_NOW)))
+ 		goto error_free_libreiserfs_handle;
+ 
+ 	INIT_SYM(reiserfs_fs_probe);

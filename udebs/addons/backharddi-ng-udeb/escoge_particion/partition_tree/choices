@@ -1,0 +1,35 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+db_metaget backharddi/text/label description
+label="$RET"
+[ -z "$label" ] && label="backharddi"
+
+whitespace_hack=""
+for dev in $DEVICES/*; do
+	[ -d $dev ] || continue
+	printf "%s//\t%s\n" $dev "$(device_name $dev)" # GETTEXT?
+	cd $dev
+
+	open_dialog PARTITIONS
+	partitions="$(read_paragraph)"
+	close_dialog
+	
+	IFS="$TAB"
+	echo "$partitions" |
+	while { read num id size type fs path name; [ "$id" ]; }; do
+	    [ "$fs" = free ] && continue
+	    part=${dev}/$id
+	    [ "$fs" = "ext3" ] && [ "$(e2label $path)" = "$label" ] && continue
+	    [ -f $part/view ] || continue
+	    printf "%s//%s\t     %s\n" "$dev" "$id" $(cat $part/view)
+	done
+	restore_ifs
+done | while read line; do
+	# A hack to make sure each line in the table is unique and
+	# selectable by debconf -- pad lines with varying amounts of
+	# whitespace.
+	whitespace_hack="$NBSP$whitespace_hack"
+	echo "$line$whitespace_hack"
+done

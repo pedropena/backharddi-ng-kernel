@@ -1,0 +1,137 @@
+#!/bin/sh
+
+. /lib/partman/definitions.sh
+
+abort () {
+	if [ -f /var/run/parted_server.pid ]; then
+		stop_parted_server
+	fi
+	exit $1
+}
+
+db_get backharddi/medio
+medio="$RET"
+
+[ "$medio" = hd-media ] || exit 0
+
+db_capb backup
+
+# Measure the width of partman/text/number here to make things faster.
+# number_width is used only in visual.d/number
+db_metaget partman/text/number description
+RET=$(printf "$RET" '')
+RET=$(stralign 50 "$RET" | sed 's/[^ ]//g')
+number_width=$((2 + 50 - ${#RET}))
+export number_width
+
+
+# Here is maybe not a good place to set deci (TODO)
+#db_metaget partman/text/deci description
+#deci="$RET"
+#export deci
+
+# The comma has special meaning for debconf.  Lets force dot untill we
+# discover where the comma has to be escaped..
+deci='.'
+
+# Commented due to #240145
+#if [ -e /var/lib/partman ]; then
+#	rm -rf /var/lib/partman
+#fi
+
+mkdir -p /var/lib/partman
+
+while true; do
+	initcount=$(ls /lib/partman/init.d/* | wc -l)
+	db_progress START 0 $initcount partman/progress/init/title
+
+	for s in /lib/partman/init.d/*; do
+		if [ -x $s ]; then
+			#logger -t partman "Running init.d/$s"
+
+			base=$(basename $s | sed 's/[0-9]*//')
+			# Not every init script has, or needs, its own progress
+			# template. Add them to slow init scripts only.
+			if ! db_progress INFO partman/progress/init/$base; then
+				db_progress INFO partman/progress/init/fallback
+			fi
+			if ! $s; then
+				db_progress STOP
+				abort 10
+			fi
+		fi
+		db_progress STEP 1
+	done
+	db_progress STOP
+
+	skip_choose_partition=no
+	for s in /lib/partman/auto.d/*; do
+		if [ -x $s ]; then
+			#logger -t partman "Running auto.d/$s"
+			$s
+			exitcode=$?
+			if [ $exitcode -eq 255 ]; then
+				abort 10 # back up to main menu
+			elif [ $exitcode -ge 100 ]; then
+				# Partitioning complete; go straight to
+				# confirmation. (To present choose_partition
+				# so that the user can edit the results of
+				# manual partitioning, just exit 0 instead.)
+				skip_choose_partition=yes
+			elif [ $exitcode -ne 0 ]; then
+				continue 2
+			fi
+		fi
+	done
+
+	while true; do
+		if [ "$skip_choose_partition" != yes ]; then
+			ask_user /lib/partman/choose_partition
+			exitcode=$?
+		else
+			exitcode=100
+		fi
+		if [ $exitcode -eq 255 ]; then
+			abort 10 # back up to main menu
+		elif [ $exitcode -ge 100 ] && confirm_changes "partman"; then
+			break
+		fi
+		skip_choose_partition=no
+	done
+
+	for s in /lib/partman/commit.d/*; do
+		if [ -x $s ]; then
+			#logger -t partman "Running commit.d/$s"
+			$s || continue 2
+		fi
+	done
+
+	finishcount=$(ls /lib/partman/finish.d/* | wc -l)
+	db_progress START 0 $finishcount partman/progress/finish/title
+
+	for s in /lib/partman/finish.d/*; do
+		if [ -x $s ]; then
+			#logger -t partman "Running finish.d/$s"
+
+			base=$(basename $s | sed 's/[0-9]*//')
+			# Not every init script has, or needs, its own progress
+			# template. Add them to slow init scripts only.
+			if ! db_progress INFO partman/progress/finish/$base; then
+				db_progress INFO partman/progress/finish/fallback
+			fi
+			$s || {
+				status=$?
+				if [ "$status" = 1 ]; then
+					continue 2
+				else
+					db_progress STOP
+					abort $status
+				fi
+			}
+		fi
+		db_progress STEP 1
+	done
+	db_progress STOP
+
+	break
+done

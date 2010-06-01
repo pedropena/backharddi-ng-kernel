@@ -1,0 +1,19 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 10-amd64-rdev.dpatch by Frederik Schüler <fschueler@gmx.net>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: hacking "architecture detection" to get rdev on amd64 too.
+
+@DPATCH@
+diff -urN ../tmp-orig/util-linux-2.12r/sys-utils/Makefile ./sys-utils/Makefile
+--- ../tmp-orig/util-linux-2.12r/sys-utils/Makefile	2004-11-15 17:47:47.000000000 +0000
++++ ./sys-utils/Makefile	2006-11-03 09:05:30.000000000 +0000
+@@ -37,7 +37,7 @@
+ endif
+ endif
+ 
+-ifeq "$(ARCH)" "intel"
++ifneq (,findstring("$(ARCH)",intel x86_64))
+ MAN8:=$(MAN8) rdev.8 ramsize.8 rootflags.8 vidmode.8
+ USRSBIN:=$(USRSBIN) rdev
+ endif

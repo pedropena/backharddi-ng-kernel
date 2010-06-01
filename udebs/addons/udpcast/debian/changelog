@@ -1,0 +1,78 @@
+udpcast (20100130backharddi-ng1) stable; urgency=low
+
+  * Se construye un paquete udeb en lugar de un paquete deb 
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 06 May 2010 10:40:10 +0200
+
+udpcast (20100130) stable; urgency=low
+
+  * In busybox, call the executables udp-receiver and udp-sender, the same
+  as outside of busybox
+
+ -- Alain Knaff <alain@knaff.lu>  Sat, 30 Jan 2010 17:40:12 +0100
+udpcast (20091230)stable; urgency=low
+
+  * new "--ignore-lost-data" mode
+  * Lift limit in number of supported network interfaces
+
+ -- Alain Knaff <alain@knaff.lu>  Wed, 30 Dec 2009 18:54:33 +0100
+udpcast (20091031)stable; urgency=low
+
+  * Support for start-timeout also on sender
+
+ -- Alain Knaff <alain@knaff.lu>  Sat, 31 Oct 2009 15:37:55 +0100
+udpcast (20090920)stable; urgency=low
+
+  * Fixed slice management bug introduced with streaming
+
+ -- Alain Knaff <alain@knaff.lu>  Sun, 20 Sep 2009 09:57:38 +0200
+udpcast (20090912)stable; urgency=low
+
+  * Restored block alignment enforcement (needed when reading data from a pipe)
+  * Fixed division-by-zero error on zero-sized transmissions
+  * only make data blocks as big as needed
+
+ -- Alain Knaff <alain@knaff.lu>  Sat, 12 Sep 2009 10:34:49 +0200
+udpcast (20090830) stable; urgency=low
+
+  * "Streaming" mode
+  * On receiver, make failure to send hello packet not fatal
+  * More efficient transmission on small files
+  * Allow pointopoint mode to be "used" (ignored) together with
+  async, as long as a dataMcastAddress is supplied
+
+ -- Alain Knaff <alain@knaff.lu>  Tue,  1 Sep 2009 20:23:24 +0200
+udpcast (20081213) stable; urgency=low
+
+  * Fixed compilation on pre-historic compilers
+
+ -- Alain Knaff <alain@knaff.lu>  Sat, 13 Dec 2008 09:48:01 +0100
+udpcast (20081130) stable; urgency=low
+
+  * Fixed a couple of compilation warnings
+
+ -- Alain Knaff <alain@knaff.lu>  Sun, 30 Nov 2008 17:14:56 +0100
+udpcast (20081116) stable; urgency=low
+
+  * Settable statistics printout delay
+  * Print uncompressed size only when it makes sense (pipe used, and
+  seekable output)
+
+ -- Alain Knaff <alain@knaff.lu>  Sun, 16 Nov 2008 17:20:56 +0100
+udpcast (20080914) stable; urgency=low
+
+  * Added distclean target to make Debian build easier
+  * Removed obsolete m486 flag
+  * Fixed parameter types for getsockopt
+  * If there are no participants after autostart delay, do not
+  transmit but exit right away
+  * Added a lot of short opts (for systems without getopt_long)
+  * pluggable rate governor
+  * Mingw fixes (socket closing)
+
+ -- Alain Knaff <alain@knaff.lu>  Sat, 20 Sep 2008 11:54:41 +0200
+udpcast (20071228) stable; urgency=low
+
+  * first release of debian package
+
+ -- Alain Knaff <alain@knaff.lu>  Thu, 26 Dec 2007 12:23:37 +0100

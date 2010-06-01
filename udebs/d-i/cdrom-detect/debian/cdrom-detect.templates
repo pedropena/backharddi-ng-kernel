@@ -1,0 +1,112 @@
+Template: cdrom-detect/load_floppy
+Type: boolean
+Default: true
+_Description: Load CD-ROM drivers from a driver floppy?
+ No common CD-ROM drive was detected.
+ .
+ You may need to load additional CD-ROM drivers from a driver floppy.
+ If you have such a floppy available now, put it in the drive, and
+ continue. Otherwise, you will be given the option to manually select
+ CD-ROM modules.
+
+Template: cdrom-detect/detect_progress_title
+Type: text
+_Description: Detecting hardware to find CD-ROM drives
+
+Template: cdrom-detect/manual_config
+Type: boolean
+Default: true
+_Description: Manually select a CD-ROM module and device?
+ No common CD-ROM drive was detected.
+ .
+ Your CD-ROM drive may be an old Mitsumi or another non-IDE, non-SCSI
+ CD-ROM drive. In that case you should choose which module to load and
+ the device to use. If you don't know which module and device are
+ needed, look for some documentation or try a network installation
+ instead of a CD-ROM installation.
+
+Template: cdrom-detect/retry
+Type: boolean
+Default: true
+_Description: Try again to mount the CD-ROM?
+ Your installation CD-ROM couldn't be mounted. This probably means that
+ the CD-ROM was not in the drive. If so you can insert it and try again.
+
+Template: cdrom-detect/cdrom_module
+Type: select
+Choices: ${choices}
+Default: none
+_Description: Module needed for accessing the CD-ROM:
+ The automatic detection didn't find a CD-ROM drive. You can try to
+ load a specific module if you have a unusual CD-ROM drive (that is
+ neither IDE nor SCSI).
+
+Template: cdrom-detect/cdrom_device
+Type: string
+Default: /dev/cdrom
+_Description: Device file for accessing the CD-ROM:
+ In order to access your CD-ROM drive, please enter the device file that
+ should be used. Non-standard CD-ROM drives use non-standard device
+ files (such as /dev/mcdx).
+ .
+ You may switch to the shell on the second terminal (ALT+F2) to check the
+ available devices in /dev with "ls /dev". You can return to this screen
+ by pressing ALT+F1.
+
+Template: cdrom-detect/scanning_progress_title
+Type: text
+_Description: Scanning CD-ROM
+
+Template: cdrom-detect/scanning_progress_step
+Type: text
+_Description: Scanning ${DIR}...
+
+Template: cdrom-detect/success
+Type: note
+_Description: CD-ROM detected
+ The CD-ROM autodetection was successful. A CD-ROM drive has been found and it
+ currently contains the CD ${cdname}. The installation will now continue.
+
+Template: cdrom-detect/wrong-cd
+Type: error
+_Description: Incorrect CD-ROM detected
+ The CD-ROM drive contains a CD which cannot be used for installation.
+ .
+ Please insert a suitable CD to continue with the installation.
+
+Template: cdrom-detect/no-release
+Type: error
+# Translators: DO NOT TRANSLATE "Release". This is the name of a file.
+_Description: Error reading Release file
+ The CD-ROM does not seem to contain a valid 'Release' file, or that file
+ could not be read correctly.
+ .
+ You may try to repeat CD-ROM detection but, even if it does succeed the
+ second time, you may experience problems later in the installation.
+
+Template: cdrom-detect/eject
+Type: boolean
+Default: true
+Description: for internal use; can be preseeded
+ Set to false to prevent the system from ejecting the CD-ROM before rebooting
+
+Template: cdrom/suite
+Type: select
+Choices: stable, testing, unstable
+Description: for internal use only
+ Debian version to install
+
+Template: cdrom/codename
+Type: string
+Description: for internal use only
+ Codename for the selected suite
+
+Template: finish-install/progress/cdrom-detect
+Type: text
+# finish-install progress bar item
+_Description: Unmounting and ejecting CD-ROM...
+
+Template: debian-installer/cdrom-detect/title
+Type: text
+#  Item in the main menu to select this package
+_Description: Detect and mount CD-ROM

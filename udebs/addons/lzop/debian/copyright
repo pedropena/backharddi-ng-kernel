@@ -1,0 +1,20 @@
+This package was debianized by Paolo Molaro <lupus@debian.org> on
+Sat, 21 Feb 1998 11:49:27 +0100.  Since Thu, 16 Sep 2004 08:49:07 +0200
+it has been maintainer by Peter Eisentraut <petere@debian.org>.
+
+It was downloaded from http://www.lzop.org/download/.
+
+Upstream author: Markus F.X.J. Oberhumer
+
+Copyright:
+
+   Copyright (C) 1996-2003 Markus Franz Xaver Johannes Oberhumer
+   All Rights Reserved.
+
+   lzop and the LZO library are free software; you can redistribute them
+   and/or modify them under the terms of the GNU General Public License as
+   published by the Free Software Foundation; either version 2 of
+   the License, or (at your option) any later version.
+
+On Debian systems, the complete text of the GNU GPL can be found in the
+file /usr/share/common-licenses/GPL.

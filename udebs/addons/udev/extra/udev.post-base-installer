@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+RULESDIR=etc/udev/rules.d
+
+mkdir -p /target/$RULESDIR
+cp /$RULESDIR/z25_persistent-cd.rules \
+   /$RULESDIR/z25_persistent-net.rules \
+	/target/$RULESDIR 2>/dev/null || true
+

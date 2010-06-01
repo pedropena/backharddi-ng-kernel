@@ -1,0 +1,7 @@
+01-wget.dpatch
+02-bin.dpatch
+03-lshw-gtk.dpatch
+04-lshw-common.dpatch 
+05-cflags.dpatch
+07-gcc43.dpatch
+08-lshw-X.dpatch

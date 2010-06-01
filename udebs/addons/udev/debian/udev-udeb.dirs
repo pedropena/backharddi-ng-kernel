@@ -1,0 +1,6 @@
+/etc/modprobe.d/
+/etc/udev/
+/etc/udev/rules.d/
+/lib/debian-installer-startup.d/
+/lib/udev/
+/sbin/

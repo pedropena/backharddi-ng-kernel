@@ -1,0 +1,27 @@
+Package: *
+Pin: origin
+Pin-Priority: 999
+
+Package: *
+Pin: release a=oldstable
+Pin-Priority: 700
+
+Package: *
+Pin: release a=stable
+Pin-Priority: 10
+
+Package: *
+Pin: release a=testing
+Pin-Priority: 10
+
+Package: *
+Pin: release a=unstable
+Pin-Priority: 10
+
+Package: *
+Pin: release n=karmic
+Pin-Priority: 10
+
+Package: *
+Pin: release n=karmic-updates
+Pin-Priority: 10

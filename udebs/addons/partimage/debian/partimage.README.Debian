@@ -1,0 +1,9 @@
+Notes for running partimage on other platforms than i386
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Officially partimage doesn't support other architectures than i386. Please
+see http://sourceforge.net/docman/display_doc.php?docid=15091&group_id=6212
+Section 2.5 for more details.
+You may be lucky and partimage works on your platform. You should test this 
+with unimportant data first. You should also try to avoid to create image 
+files on one architecture and restore it on another.
+

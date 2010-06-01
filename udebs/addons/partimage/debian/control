@@ -1,0 +1,39 @@
+Source: partimage
+Section: admin
+Priority: optional
+Maintainer: Michael Biebl <biebl@debian.org>
+Build-Depends: cdbs, debhelper (>= 5.0.0), autotools-dev, libbz2-dev, libnewt-dev, zlib1g-dev, comerr-dev, e2fslibs-dev (>=1.25-1), libssl-dev, libpam0g-dev, gettext
+Standards-Version: 3.7.2
+
+Package: partimage
+Architecture: any
+Depends: ${shlibs:Depends}
+Conflicts: partimage-server (<< 0.6.0), partimage-doc (<= 20020126-6)
+Description: backup partitions into a compressed image file
+ Partition Image is a partition imaging utility. It has support for the 
+ following file systems:
+  * Ext2/3, the linux standard
+  * Reiser3, a journalised and powerful file system
+  * FAT16/32, DOS and Windows file systems
+  * HPFS, IBM OS/2 file system
+  * JFS, journalised file system, from IBM, used on AIX
+  * XFS, another journalised and efficient file system, from sgi, used on Irix
+  * UFS (beta), Unix file system
+  * HFS (beta), MacOS File system
+  * NTFS (experimental), Windows NT, 2000 and XP
+ Only used blocks are copied and stored into an image file.
+ The image file can be compressed in the GZIP/BZIP2 formats to save disk space, 
+ and split into multiple files to be copied onto removable media (ZIP for
+ example), burned on a CD-R, etc.
+ .
+ This makes it possible to save a full Linux/Windows system with a single
+ operation. In case of a problem (virus, crash, error, etc.), you just have
+ to restore, and after several minutes, your entire system is restored
+ (boot, files, etc.), and fully working.
+ .
+ This is very useful when installing the same software on many machines: just 
+ install one of them, create an image, and restore the image on all other 
+ machines.
+ .
+  Homepage: http://www.partimage.org
+XC-Package-Type: udeb

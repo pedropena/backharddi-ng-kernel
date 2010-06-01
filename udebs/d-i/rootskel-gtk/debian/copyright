@@ -1,0 +1,21 @@
+This is a root filesystem skeleton for the Debian/GNU Linux installer.
+
+Author(s): Frans Pop
+
+Copyright 2005 Frans Pop <fjp@debian.org> and the Debian installer team.
+
+The copyright of this package is GPL, version 2 or later.
+
+The open use Debian logo is copyright (c) 1999 Software in the Public
+Interest. This logo or a modified version may be used by anyone to refer to
+the Debian project, but does not indicate endorsement by the project.
+http://www.debian.org/logos/
+
+The icons note_icon.png and warning_icon.png are copyright (c) 2005 by
+Eduardo Silva. These logos or a modified version may be used by anyone.
+
+The 'dark' theme is derived from the HighContrastLargePrintInverse GNOME
+theme, downloaded from
+http://ftp.gnome.org/pub/GNOME/sources/gnome-themes/2.14/gnome-themes-2.14.3.tar.bz2
+It is written by Bill Haneman, based on Standard theme by T. Liebeck,
+and released under LGPL 2.1.

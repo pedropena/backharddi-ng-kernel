@@ -1,0 +1,36 @@
+#include "base"
+#include "kernel"
+
+installation-locale
+localechooser
+auto-install
+ai-choosers
+hw-detect
+bogl-bterm-udeb
+di-utils-terminfo
+cdebconf-newt-udeb
+cdebconf-text-udeb
+brltty-udeb
+preseed-common
+initrd-preseed
+file-preseed
+
+nano-udeb
+
+# include support for usb, including usb storage
+usb-discover
+
+# an iso from the hard drive is loop-mounted, and the cd retriever used
+# to load it
+iso-scan
+load-iso
+cdrom-retriever
+# cdrom-retreiver depends on cdrom-detect, which is provided by iso-scan,
+# our dependency analiser is not currently capable or working this out and
+# complains; shut it up:
+cdrom-detect -
+
+save-logs
+mountfloppy
+
+libfribidi0-udeb

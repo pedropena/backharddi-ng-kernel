@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+cd $DEVICES
+if [ -f cmosgen ]; then
+	rm cmosgen
+else
+	touch cmosgen
+fi

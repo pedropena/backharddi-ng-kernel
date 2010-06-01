@@ -1,0 +1,94 @@
+#
+# udev po-debconf translation to spanish
+# Copyright (C) 2006 Software in the Public Interest, SPI Inc.
+# This file is distributed under the same license as the udev package.
+#
+# Changes:
+# - Initial translation
+#       Felipe Caminos Echeverría , 2006
+#
+#
+#  Traductores, si no conoce el formato PO, merece la pena leer la 
+#  documentación de gettext, especialmente las secciones dedicadas a este
+#  formato, por ejemplo ejecutando:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+# Equipo de traducción al español, por favor lean antes de traducir
+# los siguientes documentos:
+#
+# - El proyecto de traducción de Debian al español
+#   http://www.debian.org/intl/spanish/
+#   especialmente las notas y normas de traducción en
+#   http://www.debian.org/intl/spanish/notas
+#
+# - La guía de traducción de po's de debconf:
+#   /usr/share/doc/po-debconf/README-trans
+#   o http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+# Si tiene dudas o consultas sobre esta traducción consulte con el último
+# traductor (campo Last-Translator) y ponga en copia a la lista de
+# traducción de Debian al español (<debian-l10n-spanish@lists.debian.org>)
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: udev 0.103-1\n"
+"Report-Msgid-Bugs-To: md@linux.it\n"
+"POT-Creation-Date: 2006-11-15 15:13+0000\n"
+"PO-Revision-Date: 2006-12-08 01:27-0300\n"
+"Last-Translator: Felipe Caminos <felipem@gigared.com>\n"
+"Language-Team: Debian l10n spanish <debian-l10n-spanish@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#. Type: note
+#. Description
+#: ../udev.templates:1001
+msgid "Reboot needed after this upgrade"
+msgstr "Es necesario reiniciar después de esta actualización"
+
+#. Type: note
+#. Description
+#: ../udev.templates:1001
+msgid ""
+"You are currently upgrading udev using an incompatible kernel version. A "
+"compatible version is installed or being installed on your system, but  you "
+"need to reboot using this new kernel as soon as the upgrade is  complete."
+msgstr "Está actualizando udev, pero utilizando una versión incompatible del núcleo. Aunque se está instalando (o se va a instalar) una versión compatible del núcleo en su sistema, tiene que  reiniciar en cuanto haya terminado esta actualización."
+
+#. Type: note
+#. Description
+#: ../udev.templates:1001
+msgid ""
+"Without a reboot with this new kernel version, your system may become  "
+"UNUSABLE."
+msgstr "Su sistema puede volverse INUTILIZABLE si no reinicia con esta nueva versión del núcleo."
+
+#. Type: boolean
+#. Description
+#: ../udev.templates:2001
+msgid "Proceed with the upgrade nevertheless?"
+msgstr "¿Desea proceder con la actualización en cualquier caso?"
+
+#. Type: boolean
+#. Description
+#: ../udev.templates:2001
+msgid ""
+"You are currently upgrading udev using an incompatible kernel version. You "
+"MUST install a compatible kernel version (2.6.15 or more) before proceeding "
+"with the upgrade, otherwise your system may become UNUSABLE. Packages with a "
+"name starting with \"linux-image-2.6-\" provide a kernel image usable with "
+"this new udev version."
+msgstr "Actualmente está actualizando udev utilizando una versión de núcleo incompatible. DEBE instalar una versión de núcleo compatible (2.6.15 o superior) antes de continuar con la actualización, de otro modo el sistema puede volverse INUTILIZABLE. Los paquetes que comienzan con «linux-image-2.6-» proporcionan una imagen del núcleo compatible con esta nueva versión de udev."
+
+#. Type: boolean
+#. Description
+#: ../udev.templates:2001
+msgid ""
+"If you choose to upgrade udev nevertheless, you should install a  compatible "
+"kernel and reboot on it as soon as possible. You have been  warned."
+msgstr "Debe instalar un núcleo compatible y reiniciar con él lo antes posible si "
+"va a actualizar udev en cualquier caso. Considérese avisado."
+

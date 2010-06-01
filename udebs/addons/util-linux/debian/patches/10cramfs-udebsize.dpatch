@@ -1,0 +1,28 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 10cramfs-udebsize.dpatch by LaMont Jones <lamont@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: malloc the output buffer, instead of statically creating it.
+
+@DPATCH@
+diff -urNad --exclude=CVS --exclude=.svn ./disk-utils/fsck.cramfs.c /tmp/dpep-work.XLCGO2/util-linux/disk-utils/fsck.cramfs.c
+--- ./disk-utils/fsck.cramfs.c	2005-12-06 11:57:59.000000000 -0700
++++ /tmp/dpep-work.XLCGO2/util-linux/disk-utils/fsck.cramfs.c	2005-12-06 11:59:18.000000000 -0700
+@@ -95,7 +95,7 @@
+ static unsigned long read_buffer_block = ~0UL;
+ 
+ /* Uncompressing data structures... */
+-static char outbuffer[PAGE_CACHE_SIZE*2];
++static char *outbuffer;
+ z_stream stream;
+ 
+ #endif /* INCLUDE_FS_TESTS */
+@@ -464,6 +464,8 @@
+ 	int c;			/* for getopt */
+ 	int start = 0;
+ 
++	outbuffer=(char*)malloc(PAGE_CACHE_SIZE*2);
++
+ 	if (argc)
+ 		progname = argv[0];
+ 

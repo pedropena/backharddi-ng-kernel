@@ -1,0 +1,29 @@
+#!/bin/sh
+
+. /lib/partman/definitions.sh
+
+db_metaget backharddi/text/label description
+label="$RET"
+[ -z "$label" ] && label="backharddi"
+
+for dev in $DEVICES/*; do
+	[ -d $dev ] || continue
+	cd $dev
+	open_dialog PARTITIONS
+	while { read_line num id size type fs path name; [ "$id" ] && [ ! "$encontrado" ]; }; do
+	    [ $fs != free ] || continue
+	    case "$fs" in
+		ext3)
+			if [ "$(e2label $path)" = "$label" ]; then
+				echo "/" > $id/mountpoint
+				echo "keep" > $id/method
+				echo "ext3" > $id/acting_filesystem
+				encontrado=si
+			fi
+		;;
+	    esac
+	done
+	close_dialog
+	[ "$encontrado" ] && exit 100
+done
+exit 0

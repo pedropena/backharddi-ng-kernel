@@ -1,0 +1,25 @@
+Template: debian-installer/main-menu-title
+Type: text
+_Description: Debian installer main menu
+
+Template: debian-installer/main-menu
+Type: select
+Choices: ${MENU}
+Default: ${DEFAULT}
+_Description: Choose the next step in the install process:
+ This is the main menu for the Debian installer.
+
+Template: debian-installer/main-menu/item-failure
+Type: error
+_Description: Installation step failed
+ An installation step failed. You can try to run the failing item again
+ from the menu, or skip it and choose something else. The failing step
+ is: ${ITEM}
+
+Template: debian-installer/missing-provide
+Type: select
+Choices: ${CHOICES}
+Default: ${DEFAULT}
+_Description: Choose an installation step:
+ This installation step depends on one or more other steps that
+ have not yet been performed.

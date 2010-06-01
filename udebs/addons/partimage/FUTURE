@@ -1,0 +1,23 @@
+* if imagefile is damaged, ask user to zero the problem place, keep old blocks,
+     overwrite with damaged blocks.
+  in all cases, filesystem will have to be checked.
+
+* do same thing if harddrive is damaged
+
+* outputs on CD-R/CD-RW
+* outputs on tape 
+* outputs on zip device with auto mount/umount
+* dump partition over other partition without creating imagefile
+ 
+* support multicast
+* supprt IPv6
+
+* add filesystems 
+  BSD FFS
+  IBM JFS
+  SGI XFS
+  Solaris UFS/sunx86
+  
+* support for TLS
+
+* support capabilities (at least under Linux) to improve security

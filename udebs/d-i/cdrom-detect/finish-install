@@ -1,0 +1,27 @@
+#! /bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+log() {
+	logger -t cdrom-detect "$@"
+}
+
+if test -x /target/usr/bin/eject ; then
+	# Cannot just tell eject to eject /cdrom as it is not compatible
+	# with busybox umount. Instead, unmount the cdrom first, and then
+	# eject the device.
+	CDDEV=$(mount | grep "on /cdrom" | cut -d ' ' -f 1)
+	if [ -n "$CDDEV" ]; then
+		log "Unmounting and ejecting '$CDDEV'"
+		umount /cdrom || true
+
+		db_get cdrom-detect/eject
+		if [ "$RET" = false ]; then
+			log "Not ejecting CD, per debconf setting."
+		else
+			/target/usr/bin/eject $CDDEV || true
+		fi
+	else
+		log "Not ejecting CD, as nothing is mounted."
+	fi
+fi

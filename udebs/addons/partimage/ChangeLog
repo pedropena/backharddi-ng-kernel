@@ -1,0 +1,68 @@
+0.2.0: (2000-06-01) - First working version
+0.2.1: (2000-06-04) - Split image support, bug fixes, size check, new options
+0.2.2: (2000-07-25) - FAT16 and FAT32 support, new source code organisation, bug fixes, 2 GB limit check, new options
+0.2.3: (2000-08-14) - Bug fixes, removed the 2 GB partition size limitation
+0.2.4: (2000-08-21) - ReiserFS file system support, File system auto-detection
+0.3.0: (2000-08-27) - New semi-graphical interface based on newt (which can be run under a console), bug fixes
+0.3.1: (2000-09-06) - Bug fixes, compression level auto-detected at restore, beginning of the NTFS support
+0.3.2: (2000-09-12) - Bug fixes (NTFS and Splitting), creation of a partimage-debug.log file to help debugging.
+0.3.3: (2000-09-20) - Bug fixes, Documentation, New "halt or reboot when operation finished" option, internationalisation, French translation
+0.3.4: (2000-10-01) - Bug fixes, italian translation, debian files for packaging
+0.3.5: (2000-10-09) - Bug fixes, HPFS support
+0.6.0: (2001-xx-yy) - Network support with SSL encryption: there are two versions (server and clients). 
+	              For example, you can save the image of a computer on the disk of another computer.
+	            - The multi-thread copy: it increases the speed of the copy.
+	            - Copy optimisations: several blocks are copied in a single operation. This dramatically increases the speed of the copy.
+	            - The batch mode, which allows for unattended operation (no questions, no forms, no message boxes)
+	            - Many new other options (For example, partimage can exit automatically on finish)
+	            - New debug log file: it will make debugging easier
+	            - Support of ReiserFS-3.6 (provided with kernel-2.4) New image file format to have a better error detection, a new source code kernel, to save the MBR
+	            - The MBR is saved, and can be restored (it contains the boot loader and the partition table) 
+                    - Support for big imagefiles (>2GB)
+                    - LS120 now supported
+                    - manpages added
+                    - partimaged runs as user "partimag" instead of root
+                    - Polish translation added
+                    - bug fixes
+                    - port is now 4025 (assigned by IANA)
+0.6.1: (2001-11-21) - NTFS bugfixes: endianess conversion error
+                    - FAT12 bug detection with LS120
+                    - FAT support error
+                    - BeFS detection
+                    - bug fixed: cannot cancel the copy with *
+0.6.2: (2002-11-19) - added NL translation
+                    - translations updated
+                    - minor bug fixes
+                    - temp space file error management improved
+                    - adjusted shutdown/poweroff/reboot path
+                    - separated fschk error message in 3 messages
+                    - batch mode fixed
+                    - added FI translation
+                    - added SK translation
+                    - merge with partimage_0.6.1-27.diff from Debian
+                    - add PAM support
+0.6.3b7: (2003-09-09) - eject option added
+		    - reverted /dev automount if devfs support is enabled
+		      but no devfs is mounted
+		    - automount feature improved
+		    - fully-batch mode patch applied
+		    - eject option removed: use /proc/dev/cdrom/autoeject
+		    - several memleak fixed in partimaged
+		    - error messages improved
+                    - merge with partimage_0.6.2.final-8.diff code from Debian
+0.6.3b8: (2003-09-25) - minor changes
+0.6.3b9: (2003-09-25) - pt translation added
+0.6.3b10: (2003-09-25) - da translation updated
+0.6.3.b11: (2003-10-03) - removed unsupported FS error message in batch mode
+0.6.3.b12: (2003-10-05) - fixed a bug in restore operation
+			- translations updated
+			- switched off simulation mode by default
+0.6.3.b13: (2003-10-27) - da & fr translations updated
+		    - removed signal stuff
+0.6.3.b14: (2003-12-02) - removed ftruncate call
+0.6.3.b15: (2004-01-15) - added a missing #ifdef MUST_LOGIN
+0.6.3: (2004-01-19) - renamed beta15 as final
+	    	    - fixed a forgot conflict between -z2 and -b
+0.6.4.rc1: (2004-02-03) - fixed a conflict between -S and -b
+0.6.4.rc2: (2004-02-05) - change restoration message according to -S switch
+0.6.4: (2004-02-08) - renamed rc2 as final
