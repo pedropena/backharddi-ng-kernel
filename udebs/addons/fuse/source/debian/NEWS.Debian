@@ -1,0 +1,37 @@
+fuse (2.6.5-2) unstable; urgency=low
+
+  The fuse-source package is back. Even though fuse comes with all recent
+  2.6 kernels, some software (i.e. ntfs-3g) needs the most recent fuse API
+  to enable all its features.
+
+ -- Adam Cécile (Le_Vert) <gandalf@le-vert.net>  Thu, 17 May 2007 12:56:42 +0200
+
+fuse (2.5.3-4) unstable; urgency=low
+
+  Since this version there won't be separate fuse-source package.
+  This module is available in all recent kernels and these kernels are
+  going to be default for Etch.
+
+ -- Bartosz Fenski <fenio@debian.org>  Fri,  1 Sep 2006 10:34:32 +0200
+
+fuse (2.4.2-1) unstable; urgency=low
+
+  fuse-utils doesn't use debconf questions to handle creation of group
+  able to use setuid fusermount anymore. Due to some bugs (#307627, #342826,
+  #310964, #306281, #307624) it's not possible to safety remove previously
+  created groups and ensure that everything is going to work after that.
+
+  Thus I simply dropped debconf related part of packaging scripts. It's
+  up to you to clean left mess.
+
+  These files were used previously to handle creation of group and may be
+  interesting for you:
+
+  /etc/group
+
+  If you used default values then you can simply remove /etc/default/fuse
+  file and everything should work fine.
+
+  Sorry for inconvieniences.
+
+ -- Bartosz Fenski <fenio@debian.org>  Thu,  2 Feb 2006 01:28:40 +0100

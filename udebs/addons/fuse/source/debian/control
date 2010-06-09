@@ -1,0 +1,63 @@
+Source: fuse
+Section: libs
+Priority: optional
+Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Bartosz Fenski <fenio@debian.org>
+Uploaders: Adam Cécile (Le_Vert) <gandalf@le-vert.net>
+Build-Depends: debhelper (>= 5.0.37), autotools-dev, dpatch, lsb-base (>= 3.0-6), bzip2, libselinux1-dev | libselinux-dev
+Homepage: http://fuse.sourceforge.net/
+Standards-Version: 3.8.0
+
+Package: fuse-utils
+Section: utils
+Depends: ${shlibs:Depends}, ${misc:Depends}, libfuse2 (= ${binary:Version}), sed (>= 4), adduser, udev
+Breaks: udev (<< 136-1)
+Architecture: any
+Description: Filesystem in USErspace (utilities)
+ Simple interface for userspace programs to export a virtual
+ filesystem to the Linux kernel.
+ .
+ This package contains the fusermount utility which is necessary to
+ mount fuse filesystems.
+ .
+ This utility is setuid by default. Use dpkg-statoverride if you want
+ to change that.
+
+Package: libfuse-dev
+Section: libdevel
+Architecture: any
+Depends: libfuse2 (= ${binary:Version}), ${misc:Depends}, libselinux1-dev | libselinux-dev
+Suggests: fuse-utils
+Description: Filesystem in USErspace (development files)
+ Simple interface for userspace programs to export a virtual
+ filesystem to the Linux kernel.
+ .
+ This package contains the files necessary to write applications in C
+ or C++ using fuse.
+
+Package: libfuse2
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Conflicts: fuse-utils (<< ${binary:Version})
+Suggests: fuse-utils
+Description: Filesystem in USErspace library
+ Simple interface for userspace programs to export a virtual
+ filesystem to the Linux kernel.
+ .
+ This package contains the files necessary to write applications in C
+ or C++ using fuse.
+
+Package: fuse-utils-udeb
+Architecture: any
+XC-Package-Type: udeb
+Section: debian-installer
+Depends: ${shlibs:Depends}, ${misc:Depends}, libfuse2-udeb (= ${binary:Version})
+Description: Filesystem in USErspace (utilities)
+
+Package: libfuse2-udeb
+Architecture: any
+XC-Package-Type: udeb
+Section: debian-installer
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Filesystem in USErspace library

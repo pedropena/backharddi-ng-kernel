@@ -4,3 +4,4 @@ build/localudebs
 udebs/pbuilder
 udebs/apt
 usr
+.pc

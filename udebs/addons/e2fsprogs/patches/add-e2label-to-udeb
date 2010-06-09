@@ -1,0 +1,13 @@
+Index: e2fsprogs/source/debian/rules
+===================================================================
+--- e2fsprogs.orig/source/debian/rules	2010-06-09 19:29:29.630331712 +0200
++++ e2fsprogs/source/debian/rules	2010-06-09 19:29:39.309081941 +0200
+@@ -347,7 +347,7 @@
+ 
+ 	rm -rf ${udebdir}/usr
+ 	find ${udebdir}/sbin -type f -a ! -name e2fsck \
+-		-a ! -name mke2fs -a ! -name tune2fs \
++		-a ! -name mke2fs -a ! -name tune2fs -a ! -name e2label \
+ 		-a ! -name resize2fs -a ! -name badblocks -print | xargs rm
+ 
+ 	(cd ${udebdir}/sbin; ln -s e2fsck fsck.ext2 ; \

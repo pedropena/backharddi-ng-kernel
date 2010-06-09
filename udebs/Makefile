@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 #Es necesario poner BUILDUSERNAME=root y BUILDUSERID=0 en pbuilderrc para poder compilar backharddi-kernel
-#Dependencias: cowdancer (>= 0.47), pbuilder (>= 0.181), mkisofs, debhelper, fakeroot, reprepro (>= 3.0.1), kernel-wedge, dpatch, quilt, cdbs, sudo, debootstrap (>= 1.0.10)
+#Dependencias: cowdancer (>= 0.47), pbuilder (>= 0.181), mkisofs, debhelper, fakeroot, reprepro (>= 3.3.1), kernel-wedge, dpatch, quilt, cdbs, sudo, debootstrap (>= 1.0.10)
 SHELL := bash
 DEBIANMIRROR := http://localhost:3142/ftp.debian.org/debian
 DEBIANCOMPONENTS := main
@@ -33,7 +33,7 @@ define log
 endef
 
 define udebdir
-	$(shell changelog=$$(find -wholename *$(1)/debian/changelog); echo -n $${changelog%*/debian/changelog})
+	$(shell changelog=$$(find -wholename *$(1)/source/debian/changelog); echo -n $${changelog%*/debian/changelog})
 endef
 
 define is_source_changed
@@ -41,7 +41,7 @@ define is_source_changed
 endef
 
 define changes_file
-	$(shell echo $(BUILDER)/result/$(DIST)/$(1)_$(shell dpkg-parsechangelog -l$(shell find -wholename *$(1)/debian/changelog) 2>/dev/null | grep ^Version | cut -d " " -f 2 | sed "s/.\://")_$(ARCH).changes)
+	$(shell echo $(BUILDER)/result/$(DIST)/$(1)_$(shell dpkg-parsechangelog -l$(shell find -wholename *$(1)/source/debian/changelog) 2>/dev/null | grep ^Version | cut -d " " -f 2 | sed "s/.\://")_$(ARCH).changes)
 endef
 
 define config_mirror_and_components
@@ -55,7 +55,7 @@ third = $(word 3,$(subst _, ,$*))
 fourth = $(word 4,$(subst _, ,$*))
 first = $(firstword $(subst _, ,$*))
 
-all: $(shell for f in $$(find -wholename */debian/changelog); do dir=$${f%*/debian/changelog}; echo -n "changes_$$(basename $$dir) "; done)
+all: $(shell for f in $$(find -wholename */debian/changelog ! -wholename */.pc/*); do dir=$${f%*/source/debian/changelog}; pkg=$$(basename $$dir); echo -n "changes_$$(basename $$dir) "; done)
 
 $(BUILDER)/$(DIST).$(ARCH).$(PBUILDEXT):
 	@$(call log,Construyendo $(BUILDER) para la distribución $(DIST) $(ARCH))
@@ -74,6 +74,7 @@ $(REPOSITORY)/%/conf/distributions:
 	echo "Components: main" >>$@
 	echo "UdebComponents: main" >>$@
 	echo "Description: Backharddi NG Packages" >>$@
+	reprepro -b $(REPOSITORY)/$* export
 
 $(BUILDER)/hooks/C10shell:
 	@mkdir -p $(BUILDER)/hooks || true
@@ -98,11 +99,11 @@ $(BUILDER)/result/$(DIST)/%.changes: $(BUILDER)/$(DIST).$(ARCH).$(PBUILDEXT) $(c
 	@rm $(BUILDER)/result/$(DIST)/$(first)_*_source.changes 2> /dev/null || true
 	@install -d $(BUILDER)/result/$(DIST)
 	$(call config_mirror_and_components); \
-	changelog=$$(find -wholename *$(first)/debian/changelog); \
+	changelog=$$(find -wholename *$(first)/source/debian/changelog); \
 	cd $${changelog%*/debian/changelog}; \
 	pdebuild $(PDEBUILDOPTS) -- $(PBUILDEROPTS) --distribution $(DIST) --aptcache $(DIR)/$(BUILDER)/aptcache/$(DIST) $(PBUILDBASE) $(DIR)/$(BUILDER)/$(DIST).$(ARCH).$(PBUILDEXT) --mirror $$mirror --components "$$components"; \
 	mv ../$(first)_* $(DIR)/$(BUILDER)/result/$(DIST)
-	@reprepro -b $(REPOSITORY)/$(DIST) removefilter $(DIST) '( Source (== $(first)) , Architecture (== $(ARCH)) ) | ( Source (== $(first)) , Architecture (== all) ) | ( Package (== $(first)) , Architecture (== $(ARCH)) ) | ( Package (== $(first)) , Architecture (== all) )' || true; \
+	@reprepro -b $(REPOSITORY)/$(DIST) removefilter $(DIST) '$$Source (== $(first))' || true; \
 	reprepro -b $(REPOSITORY)/$(DIST) -A source remove $(DIST) $(first) || true; \
 	for pkg in $(UDEBS); do [ $(first)/ = $$pkg ] && { opts="-S debian-installer -P optional"; sed -i "/.*$(second).*\.deb/d" $@; break; }; done; \
 	reprepro -b $(REPOSITORY)/$(DIST) $$opts --ignore=wrongdistribution include $(DIST) $(BUILDER)/result/$(DIST)/$(first)_$(second)_source.changes; \
@@ -113,6 +114,12 @@ changes_%:
 	@$(submake) $(call changes_file,$*)
 
 changes_partman-base: changes_%: changes_parted
+	@$(submake) $(call changes_file,$*)
+
+changes_linux-ntfs: changes_%: changes_fuse
+	@$(submake) $(call changes_file,$*)
+
+changes_e2fsprogs: changes_%: changes_util-linux
 	@$(submake) $(call changes_file,$*)
 
 changes_partconf: changes_%: changes_parted

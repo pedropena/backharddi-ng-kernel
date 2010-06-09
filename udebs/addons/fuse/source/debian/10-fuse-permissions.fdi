@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<deviceinfo version="0.2">
+  <device>
+    <spawn udi="/org/freedesktop/Hal/devices/fuse"/>
+  </device>
+  <device>
+    <match key="info.udi" string="/org/freedesktop/Hal/devices/fuse">
+      <append key="info.capabilities" type="strlist">access_control</append>
+      <merge key="access_control.file" type="string">/dev/fuse</merge>
+      <merge key="access_control.type" type="string">camera</merge>
+    </match>
+  </device>
+</deviceinfo>

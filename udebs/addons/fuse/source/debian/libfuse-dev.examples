@@ -1,0 +1,2 @@
+example/*.c
+debian/pkgfiles/libfuse-dev/Makefile

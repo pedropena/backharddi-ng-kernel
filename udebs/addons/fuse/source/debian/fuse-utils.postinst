@@ -1,0 +1,76 @@
+#!/bin/sh -e
+
+test $DEBIAN_SCRIPT_DEBUG && set -v -x
+  
+
+case "$1" in
+  configure|upgrade)
+  
+  # Create fuse group
+  echo "creating fuse group..."
+  getent group fuse >/dev/null || addgroup --system fuse
+ 
+  # Detect if udev is active
+  udev=0
+  if grep -qE '^udev /dev' /proc/mounts; then
+  	udev=1
+  elif [ -d /dev/.udevdb/ -o -d /dev/.udev/ ]; then
+  	udev=1
+  fi
+  # Create device node with the right perms
+  if [ ${udev} -eq 0 ]; then
+  	# Call makedev and fix perms
+	cd /dev; MAKEDEV fuse
+	chgrp fuse /dev/fuse
+  else
+  	# Udev is active, nothing to do.
+	echo "udev active, skipping device node creation."
+	# Debian bug #473545
+	# Udev rules says "fuse" group, however this group doesn't exist in
+	# base system, so the node is root:root.
+	# Once fuse-utils is installed the group exists and udev will set proper
+	# group. The bug may come from udev, or base system, which use a group
+	# that doens't exist. For now, let's workaround this issue here.
+	# Follow-up for #473545
+	# A hack has been added to initscript for the first time installation
+	# if tyou don't have fuse kernel module already loaded
+	# Moreover we need to reload udev before chgrp, otherwise fuse group
+	# is not known
+        # only invoke-rc.d udev if the init script exists (see #499352)
+	[ ! -f /etc/init.d/udev ] || invoke-rc.d udev reload || true
+	test -e /dev/fuse && chgrp fuse /dev/fuse || true
+  fi
+
+  test -f /etc/default/fuse-utils && rm -f /etc/default/fuse-utils
+  
+  chown root:fuse /etc/fuse.conf
+  chmod 0640 /etc/fuse.conf
+
+  if ! grep -qw fuse /proc/filesystems; then
+    # try to load the module
+    lsmod | grep -q fuse > /dev/null 2>&1 || modprobe fuse > /dev/null 2>&1 || echo "Unable to load fuse module, but continuing anyway; please reboot to enable fuse"
+
+    # and make sure it's there after next reboot
+    #grep fuse /etc/modules > /dev/null 2>&1 || echo "fuse" >> /etc/modules
+  fi
+
+  # Remove from /etc/modules
+  sed -i -e '/^\s*fuse\s*$/d' /etc/modules
+
+  if type update-initramfs >/dev/null 2>&1; then
+    update-initramfs -u
+  fi
+  ;;
+
+  abort-upgrade|abort-remove|abort-deconfigure)
+  ;;
+
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+  ;;
+esac
+
+#DEBHELPER#
+
+exit 0

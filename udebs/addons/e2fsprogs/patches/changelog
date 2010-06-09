@@ -1,0 +1,14 @@
+Index: e2fsprogs/source/debian/changelog
+===================================================================
+--- e2fsprogs.orig/source/debian/changelog	2010-06-09 19:40:12.310332290 +0200
++++ e2fsprogs/source/debian/changelog	2010-06-09 19:41:02.300643590 +0200
+@@ -1,3 +1,9 @@
++e2fsprogs (1.41.11-1ubuntu2backharddi-ng1) karmic; urgency=low
++
++  * Añadido e2label al paquete udeb.
++
++ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 09 Jun 2010 19:40:32 +0200
++
+ e2fsprogs (1.41.11-1ubuntu2) lucid; urgency=low
+ 
+   * Rebuild statically linked binary against recent libc.

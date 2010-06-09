@@ -1,0 +1,5 @@
+bin/fusermount
+bin/ulockmgr_server
+sbin/mount.fuse
+lib/udev/rules.d/45-fuse.rules
+../10-fuse-permissions.fdi usr/share/hal/fdi/policy/10osvendor/

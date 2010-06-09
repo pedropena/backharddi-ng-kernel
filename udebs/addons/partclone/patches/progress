@@ -1,0 +1,32 @@
+Index: partclone/source/src/progress.c
+===================================================================
+--- partclone.orig/source/src/progress.c	2010-06-09 18:46:21.129082135 +0200
++++ partclone/source/src/progress.c	2010-06-09 18:46:36.861269438 +0200
+@@ -186,12 +186,12 @@
+ 	textdomain(PACKAGE);
+ 
+         if ((current+1) == prog->stop){
+-	    fprintf(stderr, _("\r%80c\rElapsed: %s, Remaining: %s, Completed:%6.2f%%, Seeking...,"), clear_buf, prog_stat.Eformated, prog_stat.Rformated, prog_stat.percent, (float)(prog_stat.speed));
++	    fprintf(stderr, _("stats: Completed:%6.2f%%, Elapsed: %s, Remaining: %s, Seeking...\n"), prog_stat.percent, prog_stat.Eformated, prog_stat.Rformated);
+ 	} else {
+ 	    if((int)prog_stat.speed > 0)
+-	    fprintf(stderr, _("\r%80c\rElapsed: %s, Remaining: %s, Completed:%6.2f%%, Rate: %6.2f%s/min,"), clear_buf, prog_stat.Eformated, prog_stat.Rformated, prog_stat.percent, (float)(prog_stat.speed), prog_stat.speed_unit);
++	    fprintf(stderr, _("stats: Completed:%6.2f%%, Rate: %6.2f%s/min, Elapsed: %s, Remaining: %s\n"), prog_stat.percent, (float)(prog_stat.speed), prog_stat.speed_unit, prog_stat.Eformated, prog_stat.Rformated );
+ 	    else
+-		fprintf(stderr, _("\r%80c\rElapsed: %s, Remaining: %s, Completed:%6.2f%%,"), clear_buf, prog_stat.Eformated, prog_stat.Rformated, prog_stat.percent);
++		fprintf(stderr, _("stats: Completed:%6.2f%%, Elapsed: %s, Remaining: %s\n"), prog_stat.percent, prog_stat.Eformated, prog_stat.Rformated);
+ 	}
+     } else {
+ 	setlocale(LC_ALL, "");
+@@ -199,9 +199,9 @@
+ 	textdomain(PACKAGE);
+ 
+ 	if((int)prog_stat.speed > 0)
+-	    fprintf(stderr, _("\r%80c\rElapsed: %s, Remaining: %s, Completed:%6.2f%%, Rate: %6.2f%s/min,"), clear_buf, prog_stat.Eformated, prog_stat.Rformated, prog_stat.percent, (float)(prog_stat.speed), prog_stat.speed_unit);
++	    fprintf(stderr, _("stats: Completed:%6.2f%%, Rate: %6.2f%s/min, Elapsed: %s, Remaining: %s\n"), prog_stat.percent, (float)(prog_stat.speed), prog_stat.speed_unit, prog_stat.Eformated, prog_stat.Rformated );
+ 	else
+-	    fprintf(stderr, _("\r%80c\rElapsed: %s, Remaining: %s, Completed:%6.2f%%,"), clear_buf, prog_stat.Eformated, prog_stat.Rformated, prog_stat.percent);
++	    fprintf(stderr, _("stats: Completed:%6.2f%%, Elapsed: %s, Remaining: %s\n"), prog_stat.percent, prog_stat.Eformated, prog_stat.Rformated);
+ 
+         fprintf(stderr, _("\nTotal Time: %s, "), prog_stat.Eformated);
+ 	if((int)prog_stat.speed > 0)

@@ -14,7 +14,7 @@ modules-list: udeb.list
 update-modules-list:
 	sed -i "s/-2\.6.*-/-$(KVERSION)-/" modules-list
 
-clean:
+clean: clean-patches
 	rm udeb.list || true
 	[ ! -d debian.orig ] || mv debian debian.d-i
 	[ ! -d debian.orig ] || mv debian.orig debian
@@ -23,9 +23,26 @@ clean:
 .PHONY: localudebs
 localudebs:
 	rm build/localudebs/* -rf
+	@for c in $$(find $$(pwd) -wholename */source/debian/changelog ! -wholename */.pc/*); do \
+		dir=$${c%*/source/debian/changelog}; \
+		cd $$dir; \
+		echo " * Aplicando parches a $$(basename $$dir)"; \
+		quilt push -a || true; \
+		echo; \
+	done
 	$(MAKE) -C udebs DIST=$(SUITE) ARCH=$(ARCH)
 	find udebs -name *.udeb | xargs -I'{}' cp '{}' build/localudebs
  
+.PHONY: clean-patches
+clean-patches:
+	@for c in $$(find $$(pwd) -wholename */source/debian/changelog ! -wholename */.pc/*); do \
+		dir=$${c%*/source/debian/changelog}; \
+		cd $$dir; \
+		echo " * Limpiando parches de $$(basename $$dir)"; \
+		quilt pop -a || true; \
+		echo; \
+	done
+
 minirt: localudebs
 	[ -d debian.orig ] || { mv debian debian.orig; mv debian.d-i debian; } 
 	rm boot usr -rf

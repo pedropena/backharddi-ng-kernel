@@ -1,0 +1,20 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 000-Build_system_do_not_install_init_script
+## by Bartosz Fenski <fenio@debian.org>
+##
+## DP: Upstream build system should not run update-rc.d.
+## DP: Disable it!
+
+@DPATCH@
+
+--- fuse-2.6.3.orig/util/Makefile.in
++++ fuse-2.6.3/util/Makefile.in
+@@ -502,7 +502,7 @@
+ 	$(INSTALL_PROGRAM) $(srcdir)/init_script $(DESTDIR)$(INIT_D_PATH)/fuse
+ 	@if test -x /usr/sbin/update-rc.d; then \
+ 		echo "/usr/sbin/update-rc.d fuse start 34 S . start 41 0 6 . || true"; \
+-		/usr/sbin/update-rc.d fuse start 34 S . start 41 0 6 . || true; \
++	#	/usr/sbin/update-rc.d fuse start 34 S . start 41 0 6 . || true; \
+ 	fi
+ 
+ install-data-local:

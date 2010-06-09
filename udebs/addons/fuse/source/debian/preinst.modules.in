@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+case "${1}" in
+	install)
+		dpkg-divert --package fuse-modules-@KERNEL@ --add --rename --divert /lib/modules/@KERNEL@/kernel/fs/fuse/fuse.ko.linux /lib/modules/@KERNEL@/kernel/fs/fuse/fuse.ko
+		;;
+
+	upgrade|abort-upgrade)
+
+		;;
+
+	*)
+		echo "preinst called with unknown argument \`$1'" >&2
+		exit 1
+		;;
+esac
+
+#DEBHELPER#
+
+exit 0

@@ -1,0 +1,107 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# Dpatch system
+include /usr/share/dpatch/dpatch.make
+
+# Some variables I'll use below
+DESTDIR	 = $(CURDIR)/debian/tmp
+DOCS	 = Filesystems FAQ NEWS README README.NFS doc/* debian/README.Debian debian/NEWS.Debian
+
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+CFLAGS += -Wall -g
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O0
+else
+	CFLAGS += -O2
+endif
+
+config.status: configure patch-stamp
+	dh_testdir
+ifneq "$(wildcard /usr/share/misc/config.sub)" ""
+	cp -f /usr/share/misc/config.sub config.sub
+endif
+ifneq "$(wildcard /usr/share/misc/config.guess)" ""
+	cp -f /usr/share/misc/config.guess config.guess
+endif
+	CFLAGS="$(CFLAGS)" \
+	./configure --host=$(DEB_HOST_GNU_TYPE) \
+	            --build=$(DEB_BUILD_GNU_TYPE) \
+		    --prefix=/usr \
+		    --mandir=\$${prefix}/share/man \
+		    --infodir=\$${prefix}/share/info \
+		    --bindir=/bin \
+		    --disable-kernel-module \
+		    --disable-example
+
+build: build-stamp
+build-stamp: config.status
+	$(MAKE)
+	touch $@
+
+clean: unpatch
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp config.log
+	[ ! -f example/Makefile ] || $(MAKE) distclean -C example
+	[ ! -f Makefile ] || $(MAKE) distclean
+	dh_clean config.guess config.sub
+
+install-arch:
+	dh_testdir
+	dh_testroot
+	dh_clean -k -s
+	dh_installdirs -s
+	$(MAKE) install DESTDIR=$(DESTDIR)
+	dh_installdirs -pfuse-utils usr/share/lintian/overrides
+	cp $(CURDIR)/debian/fuse-utils.lintian \
+	   $(CURDIR)/debian/fuse-utils/usr/share/lintian/overrides/fuse-utils
+	install -D -m0644 debian/45-fuse.rules \
+	$(CURDIR)/debian/tmp/lib/udev/rules.d/45-fuse.rules
+	install -D -m0755 debian/fuse-utils.initramfs-hook \
+	$(CURDIR)/debian/fuse-utils/usr/share/initramfs-tools/hooks/fuse_utils
+	$(RM) $(CURDIR)/debian/tmp/usr/lib/libfuse.so
+	$(RM) $(CURDIR)/debian/tmp/usr/lib/libulockmgr.so
+	for i in $(CURDIR)/debian/tmp/usr/lib/lib*.so.*.*.*; do \
+		base=$${i##*/}; \
+		ln -s /lib/$${base} $(CURDIR)/debian/tmp/usr/lib/$${base%.*.*.*}; \
+	done
+
+	dh_install -s --source=debian/tmp
+	install -D -m0640 $(CURDIR)/debian/fuse.conf \
+			  $(CURDIR)/debian/fuse-utils/etc/fuse.conf
+
+binary-arch: build install-arch
+	dh_testdir -s
+	dh_testroot -s
+	dh_installchangelogs -s ChangeLog
+	dh_installdocs -plibfuse2 $(DOCS)
+	dh_installdocs -plibfuse-dev $(DOCS)
+	dh_installexamples -s
+	for PKG in fuse-utils; do \
+		rm -rf debian/$$PKG/usr/share/doc/$$PKG; \
+		cd debian/$$PKG/usr/share/doc/ && ln -s libfuse2 $$PKG; \
+	done
+	dh_installman -s -pfuse-utils debian/fusermount.1
+	dh_link -s
+	dh_strip -s
+	dh_compress -s -Xusr/share/doc/libfuse-dev/examples/
+	dh_fixperms -s
+	dh_installdebconf -s
+	#dh_installinit -s --name=fuse -- start 34 S . stop 41 0 6 .
+	dh_makeshlibs -s -V "libfuse2 (>= 2.6)" --add-udeb=libfuse2-udeb
+	dh_installdeb -s
+	dh_shlibdeps -s
+	dh_gencontrol -s
+	dh_md5sums -s
+	chmod 4755 debian/fuse-utils/bin/fusermount
+	dh_builddeb -s
+
+binary-indep:
+
+binary: binary-arch binary-indep
+.PHONY: build clean binary-indep binary-arch binary install

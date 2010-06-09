@@ -1,0 +1,27 @@
+Source: fuse
+Section: misc
+Priority: optional
+Maintainer: Bartosz Fenski <fenio@debian.org>
+Uploaders: Adam Cécile (Le_Vert) <gandalf@le-vert.net>
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.7.2
+
+Package: fuse-modules-_KVERS_
+Architecture: any
+Depends: fuse-utils, linux-modules-_KVERS_ | linux-image-_KVERS_
+Provides: fuse-modules
+Description: Filesystem in USErspace kernel module (kernel _KVERS_)
+ Simple interface for userspace programs to export a virtual filesystem to
+ the linux kernel.
+ .
+ This package contains the compiled kernel modules for _KVERS_
+ .
+ If you have compiled your own kernel, you will most likely need to build
+ your own fuse-modules. The fuse-source package has been provided for use
+ with the Debian's module-assistant or kernel-package utilities to produce a
+ version of fuse-modules for your kernel.
+ .
+ Please notice thant fuse is already available in current 2.6 Linux kernel.
+ However you may need a newer version than the one shipped with your kernel.
+ .
+  Homepage: http://fuse.sourceforge.net/

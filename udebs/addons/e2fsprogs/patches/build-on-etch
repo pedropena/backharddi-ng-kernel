@@ -1,0 +1,139 @@
+Index: e2fsprogs/source/debian/compat
+===================================================================
+--- e2fsprogs.orig/source/debian/compat	2010-06-10 11:39:33.689394266 +0200
++++ e2fsprogs/source/debian/compat	2010-06-10 11:39:47.109394853 +0200
+@@ -1 +1 @@
+-7
++5
+Index: e2fsprogs/source/debian/control.in
+===================================================================
+--- e2fsprogs.orig/source/debian/control.in	2010-06-10 11:39:33.679396921 +0200
++++ e2fsprogs/source/debian/control.in	2010-06-10 11:39:47.119394018 +0200
+@@ -4,9 +4,9 @@
+ Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+ XSBC-Original-Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
+ ifdef(`UTIL_LINUX_NG',
+-``Build-Depends: texi2html (>= 1.76), gettext, texinfo, dc, pkg-config, debhelper (>= 7.0), m4, libblkid-dev (>= 2.16), uuid-dev (>= 2.16)
++``Build-Depends: texi2html (>= 1.76), gettext, texinfo, dc, pkg-config, debhelper, m4, libblkid-dev (>= 2.16), uuid-dev (>= 2.16)
+ '',
+-``Build-Depends: texi2html (>= 1.76), gettext, texinfo, dc, pkg-config, debhelper (>= 7.0), m4
++``Build-Depends: texi2html (>= 1.76), gettext, texinfo, dc, pkg-config, debhelper, m4
+ '')dnl
+ Standards-Version: 3.8.4
+ Homepage: http://e2fsprogs.sourceforge.net
+@@ -231,7 +231,7 @@
+ Package: e2fsprogs
+ Essential: yes
+ ifdef(`UTIL_LINUX_NG',
+-``Pre-Depends: ${shlibs:Depends}, ${misc:Depends}, util-linux (>= 2.15~rc1-1)
++``Pre-Depends: ${shlibs:Depends}, ${misc:Depends}
+ '',
+ ``Pre-Depends: ${shlibs:Depends}, ${misc:Depends}
+ '')dnl
+Index: e2fsprogs/source/debian/rules
+===================================================================
+--- e2fsprogs.orig/source/debian/rules	2010-06-10 11:39:33.669395772 +0200
++++ e2fsprogs/source/debian/rules	2010-06-10 11:43:51.649395736 +0200
+@@ -301,7 +301,6 @@
+ cleanup:
+ 	dh_testdir
+ 	dh_testroot
+-	dh_prep
+ 
+ install-std: DH_OPTIONS=
+ install-std: build
+@@ -464,92 +463,9 @@
+ 
+ 	dh_fixperms
+ ifneq ($(ismips),)
+-	dh_strip -k -Xlib64ext2fs-nopic.a
++	dh_strip -Xlib64ext2fs-nopic.a
+ else
+-	dh_strip -k
+-endif
+-
+-	# debug package stuff
+-	rm -rf ${udebdir}/usr
+-ifneq ($(UTIL_LINUX_NG),yes)
+-	rm -rf ${blkidudebdir}/usr
+-	rm -rf ${uuidudebdir}/usr
+-endif
+-
+-	mkdir -p ${debugdir}/usr/lib
+-	mv ${maindir}/usr/lib/debug ${debugdir}/usr/lib
+-	rm -rf ${maindir}/usr/lib/debug
+-	mv ${e2fsckstaticdir}/usr/lib/debug/sbin/* \
+-		${debugdir}/usr/lib/debug
+-	rm -rf ${e2fsckstaticdir}/usr/lib
+-
+-ifneq ($(UTIL_LINUX_NG),yes)
+-	mkdir -p ${uuidruntimedbgdir}/usr/lib
+-	mv ${uuidruntimedir}/usr/lib/debug ${uuidruntimedbgdir}/usr/lib
+-	rmdir ${uuidruntimedir}/usr/lib
+-endif
+-
+-	mkdir -p ${libext2dbgdir}/usr/lib
+-	mv ${libext2dir}/usr/lib/debug ${libext2dbgdir}/usr/lib
+-	rmdir ${libext2dir}/usr/lib
+-
+-	mkdir -p ${libcomerrdbgdir}/usr/lib
+-	mv ${libcomerrdir}/usr/lib/debug ${libcomerrdbgdir}/usr/lib
+-	rmdir ${libcomerrdir}/usr/lib
+-
+-	mkdir -p ${libssdbgdir}/usr/lib
+-	mv ${libssdir}/usr/lib/debug ${libssdbgdir}/usr/lib
+-	rmdir ${libssdir}/usr/lib
+-
+-ifneq ($(UTIL_LINUX_NG),yes)
+-	mkdir -p ${libuuiddbgdir}/usr/lib
+-	mv ${libuuiddir}/usr/lib/debug ${libuuiddbgdir}/usr/lib
+-	rmdir ${libuuiddir}/usr/lib
+-
+-	mkdir -p ${libblkiddbgdir}/usr/lib
+-	mv ${libblkiddir}/usr/lib/debug ${libblkiddbgdir}/usr/lib
+-	rmdir ${libblkiddir}/usr/lib
+-endif
+-
+-	# dpkg symbol handling
+-ifneq (,$(findstring update-symbols,$(DEB_BUILD_OPTIONS)))
+-SYMBOL_LIBS := e2fslibs libcomerr2 libss2
+-ifneq ($(UTIL_LINUX_NG),yes)
+-SYMBOL_LIBS += libblkid1 libuuid1
+-endif
+-	for i in $(SYMBOL_LIBS); \
+-	do \
+-		echo "Generating symbols for $$i..."; \
+-		dpkg-gensymbols -p$$i -Pdebian/$$i > debian/$$i.tmp-patch; \
+-		cat debian/$$i.tmp-patch; \
+-		patch debian/$$i.symbols < debian/$$i.tmp-patch; \
+-		/bin/rm debian/$$i.tmp-patch; \
+-	done
+-endif
+-
+-	$(INSTALL) -p -m 0644 debian/e2fsprogs.copyright \
+-		${debugdir}/usr/share/doc/e2fsprogs-dbg/copyright
+-
+-ifneq ($(UTIL_LINUX_NG),yes)
+-	$(INSTALL) -p -m 0644 debian/uuid-runtime.copyright \
+-		${uuidruntimedbgdir}/usr/share/doc/uuid-runtime-dbg/copyright
+-endif
+-
+-	$(INSTALL) -p -m 0644 debian/e2fslibs.copyright \
+-		${libext2dbgdir}/usr/share/doc/e2fslibs-dbg/copyright
+-
+-	$(INSTALL) -p -m 0644 debian/libcomerr2.copyright \
+-		${libcomerrdbgdir}/usr/share/doc/libcomerr2-dbg/copyright
+-
+-	$(INSTALL) -p -m 0644 debian/libss2.copyright \
+-		${libssdbgdir}/usr/share/doc/libss2-dbg/copyright
+-
+-ifneq ($(UTIL_LINUX_NG),yes)
+-	$(INSTALL) -p -m 0644 debian/libblkid.copyright \
+-		${libblkiddbgdir}/usr/share/doc/libblkid1-dbg/copyright
+-
+-	$(INSTALL) -p -m 0644 debian/libuuid1.copyright \
+-		${libuuiddbgdir}/usr/share/doc/libuuid1-dbg/copyright
++	dh_strip
+ endif
+ 
+ 	dh_compress

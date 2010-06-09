@@ -1,0 +1,14 @@
+Index: partclone/source/debian/changelog
+===================================================================
+--- partclone.orig/source/debian/changelog	2010-06-10 11:55:04.740955862 +0200
++++ partclone/source/debian/changelog	2010-06-10 11:56:13.499393555 +0200
+@@ -1,3 +1,9 @@
++partclone (0.2.8backharddi-ng1) unstable; urgency=low
++
++  * Se construye un udeb con solamente soporte para extfs
++
++ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 10 Jun 2010 11:55:14 +0200
++
+ partclone (0.2.8) unstable; urgency=low
+ 
+   * Bug fixed: update progress bar faster

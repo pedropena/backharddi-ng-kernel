@@ -1,0 +1,53 @@
+Index: partclone/source/debian/rules
+===================================================================
+--- partclone.orig/source/debian/rules	2010-06-09 18:40:52.780333836 +0200
++++ partclone/source/debian/rules	2010-06-09 18:43:08.299082562 +0200
+@@ -33,7 +33,7 @@
+ ifneq "$(wildcard /usr/share/misc/config.guess)" ""
+ 	cp -f /usr/share/misc/config.guess config.guess
+ endif
+-	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs" --enable-ncursesw --enable-all --enable-static
++	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs" --enable-extfs --disable-nls
+ 
+ 
+ build: build-stamp
+@@ -75,9 +75,9 @@
+ binary-arch: build install
+ 	dh_testdir
+ 	dh_testroot
+-	dh_installchangelogs ChangeLog
+-	dh_installdocs
+-	dh_installexamples
++#	dh_installchangelogs ChangeLog
++#	dh_installdocs
++#	dh_installexamples
+ #	dh_install
+ #	dh_installmenu
+ #	dh_installdebconf	
+@@ -89,7 +89,7 @@
+ #	dh_installinit
+ #	dh_installcron
+ #	dh_installinfo
+-	dh_installman
++#	dh_installman
+ 	dh_link
+ 	dh_strip
+ 	dh_compress
+Index: partclone/source/debian/control
+===================================================================
+--- partclone.orig/source/debian/control	2010-06-09 18:44:50.389695678 +0200
++++ partclone/source/debian/control	2010-06-09 18:45:37.279081862 +0200
+@@ -2,7 +2,7 @@
+ Section: admin
+ Priority: extra
+ Maintainer: Yu-Chin Tsai <thomas@nchc.org.tw>, Jazz Yao-Tsung Wang <jazz@nchc.org.tw>
+-Build-Depends: debhelper (>= 5), autotools-dev, e2fslibs-dev (>= 1.41.3), xfslibs-dev, libreiserfs0.3-dev, libreiser4-dev, libufs2 (>= 7.2), libbsd-dev, libncursesw5-dev, libntfs-dev
++Build-Depends: debhelper (>= 5), pkg-config, autotools-dev, e2fslibs-dev (>= 1.41.3), uuid-dev
+ Standards-Version: 3.7.2
+ 
+ Package: partclone
+@@ -18,3 +18,4 @@
+  .
+  check the project website for more details
+  http://partclone.org
++XC-Package-Type: udeb
