@@ -1,0 +1,65 @@
+Index: parted/source/debian/control
+===================================================================
+--- parted.orig/source/debian/control	2010-06-10 17:11:31.201268392 +0200
++++ parted/source/debian/control	2010-06-10 17:11:51.491269698 +0200
+@@ -7,19 +7,7 @@
+ Standards-Version: 3.8.1
+ Vcs-Git: git://git.debian.org/git/parted/debian/parted.git
+ Vcs-Browser: http://git.debian.org/?p=parted/debian/parted.git
+-Build-Depends:
+- debhelper (>= 5.0.22),
+- dpatch,
+- libncurses-dev | libncurses5-dev,
+- libreadline-dev,
+- libdevmapper-dev,
+- uuid-dev,
+- gettext,
+- texinfo (>= 4.2),
+- debianutils (>= 1.13.1),
+- libgeom-dev [kfreebsd-i386 kfreebsd-amd64],
+- po4a,
+- pkg-config
++Build-Depends: debhelper (>= 5.0.22), dpatch, libncurses-dev | libncurses5-dev, libreadline-dev, libdevmapper-dev, uuid-dev, gettext, texinfo (>= 4.2), debianutils (>= 1.13.1), libgeom-dev [kfreebsd-i386 kfreebsd-amd64], po4a, pkg-config
+ 
+ Package: parted
+ Architecture: any
+Index: parted/source/debian/control.in
+===================================================================
+--- parted.orig/source/debian/control.in	2010-06-10 17:11:06.211269414 +0200
++++ parted/source/debian/control.in	2010-06-10 17:11:26.671268388 +0200
+@@ -7,19 +7,7 @@
+ Standards-Version: 3.8.1
+ Vcs-Git: git://git.debian.org/git/parted/debian/parted.git
+ Vcs-Browser: http://git.debian.org/?p=parted/debian/parted.git
+-Build-Depends:
+- debhelper (>= 5.0.22),
+- dpatch,
+- libncurses-dev | libncurses5-dev,
+- libreadline-dev,
+- libdevmapper-dev,
+- uuid-dev,
+- gettext,
+- texinfo (>= 4.2),
+- debianutils (>= 1.13.1),
+- libgeom-dev [kfreebsd-i386 kfreebsd-amd64],
+- po4a,
+- pkg-config
++Build-Depends: debhelper (>= 5.0.22), dpatch, libncurses-dev | libncurses5-dev, libreadline-dev, libdevmapper-dev, uuid-dev, gettext, texinfo (>= 4.2), debianutils (>= 1.13.1), libgeom-dev [kfreebsd-i386 kfreebsd-amd64], po4a, pkg-config
+ 
+ Package: parted@BINPKGVER@
+ Architecture: any
+Index: parted/source/debian/rules
+===================================================================
+--- parted.orig/source/debian/rules	2010-06-10 17:10:49.161268359 +0200
++++ parted/source/debian/rules	2010-06-10 17:10:59.319092963 +0200
+@@ -137,10 +137,6 @@
+   CONFFLAGS += --disable-pc98
+ endif
+ 
+-# Workaround/fix bug #442308
+-CFLAGS += -fgnu89-inline
+-UDEB_CFLAGS += -fgnu89-inline
+-
+ # This builds a substitution list for sed based on the SUBSTS variable
+ # and the variables whose names SUBSTS contains ...
+ SUBSTLIST = $(foreach subst, $(SUBSTS), s/@$(subst)@/$($(subst))/g;)

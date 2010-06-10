@@ -3,7 +3,6 @@ linux-ntfs
 lshw
 lzma
 lzop
-parted
 partimage
 udev
 udpcast

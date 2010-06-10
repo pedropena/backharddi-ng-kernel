@@ -137,6 +137,10 @@ ifeq (powerpc, $(DEB_HOST_ARCH))
   CONFFLAGS += --disable-pc98
 endif
 
+# Workaround/fix bug #442308
+CFLAGS += -fgnu89-inline
+UDEB_CFLAGS += -fgnu89-inline
+
 # This builds a substitution list for sed based on the SUBSTS variable
 # and the variables whose names SUBSTS contains ...
 SUBSTLIST = $(foreach subst, $(SUBSTS), s/@$(subst)@/$($(subst))/g;)

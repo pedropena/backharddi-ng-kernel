@@ -7,7 +7,19 @@ Uploaders: Sven Luther <luther@debian.org>, Otavio Salvador <otavio@debian.org>,
 Standards-Version: 3.8.1
 Vcs-Git: git://git.debian.org/git/parted/debian/parted.git
 Vcs-Browser: http://git.debian.org/?p=parted/debian/parted.git
-Build-Depends: debhelper (>= 5.0.22), dpatch, libncurses-dev | libncurses5-dev, libreadline-dev, libdevmapper-dev, uuid-dev, gettext, texinfo (>= 4.2), debianutils (>= 1.13.1), libgeom-dev [kfreebsd-i386 kfreebsd-amd64], po4a, pkg-config
+Build-Depends:
+ debhelper (>= 5.0.22),
+ dpatch,
+ libncurses-dev | libncurses5-dev,
+ libreadline-dev,
+ libdevmapper-dev,
+ uuid-dev,
+ gettext,
+ texinfo (>= 4.2),
+ debianutils (>= 1.13.1),
+ libgeom-dev [kfreebsd-i386 kfreebsd-amd64],
+ po4a,
+ pkg-config
 
 Package: parted
 Architecture: any
