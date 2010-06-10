@@ -30,6 +30,7 @@ localudebs:
 		quilt push -a || true; \
 		echo; \
 	done
+	mkdir build/localudebs || true
 	$(MAKE) -C udebs DIST=$(SUITE) ARCH=$(ARCH)
 	find udebs -name *.udeb | xargs -I'{}' cp '{}' build/localudebs
  
