@@ -1,14 +1,14 @@
 Index: e2fsprogs/source/debian/compat
 ===================================================================
---- e2fsprogs.orig/source/debian/compat	2010-06-10 11:39:33.689394266 +0200
-+++ e2fsprogs/source/debian/compat	2010-06-10 11:39:47.109394853 +0200
+--- e2fsprogs.orig/source/debian/compat	2010-06-28 10:40:26.260231550 +0200
++++ e2fsprogs/source/debian/compat	2010-06-28 10:40:50.730475657 +0200
 @@ -1 +1 @@
 -7
 +5
 Index: e2fsprogs/source/debian/control.in
 ===================================================================
---- e2fsprogs.orig/source/debian/control.in	2010-06-10 11:39:33.679396921 +0200
-+++ e2fsprogs/source/debian/control.in	2010-06-10 11:39:47.119394018 +0200
+--- e2fsprogs.orig/source/debian/control.in	2010-06-28 10:40:26.251210552 +0200
++++ e2fsprogs/source/debian/control.in	2010-06-28 10:40:50.730475657 +0200
 @@ -4,9 +4,9 @@
  Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
  XSBC-Original-Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
@@ -32,8 +32,8 @@ Index: e2fsprogs/source/debian/control.in
  '')dnl
 Index: e2fsprogs/source/debian/rules
 ===================================================================
---- e2fsprogs.orig/source/debian/rules	2010-06-10 11:39:33.669395772 +0200
-+++ e2fsprogs/source/debian/rules	2010-06-10 11:43:51.649395736 +0200
+--- e2fsprogs.orig/source/debian/rules	2010-06-28 10:40:26.241154079 +0200
++++ e2fsprogs/source/debian/rules	2010-06-28 10:40:50.730475657 +0200
 @@ -301,7 +301,6 @@
  cleanup:
  	dh_testdir
@@ -137,3 +137,25 @@ Index: e2fsprogs/source/debian/rules
  endif
  
  	dh_compress
+Index: e2fsprogs/source/debian/control
+===================================================================
+--- e2fsprogs.orig/source/debian/control	2010-06-28 10:41:09.080229758 +0200
++++ e2fsprogs/source/debian/control	2010-06-28 10:42:41.070454556 +0200
+@@ -3,7 +3,7 @@
+ Priority: required
+ Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+ XSBC-Original-Maintainer: Theodore Y. Ts'o <tytso@mit.edu>
+-Build-Depends: texi2html (>= 1.76), gettext, texinfo, dc, pkg-config, debhelper (>= 7.0), m4, libblkid-dev (>= 2.16), uuid-dev (>= 2.16)
++Build-Depends: texi2html (>= 1.76), gettext, texinfo, dc, pkg-config, debhelper, m4, libblkid-dev (>= 2.16), uuid-dev (>= 2.16)
+ Standards-Version: 3.8.4
+ Homepage: http://e2fsprogs.sourceforge.net
+ Vcs-Git: git://kernel.ubuntu.com/git/e2fsprogs.git
+@@ -121,7 +121,7 @@
+ 
+ Package: e2fsprogs
+ Essential: yes
+-Pre-Depends: ${shlibs:Depends}, ${misc:Depends}, util-linux (>= 2.15~rc1-1)
++Pre-Depends: ${shlibs:Depends}, ${misc:Depends}
+ Suggests: gpart, parted, e2fsck-static
+ Conflicts: dump (<< 0.4b4-4), quota (<< 1.55-8.1), initscripts (<< 2.85-4), sysvinit (<< 2.85-4)
+ Replaces: hurd (<= 20040301-1), libblkid1 (<< 1.38+1.39-WIP-2005.12.10-2), libuuid1 (<< 1.38+1.39-WIP-2005.12.10-2)
