@@ -15,7 +15,7 @@ error(){
 }
 
 parse_stats(){
-	case "$(cat $id/detected_filesystem)" in
+	case "$(cat $imagenes/$id/detected_filesystem)" in
 		ntfs)
 	        stat="$(grep stats: $NTFSCLONE_STATS | tail -n 1)"
 			case "$stat" in 

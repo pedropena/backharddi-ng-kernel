@@ -1,3 +1,9 @@
+backharddi-ng-udeb (0.8) lucid; urgency=low
+
+  * Corregido fallo al generar el estado cuando se usa partclone o ntfsclone.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Tue, 29 Jun 2010 12:22:26 +0200
+
 backharddi-ng-udeb (0.7) karmic; urgency=low
 
   * Se usa ntfsclone para clonar particiones ntfs.
