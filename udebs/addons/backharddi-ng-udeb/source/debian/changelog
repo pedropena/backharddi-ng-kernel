@@ -3,8 +3,9 @@ backharddi-ng-udeb (0.7) karmic; urgency=low
   * Se usa ntfsclone para clonar particiones ntfs.
   * Se usa partclone para clonar particiones ext4.
   * Se actualizan versiones de dependencias.
+  * Corregida la detección del DVD/CD en el modo cdrom.
 
- -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 09 Jun 2010 19:44:19 +0200
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Mon, 28 Jun 2010 11:23:41 +0200
 
 backharddi-ng-udeb (0.6) karmic; urgency=low
 

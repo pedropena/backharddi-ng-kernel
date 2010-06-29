@@ -96,6 +96,13 @@ Description: Atención
  .
  Por favor, corrija esto en el menú de particionado.
 
+Template: backharddi/rest_mbr_error
+Type: error
+Description: Atención
+ El particionador no ha podido generar la tabla de particiones original.
+ .
+ Por favor, genere una nueva tabla de particiones y vuelva a generar la copia de seguridad.
+
 Template: backharddi/reboot
 Type: note
 Description: Proceso Terminado

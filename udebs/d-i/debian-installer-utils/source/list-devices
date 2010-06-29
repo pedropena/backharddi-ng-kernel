@@ -27,7 +27,7 @@ if [ -d /sys/block ] && type udevinfo >/dev/null 2>&1; then
 			;;
 	esac
 	for x in $syspaths; do
-		devpath="${x#/sys}"
+		devpath="${x#/sys/block/}"
 		match=false
 		case $TYPE in
 			maybe-floppy)
@@ -55,8 +55,8 @@ if [ -d /sys/block ] && type udevinfo >/dev/null 2>&1; then
 			fi
 		fi
 		if ! $match && [ "$TYPE" = cd ]; then
-			if udevinfo -q env -p "$devpath" 2>/dev/null | \
-			   grep -q '^ID_CDROM='; then
+			if udevinfo -q env -n "$devpath" 2>/dev/null | \
+			   grep -q "^ID_TYPE=$TYPE"; then
 				match=:
 			fi
 		fi

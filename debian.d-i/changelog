@@ -1,3 +1,11 @@
+backharddi-ng-kernel (0.7) lucid; urgency=low
+
+  * Actualización de backharddi-ng-udeb.
+  * Construcción con mirror de archive.debian.org (distribuciones archivadas).
+  * Actualización de debian-installer-utils.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Tue, 29 Jun 2010 08:56:30 +0200
+
 backharddi-ng-kernel (0.6) karmic; urgency=low
 
   * Actualización de backharddi-ng-udeb.

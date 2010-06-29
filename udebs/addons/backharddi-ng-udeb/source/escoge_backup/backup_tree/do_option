@@ -48,6 +48,11 @@ if [ x"$auto" = xauto ]; then
 fi
 
 if backup_ok $backup; then
+	if [ -f $REST_MBR_ERROR ]; then
+		db_input critical backharddi/rest_mbr_error || true
+		db_go
+		exit
+	fi
 	db_set backharddi/imagenes "$backup"
 	update_metadata
 	

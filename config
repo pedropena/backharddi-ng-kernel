@@ -1,8 +1,8 @@
 KVERSION = 2.6.32-5-486
 UDEBS = "$(shell cat pkg-list modules-list)"
 SUITE = etch
-MIRROR = http://localhost:3142/ftp.debian.org/debian
-MIRROR2 = $(MIRROR)
+MIRROR = http://localhost:3142/archive.debian.org/debian
+MIRROR2 = http://localhost:3142/ftp.debian.org/debian
 SUITE2 = unstable
 ARCH = i386
 COMPONENTS = main

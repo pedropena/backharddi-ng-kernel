@@ -22,7 +22,7 @@ clean: clean-patches
 
 .PHONY: localudebs
 localudebs:
-	rm build/localudebs/* -rf
+	rm build/localudebs/* -f || true
 	@for c in $$(find $$(pwd) -wholename */source/debian/changelog ! -wholename */.pc/*); do \
 		dir=$${c%*/source/debian/changelog}; \
 		cd $$dir; \
@@ -32,7 +32,7 @@ localudebs:
 	done
 	mkdir build/localudebs || true
 	$(MAKE) -C udebs DIST=$(SUITE) ARCH=$(ARCH)
-	find udebs -name *.udeb | xargs -I'{}' cp '{}' build/localudebs
+	find udebs/apt -name \*.udeb | xargs -I'{}' cp '{}' build/localudebs
  
 .PHONY: clean-patches
 clean-patches:

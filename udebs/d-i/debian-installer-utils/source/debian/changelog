@@ -1,3 +1,9 @@
+debian-installer-utils (1.45etch1backharddi-ng2) unstable; urgency=low
+
+  * Corregida la detección del cdrom
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Tue, 29 Jun 2010 08:53:32 +0200
+
 debian-installer-utils (1.45etch1backharddi-ng1) unstable; urgency=low
 
   * Primera versión de backharddi-ng

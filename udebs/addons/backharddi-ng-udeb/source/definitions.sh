@@ -3,6 +3,7 @@
 
 BACKHARDDI=/var/lib/backharddi
 LOG=/var/log/backharddi
+REST_MBR_ERROR=/tmp/restore_mbr.error
 
 to_secure_string() {
         tr " " "_" | sed "s/[^a-zA-Z0-9ñÑçÇáéíóúàèìòù\+\.,:;-]/_/g"
@@ -100,6 +101,7 @@ restore_mbr() {
 	cd $1
 	open_dialog NEW_LABEL msdos
 	close_dialog
+	[ -f $REST_MBR_ERROR ] && rm $REST_MBR_ERROR
 	sed -n "s/,//g; s/=/=\ /g; /start=/p" pt | while read dev x1 x2 start x3 size x4 ID x5; do
 		[ $ID = 0 ] && continue
 		device=$(cat device)
@@ -113,8 +115,10 @@ restore_mbr() {
 		open_dialog NEW_PARTITION $type $fs $id real 0
 		read_line num newid newsize newtype fs path name
 		close_dialog
-	done	
+		[ $id = $newid ] || { touch $REST_MBR_ERROR; break; } 
+	done
 	cd $2
+	[ ! -f $REST_MBR_ERROR ]
 }
 
 restore_metadata() {
@@ -178,7 +182,7 @@ backup_ok() {
 			devices=true
 		fi
 	done
-	[ $devices = true ] && return 0 || return 1
+	[ $devices = true ]
 }
 
 exec 2>>$LOG

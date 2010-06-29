@@ -198,6 +198,7 @@ gen_cmd(){
 			ntfsclone -s -o - $(cat $id/path) 2>$NTFSCLONE_STATS || error
 		;;
 		ext4)
+			touch $imagenes/$id/partclone
 			partclone.ext4 -C -c -s $(cat $id/path) 2>$PARTCLONE_STATS || error
 		;;
 		*)
@@ -216,7 +217,12 @@ rest_cmd(){
 			fi
 		;;
 		ext4)
-			partclone.ext4 -r -s - -o $(cat $id/path) 2>$PARTCLONE_STATS || error
+			#if [ "$(cat $imagenes/$id/img.00 | descomprime | dd bs=16 count=1)" = "PaRtImAgE-VoLuMe" ]; then
+			if [ -f $imagenes/$id/partclone ]; then
+				partclone.ext4 -r -s - -o $(cat $id/path) 2>$PARTCLONE_STATS || error
+			else
+				partimage -B gui=no -f3 restore $(cat $id/path) stdin 2>$PARTIMAGE_STATS || error				
+			fi
 		;;
 		*)
 			partimage -B gui=no -f3 restore $(cat $id/path) stdin 2>$PARTIMAGE_STATS || error

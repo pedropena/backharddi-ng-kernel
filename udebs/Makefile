@@ -3,7 +3,7 @@
 #Es necesario poner BUILDUSERNAME=root y BUILDUSERID=0 en pbuilderrc para poder compilar backharddi-kernel
 #Dependencias: cowdancer (>= 0.47), pbuilder (>= 0.181), mkisofs, debhelper, fakeroot, reprepro (>= 3.3.1), kernel-wedge, dpatch, quilt, cdbs, sudo, debootstrap (>= 1.0.10)
 SHELL := bash
-DEBIANMIRROR := http://localhost:3142/ftp.debian.org/debian
+DEBIANMIRROR := http://localhost:3142/archive.debian.org/debian
 DEBIANCOMPONENTS := main
 UBUNTUMIRROR := http://localhost:3142/archive.ubuntu.com/ubuntu
 UBUNTUCOMPONENTS := main universe
