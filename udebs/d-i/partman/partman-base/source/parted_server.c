@@ -595,9 +595,10 @@ has_extended_partition(PedDisk *disk)
 /* Add to `disk' a new extended partition starting at `start' and
    ending at `end' */
 PedPartition *
-add_extended_partition(PedDisk *disk, PedSector start, PedSector end)
+add_extended_partition(PedDisk *disk, PedSector start, PedSector end, int real)
 {
         PedPartition *extended;
+        PedConstraint *constraint;
         assert(disk != NULL);
         assert(!has_extended_partition(disk));
         /* ext2 has no sense, but parted requires some argument */
@@ -607,8 +608,14 @@ add_extended_partition(PedDisk *disk, PedSector start, PedSector end)
         if (!extended) {
                 return NULL;
         }
+
+    	if ( real == 1 )
+    		constraint = ped_constraint_exact(&extended->geom);
+    	else
+    		constraint = ped_constraint_any(disk->dev);
+
         if (!ped_disk_add_partition(disk, extended,
-                                    ped_constraint_any(disk->dev))) {
+                                    constraint)) {
                 ped_partition_destroy(extended);
                 return NULL;
         }
@@ -685,9 +692,10 @@ add_logical_partition(PedDisk *disk, PedFileSystemType *fs_type,
 	PedConstraint *constraint;
         assert(disk != NULL && fs_type != NULL);
         if (!has_extended_partition(disk))
-                if (!add_extended_partition(disk, start, end))
+                if (!add_extended_partition(disk, start, end, real))
                         return NULL;
-        maximize_extended_partition(disk);
+        if ( real != 1)
+        	maximize_extended_partition(disk);
         part = ped_partition_new(disk, PED_PARTITION_LOGICAL, fs_type,
                                  start, end);
         if (part == NULL) {
@@ -701,10 +709,12 @@ add_logical_partition(PedDisk *disk, PedFileSystemType *fs_type,
 
         if (!ped_disk_add_partition(disk, part, constraint)) {
                 ped_partition_destroy(part);
-                minimize_extended_partition(disk);
+                if ( real != 1 )
+                	minimize_extended_partition(disk);
                 return NULL;
         }
-        minimize_extended_partition(disk);
+        if (real != 1 )
+        	minimize_extended_partition(disk);
         return part;
 }
 
@@ -1882,7 +1892,7 @@ command_new_partition()
                 part = add_logical_partition(disk, fs_type,
                                              part_start, part_end, real);
 	else
-		part = add_extended_partition(disk, part_start, part_end);
+		part = add_extended_partition(disk, part_start, part_end, real);
 
         oprintf("OK\n");
         deactivate_exception_handler();

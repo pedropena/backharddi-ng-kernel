@@ -1,3 +1,9 @@
+partman-base (105backharddi-ng3) unstable; urgency=low
+
+  * Implementado NEW_PARTITION con parámetro real en parted_server
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Tue, 29 Jun 2010 13:34:46 +0200
+
 partman-base (105backharddi-ng2) unstable; urgency=low
 
   * Se construye con libparted-dev 1.8
