@@ -300,6 +300,7 @@ for dev in *; do
 		elif [ -f $id/rest ]; then
 			[ -f $dev/sti -o ! -f $imagenes/$dev/mbr ] || cat $imagenes/$dev/mbr > $(cat $dev/device)
 			accion=rest
+			[ -b $(cat $id/path) ]
 			case  "$(cat $imagenes/$id/detected_filesystem)" in
 				linux-swap)
 					if [ -f $imagenes/$id/img.00 ]; then

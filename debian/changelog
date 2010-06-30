@@ -1,3 +1,10 @@
+backharddi-ng-kernel (0.10) lucid; urgency=low
+
+  * Actualización de parted (para corregir bug al replicar particiones extendidas).
+  * Actualización de backharddi-ng-udeb.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 30 Jun 2010 12:09:27 +0200
+
 backharddi-ng-kernel (0.9) lucid; urgency=low
 
   * Actualización de partman-base.

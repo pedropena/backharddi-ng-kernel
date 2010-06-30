@@ -2,14 +2,18 @@
 
 . /lib/backharddi/definitions.sh
 
+db_get backharddi/imagenes
+imagenes="$RET"
+
 for dev in $DEVICES/*; do
 	[ -d $dev ] || continue
 	cd $dev
 	for id in $dev/*; do
 		[ -d $id ] || continue
 		if [ -f $id/rest ]; then
-			open_dialog COMMIT
-			close_dialog
+#			open_dialog COMMIT
+#			close_dialog
+			sfdisk -f $(cat $imagenes/${dev##$DEVICES/}/device) < $imagenes/${dev##$DEVICES/}/pt
 			break
 		fi
 	done

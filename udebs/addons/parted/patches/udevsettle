@@ -1,0 +1,22 @@
+Index: parted/source/debian/patches/udevadm-settle.dpatch
+===================================================================
+--- parted.orig/source/debian/patches/udevadm-settle.dpatch	2010-06-30 10:23:34.831214143 +0200
++++ parted/source/debian/patches/udevadm-settle.dpatch	2010-06-30 10:23:55.420507066 +0200
+@@ -34,7 +34,7 @@
+ +         * TODO: for upstream submission, this should check whether udevadm
+ +         * exists on $PATH.
+ +         */
+-+        if (system ("udevadm settle") != 0) {
+++        if (system ("udevsettle") != 0) {
+ +                /* ignore failures */
+ +        }
+ +
+@@ -67,7 +67,7 @@
+ +         * TODO: for upstream submission, this should check whether udevadm
+ +         * exists on $PATH.
+ +         */
+-+        if (system ("udevadm settle") != 0) {
+++        if (system ("udevsettle") != 0) {
+ +                /* ignore failures */
+ +        }
+ +
