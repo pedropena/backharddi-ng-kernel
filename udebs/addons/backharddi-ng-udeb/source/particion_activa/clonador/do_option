@@ -1,0 +1,23 @@
+#!/bin/sh
+
+task=$1
+dev=$2
+id=$3
+
+cd $dev
+
+if [ -f $id/dd ]; then
+	rm -f $id/dd
+elif [ "$(cat $id/detected_filesystem)" = "ext4" -a ! -f $id/partclone ]; then
+	touch $id/partclone
+elif [ "$(cat $id/detected_filesystem)" = "ext4" -a -f $id/partclone ]; then
+	rm -f $id/partclone
+	touch $id/dd
+elif [ "$(cat $id/detected_filesystem)" = "ntfs" -a ! -f $id/ntfsclone ]; then
+	touch $id/ntfsclone
+elif [ "$(cat $id/detected_filesystem)" = "ntfs" -a -f $id/ntfsclone ]; then
+	rm -f $id/ntfsclone
+	touch $id/dd
+else
+	touch $id/dd
+fi

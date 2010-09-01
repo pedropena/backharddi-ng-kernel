@@ -1,3 +1,23 @@
+backharddi-ng-udeb (0.12) lucid; urgency=low
+
+  * Deshabilitados los cambios para que funcione la restauración de RAID y LVM
+  * Implementación de selección de clonador por partición
+  * Se guardan 2048 sectores en lugar de 63 del mbr
+
+ -- Pedro Peña Pérez <pedro@laptop>  Wed, 01 Sep 2010 10:13:14 +0200
+
+backharddi-ng-udeb (0.11) lucid; urgency=low
+
+  * Desmontaje de /sys para que partman detecte correctamente LVM
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Tue, 27 Jul 2010 19:53:31 +0200
+
+backharddi-ng-udeb (0.10) lucid; urgency=low
+
+  * Arreglos para que funcione la restauración de RAID y LVM.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Fri, 23 Jul 2010 10:36:50 +0200
+
 backharddi-ng-udeb (0.9) lucid; urgency=low
 
   * Corregido fallo al replicar particiones extendidas.

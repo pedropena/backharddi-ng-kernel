@@ -73,6 +73,8 @@ case $modo in
 		esac
 
 		if backup_ok $backup; then
+                        #Paramos parted server para que funcione el proceso en caso de RAID y LVM
+			#stop_parted_server
 			update_metadata
 			/lib/backharddi/escoge_particion/*restaurar_todo/do_option
 			touch $DEVICES/cmosrest

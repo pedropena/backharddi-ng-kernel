@@ -5,7 +5,7 @@
 for dev in $DEVICES/*; do
     [ -d "$dev" ] || continue
     cd $dev
-    [ -f sti ] || dd if=$(cat device) of=mbr count=63 bs=512
+    [ -f sti ] || dd if=$(cat device) of=mbr count=2048 bs=512
     partitions=
     open_dialog PARTITIONS
     while { read_line partinfo; [ "$partinfo" ]; }; do

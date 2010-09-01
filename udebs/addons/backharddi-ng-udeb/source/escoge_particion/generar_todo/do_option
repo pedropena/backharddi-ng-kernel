@@ -18,8 +18,13 @@ for dev in $DEVICES/*; do
 			ext3) [ "$(e2label $(cat $id/path))" = "$label" ] && continue;;
 		esac
 		[ -f $id/rest ] && rm $id/rest
+		[ -f $id/dd ] && rm $id/dd
+		[ -f $id/partclone ] && rm $id/partclone
+		[ -f $id/ntfsclone ] && rm $id/ntfsclone
 		touch $id/gen
 		[ $fs != linux-swap ] && echo "lzo" > $id/compresion
+		[ $fs = ext4 ] && touch $id/partclone
+		[ $fs = ntfs ] && touch $id/ntfsclone
 		update_partition $dev $id
 	done
 done

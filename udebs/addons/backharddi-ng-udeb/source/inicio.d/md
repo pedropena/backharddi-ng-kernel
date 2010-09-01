@@ -1,0 +1,77 @@
+#!/bin/sh
+
+. /lib/partman/definitions.sh
+
+# Load modules
+#depmod -a 1>/dev/null 2>&1
+#modprobe md 1>/dev/null 2>&1 || modprobe md-mod 1>/dev/null 2>&1
+#
+## Load supported personalities
+#modprobe raid1 1>/dev/null 2>&1
+#
+## Detect and start MD devices
+#/sbin/mdadm --examine --scan --config=partitions > /tmp/mdadm.conf
+#/sbin/mdadm --assemble --scan --run --config=/tmp/mdadm.conf --auto=yes
+
+# Mark all RAID partitions as being MD
+for dev in /var/lib/partman/devices/*; do
+	[ -d "$dev" ] || continue
+	cd $dev
+
+	# Get all partitions, and check if they have the md flag set.
+	partitions=
+	open_dialog PARTITIONS
+	while { read_line num id size type fs path name; [ "$id" ]; }; do
+		if [ "$fs" != free ]; then
+			partitions="$partitions $id"
+		fi
+	done
+	close_dialog
+
+	for id in $partitions; do
+		md=no
+		open_dialog GET_FLAGS $id
+		while { read_line flag; [ "$flag" ]; }; do
+			if [ "$flag" = raid ]; then
+				md=yes
+			fi
+		done
+		close_dialog
+		if [ "$md" = yes ]; then
+			mkdir -p $id
+			echo raid > $id/method
+		fi
+	done
+
+	# Next, check if the device is a part of an MD setup
+#	if [ -f device ]; then
+#		DEVICE=`sed -e "s/\/dev\///" device`
+#		grep -q "${DEVICE}" /proc/mdstat
+#		if [ $? -eq 0 ]; then
+#			open_dialog NEW_LABEL loop
+#			close_dialog
+#		fi
+#	fi
+done
+
+# Create the raid devices
+#for i in `grep md /proc/mdstat|sed -e 's/^\(md.*\) : active \([[:alnum:]]*\).*/\1/'`; do
+#	NUMBER=`echo ${i}|sed -e "s/^md//"`
+#	DEVICE="/var/lib/partman/devices/=dev=md=${NUMBER}"
+#	mkdir -p ${DEVICE}
+#	cd ${DEVICE}
+#	echo "/dev/md/${NUMBER}" > ${DEVICE}/device
+#	echo "Unknown" > ${DEVICE}/model
+#	echo "0" > ${DEVICE}/size
+#	open_dialog OPEN "/dev/md/${NUMBER}"
+#	read_line response
+#	close_dialog
+#	if [ "$response" = "failed" ]; then
+#		rm -rf ${DEVICE}
+#	fi
+#
+#	open_dialog NEW_LABEL loop
+#	close_dialog
+#done
+
+exit 0

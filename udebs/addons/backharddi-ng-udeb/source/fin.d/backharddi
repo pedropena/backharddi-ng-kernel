@@ -6,6 +6,7 @@ OLD_STDIN="$DEBCONF_OLD_FD_BASE"
 PARTIMAGE_STATS=/var/log/partimage/partimage.stats
 NTFSCLONE_STATS=/var/log/ntfsclone.stats
 PARTCLONE_STATS=/var/log/partclone.stats
+DD_STATS=/var/log/dd.stats
 STOP_MONITOR=/tmp/stop_monitor
 ERROR=/tmp/backharddi_error
 CDNUM=/tmp/cdnum
@@ -15,56 +16,57 @@ error(){
 }
 
 parse_stats(){
-	case "$(cat $imagenes/$id/detected_filesystem)" in
-		ntfs)
-	        stat="$(grep stats: $NTFSCLONE_STATS | tail -n 1)"
-			case "$stat" in 
-				stats:*)
-					percent="$(echo "$stat" | cut -b 8-10)"
-				;;
-				*) 
-					percent=0
-				;;
-			esac
-			etime="No disponible"
-			rtime="No disponible"
-			rate="No disponible"
-		;;
-		ext4)
-			stat="$(grep ^stats:.*Rate $PARTCLONE_STATS | tail -n 1)"
-			case "$stat" in
-				stats:*)
-					percent="$(echo "$stat" | cut -b 18-20)"
-					etime="$(echo "$stat" | cut -b 56-63)"
-					rtime="$(echo "$stat" | cut -b 77-84)"
-					rate="$(echo "$stat" | cut -b 32-44)"
-				;;
-				*) 
-					percent=0
-					etime="0:00"
-					rtime="0:00"
-					rate="0 GB/min"
-				;;
-			esac
-		;;
-        *)
-	        stat="$(grep stats: $PARTIMAGE_STATS | tail -n 1)"
-			case "$stat" in 
-				stats:*)
-					percent="$(echo "$stat" | cut -b 8-10)"
-					etime="$(echo "$stat" | cut -b 13-20)"
-					rtime="$(echo "$stat" | cut -b 22-29)"
-					rate="$(echo "$stat" | cut -b 31-39)"
-				;;
-				*) 
-					percent=0
-					etime="0:00"
-					rtime="0:00"
-					rate="0 GB/min"
-				;;
-			esac
-		;;
-	esac
+	if [ -f $imagenes/$id/ntfsclone ]; then
+        stat="$(grep stats: $NTFSCLONE_STATS | tail -n 1)"
+		case "$stat" in 
+			stats:*)
+				percent="$(echo "$stat" | cut -b 8-10)"
+			;;
+			*) 
+				percent=0
+			;;
+		esac
+		etime="No disponible"
+		rtime="No disponible"
+		rate="No disponible"
+	elif [ -f $imagenes/$id/partclone ]; then
+		stat="$(grep ^stats:.*Rate $PARTCLONE_STATS | tail -n 1)"
+		case "$stat" in
+			stats:*)
+				percent="$(echo "$stat" | cut -b 18-20)"
+				etime="$(echo "$stat" | cut -b 56-63)"
+				rtime="$(echo "$stat" | cut -b 77-84)"
+				rate="$(echo "$stat" | cut -b 32-44)"
+			;;
+			*) 
+				percent=0
+				etime="0:00"
+				rtime="0:00"
+				rate="0 GB/min"
+			;;
+		esac
+	elif [ -f $imagenes/$id/dd ]; then
+		percent=0
+		etime="0:00"
+		rtime="0:00"
+		rate="0 GB/min"
+	else
+        stat="$(grep stats: $PARTIMAGE_STATS | tail -n 1)"
+		case "$stat" in 
+			stats:*)
+				percent="$(echo "$stat" | cut -b 8-10)"
+				etime="$(echo "$stat" | cut -b 13-20)"
+				rtime="$(echo "$stat" | cut -b 22-29)"
+				rate="$(echo "$stat" | cut -b 31-39)"
+			;;
+			*) 
+				percent=0
+				etime="0:00"
+				rtime="0:00"
+				rate="0 GB/min"
+			;;
+		esac
+	fi
 	echo $percent,$etime,$rtime,$rate
 }
 	
@@ -192,42 +194,35 @@ concatena(){
 }
 
 gen_cmd(){
-	case "$(cat $id/detected_filesystem)" in
-		ntfs)
-			touch $imagenes/$id/ntfsclone
-			ntfsclone -s -o - $(cat $id/path) 2>$NTFSCLONE_STATS || error
-		;;
-		ext4)
-			touch $imagenes/$id/partclone
-			partclone.ext4 -C -c -s $(cat $id/path) 2>$PARTCLONE_STATS || error
-		;;
-		*)
-			partimage -B gui=no -M -V0 -dc -z0 -f3 save $(cat $id/path) stdout 2>$PARTIMAGE_STATS || error
-		;;
-	esac
+	if [ -f $id/ntfsclone ]; then
+		ntfsclone -s -o - $(cat $id/path) 2>$NTFSCLONE_STATS || error
+	elif [ -f $id/partclone ]; then
+		partclone.ext4 -C -c -s $(cat $id/path) 2>$PARTCLONE_STATS || error
+	elif [ -f $id/dd ]; then
+		map=${id#*/}
+		start=${map%-*}
+		end=${map#*-}
+		size=$((end-start+1))
+		dd_rescue $(cat $id/path) - -m $size 2>$DD_STATS && touch $STOP_MONITOR || error
+	else
+		partimage -B gui=no -M -V0 -dc -z0 -f3 save $(cat $id/path) stdout 2>$PARTIMAGE_STATS || error
+	fi
 }
 
 rest_cmd(){
-	case "$(cat $imagenes/$id/detected_filesystem)" in
-		ntfs)
-			if [ -f $imagenes/$id/ntfsclone ]; then
-				ntfsclone -r -O $(cat $id/path) - 2>$NTFSCLONE_STATS >&2 || error
-			else
-				partimage -B gui=no -f3 restore $(cat $id/path) stdin 2>$PARTIMAGE_STATS || error
-			fi
-		;;
-		ext4)
-			#if [ "$(cat $imagenes/$id/img.00 | descomprime | dd bs=16 count=1)" = "PaRtImAgE-VoLuMe" ]; then
-			if [ -f $imagenes/$id/partclone ]; then
-				partclone.ext4 -r -s - -o $(cat $id/path) 2>$PARTCLONE_STATS || error
-			else
-				partimage -B gui=no -f3 restore $(cat $id/path) stdin 2>$PARTIMAGE_STATS || error				
-			fi
-		;;
-		*)
-			partimage -B gui=no -f3 restore $(cat $id/path) stdin 2>$PARTIMAGE_STATS || error
-		;;
-	esac
+	if [ -f $imagenes/$id/ntfsclone ]; then
+		ntfsclone -r -O $(cat $id/path) - 2>$NTFSCLONE_STATS >&2 || error
+	elif [ -f $imagenes/$id/partclone ]; then
+		partclone.ext4 -r -s - -o $(cat $id/path) 2>$PARTCLONE_STATS || error
+	elif [ -f $imagenes/$id/dd ]; then
+		map=${id#*/}
+		start=${map%-*}
+		end=${map#*-}
+		size=$((end-start+1))
+		dd_rescue - $(cat $id/path) -m $size 2>$DD_STATS && touch $STOP_MONITOR || error
+	else
+		partimage -B gui=no -f3 restore $(cat $id/path) stdin 2>$PARTIMAGE_STATS || error
+	fi
 }
 
 db_get backharddi/imagenes
@@ -266,6 +261,9 @@ for dev in *; do
 	for id in $dev/*; do
 		[ -d $id ] || continue
 		[ -f $PARTIMAGE_STATS ] && rm $PARTIMAGE_STATS
+		[ -f $PARTCLONE_STATS ] && rm $PARTCLONE_STATS
+		[ -f $NTFSCLONE_STATS ] && rm $NTFSCLONE_STATS
+		[ -f $DD_STATS ] && rm $DD_STATS
 		if [ -f $id/gen ]; then
 			accion=gen
 			if [ ! -d $imagenes/$dev ]; then

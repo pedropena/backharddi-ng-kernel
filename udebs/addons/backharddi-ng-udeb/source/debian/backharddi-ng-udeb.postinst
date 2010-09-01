@@ -37,11 +37,13 @@ if [ "$medio" = net ]; then
 	done
 fi
 
+#umount /sys || true
+
 backharddi
 
 dev=$(mount | grep "on /target" | cut -d ' ' -f 1)
 fs=$(mount | grep "on /target" | cut -d ' ' -f 5)
-opt=$(mount | grep "on /target" | cut -d ' ' -f 6 | tr -d "()")
+opt=$(mount | grep "on /target" | cut -d ' ' -f 6 | tr -d "()" | sed "s/relatime//")
 [ ! -f /proc/sys/dev/cdrom/autoeject ] || echo "1" > /proc/sys/dev/cdrom/autoeject
 [ -z "$dev" ] || umount /target
 [ ! -f /proc/sys/dev/cdrom/autoeject ] || echo "0" > /proc/sys/dev/cdrom/autoeject

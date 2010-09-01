@@ -1,3 +1,21 @@
+backharddi-ng-kernel (0.13) lucid; urgency=low
+
+  * Actualización de backharddi-ng-udeb.
+
+ -- Pedro Peña Pérez <pedro@laptop>  Wed, 01 Sep 2010 10:16:21 +0200
+
+backharddi-ng-kernel (0.12) lucid; urgency=low
+
+  * Actualización de backharddi-ng-udeb.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Tue, 27 Jul 2010 19:55:02 +0200
+
+backharddi-ng-kernel (0.11) lucid; urgency=low
+
+  * Actualización de backharddi-ng-udeb.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Fri, 23 Jul 2010 10:38:02 +0200
+
 backharddi-ng-kernel (0.10) lucid; urgency=low
 
   * Actualización de parted (para corregir bug al replicar particiones extendidas).
