@@ -3,7 +3,7 @@ include ../config
 DIR := $(shell cd ..; pwd)
 KERNEL := $(DIR)/boot/linux-$(KVERSION)-backharddi-ng
 INITRD := $(DIR)/boot/minirt-$(KVERSION)-backharddi-ng.gz
-CMDLINE := video=vesa:ywrap,mtrr vga=788 
+GTKCMDLINE := video=vesa:ywrap,mtrr vga=788 
 DISK1_NAME := $(BUILDDIR)/disk1 
 DISK1_SIZE := 100*2097152
 DISK2_NAME := $(BUILDDIR)/disk2
@@ -18,12 +18,17 @@ test:
 	kvm -kernel $(KERNEL) -initrd $(INITRD) -append "$(CMDLINE)" -hda $(DISK1_NAME) -hdb $(DISK2_NAME)
 
 .PHONY: tests
-tests: auto_gen_void
+tests: auto_gen_void auto_gen_void_gtk
 
 auto_gen_void: del-backup-disk $(BACKUP_DISK_NAME)
 	rm $(DISK1_NAME) || true
 	dd of=$(DISK1_NAME) seek=$$(($(DISK1_SIZE))) count=0
 	kvm -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(CMDLINE) backharddi/medio=hd-media backharddi/modo=gen backharddi/imagenes=/target/test backharddi/reboot=" -hda $(DISK1_NAME) -hdb $(DISK2_NAME)
+
+auto_gen_void_gtk: $(BACKUP_DISK_NAME)
+	rm $(DISK1_NAME) || true
+	dd of=$(DISK1_NAME) seek=$$(($(DISK1_SIZE))) count=0
+	kvm -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(GTKCMDLINE) backharddi/medio=hd-media backharddi/modo=gen backharddi/imagenes=/target/test backharddi/reboot=" -hda $(DISK1_NAME) -hdb $(DISK2_NAME)
 
 del-backup-disk:
 	rm $(BACKUP_DISK_NAME) || true
