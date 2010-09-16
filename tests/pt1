@@ -1,0 +1,7 @@
+# partition table of ../udebs/pbuilder/disk2
+unit: sectors
+
+../udebs/pbuilder/disk2p1 : start=        1, size= 20971519, Id=83
+../udebs/pbuilder/disk2p2 : start=        0, size=        0, Id= 0
+../udebs/pbuilder/disk2p3 : start=        0, size=        0, Id= 0
+../udebs/pbuilder/disk2p4 : start=        0, size=        0, Id= 0
