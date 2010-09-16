@@ -1,0 +1,23 @@
+This is rfbplaymacro, a remote control utility for VNC.
+
+An example macro file "test.rfm" exists.
+To use it, you should
+
+  chown yourname test.rfm
+  chmod 600 test.rfm
+
+it, so no one else can read it.
+
+Now you can safely insert your VNC password after "password" in the file.
+
+Run a VNC Client on your desktop, so you can watch what the script will do.
+
+Run (on the local machine, of course)
+
+  rfbplaymacro --server=myhost:1 < test.rfm
+
+The macro simply opens an xclock and kills it after 10 seconds using xkill.
+
+The script implies that your VNC server has been started with the
+-alwaysshared option, and that your VNC desktop starts with an xterm in the
+upper left corner of your screen.

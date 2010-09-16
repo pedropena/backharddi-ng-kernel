@@ -1,0 +1,28 @@
+RFM 001.000
+# The first line of each script must look like this
+
+password "mypasswd123"
+# replace mypasswd123 with your VNC password. 
+
+
+#
+# This demo will display a clock for 10 seconds
+#
+
+# Move Mouse to the xterm (upper left of screen):
+pointer 100 20 delay 1s 
+
+# Open the xclock:
+type "xclock -geometry +400+200 &"
+press Return
+
+# get a kill cursor:
+type "xkill"
+press Return
+
+# place the kill cursor over the xclock window:
+pointer 410 210 delay 10s # wait for 10 seconds after placing the cursor
+
+# click to kill:
+click 0
+

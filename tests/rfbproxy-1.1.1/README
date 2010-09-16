@@ -1,0 +1,203 @@
+rfbproxy
+
+This is a record/replay proxy for RFB (used by VNC).  It can be used
+as a proxy between a VNC viewer and a VNC server to permit recording
+into a file, or it can record from a server independently of a client.
+It can also be used as a pseudo-VNC server to play back a recorded
+session, and can convert a recorded VNC session into various video
+formats.
+
+See the man page and comments in rfbproxy.c for more information.
+
+During a proxy record, rfbproxy acts this way:
+
+VNC server <---> rfbproxy <---> VNC viewer
+                    |
+		    v
+		/some/file.rfb
+
+During a shared-session record, rfbproxy acts this way:
+
+VNC viewer(s) <---> VNC server <---> rfbproxy
+                                        |
+                                        v
+                                    /some/file.rfb
+
+During playback, the concept is much simpler:
+
+rfbproxy <---> VNC viewer
+
+rfbproxy then reads a file to present it to the VNC viewer.
+
+
+RECORDING
+
+To record a session (from a running XFree86 server):
+
+1. XFree86 version 4 supports VNC's RFB protocol directly.  You can
+   record directly from a running X server; no additional VNC server
+   is needed.  Insure VNC support is available by verifying that
+   the following line is present in your XF86Config file's "Module"
+   section:
+
+      Load "vnc"
+
+   You'll also want to add Option lines to the "Screen" section, at least:
+
+      Option "passwordFile" "/home/baccala/.vnc/passwd"
+
+   If these lines are not present, you'll need to add them and restart X.
+
+2. Run 'rfbproxy --record --shared rfb.log'
+   You will be prompted for display's VNC password.
+3. Once rfbproxy has connected, your display is being recorded.
+4. When finished, kill rfbproxy (either 'kill PID' or CNTL-C should work)
+
+To record a session (from a running non-XFree86 X server):
+
+"x0vncserver" and "x11vnc" are programs that connect to an X server as
+ordinary X clients and function as VNC servers.  Techniques such as
+polling or shared memory are used to determine the contents of the X
+desktop.  Although slower and less reliable than an X server with
+built-in VNC support, these programs require no support beyond the
+core X protocol.  Also, "x11vnc" is capable of exporting a single X
+window instead of the entire desktop.  Use them in place of XFree86's
+"vnc" module in the above instructions.
+
+To record a session (from Microsoft Windows):
+
+1. Start the Windows VNC server (available from www.realvnc.com)
+   on the Microsoft system
+2. Run 'rfbproxy --record --shared --server SERVER:0 rfb.log' on Linux
+   Replace SERVER with the DNS or IP address of the Microsoft system.
+   You will be prompted for the display's VNC password.
+3. Once rfbproxy has connected, your display is being recorded.
+4. When finished, kill rfbproxy (either 'kill PID' or CNTL-C should work)
+
+To record a session (from the command line, in proxy mode):
+
+1. Start a VNC server on the same host as the rfbproxy will be running on.
+2. Run rfbproxy in record mode (--record).  This will create a VNC proxy
+   server running on display :10 (port 5910).
+3. Run a VNC viewer, connecting to the VNC proxy server now running as
+   display :10.
+4. Once the viewer has connected, your display is being recorded.
+5. When finished, quit the VNC viewer.  The VNC proxy server will then
+   quit also; the VNC server should be unaffected.
+
+To record a session (using xinetd, in proxy mode):
+
+1. Configure /etc/xinetd.conf to use rfbproxy in record mode:
+
+service rfbproxy-record1
+{
+	port		= 5911
+	socket_type	= stream
+	protocol	= tcp
+	wait		= no
+	user		= nobody
+	server		= /usr/bin/rfbproxy
+	server_args     = --server=:1 --stdout --record /tmp/record:1.rfb
+}
+
+The port is the display number + 5900 (this example uses display :11).
+The --server option specifies which server is controlling the display which
+is being recorded.
+
+For convenience sake, use displays :11 (5911) through :19 (5909) for
+servers on displays :1 (5901) through :9 (5909).  Makes it easy to remember,
+and still leaves display :10 (5910) open for playback.
+
+2. Use a VNC viewer, connecting to the display specified; in this case,
+   display :11.
+
+3. When done, quit the viewer.
+
+To record a session (in shared-session mode):
+
+1. Start a VNC server as normal, on localhost:1
+2. Run 'rfbproxy --record --shared rfb.log'
+3. Once rfbproxy has connected, your display is being recorded.
+4. Run VNC viewer(s), connecting directly to the VNC server
+5. When finished, kill rfbproxy (either 'kill PID' or CNTL-C should work)
+
+
+PLAYBACK
+
+To play back a session, there are three possibilities:
+
+A) Use rfbproxy, this time in playback mode (--playback).  This does
+   not require X; only a VNC viewer somewhere on the network.
+   Use a command like:
+
+   rfbproxy --playback /pub/bugzilla.rfb
+
+B) Use rfbproxy (like A) but from xinetd:
+
+service rfbproxy
+{
+	port		= 5910
+	socket_type	= stream
+	protocol	= tcp
+	wait		= no
+	user		= nobody
+	server		= /usr/bin/rfbproxy
+	server_args     = --stdout --playback /pub/bugzilla.rfb
+}
+
+This example uses display :10 (that is, port 5910 - 5900).
+
+C) Use xrfbviewer, available from www.hexonet.de.  This requires X to run,
+   but also comes with x0rfbserver, a very nice package to allow remote
+   control of a local standard X11 server display.
+
+
+RECORDING TO VIDEO
+
+You probably need to record in shared-session mode for --export to
+work.  See the comments at the beginning of rfbproxy.c to understand
+why.  There are several different video codecs you can use, though I
+think mjpegtools and ffmpeg are the main ones, and many different ways
+to combine the various options.  Look at the man page and the Makefile
+for additional possibilities.
+
+About the simplest video conversion is to convert a recorded session
+to MPEG using the mjpegtools package, doing something like (for DVD
+format):
+
+rfbproxy --export rfb.log \
+	| ppmtoy4m \
+	| yuvscaler -n ntsc -O DVD \
+	| mpeg2enc -f 8 -o video.mpg
+
+It is possible to record audio simultaneously.  I use the 'vrec'
+program from sndkit to record raw audio, then use 'lame' to convert
+this to mpeg audio, then 'mplex' (also from mjpegtools) to multiplex
+this with the video into an MPEG program stream.  The only part at all
+tricky is getting the video and audio synchronized.  I use a shell
+script (see man page) to start and stop rfbproxy and 'vrec'
+simultaneously.
+
+Then lame is used like this:
+
+	lame -m m -x -r -s 48 -h audio audio.mp3
+
+And mplex like this:
+
+	mplex -f 8 -o program.mpg audio.mp3 video.mpg
+
+Now you've got a DVD-compatible MPEG program stream with both video
+and audio in it.
+
+
+Have fun.
+
+NOTES
+
+  If you intend to use the --loop or --cycle options when playing back,
+  you CANNOT use the ZRLE encoding when recording.  This is because the
+  zlib state cannot be maintained.
+
+  DO NOT suspend (CNTL-Z) rfbproxy (or the record script) when recording
+  in shared session mode, as this can freeze all sessions attached to
+  the VNC server.

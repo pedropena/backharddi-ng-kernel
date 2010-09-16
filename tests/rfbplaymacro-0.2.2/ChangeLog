@@ -1,0 +1,112 @@
+2003-08-11  Tim Waugh  <twaugh@redhat.com>
+
+	* configure.in: Version 0.2.2 (stable).
+
+2003-08-11  Tim Waugh  <twaugh@redhat.com>
+
+	* src/rfbplaymacro.c (connect_to_server): Use protocol 3.3.
+
+2003-05-23  Tim Waugh  <twaugh@redhat.com>
+
+	* configure.in: Version 0.2.1 (stable).
+
+2003-05-23  Tim Waugh  <twaugh@redhat.com>
+
+	* Makefile.am: Add tag rule.
+
+	* src/rfbplaymacro.c: Made more tolerant of bad input files, and of
+	servers requesting passwords when none has been specified.
+
+	* test.rfm: New file, created by Ralf Mueller.
+	* Makefile.am: Ship it.
+	* README: Updated.
+
+	* src/rfbplaymacro.c (main): Accept 'password' in the input file.
+	Spotted by Ralf Mueller.
+
+2002-07-07  Tim Waugh  <twaugh@redhat.com>
+
+	* configure.in: Version 0.2.0 (stable).
+
+2002-07-07  Richard Lavigne  <rfb@spamtrack.arnet.cx>
+
+	* src/rfbplaymacro.c: Getoptify.
+	* src/d3des.h, src/d3des.c: New files, borrowed from VNC.
+	* src/rfbplaymacro.c: Add VNC authentication support.
+	* Makefile.am: Build VNC authentication support.
+
+2002-07-07  Tim Waugh  <twaugh@redhat.com>
+
+	* rfbplaymacro.spec.in: New file.
+	* configure.in: Create rfbplaymacro.spec.
+	* Makefile.am: Ship it.
+
+	* rfbplaymacro.c: Move...
+	* src/rfbplaymacro.c: ... here.
+	* Makefile.am: New file.  Replaces Makefile.
+	* configure.in: New file.
+	* bootstrap: New file.
+	* include/config.h.in: New file.
+
+2001-11-30  Tim Waugh  <twaugh@redhat.com>
+
+	* rfbplaymacro.c (VERSION): Version 0.1.4 (devel).
+
+2001-11-30  Tim Waugh  <twaugh@redhat.com>
+
+	* rfbplaymacro.c (main): Fix international characters.
+
+2001-02-28  Tim Waugh  <twaugh@redhat.com>
+
+	* rfbplaymacro.c (VERSION): Version 0.1.3 (devel).
+
+2001-02-28  Tim Waugh  <twaugh@redhat.com>
+
+	* rfbplaymacro.c (connect_to_server): The server display is now
+	configurable.
+	(main): Accept server display as optional parameter.
+
+2000-06-14  Tim Waugh  <twaugh@redhat.com>
+
+	* rfbplaymacro.c (get_input_line): Ignore comments properly, and
+	tell the caller that it really was a comment.
+	(main): Always do specified delays.
+	(main): Delay for type.
+	(main): Delay for pointer.
+	(main): Delay for button.
+	(main): Delay for click.
+	(VERSION): Version 0.1.2.
+
+2000-06-13  Tim Waugh  <twaugh@redhat.com>
+
+	* rfbplaymacro.c (VERSION): Version 0.1.1.  Still in development.
+	(parse_keysym): Put comments in the ugliest function in the file.
+
+	* Makefile (update): Error when local files are modified.
+
+2000-06-12  Tim Waugh  <twaugh@redhat.com>
+
+	* rfbplaymacro.c (main): Implement type, pointer, default
+	delay, button, and click.
+	(VERSION): Version 0.1.
+
+	* Makefile (CFLAGS): Use -ggdb by default.
+
+	* rfbplaymacro.c (get_input_line): Use wordexp.
+
+2000-06-09  Tim Waugh  <twaugh@redhat.com>
+
+	* rfbplaymacro.c (parse_optional_delay): Fix delay parsing code:
+	need to skip over the leading whitespace first.
+	(VERSION): Set to 0.0.
+	(main): Accept --help and --version.  Display argument not yet
+	implemented.
+
+2000-06-08  Tim Waugh  <twaugh@redhat.com>
+
+	* rfbplaymacro.c (parse_optional_delay): New function.
+	(get_input_line): Use it.
+	(parse_keysym): New function.  Ugly hack which needs to be
+	rewritten!
+	(main): Close socket when finished.
+
