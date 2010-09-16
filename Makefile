@@ -60,3 +60,7 @@ srelease:
 brelease:
 	dpkg-buildpackage -b -I.git -I*.udeb -I$(BUILDDIR) -I.project -I.gitignore -I.pydevproject -Iudebs/apt
 	fakeroot ./debian/rules clean
+
+test: 
+	[ -f sda ] || dd of=sda seek=$$((10*2097152)) count=0
+	kvm -kernel boot/linux-$(KVERSION)-backharddi-ng -initrd boot/minirt-$(KVERSION)-backharddi-ng.gz -append "video=vesa:ywrap,mtrr vga=788" sda

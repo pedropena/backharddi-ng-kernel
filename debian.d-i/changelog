@@ -1,3 +1,9 @@
+backharddi-ng-kernel (0.14) lucid; urgency=low
+
+  * Arreglada la visualización de la interfaz gráfica.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 16 Sep 2010 11:10:07 +0200
+
 backharddi-ng-kernel (0.13) lucid; urgency=low
 
   * Actualización de backharddi-ng-udeb.

@@ -1,7 +1,5 @@
 10 premaster
 30 parted
-#31 md-devices
 50 lvm
-#51 md
 60 sti
 70 update_partitions
