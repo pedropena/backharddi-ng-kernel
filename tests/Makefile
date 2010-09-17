@@ -9,7 +9,7 @@ RFBPROXY := rfbproxy-1.1.1/rfbproxy
 SLT := .1
 
 .PHONY: tests
-tests: test_001 test_002
+tests: test_001
 
 $(RFBPLAYMACRO) $(RFBPROXY):
 	echo $@
@@ -19,7 +19,7 @@ $(RFBPLAYMACRO) $(RFBPROXY):
 record_%: $(RFBPROXY)
 	@cd $*; i=0; for script in prepare_disk*; do i=$$((i+1)); echo " * [$*] Preparando disco $$i"; bash $$script >/dev/null 2>&1; done
 	@echo " * [$*] Grabando test"; cd $*; kvm -vnc :20 -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(shell cat $*/cmdline)" $(shell cat $*/params) &
-	@$(RFBPROXY) --server=:20 --type=events -r $*/fbs &
+	@$(RFBPROXY) --server=:20 --type=events -r $*/fbs >/dev/null 2>&1 &
 	@sleep $(SLT); vncviewer :10 >/dev/null 2>&1
 
 .PHONY: test_%

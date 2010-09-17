@@ -2,6 +2,8 @@
 
 mkdir mnt || true
 sudo mount -o loop,offset=512 disk2 mnt
+find mnt/test -type f -printf "%p\n" | sort > list
+md5sum -c md5sums >/dev/null 2>&1 && echo ok || echo ko
 sudo umount mnt
-rm -r disk2 mnt 
-echo ok
+rm -r mnt list
+gzip -9 disk1

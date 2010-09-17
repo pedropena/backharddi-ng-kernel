@@ -1,0 +1,3 @@
+#!/bin/bash
+
+gunzip disk1.gz
