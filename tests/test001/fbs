@@ -1,0 +1,57 @@
+RFM 001.000
+shared
+# ClientCutText not supported yet
+# At 1025ms from start
+# At 2020ms from start
+# At 3289ms from start
+# At 4023ms from start
+# At 5004ms from start
+# At 6513ms from start
+# At 7077ms from start
+# At 8747ms from start
+# At 9215ms from start
+# At 10019ms from start
+key 0xffe3 down delay 14242ms
+key 0xffe3 up delay 593ms
+# At 14865ms from start
+press 0xff54 delay 352ms
+# At 15216ms from start
+press 0xff54 delay 321ms
+press 0xff54 delay 351ms
+press 0xff54 delay 99ms
+# At 16786ms from start
+key 0xff0d down delay 845ms
+key 0xff0d up delay 13ms
+# At 17018ms from start
+key 0xffe3 down delay 1010ms
+key 0xffe3 up delay 865ms
+# At 18722ms from start
+press t delay 125ms
+press e delay 240ms
+# At 19056ms from start
+press s delay 207ms
+press t delay 139ms
+key 0xff0d down delay 424ms
+key 0xff0d up delay 28ms
+# At 20007ms from start
+key 0xffe3 down delay 1924ms
+key 0xffe3 up delay 400ms
+# At 22199ms from start
+press 0xff54 delay 225ms
+press 0xff54 delay 191ms
+press 0xff54 delay 224ms
+press 0xff54 delay 239ms
+# At 23090ms from start
+press 0xff54 delay 833ms
+press 0xff0d delay 92ms
+# At 24012ms from start
+key 0xffe3 down delay 1187ms
+key 0xffe3 up delay 449ms
+# At 25651ms from start
+press 0xff54 delay 655ms
+# At 26305ms from start
+press 0xff0d delay 93ms
+key 0xffe3 down delay 1059ms
+key 0xffe3 up delay 1040ms
+# At 28498ms from start
+press 0xff0d delay 94ms

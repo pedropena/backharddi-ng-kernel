@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mkdir mnt || true
+sudo mount -o loop,offset=512 disk2 mnt
+sudo umount mnt
+rm -r disk2 mnt 
+echo ok

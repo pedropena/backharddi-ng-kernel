@@ -1,0 +1,9 @@
+#!/bin/bash
+
+rm disk2 || true
+dd of=disk2 seek=$((10*2**21)) count=0
+sfdisk --no-reread -f disk2 < pt1
+sudo losetup -d /dev/loop0 || true
+sudo losetup -o $((1*512)) --sizelimit $((20971519*512)) /dev/loop0 disk2
+sudo mkfs.ext3 -L backharddi /dev/loop0
+sudo losetup -d /dev/loop0

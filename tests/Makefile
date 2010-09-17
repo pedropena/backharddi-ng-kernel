@@ -4,41 +4,34 @@ DIR := $(shell cd ..; pwd)
 KERNEL := $(DIR)/boot/linux-$(KVERSION)-backharddi-ng
 INITRD := $(DIR)/boot/minirt-$(KVERSION)-backharddi-ng.gz
 GTKCMDLINE := video=vesa:ywrap,mtrr vga=788 
-DISK1_NAME := $(BUILDDIR)/disk1 
-DISK1_SIZE := 100*2097152
-DISK2_NAME := $(BUILDDIR)/disk2
-DISK2_SIZE := 10*2097152
-BACKUP_DISK_NAME := $(BUILDDIR)/disk2
-BACKUP_DISK_SIZE := 10*2097152
-
-.PHONY: test
-test: 
-	[ -f $(DISK1_NAME) ] || dd of=$(DISK1_NAME) seek=$$(($(DISK1_SIZE))) count=0
-	[ -f $(DISK2_NAME) ] || dd of=$(DISK2_NAME) seek=$$(($(DISK2_SIZE))) count=0
-	kvm -kernel $(KERNEL) -initrd $(INITRD) -append "$(CMDLINE)" -hda $(DISK1_NAME) -hdb $(DISK2_NAME)
+RFBPLAYMACRO := rfbplaymacro-0.2.2/src/rfbplaymacro
+RFBPROXY := rfbproxy-1.1.1/rfbproxy
+SLT := .1
 
 .PHONY: tests
-tests: auto_gen_void auto_gen_void_gtk
+tests: test_001 test_002
 
-auto_gen_void: del-backup-disk $(BACKUP_DISK_NAME)
-	rm $(DISK1_NAME) || true
-	dd of=$(DISK1_NAME) seek=$$(($(DISK1_SIZE))) count=0
-	kvm -vnc :0 -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(CMDLINE) backharddi/medio=hd-media backharddi/modo=gen backharddi/imagenes=/target/test backharddi/reboot=" -hda $(DISK1_NAME) -hdb $(DISK2_NAME)
+$(RFBPLAYMACRO) $(RFBPROXY):
+	echo $@
+	cd $(firstword $(subst /, ,$@)); ./configure; make
 
-auto_gen_void_gtk: $(BACKUP_DISK_NAME)
-	rm $(DISK1_NAME) || true
-	dd of=$(DISK1_NAME) seek=$$(($(DISK1_SIZE))) count=0
-	kvm -vnc :0 -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(GTKCMDLINE) backharddi/medio=hd-media backharddi/modo=gen backharddi/imagenes=/target/test backharddi/reboot=" -hda $(DISK1_NAME) -hdb $(DISK2_NAME)
+.PHONY: record_%
+record_%: $(RFBPROXY)
+	@cd $*; i=0; for script in prepare_disk*; do i=$$((i+1)); echo " * [$*] Preparando disco $$i"; bash $$script >/dev/null 2>&1; done
+	@echo " * [$*] Grabando test"; cd $*; kvm -vnc :20 -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(shell cat $*/cmdline)" $(shell cat $*/params) &
+	@$(RFBPROXY) --server=:20 --type=events -r $*/fbs &
+	@sleep $(SLT); vncviewer :10 >/dev/null 2>&1
 
-del-backup-disk:
-	rm $(BACKUP_DISK_NAME) || true
+.PHONY: test_%
+test_%: $(RFBPLAYMACRO)
+	@cd test$*; i=0; for script in prepare_disk*; do i=$$((i+1)); echo " * [test$*] Preparando disco $$i"; bash $$script >/dev/null 2>&1; done
+	@echo " * [test$*] Ejecutando test"; cd test$*; kvm -vnc :20 -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(shell cat test$*/cmdline)" $(shell cat test$*/params) &
+	@sleep $(SLT); [ ! -f test$*/view ] || vncviewer :20 >/dev/null 2>&1 &
+	@sleep $(SLT); cat test$*/fbs | $(RFBPLAYMACRO) --server :20
+	@echo -n " * [test$*] Comprobando resultados... "; cd test$*; [ ! -f checks ] || bash checks
 
-$(BACKUP_DISK_NAME):
-	if [ ! -f $(BACKUP_DISK_NAME) ]; then \
-		dd of=$(BACKUP_DISK_NAME) seek=$$(($(BACKUP_DISK_SIZE))) count=0; \
-		sfdisk -f $(BACKUP_DISK_NAME) < pt1; \
-		sudo losetup -d /dev/loop0 || true; \
-		sudo losetup -o $$((1*512)) --sizelimit $$((20971519*512)) /dev/loop0 $(BACKUP_DISK_NAME); \
-		sudo mkfs.ext3 -L backharddi /dev/loop0; \
-		sudo losetup -d /dev/loop0; \
-	fi
+.PHONY: manual_%
+manual_%: 
+	@cd $*; kvm -vnc :20 -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(GTKCMDLINE) $(shell cat $*/cmdline)" $(shell cat $*/params) &
+	@sleep $(SLT); vncviewer :20 >/dev/null 2>&1
+
