@@ -1,3 +1,9 @@
+partman-base (105backharddi-ng4) unstable; urgency=low
+
+  * Espera a que se terminen de procesar los eventos de udev antes de iniciar parted_server
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 22 Sep 2010 09:59:08 +0200
+
 partman-base (105backharddi-ng3) unstable; urgency=low
 
   * Implementado NEW_PARTITION con parámetro real en parted_server

@@ -1,3 +1,10 @@
+backharddi-ng-kernel (0.15) lucid; urgency=low
+
+  * Actualización de backharddi-ng-udeb.
+  * Actualización de partman-base.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 22 Sep 2010 10:03:58 +0200
+
 backharddi-ng-kernel (0.14) lucid; urgency=low
 
   * Arreglada la visualización de la interfaz gráfica.

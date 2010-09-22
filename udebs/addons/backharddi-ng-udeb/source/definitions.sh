@@ -103,9 +103,16 @@ restore_mbr() {
 	close_dialog
 	[ -f $REST_MBR_ERROR ] && rm $REST_MBR_ERROR
 	sed -n "s/,//g; s/=/=\ /g; /start=/p" pt | while read dev x1 x2 start x3 size x4 ID x5; do
+               num=${dev#$device}
+               num=${num%:}
+               if [ $num -gt 9 ]; then
+                       start=$x2
+                       size=$x3
+                       ID=$x4
+                       dev=${dev%:}
+               fi
 		[ $ID = 0 ] && continue
 		device=$(cat device)
-		num=${dev#$device}
 		type=primary
 		[ $ID = 5 -o $ID = f ] && type=extended
 		[ $num -gt 4 ] && type=logical

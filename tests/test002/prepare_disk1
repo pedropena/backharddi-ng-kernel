@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm disk1 || true
+dd of=disk1 seek=$((10*2**21)) count=0

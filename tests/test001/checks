@@ -3,7 +3,14 @@
 mkdir mnt || true
 sudo mount -o loop,offset=512 disk2 mnt
 find mnt/test -type f -printf "%p\n" | sort > list
-md5sum -c md5sums >/dev/null 2>&1 && echo ok || echo ko
+md5sum -c md5sums >/dev/null 2>&1 || KO=yes
+diff list.orig list > diff.list
+if [ -s diff.list ]; then
+	echo
+	KO=yes
+	cat diff.list
+fi
+[ "x$KO" = "x" ] && echo "ok" || echo "ko"
 sudo umount mnt
-rm -r mnt list
+rm -r mnt list diff.list
 gzip -9 disk1

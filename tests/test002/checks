@@ -1,0 +1,20 @@
+#!/bin/bash
+
+while read begin end name; do
+	gunzip disk1.$name.orig.hexdump.gz
+	start=$((begin/512))
+	finish=$(((end+1)/512))
+	size=$((finish-start))
+	dd if=disk1 skip=$start count=$size 2>/dev/null | hexdump -C > disk1.$name.hexdump
+	diff disk1.$name.orig.hexdump disk1.$name.hexdump > diff.$name
+	if [ -s diff.$name ]; then
+		echo
+		KO=yes
+		echo $name
+		cat diff.$name
+	fi
+	rm disk1.$name.hexdump diff.$name
+	gzip -9 disk1.$name.orig.hexdump
+done < map
+
+[ "x$KO" = "x" ] && echo "ok" || echo "ko"

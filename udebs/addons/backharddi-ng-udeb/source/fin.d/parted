@@ -14,6 +14,7 @@ for dev in $DEVICES/*; do
 #			open_dialog COMMIT
 #			close_dialog
 			sfdisk -f $(cat $imagenes/${dev##$DEVICES/}/device) < $imagenes/${dev##$DEVICES/}/pt
+			udevsettle
 			break
 		fi
 	done

@@ -1,7 +1,6 @@
 all: minirt
 
 include config
-include test
 
 .PHONY: pkg-list
 pkg-list: udeb.list
@@ -41,7 +40,7 @@ clean-patches:
 		dir=$${c%*/source/debian/changelog}; \
 		cd $$dir; \
 		echo " * Limpiando parches de $$(basename $$dir)"; \
-		quilt pop -a || true; \
+		quilt pop -a -f || true; \
 		echo; \
 	done
 
@@ -49,7 +48,7 @@ minirt: localudebs
 	[ -d debian.orig ] || { mv debian debian.orig; mv debian.d-i debian; } 
 	rm boot usr -rf
 	echo "BUILDUSERNAME=root\nBUILDUSERID=0" >$(BUILDDIR)/.pbuilderrc
-	HOME=$(BUILDDIR); pdebuild $(PDEBUILDOPTS) --debbuildopts "-b -Idebian.orig -I.git -Iudebs -I.project -Iusr -I.gitignore -I.pydevproject" -- $(BUILDEROPTS) --distribution $(SUITE) --aptcache $(BUILDDIR)/aptcache/$(SUITE) $(BUILDERBASE) $(BUILDDIR)/$(SUITE).$(ARCH).$(BUILDEREXT) --mirror $(MIRROR) --components $(COMPONENTS) || true
+	HOME=$(BUILDDIR); pdebuild $(PDEBUILDOPTS) --debbuildopts "-b -Itests -Idebian.orig -I.git -Iudebs -I.project -Iusr -I.gitignore -I.pydevproject" -- $(BUILDEROPTS) --distribution $(SUITE) --aptcache $(BUILDDIR)/aptcache/$(SUITE) $(BUILDERBASE) $(BUILDDIR)/$(SUITE).$(ARCH).$(BUILDEREXT) --mirror $(MIRROR) --components $(COMPONENTS) || true
 	dpkg -x $(BUILDDIR)/result/$(SUITE)/backharddi-ng-kernel-i386_$$(dpkg-parsechangelog | grep Version: | cut -f 2 -d " ")_all.deb .
 	mv debian debian.d-i
 	mv debian.orig debian

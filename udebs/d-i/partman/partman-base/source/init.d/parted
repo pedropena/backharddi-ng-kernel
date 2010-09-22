@@ -4,6 +4,8 @@ set -e
 
 . /lib/partman/definitions.sh
 
+udevsettle
+
 if [ ! -f /var/run/parted_server.pid ]; then
     [ -d /var/run ] || mkdir /var/run
     parted_server

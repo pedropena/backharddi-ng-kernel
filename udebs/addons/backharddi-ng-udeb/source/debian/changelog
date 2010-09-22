@@ -1,3 +1,11 @@
+backharddi-ng-udeb (0.13) lucid; urgency=low
+
+  * Corregido error al restaurar copias de seguridad con más de 9 particiones
+  * Se genera un fichero por dispositivo con el mapa del dispositivo
+  * Se espera a que terminen los eventos de udev al volcar la tabla de particiones
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 22 Sep 2010 10:02:49 +0200
+
 backharddi-ng-udeb (0.12) lucid; urgency=low
 
   * Deshabilitados los cambios para que funcione la restauración de RAID y LVM

@@ -18,6 +18,9 @@ $partinfo"
     done
     close_dialog
     [ "x$partitions" != "x" ] && sfdisk -d $(cat device) >pt
+    open_dialog DUMP
+    close_dialog
+    mv /var/log/partition_dump .
 
     IFS="$NL"
     for partinfo in $partitions; do
