@@ -1,0 +1,23 @@
+Source: openvpn
+Section: net
+Priority: optional
+Maintainer: Alberto Gonzalez Iniesta <agi@inittab.org>
+Build-Depends: debhelper (>= 4.1.16), libssl-dev (>> 0.9.6), liblzo2-dev, libpam0g-dev
+Standards-Version: 3.7.2.0
+
+Package: openvpn
+Architecture: any
+Depends: debconf | debconf-2.0, ${shlibs:Depends}
+Suggests: openssl
+Description: Virtual Private Network daemon
+ An application to securely tunnel IP networks over a single UDP or TCP port.
+ It can be used to access remote sites, make secure point to point connections,
+ enhance WiFi security, etc.
+ .
+ OpenVPN uses all of the encryption, authentication, and certification features
+ of the OpenSSL library (any cipher, key size, or HMAC digest).
+ .
+ OpenVPN may use static, pre-shared keys or TLS-based dynamic key exchange.  It
+ also supports VPNs with dynamic endpoints (DHCP or dial-up clients), tunnels
+ over NAT or connection-oriented stateful firewalls (like Linux's iptables).
+

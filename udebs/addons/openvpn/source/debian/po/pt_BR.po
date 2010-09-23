@@ -1,0 +1,175 @@
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openvpn\n"
+"Report-Msgid-Bugs-To: agi@inittab.org\n"
+"POT-Creation-Date: 2006-05-22 03:32+0200\n"
+"PO-Revision-Date: 2005-01-24 22:05-0200\n"
+"Last-Translator: André Luís Lopes <andrelop@debian.org>\n"
+"Language-Team: Debian-BR Project <debian-l10n-portuguese@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../templates:4
+msgid "Would you like to start openvpn sooner?"
+msgstr "Você gostaria de iniciar o OpenVPN antes ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:4
+#, fuzzy
+msgid ""
+"Previous versions of openvpn started at the same time as most of other "
+"services. This means that most of these services couldn't use openvpn since "
+"it may have been unavailable when they started. Newer versions of the "
+"openvpn package will start earlier. (i.e. a S16openvpn link in rc[235].d "
+"instead of a S20openvpn)"
+msgstr ""
+"Versões anteriores do OpenVPN iniciavam ao mesmo tempo em que a maioria dos "
+"outros serviços. Isso significa que a maioria desses serviços não podiam "
+"utilizar o OpenVPN, uma vez que o mesmo podia não estar disponível quando os "
+"mesmos iniciavam. Novas versões do pacote OpenVPN iniciarão antes desses "
+"serviços (por exemplo, um ligação S18openvpn em /etc/rc[235].d ao invés de "
+"S20openvpn)."
+
+#. Type: boolean
+#. Description
+#: ../templates:18
+msgid "Would you like a TUN/TAP device to be created?"
+msgstr "Você gostaria que um dispositivo TUN/TAP fosse criado ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:18
+msgid ""
+"If you accept here, the package will make a special device called /dev/net/"
+"tun for openvpn's use. If you refuse, the device won't be made now. Read "
+"README.Debian for details on how to make it. If you are using devfs refuse "
+"here."
+msgstr ""
+"Caso você aceite, o pacote irá criar um dispositivo especial chamado /dev/"
+"net/tun para o uso do OpenVPN. Caso você não aceite, o dispositivo não será "
+"criado agora. Leio o arquivo README.Debian para maiores detalhes sobre como "
+"criar o dispositivo. Caso você esteja usando DevFS, não aceite a oferta de "
+"criação do dispositivo."
+
+#. Type: boolean
+#. Description
+#: ../templates:27
+msgid "Would you like to stop openvpn before it gets upgraded?"
+msgstr "Você gostaria de parar o OpenVPN antes que o mesmo fosse atualizado ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:27
+msgid ""
+"In some cases you may be upgrading openvpn in a remote server using a VPN to "
+"do so. The upgrade process stops the running daemon before  installing the "
+"new version, in that case you may lose your connection, the upgrade may be "
+"interrupted, and you may not be able to reconnect to the remote host."
+msgstr ""
+"Em alguns casos, você pode estar atualizando o OpenVPN em um servidor remoto "
+"usando uma VPN para fazê-lo. O processo de atualização para o daemon em "
+"execução antes de instalar a nova versão e, nesse caso, você pode perder sua "
+"conexão, a atualização pode ser interrompida e você pode não ser capaz de "
+"reconectar ao host remoto."
+
+#. Type: boolean
+#. Description
+#: ../templates:27
+msgid ""
+"Unless you do your upgrades locally, it is advised NOT to stop openvpn "
+"before it gets upgraded. The installation process will restart it once it's "
+"done."
+msgstr ""
+"A menos que você faça suas atualizações localmente, NÃO é recomendado que "
+"você pare o OpenVPN antes que o mesmo seja atualizado. O processo de "
+"instalação irá reiniciá-lo assim que seja finalizado."
+
+#. Type: boolean
+#. Description
+#: ../templates:27
+msgid "This option will take effect in your next upgrade."
+msgstr "Essa opção terá efeito em sua próxima atualização."
+
+#. Type: note
+#. Description
+#: ../templates:42
+msgid "Default port has changed"
+msgstr "Porta padrão mudou"
+
+#. Type: note
+#. Description
+#: ../templates:42
+msgid ""
+"OpenVPN's default port has changed from 5000 to 1194 (IANA assigned). If you "
+"don't specify the port to be used on your VPNs, this upgrade may break them."
+msgstr ""
+"A porta padrão do OpenVPN mudou de 5000 pra 1194 (atribuída pelo IANA). Caso "
+"você não especifique a porta a ser utilizada em suas VPNs, esta atualização "
+"pode quebrá-las."
+
+#. Type: note
+#. Description
+#: ../templates:42
+#, fuzzy
+msgid ""
+"Use the option 'port 5000' if you want to keep the old port configuration, "
+"or take a look at your firewall rules to allow the new default port "
+"configuration to work."
+msgstr ""
+"Utilize a opção 'port 5000' caso você queira manter a configuração antiga de "
+"porta. Opcionalmente, verifique suas regras de firewall e permita que a "
+"configuração da nova porta padrão funcione."
+
+#. Type: boolean
+#. Description
+#: ../templates:54
+#, fuzzy
+msgid "Would you like to stop openvpn later?"
+msgstr "Você gostaria de iniciar o OpenVPN antes ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:54
+#, fuzzy
+msgid ""
+"Previous versions of openvpn stopped at the same time as most of other "
+"services. This meant that some of services stopping later couldn't use  "
+"openvpn since it may have been stopped before them. Newer versions of the "
+"openvpn package will stop the service later. (i.e. a K80openvpn link in  rc"
+"[06].d instead of a K20openvpn)"
+msgstr ""
+"Versões anteriores do OpenVPN iniciavam ao mesmo tempo em que a maioria dos "
+"outros serviços. Isso significa que a maioria desses serviços não podiam "
+"utilizar o OpenVPN, uma vez que o mesmo podia não estar disponível quando os "
+"mesmos iniciavam. Novas versões do pacote OpenVPN iniciarão antes desses "
+"serviços (por exemplo, um ligação S18openvpn em /etc/rc[235].d ao invés de "
+"S20openvpn)."
+
+#. Type: boolean
+#. Description
+#: ../templates:54
+msgid ""
+"If you accept here, the package upgrade will make this change for you. If "
+"you refuse, nothing will change, and openvpn will be working just like it "
+"did before."
+msgstr ""
+"Caso você aceite, a atualização do pacote irá fazer essa mudança para você. "
+"Caso você não aceite, nada irá mudar e o OpenVPN continuará a funcionar "
+"exatamente da maneira que funcionava anteriormente."

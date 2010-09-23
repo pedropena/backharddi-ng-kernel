@@ -1,0 +1,164 @@
+# translation of fr.po to French
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans#
+#    Developers do not need to manually edit POT or PO files.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openvpn_2.0.6-2\n"
+"Report-Msgid-Bugs-To: agi@inittab.org\n"
+"POT-Creation-Date: 2006-05-22 03:32+0200\n"
+"PO-Revision-Date: 2006-06-07 06:56+0200\n"
+"Last-Translator: Michel Grentzinger <mic.grentz@online.fr>\n"
+"Language-Team: French <debian-l10n-french@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../templates:4
+msgid "Would you like to start openvpn sooner?"
+msgstr "Faut-il démarrer openvpn dès que possible ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:4
+msgid ""
+"Previous versions of openvpn started at the same time as most of other "
+"services. This means that most of these services couldn't use openvpn since "
+"it may have been unavailable when they started. Newer versions of the "
+"openvpn package will start earlier. (i.e. a S16openvpn link in rc[235].d "
+"instead of a S20openvpn)"
+msgstr "Les précédentes versions d'openvpn démarraient en même temps que la plupart des autres services. Cela signifie que la majorité de ces services ne peuvent pas utiliser openvpn puisqu'il n'est pas encore disponible lorsqu'ils démarrent. Les versions récentes du paquet openvpn démarrent plus tôt (c.-à-d. que le lien dans rc[235].d est S16openvpn au lieu de S20openvpn)."
+
+#. Type: boolean
+#. Description
+#: ../templates:18
+msgid "Would you like a TUN/TAP device to be created?"
+msgstr "Faut-il créer un périphérique TUN/TAP ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:18
+msgid ""
+"If you accept here, the package will make a special device called /dev/net/"
+"tun for openvpn's use. If you refuse, the device won't be made now. Read "
+"README.Debian for details on how to make it. If you are using devfs refuse "
+"here."
+msgstr ""
+"Si vous choisissez cette option, le paquet créera un périphérique spécial "
+"nommé /dev/net/tun pour l'usage d'openvpn. Si vous refusez, ce périphérique "
+"ne sera pas créé maintenant. Veuillez consulter README.Debian pour obtenir "
+"des précisions sur la façon de procéder. Si vous utilisez devfs, veuillez "
+"refuser ici."
+
+#. Type: boolean
+#. Description
+#: ../templates:27
+msgid "Would you like to stop openvpn before it gets upgraded?"
+msgstr "Faut-il arrêter openvpn avant de le mettre à jour ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:27
+msgid ""
+"In some cases you may be upgrading openvpn in a remote server using a VPN to "
+"do so. The upgrade process stops the running daemon before  installing the "
+"new version, in that case you may lose your connection, the upgrade may be "
+"interrupted, and you may not be able to reconnect to the remote host."
+msgstr ""
+"Dans certains cas, vous pourriez effectuer la présente mise à jour d'openvpn "
+"sur serveur en utilisant vous-même un tunnel VPN. Le processus de mise à "
+"jour arrête le démon avant d'installer la nouvelle version, ce qui peut "
+"entraîner la perte de la connexion et l'arrêt de la mise à jour. Vous ne "
+"seriez alors plus en mesure de vous reconnecter à l'hôte distant."
+
+#. Type: boolean
+#. Description
+#: ../templates:27
+msgid ""
+"Unless you do your upgrades locally, it is advised NOT to stop openvpn "
+"before it gets upgraded. The installation process will restart it once it's "
+"done."
+msgstr ""
+"Sauf si vous effectuez votre mise à jour localement, il est conseillé de ne "
+"pas arrêter openvpn avant sa mise à jour. Le processus d'installation le "
+"redémarrera une fois cette opération terminée."
+
+#. Type: boolean
+#. Description
+#: ../templates:27
+msgid "This option will take effect in your next upgrade."
+msgstr "Cette option prendra effet à la prochaine mise à jour."
+
+#. Type: note
+#. Description
+#: ../templates:42
+msgid "Default port has changed"
+msgstr "Changement du port par défaut"
+
+#. Type: note
+#. Description
+#: ../templates:42
+msgid ""
+"OpenVPN's default port has changed from 5000 to 1194 (IANA assigned). If you "
+"don't specify the port to be used on your VPNs, this upgrade may break them."
+msgstr ""
+"Le port par défaut d'OpenVPN est passé de 5000 à 1194 (valeur choisie par "
+"l'IANA). Si vous n'indiquez pas le port à utiliser sur vos réseaux privés "
+"virtuels, cette mise à niveau peut les rendre inutilisables."
+
+#. Type: note
+#. Description
+#: ../templates:42
+msgid ""
+"Use the option 'port 5000' if you want to keep the old port configuration, "
+"or take a look at your firewall rules to allow the new default port "
+"configuration to work."
+msgstr ""
+"Vous devriez utiliser l'option « port 5000 » si vous souhaitez continuer à "
+"utiliser l'ancien port, ou vérifier les réglages de votre pare-feu pour vous "
+"assurer que la configuration avec le nouveau port pourra fonctionner."
+
+#. Type: boolean
+#. Description
+#: ../templates:54
+msgid "Would you like to stop openvpn later?"
+msgstr "Faut-il arrêter openvpn dès que possible ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:54
+msgid ""
+"Previous versions of openvpn stopped at the same time as most of other "
+"services. This meant that some of services stopping later couldn't use  "
+"openvpn since it may have been stopped before them. Newer versions of the "
+"openvpn package will stop the service later. (i.e. a K80openvpn link in  rc"
+"[06].d instead of a K20openvpn)"
+msgstr ""
+"Les précédentes versions d'openvpn se terminaient en même temps que la "
+"plupart des autres services. Cela signifie que la majorité de ces services "
+"ne peuvent pas utiliser openvpn puisque ce dernier est déjà arrêté avant "
+"qu'ils ne s'arrêtent à leur tour. Les versions récentes du paquet openvpn "
+"s'arrêtent plus tard (c.-à-d. que le lien dans rc[06].d est K80openvpn au "
+"lieu de K20openvpn)."
+
+#. Type: boolean
+#. Description
+#: ../templates:54
+msgid ""
+"If you accept here, the package upgrade will make this change for you. If "
+"you refuse, nothing will change, and openvpn will be working just like it "
+"did before."
+msgstr ""
+"Si vous choisissez cette option, cette modification sera effectuée lors de "
+"la mise à jour du paquet. Sinon, rien ne sera modifié, et openvpn "
+"fonctionnera comme auparavant."

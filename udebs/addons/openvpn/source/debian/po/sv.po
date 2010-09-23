@@ -1,0 +1,113 @@
+# Translators, if you are not familiar with the PO format, gettext
+# documentation is worth reading, especially sections dedicated to
+# this format, e.g. by running:
+# info -n '(gettext)PO Files'
+# info -n '(gettext)Header Entry'
+# Some information specific to po-debconf are available at
+# /usr/share/doc/po-debconf/README-trans
+# or http://www.debian.org/intl/l10n/po-debconf/README-trans
+# Developers do not need to manually edit POT or PO files.
+# , fuzzy
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openvpn 2.0.2-1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-01-13 19:59+0100\n"
+"PO-Revision-Date: 2007-01-21 22:00+0100\n"
+"Last-Translator: Andreas Henriksson <andreas@fatal.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: SWEDEN\n"
+
+#. Type: boolean
+#. Description
+#: ../templates:1001
+msgid "Would you like to start openvpn sooner?"
+msgstr "Vill du starta openvpn tidigare?"
+
+#. Type: boolean
+#. Description
+#: ../templates:1001
+msgid "Previous versions of openvpn started at the same time as most of other services. This means that most of these services couldn't use openvpn since it may have been unavailable when they started. Newer versions of the openvpn package will start earlier. (i.e. a S16openvpn link in rc[235].d instead of a S20openvpn)"
+msgstr "Tidigare versioner av OpenVPN startade samtidigt som många andra tjänster. Detta betyder att många av dessa tjänster inte kunde använda sig av OpenVPN eftersom den inte var tillgänglig när de startade. Senare versioner av OpenVPN startar tidigare. (Dvs, en S18openvpn länk i rc[235].d istället för en S20openvpn)"
+
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
+#: ../templates:1001
+#: ../templates:5001
+msgid "If you accept here, the package upgrade will make this change for you. If you refuse, nothing will change, and openvpn will be working just like it did before."
+msgstr "Om du accepterar här kommer paketuppgraderingen att skapa denna åt dig. Om du vägrar kommer ingenting att göras och OpenVPN kommer att fungerar precis som den gjorde tidigare."
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid "Would you like a TUN/TAP device to be created?"
+msgstr "Vill du att en TUN/TAP-enhet skapas?"
+
+#. Type: boolean
+#. Description
+#: ../templates:2001
+msgid "If you accept here, the package will make a special device called /dev/net/tun for openvpn's use. If you refuse, the device won't be made now. Read README.Debian for details on how to make it. If you are using devfs refuse here."
+msgstr "Om du accepterar här kommer paketet att skapa en speciell enhet kallad /dev/net/tun som OpenVPN använder. Om du vägrar kommer inte enheten att skapas. Läs README.Debian för detaljer hur du skapar den. Om du använder devfs så ska du vägra här."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "Would you like to stop openvpn before it gets upgraded?"
+msgstr "Vill du stoppa openvpn före den uppgraderas?"
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "In some cases you may be upgrading openvpn in a remote server using a VPN to do so. The upgrade process stops the running daemon before  installing the new version, in that case you may lose your connection, the upgrade may be interrupted, and you may not be able to reconnect to the remote host."
+msgstr "I vissa fall kan du uppgradera OpenVPN i en fjärrserver via ett VPN. Uppgraderingsprocessen stoppar den körande daemonen före installation av den nya versionen och du kommer att tappa förbindelsen, uppgraderingen kommer att avbrytas och du kanske inte kan återuppta förbindelsen till fjärrservern."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "Unless you do your upgrades locally, it is advised NOT to stop openvpn before it gets upgraded. The installation process will restart it once it's done."
+msgstr "Om du gör dina uppgraderingar lokalt är det lämpligt att INTE stoppa OpenVPN före den uppgraderas. Installationsprocessen kommer att starta om den när allt är klart."
+
+#. Type: boolean
+#. Description
+#: ../templates:3001
+msgid "This option will take effect in your next upgrade."
+msgstr "Denna funktion blir aktiverad vid din nästa uppgradering."
+
+#. Type: note
+#. Description
+#: ../templates:4001
+msgid "Default port has changed"
+msgstr "Standardporten har ändrats"
+
+#. Type: note
+#. Description
+#: ../templates:4001
+msgid "OpenVPN's default port has changed from 5000 to 1194 (IANA assigned). If you don't specify the port to be used on your VPNs, this upgrade may break them."
+msgstr "OpenVPN's standardport har ändrats från 5000 till 1194 (IANA tilldelad). Om du inte anger porten som ska användas i dina VPN kan denna uppgradering få dom att sluta fungera."
+
+#. Type: note
+#. Description
+#: ../templates:4001
+msgid "Use the option 'port 5000' if you want to keep the old port configuration, or take a look at your firewall rules to allow the new default port configuration to work."
+msgstr "Använd inställningen 'port 5000' om du vill behålla den gamla portkonfigurationen eller ta en titt på dina brandväggsregler för att tillåta den nya konfigurationen för standardporten att fungera."
+
+#. Type: boolean
+#. Description
+#: ../templates:5001
+msgid "Would you like to stop openvpn later?"
+msgstr "Vill du stoppa openvpn senare?"
+
+#. Type: boolean
+#. Description
+#: ../templates:5001
+msgid "Previous versions of openvpn stopped at the same time as most of other services. This meant that some of services stopping later couldn't use  openvpn since it may have been stopped before them. Newer versions of the openvpn package will stop the service later. (i.e. a K80openvpn link in  rc[06].d instead of a K20openvpn)"
+msgstr "Tidigare versioner av OpenVPN stoppade samtidigt som många andra tjänster. Detta betyder att några av dessa tjänster som stoppades senare inte kunde använda sig av OpenVPN eftersom de hade stoppats före dom. Senare versioner av OpenVPN stoppar tjänsten senare (exempel, en K80openvpn länk i rc[06].d istället för en K20openvpn)"
+

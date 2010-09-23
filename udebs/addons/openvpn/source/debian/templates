@@ -1,0 +1,64 @@
+Template: openvpn/change_init
+Type: boolean
+Default: false
+_Description: Would you like to start openvpn sooner?
+ Previous versions of openvpn started at the same time as most of other
+ services. This means that most of these services couldn't use openvpn
+ since it may have been unavailable when they started. Newer versions of the
+ openvpn package will start earlier. (i.e. a S16openvpn link in rc[235].d
+ instead of a S20openvpn)
+ .
+ If you accept here, the package upgrade will make this change for you.
+ If you refuse, nothing will change, and openvpn will be working just like
+ it did before.
+
+Template: openvpn/create_tun
+Type: boolean
+Default: false
+_Description: Would you like a TUN/TAP device to be created?
+ If you accept here, the package will make a special device called
+ /dev/net/tun for openvpn's use. If you refuse, the device won't be made
+ now. Read README.Debian for details on how to make it. If you are using
+ devfs refuse here.
+
+Template: openvpn/stop2upgrade
+Type: boolean
+Default: false
+_Description: Would you like to stop openvpn before it gets upgraded?
+ In some cases you may be upgrading openvpn in a remote server using
+ a VPN to do so. The upgrade process stops the running daemon before 
+ installing the new version, in that case you may lose your connection,
+ the upgrade may be interrupted, and you may not be able to reconnect to
+ the remote host.
+ .
+ Unless you do your upgrades locally, it is advised NOT to stop openvpn
+ before it gets upgraded. The installation process will restart it once
+ it's done.
+ .
+ This option will take effect in your next upgrade.
+
+Template: openvpn/default_port
+Type: note
+_Description: Default port has changed
+ OpenVPN's default port has changed from 5000 to 1194 (IANA assigned).
+ If you don't specify the port to be used on your VPNs, this upgrade
+ may break them. 
+ .
+ Use the option 'port 5000' if you want to keep the old port
+ configuration, or take a look at your firewall rules to
+ allow the new default port configuration to work.
+
+Template: openvpn/change_init2
+Type: boolean
+Default: false
+_Description: Would you like to stop openvpn later?
+ Previous versions of openvpn stopped at the same time as most of other
+ services. This meant that some of services stopping later couldn't use 
+ openvpn since it may have been stopped before them. Newer versions of the
+ openvpn package will stop the service later. (i.e. a K80openvpn link in 
+ rc[06].d instead of a K20openvpn)
+ .
+ If you accept here, the package upgrade will make this change for you.
+ If you refuse, nothing will change, and openvpn will be working just like
+ it did before.
+

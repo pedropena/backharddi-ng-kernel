@@ -1,0 +1,62 @@
+#!/bin/sh
+# Copyright 2001 Alberto Gonzalez Iniesta <agi@agi.as>
+# Licensed under the GNU General Public License, version 2.  See the file
+# /usr/share/common-licenses/GPL or <http://www.gnu.org/copyleft/gpl.txt>.
+#
+set -e
+test $DEBIAN_SCRIPT_DEBUG && set -v -x
+
+# use debconf
+. /usr/share/debconf/confmodule
+
+case "$1" in
+  configure)
+    # get rid of confiles installed by mistake
+    rm -f /etc/network/if-up.d/openvpn.if-up.d || true
+    rm -f /etc/network/if-down.d/openvpn.if-down.d || true
+    db_get openvpn/create_tun || RET="false"
+    if [ "$RET" = "true" ]; then
+      [ -e /dev/net ] || mkdir -m 755 /dev/net
+      [ -d /dev/net -a ! -e /dev/net/tun ] && /bin/mknod /dev/net/tun c 10 200
+    fi
+    # Do we want to move the old S20 symlinks to S18 ones?
+    if [ -n "$2" ] ; then
+      if dpkg --compare-versions "$2" lt 2.0.2-1 ; then
+        db_get openvpn/change_init || RET="false"
+        db_get openvpn/change_init2
+        if [ "$RET" = "true" ]; then
+          /usr/sbin/update-rc.d -f openvpn remove > /dev/null
+        fi
+      fi
+    fi
+  ;;
+esac
+
+if [ -x "/etc/init.d/openvpn" ]; then
+        # defaults to true, better start it again than starting none
+        db_get openvpn/stop2upgrade || RET="true"
+	if [ -x /usr/sbin/invoke-rc.d ]; then
+                # if it is a new install or stopped on upgrade
+                # start instead
+                if [ -z "$2" -o "$RET" = "true" ] ; then
+                  invoke-rc.d openvpn start
+                else
+      	          invoke-rc.d openvpn cond-restart || invoke-rc.d openvpn restart
+                fi
+	else
+                # if it is a new install or stopped on upgrade
+                # start instead
+                if [ -z "$2" -o "$RET" = "true" ] ; then
+                  /etc/init.d/openvpn start
+                else
+		  /etc/init.d/openvpn cond-restart || /etc/init.d/openvpn restart
+                fi
+	fi
+fi
+
+db_stop
+
+#DEBHELPER#
+
+exit 0
+# vim:set ai et sts=2 sw=2 tw=0:
