@@ -3,7 +3,7 @@
 . /lib/backharddi/definitions.sh
 
 get_backup_part_name () {
-	dev="$(echo ${backup%+*} | tr -d +)"
+	dev="$(echo ${backup%+*} | tr -d + | tr "_" "=")"
 	id="${backup##*+}"
 	model="$(cat $DEVICES/$dev/model)"
 	devname="$(cat $DEVICES/$dev/$id/path)"
