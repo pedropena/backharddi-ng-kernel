@@ -7,7 +7,7 @@ Standards-Version: 3.7.2.0
 
 Package: openvpn
 Architecture: any
-Depends: debconf | debconf-2.0, ${shlibs:Depends}
+Depends: cdebconf-udeb, ${shlibs:Depends}
 Suggests: openssl
 Description: Virtual Private Network daemon
  An application to securely tunnel IP networks over a single UDP or TCP port.
@@ -20,4 +20,4 @@ Description: Virtual Private Network daemon
  OpenVPN may use static, pre-shared keys or TLS-based dynamic key exchange.  It
  also supports VPNs with dynamic endpoints (DHCP or dial-up clients), tunnels
  over NAT or connection-oriented stateful firewalls (like Linux's iptables).
-
+XC-Package-Type: udeb

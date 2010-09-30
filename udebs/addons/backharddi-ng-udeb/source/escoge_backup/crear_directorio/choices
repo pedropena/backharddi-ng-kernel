@@ -7,6 +7,10 @@ db_get backharddi/medio
 if [ "$RET" = cdrom ]; then
 	printf "nocrear_directorio\t%s\n" "No se puede crear un directorio sobre un medio de solo lectura"
 else
-	db_metaget backharddi/text/directorio_nuevo description
-	printf "$dir\t$RET"
+	if [ "$dir" = "/target" ]; then
+		printf "nocrear_directorio\t%s\n" "No es posible crear un directorio aquí"
+	else 
+		db_metaget backharddi/text/directorio_nuevo description
+		printf "$dir\t$RET"
+	fi
 fi

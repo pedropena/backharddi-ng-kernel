@@ -2,7 +2,7 @@
 
 . /lib/backharddi/definitions.sh
 
-[ "$1" = nocrear_directorio ] && exit 0
+[ "$1" = noeliminar_directorio ] && exit 0
 
 dir="$1"
 db_input critical backharddi/eliminar_directorio || true

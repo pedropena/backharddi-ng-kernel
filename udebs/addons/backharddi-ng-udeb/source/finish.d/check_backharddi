@@ -17,9 +17,9 @@ no_backharddi() {
 	for mp in $mountpoints; do
 		path=${mp%,*}
 		mp=${mp#*,}
-		if [ "$mp" = "/" -a "$(e2label $path)" = "$label" ]; then
-			return 0
-		fi
+		case "$mp" in
+			/+=dev=*) [ "$(e2label $path)" = "$label" ] && return 0;;
+		esac
 	done
     
 	db_input critical backharddi/no_part || true

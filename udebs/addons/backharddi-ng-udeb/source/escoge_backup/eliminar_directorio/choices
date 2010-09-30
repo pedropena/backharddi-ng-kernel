@@ -8,7 +8,9 @@ if [ "$RET" = cdrom ]; then
 	printf "noeliminar_directorio\t%s\n" "No se puede eliminar un directorio sobre un medio de solo lectura"
 else
 	if [ "$dir" = "/target" ]; then
-		printf "$dir\t%s\n" " "
+		printf "noeliminar_directorio\t%s\n" "No es posible eliminar el directorio actual"
+	elif mount | grep -q "$dir"; then
+		printf "noeliminar_directorio\t%s\n" "No es posible eliminar el directorio actual"
 	else 
 		db_metaget backharddi/text/eliminar_directorio description
 		printf "$dir\t$RET"

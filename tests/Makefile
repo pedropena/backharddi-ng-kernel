@@ -22,14 +22,14 @@ $(RFBPLAYMACRO) $(RFBPROXY):
 .PHONY: record_%
 record_%: $(RFBPROXY)
 	@cd $*; i=0; for script in prepare_disk*; do i=$$((i+1)); echo " * [$*] Preparando disco $$i"; bash $$script >/dev/null 2>&1; done
-	@echo " * [$*] Grabando test"; cd $*; kvm -vnc :10 -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(shell cat $*/cmdline)" $(shell cat $*/params) &
+	@echo " * [$*] Grabando test"; cd $*; kvm -k es -vnc :10 -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(shell cat $*/cmdline)" $(shell cat $*/params) &
 	@$(RFBPROXY) :20 --server=:10 --type=events -r $*/fbs >/dev/null &
 	@sleep $(SLT); [ "x$(REMOTE)" = "xyes" ] && $(RVNCVIEWER) || $(VNCVIEWER) :20 >/dev/null 2>&1
 
 .PHONY: test_%
 test_%: $(RFBPLAYMACRO)
 	@cd test$*; i=0; for script in prepare_disk*; do i=$$((i+1)); echo " * [test$*] Preparando disco $$i"; bash $$script >/dev/null 2>&1; done
-	@echo " * [test$*] Ejecutando test"; cd test$*; kvm -vnc :20 -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(shell cat test$*/cmdline)" $(shell cat test$*/params) & \
+	@echo " * [test$*] Ejecutando test"; cd test$*; kvm -k es -vnc :20 -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(shell cat test$*/cmdline)" $(shell cat test$*/params) & \
 	sleep $(SLT); [ ! -f view ] || { [ "x$(REMOTE)" = "xyes" ] && $(RVNCVIEWER) || $(VNCVIEWER) :20 >/dev/null 2>&1; } & \
 	sleep $(SLT); cat fbs | ../$(RFBPLAYMACRO) --server :20; \
 	wait
@@ -37,7 +37,7 @@ test_%: $(RFBPLAYMACRO)
 
 .PHONY: manual_%
 manual_%: 
-	@cd $*; kvm -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(GTKCMDLINE) $(shell cat $*/cmdline)" $(shell cat $*/params)
+	@cd $*; kvm -k es -no-reboot -kernel $(KERNEL) -initrd $(INITRD) -append "$(GTKCMDLINE) $(shell cat $*/cmdline)" $(shell cat $*/params)
 
 remote_%:
 	ssh -fN -R 4000:localhost:4000 $(SERVER)
