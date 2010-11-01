@@ -1,3 +1,9 @@
+backharddi-ng-kernel (0.16.1) lucid; urgency=low
+
+  * Corregido error en el manejo de múltiples particiones cuando los nombres de backup colisionaban
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Mon, 01 Nov 2010 10:53:54 +0100
+
 backharddi-ng-kernel (0.16) lucid; urgency=low
 
   * Implementado manejo de múltiples particiones de backup
