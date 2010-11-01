@@ -4,9 +4,9 @@
 
 get_backup_part_name () {
 	dev="$(echo ${backup%+*} | tr -d + | tr "_" "=")"
-	id="${backup##*+}"
+	num="${backup##*+}"
 	model="$(cat $DEVICES/$dev/model)"
-	devname="$(cat $DEVICES/$dev/$id/path)"
+	devname="$(echo $dev | tr "=" "/")$num"
 	echo -n "En disco duro $model, dispositivo $devname:"
 }
 
@@ -26,13 +26,15 @@ print_local_backup_list () {
 				printf "$dir/$backup\t%s\n" "$backup_nombre"
 				print_local_backup_list "$dir/$backup" yes
 			    else
-			    	printf "$dir/$backup\t%s\n" "$backup_nombre"
+				num=$((num+1))
+			    	printf "$dir/$backup\t%s\n" "$num $backup_nombre"
 			    fi
 			    vacio=no
 			;;
 			*) ls "$dir/$backup"/=dev=* >/dev/null 2>&1 || ls "$dir/$backup"/cmosdump >/dev/null 2>&1 || continue
 			   vacio=no
-			   printf "$dir/$backup\t%s\n" "$backup_nombre"
+			   num=$((num+1))
+			   printf "$dir/$backup\t%s\n" "$num $backup_nombre"
 			;;
 		esac
 	done
@@ -56,5 +58,6 @@ if [ "$medio" = net ]; then
 	done
 	[ "x$backup_nombre" = "x" ] && printf "none\t--Vacío--\n" 
 else
+	num=0
 	print_local_backup_list "$1"
 fi
