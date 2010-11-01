@@ -1,3 +1,9 @@
+openvpn (2.0.9-4etch1backharddi-ng1) unstable; urgency=low
+
+  * Creación de paquete udeb para backharddi-ng
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 30 Sep 2010 09:55:41 +0200
+
 openvpn (2.0.9-4etch1) stable; urgency=low
 
   * Moved liblzo dependency to liblzo2 to fix amd64 general

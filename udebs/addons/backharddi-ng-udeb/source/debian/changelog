@@ -1,3 +1,9 @@
+backharddi-ng-udeb (0.14) lucid; urgency=low
+
+  * Implementación de manejo de múltiples particiones de backup
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 30 Sep 2010 09:56:28 +0200
+
 backharddi-ng-udeb (0.13) lucid; urgency=low
 
   * Corregido error al restaurar copias de seguridad con más de 9 particiones
@@ -12,7 +18,7 @@ backharddi-ng-udeb (0.12) lucid; urgency=low
   * Implementación de selección de clonador por partición
   * Se guardan 2048 sectores en lugar de 63 del mbr
 
- -- Pedro Peña Pérez <pedro@laptop>  Wed, 01 Sep 2010 10:13:14 +0200
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 01 Sep 2010 10:13:14 +0200
 
 backharddi-ng-udeb (0.11) lucid; urgency=low
 

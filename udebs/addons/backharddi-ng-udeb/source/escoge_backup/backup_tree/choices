@@ -2,7 +2,43 @@
 
 . /lib/backharddi/definitions.sh
 
-dir="$1"
+get_backup_part_name () {
+	dev="$(echo ${backup%+*} | tr -d + | tr "_" "=")"
+	id="${backup##*+}"
+	model="$(cat $DEVICES/$dev/model)"
+	devname="$(cat $DEVICES/$dev/$id/path)"
+	echo -n "En disco duro $model, dispositivo $devname:"
+}
+
+print_local_backup_list () {
+	local dir vacio
+	dir=$1
+	tab=$2
+	vacio=yes
+	for backup in $(ls "$dir"); do
+		[ -d "$dir/$backup" ] || continue
+		[ "$backup" = "boot" ] && continue
+		[ "$backup" = "lost+found" ] && continue
+		[ "x$tab" = "x" ] && backup_nombre=$(echo $backup | to_original_string) || backup_nombre="    $(echo $backup | to_original_string)"
+		case "$backup" in
+			+*) if [ "$dir" = "/target" ]; then
+				backup_nombre="$(get_backup_part_name)"
+				printf "$dir/$backup\t%s\n" "$backup_nombre"
+				print_local_backup_list "$dir/$backup" yes
+			    else
+			    	printf "$dir/$backup\t%s\n" "$backup_nombre"
+			    fi
+			    vacio=no
+			;;
+			*) ls "$dir/$backup"/=dev=* >/dev/null 2>&1 || ls "$dir/$backup"/cmosdump >/dev/null 2>&1 || continue
+			   vacio=no
+			   printf "$dir/$backup\t%s\n" "$backup_nombre"
+			;;
+		esac
+	done
+	[ "x$vacio" = "xyes" ] && printf "none\t--Vacío--\n" 
+}
+
 db_get backharddi/medio
 medio="$RET"
 if [ "$medio" = net ]; then
@@ -13,23 +49,12 @@ if [ "$medio" = net ]; then
 	if [ x"$service_port" = x ]; then
 		service_port=4600
 	fi
-	backups=$(wget -q -O - http://$server:$service_port/listPartition?dir=$(echo $dir | escape_string))
+	backups=$(wget -q -O - http://$server:$service_port/listPartition?dir=$(echo $1 | escape_string))
 	for backup in $backups; do
 		backup_nombre=$(echo $backup | to_original_string)
-		printf "$dir/$backup\t%s\n" "$backup_nombre"
+		printf "$1/$backup\t%s\n" "$backup_nombre"
 	done
+	[ "x$backup_nombre" = "x" ] && printf "none\t--Vacío--\n" 
 else
-	for backup in $(ls "$dir"); do
-		[ -d "$dir/$backup" ] || continue
-		[ "$backup" = "boot" ] && continue
-		[ "$backup" = "lost+found" ] && continue
-		case "$backup" in
-			+*) true ;;
-			*) ls "$dir/$backup"/=dev=* >/dev/null 2>&1 || continue ;;
-		esac
-		backup_nombre=$(echo $backup | to_original_string)
-		printf "$dir/$backup\t%s\n" "$backup_nombre"
-	done
+	print_local_backup_list "$1"
 fi
-
-[ "x$backup_nombre" = "x" ] && printf "none\t--Vacío--\n" 

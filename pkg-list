@@ -65,6 +65,7 @@ netcfg
 network-console
 ntfsprogs-udeb
 openssh-server-udeb
+openvpn
 partclone
 partconf-find-partitions
 parted-udeb

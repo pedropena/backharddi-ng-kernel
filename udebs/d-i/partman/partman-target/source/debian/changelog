@@ -1,3 +1,9 @@
+partman-target (49backharddi-ng2) unstable; urgency=low
+
+  * Implementación de múltiples particiones de backup
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 30 Sep 2010 09:53:41 +0200
+
 partman-target (49backharddi-ng1) unstable; urgency=low
 
   * Primera versión de backharddi-ng

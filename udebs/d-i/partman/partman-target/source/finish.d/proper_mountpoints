@@ -15,9 +15,9 @@ no_root () {
     )
     
     for mp in $mountpoints; do
-	if [ "$mp" = / ]; then
-	    return 0
-	fi
+	case "$mp" in
+		/+_dev_*) return 0;;
+	esac
     done
     
     db_input critical partman-target/no_root || true

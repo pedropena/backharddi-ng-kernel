@@ -21,7 +21,7 @@ is_dir(){
 		basename $backup | grep -q ^+
 		return $?
 	else
-		! ls "$backup"/=dev=* >/dev/null 2>&1
+		! ls "$backup"/=dev=* >/dev/null 2>&1 && ! ls "$backup"/cmosdump > /dev/null 2>&1
 		return $?
 	fi
 }
