@@ -6,6 +6,8 @@ dir="$1"
 db_get backharddi/medio
 if [ "$RET" = cdrom ]; then
 	printf "noeliminar_directorio\t%s\n" "No se puede eliminar un directorio sobre un medio de solo lectura"
+elif [ "$RET" = net ]; then
+	printf "noeliminar_directorio\t%s\n" "No es posible eliminar un directorio en el servidor"
 else
 	if [ "$dir" = "/target" ]; then
 		printf "noeliminar_directorio\t%s\n" "No es posible eliminar el directorio actual"

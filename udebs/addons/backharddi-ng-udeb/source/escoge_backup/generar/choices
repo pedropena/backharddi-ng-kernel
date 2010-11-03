@@ -7,7 +7,7 @@ db_get backharddi/medio
 if [ "$RET" = cdrom ]; then
 	printf "nogenerar\t%s\n" "No se puede generar sobre un medio de solo lectura"
 else
-	if [ "$dir" = "/target" ]; then
+	if [ "$dir" = "/target" -a "$RET" != net ]; then
 		printf "nogenerar\t%s\n" "No es posible generar una copia de seguridad aquí"
 	else 
 		db_metaget backharddi/text/generar description
