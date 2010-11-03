@@ -1,3 +1,9 @@
+backharddi-ng-kernel (0.17) lucid; urgency=low
+
+  * Actualización de backharddi-ng-udeb.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 03 Nov 2010 18:25:47 +0100
+
 backharddi-ng-kernel (0.16.1) lucid; urgency=low
 
   * Corregido error en el manejo de múltiples particiones cuando los nombres de backup colisionaban
