@@ -32,6 +32,13 @@ localudebs:
 	done
 	mkdir build/localudebs || true
 	$(MAKE) -C udebs DIST=$(SUITE) ARCH=$(ARCH)
+	@for c in $$(find $$(pwd) -wholename */source/debian/changelog ! -wholename */.pc/*); do \
+		dir=$${c%*/source/debian/changelog}; \
+		cd $$dir; \
+		echo " * Limpiando parches de $$(basename $$dir)"; \
+		quilt pop -a -f || true; \
+		echo; \
+	done
 	find udebs/apt -name \*.udeb | xargs -I'{}' cp '{}' build/localudebs
  
 .PHONY: clean-patches
@@ -54,9 +61,9 @@ minirt: localudebs
 	mv debian.orig debian
 	
 srelease:
-	dpkg-buildpackage -S -Iboot/minirt-$(KVERSION)-backharddi-ng.gz -Iboot/linux-$(KVERSION)-backharddi-ng -I.git -I*.udeb -I$(BUILDDIR) -I.project -I.gitignore -I.pydevproject -Iudebs/apt
+	dpkg-buildpackage -S -Iboot/minirt-$(KVERSION)-backharddi-ng.gz -Iboot/linux-$(KVERSION)-backharddi-ng -I.git -I*.udeb -I$(BUILDDIR) -I.project -I.gitignore -I.pydevproject -Iudebs/apt -Iudebs/pbuilder
 	fakeroot ./debian/rules clean
 	
 brelease:
-	dpkg-buildpackage -b -I.git -I*.udeb -I$(BUILDDIR) -I.project -I.gitignore -I.pydevproject -Iudebs/apt
+	dpkg-buildpackage -b -I.git -I*.udeb -I$(BUILDDIR) -I.project -I.gitignore -I.pydevproject -Iudebs/apt -Iudebs/pbuilder
 	fakeroot ./debian/rules clean

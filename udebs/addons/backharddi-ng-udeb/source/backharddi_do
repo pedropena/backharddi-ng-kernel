@@ -50,3 +50,7 @@ case "$medio" in
 		kill -SIGHUP 1
 	;;
 esac
+
+for var in $@; do
+        debconf-set ${var%%=*}
+done

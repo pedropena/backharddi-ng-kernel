@@ -36,8 +36,12 @@ define udebdir
 	$(shell changelog=$$(find -wholename *$(1)/source/debian/changelog); echo -n $${changelog%*/debian/changelog})
 endef
 
+define patchdir
+	$(shell changelog=$$(find -wholename *$(1)/source/debian/changelog); echo -n $${changelog%*/source/debian/changelog}/patches)
+endef
+
 define is_source_changed
-	$$(shell find $$(call udebdir,$(1)) -type f ! -name \.\*\.swp ! -wholename \*svn\* ! -wholename \*CVS\* 2>/dev/null)
+	$$(shell [ -d $$(call patchdir,$(1)) ] && find $$(call patchdir,$(1)) -type f ! -name \.\*\.swp ! -wholename \*svn\* ! -wholename \*CVS\* 2>/dev/null || find $$(call udebdir,$(1)) -type f ! -name \.\*\.swp ! -wholename \*svn\* ! -wholename \*CVS\* 2>/dev/null)
 endef
 
 define changes_file
