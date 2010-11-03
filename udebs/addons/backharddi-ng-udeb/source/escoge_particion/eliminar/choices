@@ -4,7 +4,7 @@
 
 if [ "$1" ]; then
 	db_get backharddi/medio
-	if [ "$RET" = cdrom ]; then
+	if [ "$RET" = cdrom -o "$RET" = net ]; then
 		printf "eliminar\t"
 	else
 		db_metaget backharddi/text/eliminar description

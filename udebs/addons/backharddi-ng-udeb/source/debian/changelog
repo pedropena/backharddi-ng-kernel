@@ -1,3 +1,10 @@
+backharddi-ng-udeb (0.16) lucid; urgency=low
+
+  * En modo net se puede crear directorios y generar copias de seguridad desde el
+    cliente. No se pueden eliminar directorios ni copias de seguridad.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 03 Nov 2010 20:00:49 +0100
+
 backharddi-ng-udeb (0.15) lucid; urgency=low
 
   * Limpieza de variables de debconf establecidas en backharddi_do
