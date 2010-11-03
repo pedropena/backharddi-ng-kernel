@@ -61,7 +61,7 @@ minirt: localudebs
 	mv debian.orig debian
 	
 srelease:
-	dpkg-buildpackage -S -Iboot/minirt-$(KVERSION)-backharddi-ng.gz -Iboot/linux-$(KVERSION)-backharddi-ng -I.git -I*.udeb -I$(BUILDDIR) -I.project -I.gitignore -I.pydevproject -Iudebs/apt -Iudebs/pbuilder
+	dpkg-buildpackage -S -I.git -I*.udeb -I$(BUILDDIR) -I.project -I.gitignore -I.pydevproject -Iudebs/apt -Iudebs/pbuilder
 	fakeroot ./debian/rules clean
 	
 brelease:
