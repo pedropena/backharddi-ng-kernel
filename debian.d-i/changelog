@@ -1,3 +1,9 @@
+backharddi-ng-kernel (0.18) lucid; urgency=low
+
+  * Actualización de backharddi-ng-udeb.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 03 Nov 2010 20:01:36 +0100
+
 backharddi-ng-kernel (0.17) lucid; urgency=low
 
   * Actualización de backharddi-ng-udeb.
