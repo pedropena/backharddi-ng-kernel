@@ -1,3 +1,9 @@
+backharddi-ng-udeb (0.15) lucid; urgency=low
+
+  * Limpieza de variables de debconf establecidas en backharddi_do
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 03 Nov 2010 18:26:20 +0100
+
 backharddi-ng-udeb (0.14) lucid; urgency=low
 
   * Implementación de manejo de múltiples particiones de backup
