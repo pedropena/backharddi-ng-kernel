@@ -1,0 +1,51 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+	
+	$(MAKE)
+
+	touch $@
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+
+	$(MAKE) clean
+
+	dh_clean
+
+install-indep:
+
+install-arch:
+	dh_testdir
+	dh_testroot
+	dh_clean -k -s
+
+	$(MAKE) install-network-console DESTDIR=$(CURDIR)/debian/network-console
+
+# Build architecture-independent files here.
+binary-indep: build install-indep
+
+# Build architecture-dependent files here.
+binary-arch: build install-arch
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs -s
+	dh_installdebconf -s
+	install debian/network-console.isinstallable debian/network-console/DEBIAN/isinstallable
+	dh_link -s
+	dh_strip -s
+	dh_compress -s
+	dh_fixperms -s
+	dh_installdeb -s
+	dh_gencontrol -s
+	dh_builddeb -s
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install

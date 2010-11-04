@@ -1,0 +1,16 @@
+# Installer generated configuration file
+
+Port 22
+Protocol 2
+HostKey /etc/ssh/ssh_host_rsa_key
+LoginGraceTime 600
+PermitRootLogin yes
+StrictModes yes
+PermitEmptyPasswords no
+PasswordAuthentication yes
+UsePrivilegeSeparation no
+
+X11Forwarding no
+PrintMotd yes
+TCPKeepAlive yes
+
