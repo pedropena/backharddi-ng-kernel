@@ -1,0 +1,82 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+TEMPLATE_ROOT=network-console
+
+KEY_FILE=/etc/ssh/ssh_host_rsa_key
+ARCHDETECT="$(archdetect)"
+
+if [ ! -f $KEY_FILE ]; then
+	db_progress START 0 1 $TEMPLATE_ROOT/key
+	ssh-keygen -b 2048 -t rsa -N '' -f $KEY_FILE -q
+	db_progress STOP
+fi
+
+db_get $TEMPLATE_ROOT/password
+INST_PWD="$RET"
+# FIXME: put all of this architecture-specific code into hooks -- tbm
+case "$ARCHDETECT" in
+	mipsel/cobalt)
+		if [ -z "$INST_PWD" ]; then
+			PASSWORD=$(pwgen -1 8)
+			DISPLAY_PWD="passwd: $PASSWORD"
+		fi
+	;;
+esac
+
+while [ -z "$PASSWORD" ]; do
+	db_input critical $TEMPLATE_ROOT/password || true
+	COMPARE_PW=''
+	db_input high $TEMPLATE_ROOT/password-again && COMPARE_PW=1 || true
+	db_go
+
+	db_get $TEMPLATE_ROOT/password
+	INST_PW="$RET"
+	if [ -z "$INST_PW" ]; then
+		db_input critical $TEMPLATE_ROOT/password-empty
+		continue
+	fi
+	db_get $TEMPLATE_ROOT/password-again
+	if [ "$COMPARE_PW" ] && [ "$INST_PW" != "$RET" ]; then
+		db_input critical $TEMPLATE_ROOT/password-mismatch
+		continue
+	fi
+	PASSWORD=$INST_PW
+
+	db_set $TEMPLATE_ROOT/password ""
+	db_set $TEMPLATE_ROOT/password-again ""
+done
+
+echo "installer:$(gen-crypt $PASSWORD):1:0:99999:7:::" >> /etc/shadow
+
+KEY_FINGERPRINT=$(ssh-keygen -l -f $KEY_FILE | cut -f2 -d ' ')
+
+/usr/sbin/sshd
+
+# Queue installation of ssh to make sure we can log in after reboot
+apt-install openssh-server || true
+
+IPADDR=$(ifconfig | grep 'inet addr:' | head -n 1 | \
+    sed 's/.*inet addr:\([0-9.]*\).*/\1/')
+db_subst $TEMPLATE_ROOT/start ip $IPADDR
+db_subst $TEMPLATE_ROOT/start fingerprint $KEY_FINGERPRINT
+case "$ARCHDETECT" in
+	arm*/ixp4xx)
+		modprobe ixp4xx-beeper || true
+		beep -e /dev/input/event0 -f 220 -l 500 -d 500 -r 3 || true
+	;;
+	mipsel/cobalt)
+		OLD_IFS="$IFS"
+		IFS=""
+		kill `pidof paneld` || true
+		paneld -d "SSH to installer" "@$IPADDR" \
+		    $(echo $KEY_FINGERPRINT | cut -d ":" -f  1-8 | sed 's/://g') \
+		    $(echo $KEY_FINGERPRINT | cut -d ":" -f 9-16 | sed 's/://g') \
+		    $DISPLAY_PWD
+		IFS="$OLD_IFS"
+	;;
+esac
+db_input critical $TEMPLATE_ROOT/start || true
+db_go

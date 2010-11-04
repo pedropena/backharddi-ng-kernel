@@ -1,0 +1,66 @@
+
+Template: debian-installer/network-console/title
+#  Item in the main menu to select this package
+Type: text
+_Description: Continue installation remotely using SSH
+
+Template: network-console/login
+Type: select
+# Note to translators : Please keep your translations of the choices
+# below a 65 columns limit (which means 65 characters 
+# in single-byte languages)
+__Choices: Start menu, Start shell
+Default: Start menu
+_Description: Network console option:
+ This is the network console for the Debian installer. From here, you
+ may start the Debian installer main menu, or execute an interactive
+ shell.
+ .
+ To return to this menu, you will need to log in again.
+
+Template: network-console/key
+Type: text
+_Description: Generating SSH host key
+
+Template: network-console/password
+Type: password
+_Description: Remote installation password:
+ You need to set a password for remote access to the Debian installer. A
+ malicious or unqualified user with access to the installer can have
+ disastrous results, so you should take care to choose a password that
+ is not easy to guess. It should not be a word found in the dictionary,
+ or a word that could be easily associated with you, like your middle
+ name.
+ .
+ This password is used only by the Debian installer, and will be
+ discarded once you finished the installation.
+
+Template: network-console/password-again
+Type: password
+_Description: Re-enter password to verify:
+ Please enter the same remote installation password again to verify that
+ you have typed it correctly.
+
+Template: network-console/password-empty
+Type: error
+_Description: Empty password
+ You entered an empty password, which is not allowed.
+ Please choose a non-empty password.
+
+Template: network-console/password-mismatch
+Type: error
+_Description: Password mismatch
+ The two passwords you entered were not the same. Please enter a password
+ again.
+
+Template: network-console/start
+Type: note
+_Description: Start SSH
+ To continue the installation, please use an SSH client to connect to the
+ IP address ${ip} and log in as the "installer" user.
+ .
+ The fingerprint of this SSH server's host key is:
+ ${fingerprint}
+ .
+ Please check this carefully against the fingerprint reported by
+ your SSH client.

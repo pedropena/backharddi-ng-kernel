@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+ARCHDETECT="$(archdetect)"
+
+case "$ARCHDETECT" in
+	mipsel/cobalt)
+		# Clear the LCD
+		kill `pidof paneld` || true
+		paneld -d
+	;;
+esac
+
+export TERM=linux
+export TERM_TYPE=network
+kill $(pidof parted_server)
+rm /var/run/parted_server.pid
+exec /sbin/debian-installer /bin/network-console-menu

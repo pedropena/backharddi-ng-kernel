@@ -279,6 +279,7 @@ for dev in *; do
 			case  "$(cat $id/detected_filesystem)" in
 				linux-swap)
 					dd if=$(cat $id/path) of=$imagenes/$id/img.00 count=8
+					[ "$medio" = net ] && success_gen=true || true
 				;;
 				*) 
 					case "$medio" in
