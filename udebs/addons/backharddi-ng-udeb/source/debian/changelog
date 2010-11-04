@@ -1,3 +1,9 @@
+backharddi-ng-udeb (0.17) lucid; urgency=low
+
+  * Posibilidad de subir solamente una partición swap en modo net
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 04 Nov 2010 19:01:54 +0100
+
 backharddi-ng-udeb (0.16) lucid; urgency=low
 
   * En modo net se puede crear directorios y generar copias de seguridad desde el
