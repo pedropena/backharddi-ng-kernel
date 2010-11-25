@@ -1,3 +1,9 @@
+backharddi-ng-udeb (0.18) lucid; urgency=low
+
+  * Arreglado cierre de lector óptico al terminar la restauración en algunos equipos.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 25 Nov 2010 12:32:32 +0100
+
 backharddi-ng-udeb (0.17) lucid; urgency=low
 
   * Posibilidad de subir solamente una partición swap en modo net
