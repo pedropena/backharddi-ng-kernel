@@ -46,6 +46,7 @@ for mp in $(mount | grep "on /target" | cut -d ' ' -f 3); do
 	fs=$(mount | grep "on $mp" | cut -d ' ' -f 5)
 	opt=$(mount | grep "on $mp" | cut -d ' ' -f 6 | tr -d "()" | sed "s/relatime//")
 	[ ! -f /proc/sys/dev/cdrom/autoeject ] || echo "1" > /proc/sys/dev/cdrom/autoeject
+	[ ! -f /proc/sys/dev/cdrom/autoclose ] || echo "0" > /proc/sys/dev/cdrom/autoclose
 	[ -z "$dev" ] || umount $mp
 	[ ! -f /proc/sys/dev/cdrom/autoeject ] || echo "0" > /proc/sys/dev/cdrom/autoeject
 	mps="$dev $fs $opt $mp
@@ -57,9 +58,9 @@ if db_go; then
 else
 	db_reset backharddi/modo
 	echo "$mps" | while read dev fs opt mp; do
-		[ ! -f /proc/sys/dev/cdrom/autoeject ] || echo "1" > /proc/sys/dev/cdrom/autoclose
+		[ ! -f /proc/sys/dev/cdrom/autoclose ] || echo "1" > /proc/sys/dev/cdrom/autoclose
 		[ -z "$dev" ] || mount -t $fs -o $opt $dev $mp
-		[ ! -f /proc/sys/dev/cdrom/autoeject ] || echo "0" > /proc/sys/dev/cdrom/autoclose
+		[ ! -f /proc/sys/dev/cdrom/autoclose ] || echo "0" > /proc/sys/dev/cdrom/autoclose
 	done
 	exit 10
 fi

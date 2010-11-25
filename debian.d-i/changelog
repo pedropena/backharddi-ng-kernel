@@ -1,3 +1,9 @@
+backharddi-ng-kernel (0.20) lucid; urgency=low
+
+  * Actualización de paquete udeb backharddi-ng-udeb
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 25 Nov 2010 12:33:18 +0100
+
 backharddi-ng-kernel (0.19) lucid; urgency=low
 
   * Añadido paquete udeb network-console           
