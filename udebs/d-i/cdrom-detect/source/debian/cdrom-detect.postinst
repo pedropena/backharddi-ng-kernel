@@ -32,6 +32,7 @@ do
 	mounted=0
 
 	devices="$(list-devices cd; list-devices maybe-usb-floppy)"
+	[ -z "$devices" -a -b /dev/sr0 ] && devices="/dev/sr0" || true
 	for device in $devices; do
 		if mount -t iso9660 -o ro,exec $device /target; then
 			log "CD-ROM mount succeeded: device=$device"
