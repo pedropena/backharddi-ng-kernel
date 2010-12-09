@@ -1,3 +1,9 @@
+cdrom-detect (1.20etch1backharddi-ng2) unstable; urgency=low
+
+  * Comprobación más exhaustiva de que realmente exite un medio óptico
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 09 Dec 2010 10:26:57 +0100
+
 cdrom-detect (1.20etch1backharddi-ng1) unstable; urgency=low
 
   * Primera versión de backharddi-ng
