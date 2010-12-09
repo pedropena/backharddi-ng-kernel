@@ -1,0 +1,13 @@
+#!/bin/sh
+
+dev=$1
+
+cd $dev
+
+if [ -f genmbr ]; then
+	printf "accion\tGenerar copia de seguridad del MBR (Master Boot Record)\n"
+elif [ -f restmbr ]; then
+	printf "accion\tRestaurar copia de seguridad del MBR (Master Boot Record)\n"
+else
+	printf "accion\tNo hacer nada\n"
+fi

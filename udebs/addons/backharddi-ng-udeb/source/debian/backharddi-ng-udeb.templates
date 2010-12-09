@@ -73,6 +73,12 @@ Choices: ${CHOICES}
 Description: ${ACCION}
  Ha seleccionado la partición #${PARTITION} de ${DEVICE}. ${OTHERINFO} 
 
+Template: backharddi/dispositivo_activo
+Type: select
+Choices: ${CHOICES}
+Description: ${ACCION}
+ Ha seleccionado el dispositivo ${DEVICE}.
+
 Template: backharddi/text/label
 Type: text
 Description: backharddi
@@ -80,6 +86,14 @@ Description: backharddi
 Template: backharddi/text/accion
 Type: text
 Description: Defina la acción a realizar sobre la partición:
+
+Template: backharddi/text/dispositivo_accion
+Type: text
+Description: Defina la acción a realizar sobre el dispositivo:
+
+Template: backharddi/text/dispositivo_finalizado
+Type: text
+Description: Se ha terminado de definir el dispositivo
 
 Template: backharddi/text/no_accion
 Type: text

@@ -53,4 +53,20 @@ if [ -n "$id" ]; then
 	    done
 	    ;;
     esac
+else
+	while true; do
+		set +e
+		device="$(humandev $(cat device))"
+		db_subst backharddi/dispositivo_activo DEVICE "$device"
+	    db_metaget backharddi/text/dispositivo_accion description
+	    accion="$RET"
+	    db_subst backharddi/dispositivo_activo ACCION "$accion"
+	    
+		ask_user /lib/backharddi/dispositivo_activo "$dev"
+		exitcode="$?"
+		if [ "$exitcode" -ge 100 ]; then
+		    break
+		fi
+		set -e
+	done
 fi

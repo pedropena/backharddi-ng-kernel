@@ -1,0 +1,30 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+task=$1
+dev=$2
+
+cd $dev
+
+estado=0
+[ -f genmbr ] && { rm genmbr; estado=1; }
+[ -f restmbr ] && { rm restmbr; estado=2; }
+
+while true; do
+	estado=$((estado+1))
+	[ $estado -eq 3 ] && estado=0
+	case $estado in
+		0) break;;
+		1) 
+		   db_get backharddi/medio
+		   medio="$RET"
+		   [ ! "$medio" = cdrom ] && { touch genmbr; break; }
+		;;
+		2)
+		   db_get backharddi/imagenes
+	       imagenes="$RET"
+		   [ -f $imagenes/${dev#$DEVICES/}/mbr ] && { touch restmbr; break; }
+		;;
+	esac
+done
