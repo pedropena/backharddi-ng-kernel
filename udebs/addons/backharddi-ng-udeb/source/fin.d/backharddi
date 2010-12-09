@@ -265,7 +265,7 @@ for dev in *; do
 			cat /proc/cmdline > $imagenes/cmdline
 		fi
 		dd if=$(cat $dev/device) of=$imagenes/$dev/mbr count=2048 bs=512
-		success_gen=true
+		[ "$medio" = net ] && success_gen=true || true
 	fi
 	[ ! -f $dev/restmbr ] || cat $imagenes/$dev/mbr > $(cat $dev/device)
 	for id in $dev/*; do
