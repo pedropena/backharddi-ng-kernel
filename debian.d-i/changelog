@@ -1,3 +1,9 @@
+backharddi-ng-kernel (0.22.1) lucid; urgency=low
+
+  * Corregido error en mensaje de finalización de configuración del dispositivo
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 09 Dec 2010 12:47:18 +0100
+
 backharddi-ng-kernel (0.22) lucid; urgency=low
 
   * Actualización de paquete udeb backharddi-ng-udeb

@@ -3,6 +3,6 @@
 . /usr/share/debconf/confmodule
 
 
-db_metaget partman/text/dispositivo_finalizado description
+db_metaget backharddi/text/dispositivo_finalizado description
 printf "finished\t$RET"
 
