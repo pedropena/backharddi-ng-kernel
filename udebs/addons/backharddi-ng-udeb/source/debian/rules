@@ -31,6 +31,7 @@ install: build
 	debian/install-rc valid_visuals.d backharddi
 	debian/install-rc visual.d backharddi
 	debian/install-rc particion_activa backharddi
+	debian/install-rc dispositivo_activo backharddi
 	debian/install-rc escoge_particion backharddi
 	debian/install-rc escoge_backup backharddi
 	debian/install-rc inicio.d backharddi
