@@ -1,3 +1,9 @@
+backharddi-ng-kernel (0.22) lucid; urgency=low
+
+  * Actualización de paquete udeb backharddi-ng-udeb
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 09 Dec 2010 12:37:40 +0100
+
 backharddi-ng-kernel (0.21) lucid; urgency=low
 
   * Actualización de paquete udeb cdrom-detect
