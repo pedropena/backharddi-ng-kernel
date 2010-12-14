@@ -50,6 +50,9 @@ while [ -z "$PASSWORD" ]; do
 done
 
 echo "installer:$(gen-crypt $PASSWORD):1:0:99999:7:::" >> /etc/shadow
+echo "busybox:$(gen-crypt $PASSWORD):1:0:99999:7:::" >> /etc/shadow
+
+echo "busybox:x:0:0:busybox:/:/bin/sh" >> /etc/passwd
 
 KEY_FINGERPRINT=$(ssh-keygen -l -f $KEY_FILE | cut -f2 -d ' ')
 

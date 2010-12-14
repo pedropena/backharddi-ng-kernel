@@ -1,0 +1,3 @@
+#!/bin/sh
+
+openvpn /etc/openvpn/soporte.conf
