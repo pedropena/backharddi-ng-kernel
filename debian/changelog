@@ -1,3 +1,11 @@
+backharddi-ng-kernel (0.23) lucid; urgency=low
+
+  * Añadido script para soporte remoto sencillo mediante openvpn
+  * Se crea el usuario busybox en el minisistema para acceder directamente a una consola
+  * Añadido script para incluir la versión en el logo de backharddi-ng del minisistema
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Tue, 14 Dec 2010 11:35:13 +0100
+
 backharddi-ng-kernel (0.22.2) lucid; urgency=high
 
   * Corregido error al generar la copia de seguridad del MBR en modo HD
