@@ -13,7 +13,16 @@ for dev in $DEVICES/*; do
 		if [ -f $id/rest ]; then
 #			open_dialog COMMIT
 #			close_dialog
-			sfdisk -f $(cat $imagenes/${dev##$DEVICES/}/device) < $imagenes/${dev##$DEVICES/}/pt
+			count=0
+			#Reintentamos volcar la tabla de particiones 5 veces
+			while sfdisk -f $(cat $imagenes/${dev##$DEVICES/}/device) < $imagenes/${dev##$DEVICES/}/pt 2>&1 | grep -q failed; do
+				if [ "$count" -lt 5 ]; then
+					sleep 1
+					count=$((count+1))
+					continue
+				fi
+				exit 1
+			done
 			udevsettle
 			break
 		fi
