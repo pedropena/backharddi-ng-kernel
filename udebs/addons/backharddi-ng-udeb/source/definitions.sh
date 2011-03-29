@@ -152,7 +152,7 @@ backup_ok() {
 		if [ x"$service_port" = x ]; then
 			service_port=4600
 		fi
-		wget -q -O - http://$server:$service_port/getBackupMetadata?backup=$(echo $1 | escape_string) | tar xz -C /target
+		wget -q -O - http://$server:$service_port/get_meta?backup=$(echo $1 | escape_string) | tar xz -C /target
 	fi
 	
 	cd $1
