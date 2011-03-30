@@ -59,7 +59,7 @@ case $modo in
 				if [ x"$service_port" = x ]; then
 					service_port=4600
 				fi
-				port="$(wget -q -O - http://$server:$service_port/get?backup=$(echo $backup | escape_string)\;minclients=$minclients)"
+				port="$(wget -q -O - http://$server:$service_port/get_imgs?backup=$(echo $backup | escape_string)\;minclients=$minclients)"
 				db_set backharddi/net/port "$port"
 			;;
 			cdrom)

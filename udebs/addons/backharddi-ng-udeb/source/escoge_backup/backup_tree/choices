@@ -51,7 +51,7 @@ if [ "$medio" = net ]; then
 	if [ x"$service_port" = x ]; then
 		service_port=4600
 	fi
-	backups=$(wget -q -O - http://$server:$service_port/listPartition?dir=$(echo $1 | escape_string))
+	backups=$(wget -q -O - http://$server:$service_port/list_partition?dir=$(echo $1 | escape_string))
 	for backup in $backups; do
 		backup_nombre=$(echo $backup | to_original_string)
 		printf "$1/$backup\t%s\n" "$backup_nombre"

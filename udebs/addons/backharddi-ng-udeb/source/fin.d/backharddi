@@ -148,7 +148,7 @@ concatena(){
 				monitor | udp-receiver --nokbd --stat-period 2000 --portbase "$port" 2>>/var/log/udp-receiver || error 51
 				wait
 			else
-				port="$(wget -q -O - http://$server:$service_port/get?backup=$(echo $imagenes/$id | escape_string))" || error 52
+				port="$(wget -q -O - http://$server:$service_port/get_imgs?backup=$(echo $imagenes/$id | escape_string))" || error 52
 				monitor | udp-receiver --stat-period 2000 --portbase "$port" <&$OLD_STDIN 2>>/var/log/udp-receiver || error 51
 				wait
 			fi
@@ -288,7 +288,7 @@ for dev in *; do
 				*) 
 					case "$medio" in
 						net)
-							port="$(wget -q -O - http://$server:$service_port/put?file=$(echo $imagenes/$id/img | escape_string))" || error 53
+							port="$(wget -q -O - http://$server:$service_port/put_img?file=$(echo $imagenes/$id/img | escape_string))" || error 53
 							monitor | gen_cmd | comprime | nc $server $port
 							success_gen=true
 						;;
@@ -322,6 +322,6 @@ for dev in *; do
 done
 
 if [ "$success_gen" = true ]; then
-	port="$(wget -q -O - http://$server:$service_port/putBackupMetadata)" || error 54
+	port="$(wget -q -O - http://$server:$service_port/put_meta)" || error 54
 	pack_backup_metadata $imagenes | nc $server $port || error 55
 fi
