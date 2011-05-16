@@ -1,3 +1,9 @@
+backharddi-ng-kernel (0.25.1) lucid; urgency=low
+
+  * Mejora de la fiabilidad al volcar tabla de particiones
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Mon, 16 May 2011 08:44:13 +0200
+
 backharddi-ng-kernel (0.25) lucid; urgency=low
 
   * Actualización de paquete backhaddi-ng-udeb
