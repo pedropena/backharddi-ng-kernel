@@ -2,6 +2,9 @@
 
 . /lib/backharddi/definitions.sh
 
+db_get backharddi/sti
+[ x"$RET" = xauto ] || exit 0
+
 DD_LOG=/var/log/ddrescue
 
 monitor_dd(){
