@@ -1,3 +1,12 @@
+backharddi-ng-kernel (0.26) lucid; urgency=low
+
+  * Deshabilitada la autodetección de las particiones que oculta la tarjeta de
+    backup de STI
+  * Para habilitar de nuevo la autodetección hay que pasar el parámetro
+    backharddi/sti=auto al núcleo
+
+ -- Pedro Peña Pérez <pedro@laptop>  Tue, 14 Jun 2011 19:44:49 +0200
+
 backharddi-ng-kernel (0.25.1) lucid; urgency=low
 
   * Mejora de la fiabilidad al volcar tabla de particiones
