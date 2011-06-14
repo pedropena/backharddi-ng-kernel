@@ -2,6 +2,9 @@
 
 . /lib/backharddi/definitions.sh
 
+db_get backharddi/sti
+[ x"$RET" = xauto ] || exit 0
+
 lspci -n | grep 0000:0059 || lspci -n | grep 0000:8000 || exit 0
 STI_SIG1="PILTpilt"
 STI_SIG2="X-MBR"

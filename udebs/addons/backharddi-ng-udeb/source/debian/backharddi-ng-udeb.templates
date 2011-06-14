@@ -52,6 +52,10 @@ Template: backharddi/imagenes
 Type: string
 Description: Directorio de imagenes
 
+Template: backharddi/sti
+Type: string
+Description: Activación de detección de tarjetas de backup de STI
+
 Template: backharddi/escoge_dir
 Type: select
 Choices: ${CHOICES}
