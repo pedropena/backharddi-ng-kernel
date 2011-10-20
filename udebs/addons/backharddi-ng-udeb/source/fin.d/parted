@@ -30,7 +30,7 @@ for dev in $DEVICES/*; do
 					count=$((count+1))
 					continue
 				fi
-				exit 1
+				error 20
 			done
 			udevsettle
 			break

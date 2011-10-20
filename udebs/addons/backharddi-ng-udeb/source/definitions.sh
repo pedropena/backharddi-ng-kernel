@@ -4,6 +4,8 @@
 BACKHARDDI=/var/lib/backharddi
 LOG=/var/log/backharddi
 REST_MBR_ERROR=/tmp/restore_mbr.error
+STOP_MONITOR=/tmp/stop_monitor
+ERROR=/tmp/backharddi_error
 
 to_secure_string() {
         tr " " "_" | sed "s/[^a-zA-Z0-9ñÑçÇáéíóúàèìòù\+\.,:;-]/_/g"
@@ -38,7 +40,7 @@ sendstatus_to_server(){
 	shift
 	shift
 	shift
-	wget -q -O /dev/null http://$server:$port/status?status=$status\;msg=$(echo $@ | escape_string)
+	wget -q -O /dev/null http://$server:$port/status?status=$status\;msg=$(echo $@ | escape_string) || error 71
 }
 
 update_partition() {
@@ -190,6 +192,34 @@ backup_ok() {
 		fi
 	done
 	[ $devices = true ]
+}
+
+error(){
+	touch $STOP_MONITOR
+	if [ ! -f $ERROR ]; then
+		echo -n $1 >$ERROR
+	else
+		count=1
+		while [ -f $ERROR$count ]; do
+			count=$((count+1))
+		done
+		echo -n $1 >$ERROR$count
+	fi
+}
+
+manage_error() {
+	case $1 in
+		20) error_rest_pt;;
+		21) error_gen_ntfsclone;;
+		22) error_gen_partclone;;
+		23) error_gen_dd;;
+		24) error_gen_partimage;;
+		25) error_rest_ntfsclone;;
+		26) error_rest_partclone;;
+		27) error_rest_dd;;
+		28) error_rest_partimage;;
+		*) error_undefined;;
+	esac
 }
 
 exec 2>>$LOG
