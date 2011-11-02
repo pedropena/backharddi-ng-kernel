@@ -1,3 +1,16 @@
+backharddi-ng-kernel (0.27) lucid; urgency=low
+
+  * Inicio del manejo de errores
+  * Adaptación de nombres de funciones del webservice al refactoring de la parte
+    servidora
+  * Subida la versión del núcleo a 3.0.0-1-486
+  * Mejora en la fiabilidad al enviar comandos a los clientes desde la interfaz web
+    de control
+  * Se reporta más información desde los clientes a la interfaz web de control
+  * Mejora en la fiabilidad de la función restore_mbr
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 02 Nov 2011 12:59:27 +0100
+
 backharddi-ng-kernel (0.26) lucid; urgency=low
 
   * Deshabilitada la autodetección de las particiones que oculta la tarjeta de
