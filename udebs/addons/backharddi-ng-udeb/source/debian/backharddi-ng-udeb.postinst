@@ -26,7 +26,7 @@ if [ "$medio" = net ]; then
 		fi
 		db_set backharddi/net/server "$server"
 		for i in 1 2 3; do
-			wget -q -O /dev/null http://$server:$service_port/listPartition && mount=true && break
+			wget -q -O /dev/null http://$server:$service_port/list_partition && mount=true && break
 		done
 		[ "$mount" = true ] && break
 		db_capb backup

@@ -72,6 +72,7 @@ if backup_ok $backup; then
 		exit 0
 	fi
 else
+	sendstatus Conectado Error
 	db_input critical backharddi/no_devices || true
 	db_go || exit
 	db_get backharddi/no_devices

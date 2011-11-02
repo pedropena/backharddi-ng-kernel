@@ -534,6 +534,7 @@ sources.list.udeb:
 	if [ "$(MIRROR)x" != "x" ]; then \
 		echo "deb $(MIRROR) $(SUITE) $(UDEB_COMPONENTS)"; \
 		echo "deb $(MIRROR2) $(SUITE2) $(UDEB_COMPONENTS)"; \
+		echo "deb $(MIRROR3) $(SUITE3) $(UDEB_COMPONENTS)"; \
 	else \
 		grep '^deb[ \t]' $(SYSTEM_SOURCES_LIST) \
 		|grep -v '^deb[ \t]cdrom:' \

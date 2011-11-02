@@ -8,4 +8,7 @@ db_get backharddi/modo
 db_get backharddi/imagenes
 imagenes="$RET"
 
-[ ! -f "$imagenes/postmaster" ] || . $imagenes/postmaster
+if [ -f "$imagenes/postmaster" ]; then
+	sendstatus Conectado Ejecutando script postmaster
+	. $imagenes/postmaster
+fi
