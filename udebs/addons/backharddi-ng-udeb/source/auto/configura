@@ -80,6 +80,7 @@ case $modo in
 			touch $DEVICES/cmosrest
 			exit 100
 		else
+			sendstatus Conectado Error
 			db_input critical backharddi/auto_no_devices
 			db_go || exit 0
 			[ "$medio" = cdrom ] && exit 10

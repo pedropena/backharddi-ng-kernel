@@ -25,10 +25,15 @@ fi
 
 debconf-set backharddi/net/service_port "$service_port"
 
+tty=6
+while grep -q vc\/$tty /etc/inittab; do
+	tty=$((tty+1))
+done
+
 case "$medio" in
 	net)
-		if ! grep -q vc\/7 /etc/inittab; then
-			echo "vc/7::respawn:/bin/backharddi-monitor $server $service_port" >> /etc/inittab
+		if ! grep -q vc\/$tty /etc/inittab; then
+			echo "vc/$tty::respawn:/bin/backharddi-monitor $server $service_port" >> /etc/inittab
 			kill -SIGHUP 1
 		fi
 	;;
@@ -39,14 +44,16 @@ kill $(pidof udpkg)
 kill $(pidof parted_server)
 rm /var/run/parted_server.pid
 kill $(pidof partimage)
+kill $(pidof ntfsclone)
+kill $(pidof partclone.ext4)
 kill $(pidof udp-receiver)
 kill $(pidof lzop)
 kill $(pidof lzma)
-/sbin/debian-installer /bin/backharddi </dev/tty7 >/dev/tty7 2>/dev/tty7
+/sbin/debian-installer /bin/backharddi </dev/tty$tty >/dev/tty$tty 2>/dev/tty$tty
 
 case "$medio" in
 	net)
-		sed -i "/vc\/7/d" /etc/inittab
+		sed -i "/vc\/$tty/d" /etc/inittab
 		kill -SIGHUP 1
 	;;
 esac

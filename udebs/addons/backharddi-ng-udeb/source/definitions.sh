@@ -43,6 +43,18 @@ sendstatus_to_server(){
 	wget -q -O /dev/null http://$server:$port/status?status=$status\;msg=$(echo $@ | escape_string) || error 71
 }
 
+open_dialog_with_no_error_handler(){
+    local exception_type info state frac type priority message options skipped
+    command="$1"
+    shift
+    open_infifo
+    write_line "$command" "${PWD##*/}" "$@"
+    open_outfifo
+    read_line exception_type
+    rm -f /var/lib/partman/progress_info
+    [ "$exception_type" = OK ]
+}
+
 update_partition() {
     local u
     cd $1
@@ -105,6 +117,7 @@ restore_mbr() {
 	close_dialog
 	[ -f $REST_MBR_ERROR ] && rm $REST_MBR_ERROR
 	sed -n "s/,//g; s/=/=\ /g; /start=/p" pt | while read dev x1 x2 start x3 size x4 ID x5; do
+	       device=$(cat device)
                num=${dev#$device}
                num=${num%:}
                if [ $num -gt 9 ]; then
@@ -114,17 +127,17 @@ restore_mbr() {
                        dev=${dev%:}
                fi
 		[ $ID = 0 ] && continue
-		device=$(cat device)
 		type=primary
 		[ $ID = 5 -o $ID = f ] && type=extended
 		[ $num -gt 4 ] && type=logical
 		id=$((start*512))-$(((start+size)*512-1))
 		fs=ext3
 		[ -f $id/detected_filesystem ] && fs=$(cat $id/detected_filesystem)
-		open_dialog NEW_PARTITION $type $fs $id real 0
+		touch $REST_MBR_ERROR
+		open_dialog_with_no_error_handler NEW_PARTITION $type $fs $id real 0 || break
 		read_line num newid newsize newtype fs path name
 		close_dialog
-		[ $id = $newid ] || { touch $REST_MBR_ERROR; break; } 
+		[ "x$id" = "x$newid" ] && rm $REST_MBR_ERROR || break
 	done
 	cd $2
 	[ ! -f $REST_MBR_ERROR ]
@@ -165,6 +178,7 @@ backup_ok() {
 		[ -f $dev/size ] || continue
 		[ -f $dev/model ] || continue
 		if [ ! -d $DEVICES/$dev ]; then
+			sendstatus Conectado Error
 			db_subst backharddi/no_dev dev $(device_name $dev)
 			db_input critical backharddi/no_dev || true
 			db_go || exit
@@ -174,6 +188,7 @@ backup_ok() {
 		if [ $backharddi_dev != no ]; then
 			backharddi="${backharddi_dev#$DEVICES/$dev/}"
 			if [ ! -d $dev/$backharddi ]; then
+				sendstatus Conectado Error
 				db_input critical backharddi/no_backharddi || true
 				db_go || true
 				exit
@@ -181,13 +196,14 @@ backup_ok() {
 		fi
 		if [ -f $dev/pt ]; then
 			if [ "$(cat $dev/size)" -gt "$(cat $DEVICES/$dev/size)" ]; then
+				sendstatus Conectado Error
 				db_subst backharddi/no_space dev $(device_name $dev)
 				db_subst backharddi/no_space dev2 $(device_name $DEVICES/$dev)
 				db_input critical backharddi/no_space || true
 				db_go || true
 				continue
 			fi
-			restore_mbr $dev $1
+			restore_mbr $dev $1 || { sendstatus Conectado Error; break; }
 			devices=true
 		fi
 	done

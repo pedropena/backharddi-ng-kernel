@@ -10,7 +10,7 @@ build: build-stamp
 build-stamp: 
 	dh_testdir
 	dh_testroot
-	$(MAKE) -C build build_cdrom_gtk UDEBS=$(UDEBS) KERNELVERSION=$(KVERSION) SUITE2=$(SUITE2) MIRROR2=$(MIRROR2)
+	$(MAKE) -C build build_cdrom_gtk UDEBS=$(UDEBS) KERNELVERSION=$(KVERSION) SUITE2=$(SUITE2) MIRROR2=$(MIRROR2) SUITE3=$(SUITE3) MIRROR3=$(MIRROR3)
 	cp build/dest/cdrom/gtk/vmlinuz linux-$(KVERSION)-backharddi-ng
 	cp build/dest/cdrom/gtk/initrd.gz minirt-$(KVERSION)-backharddi-ng.gz 
 	touch build-stamp
