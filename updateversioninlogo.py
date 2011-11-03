@@ -10,3 +10,10 @@ draw = ImageDraw.Draw(im)
 draw.text((11, 40), "Version: " + version, font=font, fill=fontcolor)
 del draw
 im.save('udebs/d-i/rootskel-gtk/source/src/usr/share/graphics/logo_debian.png')
+
+import fileinput
+
+for line in fileinput.FileInput("build/config/common", inplace=1):
+	if "LSB_DISTRIB_RELEASE=" in line:
+		line = 'LSB_DISTRIB_RELEASE="%s (build $(BUILD_DATE))' % version
+	print line[:-1]
