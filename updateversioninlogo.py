@@ -15,5 +15,5 @@ import fileinput
 
 for line in fileinput.FileInput("build/config/common", inplace=1):
 	if "LSB_DISTRIB_RELEASE=" in line:
-		line = 'LSB_DISTRIB_RELEASE="%s (build $(BUILD_DATE))' % version
+		line = 'LSB_DISTRIB_RELEASE="%s (build $(BUILD_DATE))" ' % version
 	print line[:-1]
