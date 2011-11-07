@@ -11,6 +11,17 @@ for dev in $DEVICES/*; do
 	for id in $dev/*; do
 		[ -d $id ] || continue
 		if [ -f $id/rest ]; then
+			umount_if_mounted
+		fi
+	done
+done
+
+for dev in $DEVICES/*; do
+	[ -d $dev ] || continue
+	cd $dev
+	for id in $dev/*; do
+		[ -d $id ] || continue
+		if [ -f $id/rest ]; then
 #			open_dialog COMMIT
 #			close_dialog
 			count=0
@@ -21,7 +32,7 @@ for dev in $DEVICES/*; do
 					count=$((count+1))
 					continue
 				fi
-				exit 1
+				error 20
 			done
 			count=0
 			while sfdisk -R $(cat $imagenes/${dev##$DEVICES/}/device) 2>&1 | grep -q busy; do

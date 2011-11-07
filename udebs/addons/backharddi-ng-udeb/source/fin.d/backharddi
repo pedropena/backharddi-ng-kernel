@@ -293,6 +293,7 @@ for dev in *; do
 							success_gen=true
 						;;
 						hd-media)
+							umount_if_mounted
 							monitor | gen_cmd | comprime | split  -b 680m -d - $imagenes/$id/img.
 						;;
 					esac				
@@ -312,9 +313,13 @@ for dev in *; do
 						mkswap $(cat $id/path)
 					fi
 				;;
-				*) concatena | descomprime | rest_cmd 
-				   wait
-				   [ ! -f $ERROR ] || exit $(cat $ERROR)
+				*) 
+					if [ "$medio" = "hd-media" ]; then
+						umount_if_mounted
+					fi 
+					concatena | descomprime | rest_cmd
+					wait
+					[ ! -f $ERROR ] || exit $(cat $ERROR)
 				;;
 			esac
 		fi

@@ -6,6 +6,11 @@ db_metaget backharddi/text/label description
 label="$RET"
 [ -z "$label" ] && label="backharddi"
 
+db_get backharddi/medio
+medio="$RET"
+
+backup="$2"
+
 for dev in $DEVICES/*; do
 	[ -d $dev ] || continue
 	cd $dev
@@ -13,9 +18,17 @@ for dev in $DEVICES/*; do
 		[ -d $id ] || continue
 		[ -f $id/detected_filesystem ] || continue
 		fs="$(cat $id/detected_filesystem)"
+		path="$(cat $id/path)"
 		case $fs in
 			free) continue ;;
-			ext3) [ "$(e2label $(cat $id/path))" = "$label" ] && continue;;
+			ext3) 
+            			if [ "$medio" = "hd-media" ]; then
+		                    backupdev=${backup#/target/}
+				    backupdev=${backupdev%/*}
+		                    backupdev=$(echo $backupdev | tr -d "+" | tr "_" "/")
+				    [ "$backupdev" = "$path" ] && [ "$fs" = "ext3" ] && [ "$(e2label $path)" = "$label" ] && continue
+		                fi
+			;;
 		esac
 		[ -f $id/rest ] && rm $id/rest
 		[ -f $id/dd ] && rm $id/dd
