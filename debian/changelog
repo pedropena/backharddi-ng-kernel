@@ -1,3 +1,13 @@
+backharddi-ng-kernel (0.28) lucid; urgency=low
+
+  * Se añade la posibilidad de generar o restaurar particiones de backup
+    cuando no son las que se van a usar.
+  * Corregido error por el cual se efectuaban operaciones de particionado 2
+    veces (dando un error después de la primera) al establecer una partición
+    de backup cuando no se encontraba ninguna.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Mon, 07 Nov 2011 12:09:14 +0100
+
 backharddi-ng-kernel (0.27) lucid; urgency=low
 
   * Inicio del manejo de errores
