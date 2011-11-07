@@ -19,6 +19,7 @@ no_backharddi() {
 		mp=${mp#*,}
 		case "$mp" in
 			/+_dev_*) [ "$(e2label $path)" = "$label" ] && return 0;;
+			/) [ "$(e2label $path)" = "$label" ] && return 0;;
 		esac
 	done
     

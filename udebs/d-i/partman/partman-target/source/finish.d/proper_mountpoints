@@ -17,6 +17,7 @@ no_root () {
     for mp in $mountpoints; do
 	case "$mp" in
 		/+_dev_*) return 0;;
+		/) return 0;;
 	esac
     done
     
