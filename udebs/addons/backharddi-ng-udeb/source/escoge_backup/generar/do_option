@@ -18,7 +18,7 @@ while true; do
 		db_set backharddi/imagenes "$backup"
 		update_metadata
 		while true; do
-			ask_user /lib/backharddi/escoge_particion
+			ask_user /lib/backharddi/escoge_particion $backup
 			exitcode="$?"
 			if [ "$exitcode" -ge 100 ]; then
 				break

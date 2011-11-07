@@ -6,6 +6,11 @@ db_metaget backharddi/text/label description
 label="$RET"
 [ -z "$label" ] && label="backharddi"
 
+db_get backharddi/medio
+medio="$RET"
+
+backup="$1"
+
 whitespace_hack=""
 for dev in $DEVICES/*; do
 	[ -d $dev ] || continue
@@ -21,7 +26,12 @@ for dev in $DEVICES/*; do
 	while { read num id size type fs path name; [ "$id" ]; }; do
 	    [ "$fs" = free ] && continue
 	    part=${dev}/$id
-	    [ "$fs" = "ext3" ] && [ "$(e2label $path)" = "$label" ] && continue
+            if [ "$medio" = "hd-media" ]; then
+                    backupdev=${backup#/target/}
+		    backupdev=${backupdev%/*}
+                    backupdev=$(echo $backupdev | tr -d "+" | tr "_" "/")
+		    [ "$backupdev" = "$path" ] && [ "$fs" = "ext3" ] && [ "$(e2label $path)" = "$label" ] && continue
+            fi
 	    [ -f $part/view ] || continue
 	    printf "%s//%s\t     %s\n" "$dev" "$id" $(cat $part/view)
 	done

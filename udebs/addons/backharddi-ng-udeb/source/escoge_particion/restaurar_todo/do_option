@@ -9,11 +9,32 @@ label="$RET"
 db_get backharddi/imagenes
 imagenes="$RET"
 
+db_get backharddi/medio
+medio="$RET"
+
+backup="$2"
+
 for dev in $DEVICES/*; do
 	[ -d $dev ] || continue
 	cd $dev
 	for id in *; do
 		[ -d $id ] || continue
+		fs="$(cat $id/detected_filesystem)"
+		path="$(cat $id/path)"
+		case $fs in
+			ext3) 
+            			if [ "$medio" = "hd-media" ]; then
+		                    backupdev=${backup#/target/}
+				    backupdev=${backupdev%/*}
+		                    backupdev=$(echo $backupdev | tr -d "+" | tr "_" "/")
+				    if [ "$backupdev" = "$path" -a "$fs" = "ext3" ]; then
+					if e2label $path &>/dev/null; then
+						[ "$(e2label $path)" = "$label" ] && continue
+					fi
+				    fi
+		                fi
+			;;
+		esac
 		[ -f $id/gen ] && rm $id/gen
 		[ -f $id/rest ] && rm $id/rest
 		[ -f $id/compresion ] && rm $id/compresion

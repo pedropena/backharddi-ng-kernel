@@ -55,6 +55,13 @@ open_dialog_with_no_error_handler(){
     [ "$exception_type" = OK ]
 }
 
+umount_if_mounted() {
+	if grep -q $(cat $id/path) /proc/mounts; then
+		mp=$(grep $(cat $id/path) /proc/mounts | cut -d ' ' -f 2)
+		umount $mp
+	fi
+}
+
 update_partition() {
     local u
     cd $1
