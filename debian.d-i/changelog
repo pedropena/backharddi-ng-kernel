@@ -1,3 +1,9 @@
+backharddi-ng-kernel (0.29) lucid; urgency=low
+
+  * Activado soporte para Serial ATA RAID (aka FakeRAID, BIOS Raid, ...) 
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Tue, 08 Nov 2011 11:04:39 +0100
+
 backharddi-ng-kernel (0.28) lucid; urgency=low
 
   * Se añade la posibilidad de generar o restaurar particiones de backup
