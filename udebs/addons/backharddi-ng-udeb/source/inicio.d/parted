@@ -18,6 +18,9 @@ if [ ! -f /var/run/parted_server.pid ]; then
     fi
     mkdir $DEVICES || true
     
+    modprobe dm-mod
+    dmraid -ay
+
     IFS="$NL"
     for partdev in $(parted_devices | 
 	    grep -v '^/dev/md' | 
