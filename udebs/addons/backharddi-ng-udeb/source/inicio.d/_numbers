@@ -1,5 +1,6 @@
 10 premaster
 30 parted
+50 sataraid_flag
 50 lvm
 60 sti
 70 update_partitions

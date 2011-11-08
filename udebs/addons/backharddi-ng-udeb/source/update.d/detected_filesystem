@@ -25,7 +25,12 @@ else
     close_dialog
     
     [ -d $id ] || mkdir $id
-    echo "$path" >$id/path
+    if [ -f sataraid ]; then
+        device=${dev##$DEVICES/}
+        echo "$(echo $device | tr "=" "/")""$num" >$id/path
+    else
+        echo "$path" >$id/path
+    fi
     if [ "$filesystem" = none ]; then
 	rm -f $id/detected_filesystem
     else
