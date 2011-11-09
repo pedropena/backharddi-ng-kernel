@@ -1,3 +1,12 @@
+backharddi-ng-kernel (0.30) lucid; urgency=low
+
+  * Se añade la posibilidad de etiquetar con nombres descriptivos a una o
+    varias particiones. De esta forma se podrán elegir de manera más sencilla
+    las operaciones a realizar cuando se detecten etiquetas en una copia de
+    seguridad.
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Wed, 09 Nov 2011 13:52:25 +0100
+
 backharddi-ng-kernel (0.29) lucid; urgency=low
 
   * Activado soporte para Serial ATA RAID (aka FakeRAID, BIOS Raid, ...) 

@@ -6,6 +6,6 @@ db_get backharddi/medio
 if [ "$RET" = cdrom ]; then
 	printf "nogenerar_todo\t"
 else
-	db_metaget backharddi/text/marcar_todo_generar description
+	db_metaget backharddi/text/generar_todo description
 	printf "generar_todo\t$RET"
 fi

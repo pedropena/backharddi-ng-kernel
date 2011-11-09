@@ -61,6 +61,11 @@ Type: select
 Choices: ${CHOICES}
 Description: Este es el listado de directorios disponibles. Seleccione uno para acceder a él o genere la copia de seguridad en el directorio actual:
 
+Template: backharddi/escoge_etiqueta
+Type: select
+Choices: ${CHOICES}
+Description: Sobre la copia de seguridad seleccionada se pueden realizar las siguientes acciones:
+
 Template: backharddi/escoge_backup
 Type: select
 Choices: ${CHOICES}
@@ -82,6 +87,10 @@ Type: select
 Choices: ${CHOICES}
 Description: ${ACCION}
  Ha seleccionado el dispositivo ${DEVICE}.
+
+Template: backharddi/etiqueta
+Type: string
+Description: Seleccione uno o varios nombres (separados por comas) para etiquetar ésta partición:
 
 Template: backharddi/text/label
 Type: text
@@ -170,13 +179,25 @@ Template: backharddi/text/restaurar
 Type: text
 Description: Restaurar
 
-Template: backharddi/text/generar_todo
+Template: backharddi/text/marcar_todo_generar
 Type: text
 Description: Marcar todo para generar copia de seguridad
 
-Template: backharddi/text/restaurar_todo
+Template: backharddi/text/marcar_todo_restaurar
 Type: text
 Description: Marcar todo para restaurar copia de seguridad
+
+Template: backharddi/text/generar_todo
+Type: text
+Description: Generar copia de seguridad de Todo
+
+Template: backharddi/text/restaurar_todo
+Type: text
+Description: Restaurar copia de seguridad de Todo
+
+Template: backharddi/text/seleccion_manual
+Type: text
+Description: Seleccionar manualmente las acciones a realizar
 
 Template: backharddi/backup_nombre
 Type: string

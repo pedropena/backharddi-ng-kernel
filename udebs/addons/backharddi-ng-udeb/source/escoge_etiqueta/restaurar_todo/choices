@@ -3,7 +3,7 @@
 . /usr/share/debconf/confmodule
 
 if [ "$1" ]; then
-	db_metaget backharddi/text/marcar_todo_restaurar description
+	db_metaget backharddi/text/restaurar_todo description
 	printf "restaurar_todo\t$RET"
 fi
 

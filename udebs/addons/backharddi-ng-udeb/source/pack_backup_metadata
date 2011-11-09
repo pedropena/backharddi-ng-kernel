@@ -5,7 +5,7 @@ SEP=***BACKHARDDINGPACK***
 for f in $(find $1 -type f); do
 	file=$(basename $f)
 	case $file in
-		cmdline|device|mbr|model|pt|size|visuals|bootable|compresion|detected_filesystem|img|path|view|visual_filesystem|visual_mountpoint|cmosdump|postmaster|premaster|sti|ntfsclone|partclone)
+		cmdline|device|mbr|model|pt|size|visuals|bootable|compresion|detected_filesystem|img|path|view|visual_filesystem|visual_mountpoint|cmosdump|postmaster|premaster|sti|ntfsclone|partclone|label)
 			echo -n $SEP
 			echo -n $f
 			echo -n $SEP
