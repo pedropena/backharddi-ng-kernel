@@ -1,0 +1,19 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+backup=$1
+
+while true; do
+	ask_user /lib/backharddi/escoge_particion $backup
+	exitcode="$?"
+	if [ "$exitcode" -ge 100 ]; then
+		break
+	fi
+done	
+
+if [ "$exitcode" -eq 100 ]; then                                                                                                                             
+        exit 100                                                                                                                                             
+else                                                                                                                                                         
+        exit 0                                                                                                                                               
+fi

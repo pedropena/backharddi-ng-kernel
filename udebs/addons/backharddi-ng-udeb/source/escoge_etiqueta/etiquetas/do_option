@@ -1,0 +1,73 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+db_metaget backharddi/text/label description
+label="$RET"
+[ -z "$label" ] && label="backharddi"
+
+db_get backharddi/medio
+medio="$RET"
+
+exec 2>/tmp/debug_etiquetas
+set -xv
+
+accion=${1%//*}
+label=${1#*//}
+backup="$2"
+
+OLDIFS=$IFS
+for dev in $DEVICES/*; do
+	[ -d $dev ] || continue
+	cd $dev
+	for id in *; do
+		[ -d $id ] || continue
+		label_file=$backup/${dev#$DEVICES/}/$id/label
+		[ -f $label_file ] || continue
+		encontrado="false"
+		IFS=','
+	        for l in $(cat $label_file); do
+        	        if [ "$(echo -n $l | sed 's/^ *//' | sed 's/ *$//' | to_secure_string)" = "$label" ]; then
+				encontrado="true"
+				break
+			fi
+		done
+		IFS=$OLDIFS
+		[ "$encontrado" = "true" ] || continue
+		fs="$(cat $id/detected_filesystem)"
+		path="$(cat $id/path)"
+		case $fs in
+			free) [ "$accion" = "rest" ] || continue ;;
+			ext3) 
+            			if [ "$medio" = "hd-media" ]; then
+		                    backupdev=${backup#/target/}
+				    backupdev=${backupdev%/*}
+		                    backupdev=$(echo $backupdev | tr -d "+" | tr "_" "/")
+				    if [ "$backupdev" = "$path" -a "$fs" = "ext3" ]; then
+					if e2label $path &>/dev/null; then
+						[ "$(e2label $path)" = "$label" ] && continue
+					fi
+				    fi
+		                fi
+			;;
+		esac
+		if [ "$accion" = "rest" ]; then
+			[ -f $id/gen ] && rm $id/gen
+			[ -f $id/rest ] && rm $id/rest
+			[ -f $id/compresion ] && rm $id/compresion
+			[ -f $backup/${dev#$DEVICES/}/$id/img ] && touch $id/rest
+		else
+			[ -f $id/rest ] && rm $id/rest
+			[ -f $id/dd ] && rm $id/dd
+			[ -f $id/partclone ] && rm $id/partclone
+			[ -f $id/ntfsclone ] && rm $id/ntfsclone
+			touch $id/gen
+			[ $fs != linux-swap ] && echo "lzo" > $id/compresion
+			[ $fs = ext4 ] && touch $id/partclone
+			[ $fs = ntfs ] && touch $id/ntfsclone
+		fi
+		update_partition $dev $id
+	done
+done
+
+exit 100

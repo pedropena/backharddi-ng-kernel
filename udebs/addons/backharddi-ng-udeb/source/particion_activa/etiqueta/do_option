@@ -1,0 +1,26 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+task=$1
+dev=$2
+id=$3
+
+cd $dev
+
+if [ -f $id/label ]; then
+	label=$(cat $id/label)
+else
+	label=''
+fi
+db_set backharddi/etiqueta "$label"
+db_input critical backharddi/etiqueta || true
+db_go || exit 1
+db_get backharddi/etiqueta
+if [ "$RET" ]; then
+	echo "$RET" >$id/label
+else
+	rm -f $id/label
+fi
+>$id/label_updated
+db_reset backharddi/etiqueta
