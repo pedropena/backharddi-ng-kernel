@@ -1,0 +1,8 @@
+#!/bin/sh
+
+. /usr/share/debconf/confmodule
+
+
+db_metaget backharddi/text/seleccion_manual description
+printf "manual\t$RET"
+

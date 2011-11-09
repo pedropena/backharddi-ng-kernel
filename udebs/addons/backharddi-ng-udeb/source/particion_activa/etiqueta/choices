@@ -1,0 +1,25 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+dev=$1
+id=$2
+
+cd $dev
+
+if [ -f $id/gen ]; then
+	if [ -f $id/label ]; then
+		printf "etiqueta\tEtiquetas: $(cat $id/label)\n"
+	else
+		db_get backharddi/imagenes
+		imagenes="$RET"
+		if [ -f $imagenes/${dev#$DEVICES/}/$id/label -a ! -f $id/label_updated ]; then
+			cp $imagenes/${dev#$DEVICES/}/$id/label $id/label
+			printf "etiqueta\tEtiquetas: $(cat $id/label)\n"
+		else
+			printf "etiqueta\tSin Etiqueta\n"
+		fi
+	fi
+else
+	[ -f $id/label ] && rm $id/label
+fi

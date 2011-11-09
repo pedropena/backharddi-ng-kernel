@@ -1,0 +1,27 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+backup="$1"
+label_files="$(find $backup -type f -name label)"
+labels=/tmp/labels
+
+>$labels
+OLDIFS=$IFS
+IFS=$NL
+for f in $label_files; do
+	IFS=','
+	for l in $(cat $f); do
+		label=$(echo -n $l | sed "s/^ *//" | sed "s/ *$//")
+		grep -q "$label" $labels || echo "$label" >> $labels
+	done
+	IFS=$NL
+done
+
+db_get backharddi/medio
+medio="$RET"
+for label in $(cat $labels); do
+	printf "rest//%s\t%s\n" "$(echo -n $label | to_secure_string)" "Restaurar únicamente copia de seguridad de $label"
+	[ "a$medio" = acdrom ] || printf "gen//%s\t%s\n" "$(echo -n $label | to_secure_string)" "Generar únicamente copia de seguridad de $label"
+done
+IFS=$OLDIFS

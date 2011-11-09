@@ -63,11 +63,13 @@ case $modo in
 				db_set backharddi/net/port "$port"
 			;;
 			cdrom)
-				db_input critical backharddi/cdrom/alert || true
-				db_go || exit 0
-				db_get backharddi/cdrom/alert
-				if [ "$RET" = false ]; then
-					exit 10
+				if [ $labels = 0 ]; then
+					db_input critical backharddi/cdrom/alert || true
+					db_go || exit 0
+					db_get backharddi/cdrom/alert
+					if [ "$RET" = false ]; then
+						exit 10
+					fi
 				fi
 			;;
 		esac
@@ -76,9 +78,22 @@ case $modo in
                         #Paramos parted server para que funcione el proceso en caso de RAID y LVM
 			#stop_parted_server
 			update_metadata
-			/lib/backharddi/escoge_particion/*restaurar_todo/do_option
-			touch $DEVICES/cmosrest
-			exit 100
+			labels=$(find $backup -type f -name label | wc -l)
+			if [ $labels = 0 ]; then
+				/lib/backharddi/escoge_particion/*restaurar_todo/do_option
+				touch $DEVICES/cmosrest
+				exit 100
+			else
+				while true; do
+					ask_user /lib/backharddi/escoge_etiqueta $backup
+					exitcode="$?"
+					if [ "$exitcode" -eq 100 ]; then
+						exit 100
+					else
+						break
+					fi
+				done	
+			fi
 		else
 			sendstatus Conectado Error
 			db_input critical backharddi/auto_no_devices

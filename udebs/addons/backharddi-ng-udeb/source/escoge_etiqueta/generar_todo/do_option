@@ -1,0 +1,5 @@
+#!/bin/sh
+
+/lib/backharddi/escoge_particion/*generar_todo/do_option
+
+exit 100

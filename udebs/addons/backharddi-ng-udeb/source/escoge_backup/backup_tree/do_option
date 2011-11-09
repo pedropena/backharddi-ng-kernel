@@ -11,13 +11,6 @@ is_dir(){
 	db_get backharddi/medio
 	medio="$RET"
 	if [ "$medio" = net ]; then
-#		db_get backharddi/net/server
-#		server="$RET"
-#		db_get backharddi/net/service_port
-#		service_port="$RET"
-#		if [ x"$service_port" = x ]; then
-#			service_port=4600
-#		fi
 		basename $backup | grep -q ^+
 		return $?
 	else
@@ -56,8 +49,13 @@ if backup_ok $backup; then
 	db_set backharddi/imagenes "$backup"
 	update_metadata
 	
+	labels=$(find $backup -type f -name label | wc -l)
 	while true; do
-		ask_user /lib/backharddi/escoge_particion $backup
+		if [ $labels -gt 0 ]; then
+			ask_user /lib/backharddi/escoge_etiqueta $backup
+		else
+			ask_user /lib/backharddi/escoge_particion $backup
+		fi
 		exitcode="$?"
 		if [ "$exitcode" -ge 100 ]; then
 			break
