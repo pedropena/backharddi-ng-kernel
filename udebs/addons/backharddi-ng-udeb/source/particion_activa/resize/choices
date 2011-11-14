@@ -1,0 +1,25 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+dev=$1
+id=$2
+
+cd $dev
+
+if [ -f $id/gen -o -f $id/rest ]; then
+	if [ -f $id/resize ]; then
+		printf "resize\tCambiar tamaño de la partición al $(cat $id/resize)%% del espacio libre\n"
+	else
+		db_get backharddi/imagenes
+		imagenes="$RET"
+		if [ -f $imagenes/${dev#$DEVICES/}/$id/resize -a ! -f $id/resize_updated ]; then
+			cp $imagenes/${dev#$DEVICES/}/$id/resize $id/resize
+			printf "resize\tCambiar tamaño de la partición al $(cat $id/resize)%% del espacio libre\n"
+		else
+			printf "resize\tNo cambiar tamaño de la partición\n"
+		fi
+	fi
+else
+	[ -f $id/resize ] && rm $id/resize
+fi

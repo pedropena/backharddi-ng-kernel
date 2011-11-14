@@ -1,0 +1,25 @@
+#!/bin/sh -e
+
+. /lib/backharddi/definitions.sh
+
+db_get backharddi/imagenes
+imagenes="$RET"
+cd $DEVICES
+
+for dev in *; do
+	[ -d $dev ] || continue
+	if [ -f $dev/genmbr ]; then
+		if [ ! -d $imagenes/$dev ]; then
+			mkdir -p $imagenes
+			cp -r $dev $imagenes
+			cat /proc/cmdline > $imagenes/cmdline
+		fi
+		dd if=$(cat $dev/device) of=$imagenes/$dev/mbr count=2048 bs=512
+	fi
+	[ ! -f $dev/restmbr ] || cat $imagenes/$dev/mbr > $(cat $dev/device)
+	for id in $dev/*; do
+		if [ -f $id/rest ]; then
+			[ -f $dev/sti -o ! -f $imagenes/$dev/mbr ] || cat $imagenes/$dev/mbr > $(cat $dev/device)
+		fi
+	done
+done

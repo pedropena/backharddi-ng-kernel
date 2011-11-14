@@ -88,6 +88,10 @@ Choices: ${CHOICES}
 Description: ${ACCION}
  Ha seleccionado el dispositivo ${DEVICE}.
 
+Template: backharddi/resize
+Type: string
+Description: Seleccione el porcentaje del espacio libre (de 0 a 100) para dedicar a ésta partición:
+
 Template: backharddi/etiqueta
 Type: string
 Description: Seleccione uno o varios nombres (separados por comas) para etiquetar ésta partición:
@@ -154,6 +158,10 @@ Description: Restaurando copia de seguridad de ${device}...\nTiempo transcurrido
 Template: backharddi/net/nota
 Type: text
 Description: Pulse una tecla cuando todos los equipos a restaurar muestren este mensaje
+
+Template: backharddi/progress/resizefs
+Type: text
+Description: Redimensionando sistema de archivos de ${device}...
 
 Template: backharddi/progress/t1sti
 Type: text

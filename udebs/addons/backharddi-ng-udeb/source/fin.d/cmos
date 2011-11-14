@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+. /lib/backharddi/definitions.sh
+
+db_get backharddi/imagenes
+imagenes="$RET"
+cd $DEVICES
+
+if [ -f cmosgen ]; then
+	[ -d $imagenes ] || mkdir -p $imagenes
+	cmospwd /d /w $imagenes/cmosdump
+fi
+
+[ -f cmosrest -a -f $imagenes/cmosdump ] && echo 2 | cmospwd /d /r $imagenes/cmosdump || true

@@ -1,4 +1,9 @@
+20 umount
 30 parted
-50 backharddi
+32 cmos
+35 mbr
+40 resize_parts
+50 filesystems
+55 resize_filesystems
 60 sti
 70 postmaster

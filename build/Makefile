@@ -282,20 +282,28 @@ $(STAMPS)tree-unpack-$(targetstring)-stamp: $(STAMPS)get_udebs-$(targetstring)-s
 	# Set up the basic files [u]dpkg needs.
 	mkdir -p $(DPKGDIR)/info
 	touch $(DPKGDIR)/status
+	mkdir -p $(TREE)/$(SUITE3)/var/lib/dpkg/info
+	touch $(TREE)/$(SUITE3)/var/lib/dpkg/status
 	# Create a tmp tree
 	mkdir -p $(TREE)/tmp
+	mkdir -p $(TREE)/$(SUITE3)
 	# Only dpkg needs this stuff, so it can be removed later.
 	mkdir -p $(DPKGDIR)/updates/
 	touch $(DPKGDIR)/available
+	mkdir -p $(TREE)/$(SUITE3)/var/lib/dpkg/updates/
+	touch $(TREE)/$(SUITE3)/var/lib/dpkg/available
 
 	# Unpack the udebs with dpkg. This command must run as root
 	# or fakeroot.
 	echo -n > $(TEMP)/diskusage.txt
 	set -e; \
-	oldsize=0; oldblocks=0; oldcount=0; for udeb in $(UDEBDIR)/*.udeb ; do \
+	oldsize=0; oldblocks=0; oldcount=0; for udeb in $(UDEBDIR)/*.udeb $(UDEBDIR)/$(SUITE3)/*.udeb; do \
 		if [ -f "$$udeb" ]; then \
 			pkg=`basename $$udeb` ; \
-			dpkg $(DPKG_UNPACK_OPTIONS) --log=/dev/null --root=$(TREE) --unpack $$udeb ; \
+			case $$udeb in \
+				$(UDEBDIR)/$(SUITE3)/*.udeb) dpkg $(DPKG_UNPACK_OPTIONS) --log=/dev/null --root=$(TREE)/$(SUITE3) --unpack $$udeb ;; \
+				$(UDEBDIR)/*.udeb) dpkg $(DPKG_UNPACK_OPTIONS) --log=/dev/null --root=$(TREE) --unpack $$udeb ;; \
+			esac; \
 			newsize=`du -bs $(TREE) | awk '{print $$1}'` ; \
 			newblocks=`du -s $(TREE) | awk '{print $$1}'` ; \
 			newcount=`find $(TREE) -type f | wc -l | awk '{print $$1}'` ; \
@@ -443,7 +451,7 @@ ifndef ONLY_KLIBC
 	-cp -a `find $(TREE)/lib -name '*.so.*'` $(TEMP)/udeblibs
 	mkdir -p $(TREE)/lib
 	$(MKLIBS) -L $(TREE)/usr/lib -L $(TEMP)/udeblibs -v -d $(TREE)/lib --root=$(TREE) \
-		`find $(TEMP) -type f -a \( -perm +0111 -o -name '*.so' -o -name '*.so.*' \) | grep -v udeblibs`
+		`find $(TEMP) -type f -a \( -perm +0111 -o -name '*.so' -o -name '*.so.*' \) | grep -v udeblibs | grep -v $(TREE)/$(SUITE3)`
 	rm -rf $(TEMP)/udeblibs
 endif
 
@@ -498,6 +506,7 @@ endif
 		fi; \
 		rm $$file; \
 	done
+	rm $(TREE)/$(SUITE3)/var -rf
 
 	# Collect the used UTF-8 strings, to know which glyphs to include in
 	# the font.
@@ -524,6 +533,10 @@ $(STAMPS)get_udebs-$(targetstring)-stamp: sources.list.udeb
 	dh_testroot
 	@rm -f $@
 	get-packages udeb $(UDEBS)
+	mv sources.list.udeb sources.list.udeb.orig
+	echo "deb $(MIRROR3) $(SUITE3) $(UDEB_COMPONENTS)" > sources.list.udeb
+	UDEBDIR=$(UDEBDIR)/$(SUITE3) get-packages udeb $(SUITE3_UDEBS)
+	mv sources.list.udeb.orig sources.list.udeb
 	@touch $@
 
 # Auto-generate a sources.list.type

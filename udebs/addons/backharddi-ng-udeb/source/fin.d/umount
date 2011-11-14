@@ -1,0 +1,14 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+for dev in $DEVICES/*; do
+	[ -d $dev ] || continue
+	cd $dev
+	for id in $dev/*; do
+		[ -d $id ] || continue
+		if [ -f $id/rest ]; then
+			umount_if_mounted
+		fi
+	done
+done
