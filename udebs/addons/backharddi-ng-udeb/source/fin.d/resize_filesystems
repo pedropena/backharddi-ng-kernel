@@ -1,0 +1,61 @@
+#!/bin/sh -e
+
+if [ "$1" != "debug" ]; then
+	. /lib/backharddi/definitions.sh
+
+	db_get backharddi/imagenes
+	imagenes="$RET"
+else
+	DEVICES=/test
+fi
+
+cd $DEVICES
+for dev in *; do
+	cd $DEVICES
+	[ -d $dev ] || continue
+	cd $dev
+	devpath=$(cat device)
+	for id in $(ls | sort -n); do
+		[ -d $id ] || continue
+		if [ -f $id/rest ]; then
+			[ -f $imagenes/$dev/$id/resize -o -f $id/resize ] || continue
+			[ -f $imagenes/$dev/$id/detected_filesystem ] && fs=$(cat $imagenes/$dev/$id/detected_filesystem) || continue
+			partpath="$(cat $id/path)"
+			num=${partpath#$devpath}
+			db_progress START 0 2 debian-installer/backharddi-udeb/title
+			db_subst backharddi/progress/resizefs device $(humandev $partpath)
+			db_progress INFO backharddi/progress/resizefs
+			case $fs in
+				ext*)
+					e2fsck -p -f "$partpath"
+					db_progress SET 1
+					resize2fs "$partpath"
+				;;
+				ntfs)
+					echo y | ntfsresize -f "$partpath"
+				;;
+				*)
+					partinfo=$(parted2.3 -s $devpath u B p | grep ^\ $num\ | tail -n 1 | sed "s/ */ /g")
+					start=$(echo $partinfo | cut -d " " -f 2)
+					end=$(echo $partinfo | cut -d " " -f 3)
+					parted2.3 -s $devpath resize $num $start $end
+					update-dev
+#					parted_server
+#					open_dialog OPEN $devpath
+#					read_line response
+#					close_dialog
+#					open_dialog GET_RESIZE_RANGE $id
+#					read_line minsize cursize maxsize
+#					close_dialog
+#				        name_progress_bar partman-partitioning/progress_resizing
+#				        open_dialog RESIZE_PARTITION $id $maxsize
+#				        read_line newid
+#				        close_dialog
+#					stop_parted_server
+				;;
+			esac
+			db_progress SET 2
+			db_progress STOP
+		fi
+	done
+done

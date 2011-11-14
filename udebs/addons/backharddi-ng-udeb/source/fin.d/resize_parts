@@ -1,0 +1,144 @@
+#!/bin/sh
+
+if [ "$1" != "debug" ]; then
+	. /lib/backharddi/definitions.sh
+
+	db_get backharddi/imagenes
+	imagenes="$RET"
+else
+	DEVICES=/test
+fi
+
+ALIGN=$((2**20))
+
+locate_last_freespace() {
+	freespace=$(parted2.3 -s $devpath u B p free | grep Free | tail -n 1 | sed "s/ */ /g")
+	freespace_size=$(echo $freespace | cut -d " " -f 3 | tr -d "B")
+}
+
+delete_extended_if_no_logicals() {
+	local num
+	if parted2.3 -s $devpath p | grep -q extended; then
+		num=$(parted2.3 -s $devpath p | grep extended |tail -n 1 | sed "s/ */ /g" | cut -d " " -f 2)
+		echo "eliminando particion extendida"
+		parted2.3 -s $devpath rm $num >&2
+	fi
+}
+
+del_next_parts() {
+	local devpath partpath id start end num
+	devpath=$(cat device)
+	for id in $(ls | sort -n); do
+	        [ -d $id ] || continue
+		[ -f $id/path ] || continue
+                start=${id%-*}
+                end=${id#*-}
+		partpath=$(cat $id/path)
+		num=${partpath#$devpath}
+		if [ "$start" -ge "$1" ]; then
+			echo "eliminando $partpath"
+			parted2.3 -s $devpath rm $num >&2
+		fi
+	done
+	delete_extended_if_no_logicals
+}
+
+create_max_extended_part() {
+	freespace_start=$(parted2.3 -s $devpath u B p free | grep Free | tail -n 1 | sed "s/ */ /g" | cut -d " " -f 2 | tr -d "B")
+	echo "creando particion extendida id $((freespace_start))"
+	parted2.3 -s $devpath u B mkpart extended $((freespace_start))B 100% >&2
+}
+
+create_part() {
+	local freespace_start size
+	size=$1
+	freespace_start=$(parted2.3 -s $devpath u B p free | grep Free | tail -n 1 | sed "s/ */ /g" | cut -d " " -f 2 | tr -d "B")
+	echo -n "creando particion $num id $((freespace_start))-$((freespace_start+size-1)) $start-$end $size "
+	while true; do
+#		echo -n "ejecutando: parted2.3 -s $devpath u B mkpart $type $fs $((freespace_start))B $((freespace_start+size-1))B "	
+		result=$(parted2.3 -s $devpath u B mkpart $type $fs $((freespace_start))B $((freespace_start+size-1))B)
+		if [ -n "$result" ]; then
+			if echo "$result" | grep -q "not properly aligned for best performance"; then
+#				echo "Subiendo inicio..."
+				freespace_start=$((freespace_start+512))
+				freespace_start=$(((freespace_start/ALIGN+1)*ALIGN))
+				parted2.3 -s $devpath rm $num >&2
+				continue
+			fi
+			if echo "$result" | grep -q "The closest location we can manage is"; then
+				echo -n "Ajustando inicio... "
+				freespace_start=$(echo "$result" | grep "The closest location we can manage is" | cut -d " " -f 8 | tr -d "B")
+				continue
+			fi
+			if echo "$result" | grep -q "is outside of the device"; then
+				$0 freespace $((freespace_size-ALIGN))
+				exit $?
+			fi
+			echo "Error: $result"
+			break
+		else
+			echo "ok."
+			break
+		fi
+	done
+}
+
+cd $DEVICES
+for dev in *; do
+	cd $DEVICES
+	[ -d $dev ] || continue
+	cd $dev
+	resize_parts=0
+	for id in *; do
+		[ -d $id ] || continue
+		if [ -f $id/rest ]; then
+			[ -f $imagenes/$dev/$id/resize -o -f $id/resize ] && { resize_parts=1; break; }
+		fi
+	done
+	[ "$resize_parts" = 1 ] || continue
+	devpath=$(cat device)
+	[ "$1" = "freespace" ] && freespace_size=$2 || locate_last_freespace
+	deleted_parts=0
+	offset=0
+	for id in $(ls | sort -n); do
+		[ -d $id ] || continue
+		[ -f $id/path ] || continue 
+		start=${id%-*}
+		end=${id#*-}
+		size=$((end-start+1))
+		partpath=$(cat $id/path)
+		num=${partpath#$devpath}
+		[ -f $imagenes/$dev/$id/detected_filesystem ] && fs=$(cat $imagenes/$dev/$id/detected_filesystem)
+		if [ $num -ge 5 ]; then
+			type=logical
+		else
+			type=primary
+		fi
+		if [ "$deleted_parts" = 0 ]; then
+			[ -f $id/rest ] || continue
+			[ -f $id/resize -o -f $imagenes/$dev/$id/resize ] || continue
+			del_next_parts $start
+			deleted_parts=1
+			if [ $num = 5 ]; then
+				create_max_extended_part
+			fi
+			[ -f $id/resize ] && percent=$(cat $id/resize) || percent=$(cat $imagenes/$dev/$id/resize)
+			extra_space=$((freespace_size*percent/100))
+			create_part $(((size+extra_space)))
+			offset=$((offset+extra_space))
+		elif [ -f $id/rest ] && [ -f $id/resize -o -f $imagenes/$dev/$id/resize ]; then
+			if [ $num = 5 ]; then
+				create_max_extended_part
+			fi
+			[ -f $id/resize ] && percent=$(cat $id/resize) || percent=$(cat $imagenes/$dev/$id/resize)
+                        extra_space=$((freespace_size*percent/100))
+                        create_part $(((size+extra_space)))
+                        offset=$((offset+extra_space))
+		else
+			if [ $num = 5 ]; then
+				create_max_extended_part
+			fi
+			create_part $size
+		fi
+	done
+done

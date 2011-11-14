@@ -1,3 +1,12 @@
+backharddi-ng-kernel (0.31) lucid; urgency=low
+
+  * Añadido parted versión 2.3
+  * Posibilidad de redimensionar particiones al alza seleccionando el
+    porcentaje de espacio libre a usar por partición
+  * Refactoring de directorio fin.d de backharddi-ng-udeb
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Mon, 14 Nov 2011 19:43:09 +0100
+
 backharddi-ng-kernel (0.30) lucid; urgency=low
 
   * Se añade la posibilidad de etiquetar con nombres descriptivos a una o

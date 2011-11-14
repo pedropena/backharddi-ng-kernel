@@ -242,26 +242,9 @@ esac
 [ -f $STOP_MONITOR ] && rm $STOP_MONITOR
 [ -f $ERROR ] && rm $ERROR
 
-if [ -f cmosgen ]; then
-	[ -d $imagenes ] || mkdir -p $imagenes
-	cmospwd /d /w $imagenes/cmosdump
-fi
-
-[ -f cmosrest -a -f $imagenes/cmosdump ] && echo 2 | cmospwd /d /r $imagenes/cmosdump || true
-
 success_gen=false
 for dev in *; do
 	[ -d $dev ] || continue
-	if [ -f $dev/genmbr ]; then
-		if [ ! -d $imagenes/$dev ]; then
-			mkdir -p $imagenes
-			cp -r $dev $imagenes
-			cat /proc/cmdline > $imagenes/cmdline
-		fi
-		dd if=$(cat $dev/device) of=$imagenes/$dev/mbr count=2048 bs=512
-		[ "$medio" = net ] && success_gen=true || true
-	fi
-	[ ! -f $dev/restmbr ] || cat $imagenes/$dev/mbr > $(cat $dev/device)
 	for id in $dev/*; do
 		[ -d $id ] || continue
 		[ -f $PARTIMAGE_STATS ] && rm $PARTIMAGE_STATS
@@ -302,7 +285,6 @@ for dev in *; do
 				;;
 			esac
 		elif [ -f $id/rest ]; then
-			[ -f $dev/sti -o ! -f $imagenes/$dev/mbr ] || cat $imagenes/$dev/mbr > $(cat $dev/device)
 			accion=rest
 			[ -b $(cat $id/path) ]
 			case  "$(cat $imagenes/$id/detected_filesystem)" in

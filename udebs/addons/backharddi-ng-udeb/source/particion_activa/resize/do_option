@@ -1,0 +1,30 @@
+#!/bin/sh
+
+. /lib/backharddi/definitions.sh
+
+task=$1
+dev=$2
+id=$3
+
+cd $dev
+
+if [ -f $id/resize ]; then
+	resize="$(cat $id/resize)%"
+else
+	resize='0%'
+fi
+while true; do
+	db_set backharddi/resize "$resize"
+	db_input critical backharddi/resize || true
+	db_go || exit 1
+	db_get backharddi/resize
+	if [ "$RET" ]; then
+		percent="$(echo $RET | tr -d " " | tr -d "%")"
+		[ "$percent" -gt 100 ] && continue || echo "$percent" >$id/resize
+	else
+		rm -f $id/resize
+	fi
+	break
+done
+>$id/resize_updated
+db_reset backharddi/resize

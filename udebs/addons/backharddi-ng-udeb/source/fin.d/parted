@@ -11,17 +11,6 @@ for dev in $DEVICES/*; do
 	for id in $dev/*; do
 		[ -d $id ] || continue
 		if [ -f $id/rest ]; then
-			umount_if_mounted
-		fi
-	done
-done
-
-for dev in $DEVICES/*; do
-	[ -d $dev ] || continue
-	cd $dev
-	for id in $dev/*; do
-		[ -d $id ] || continue
-		if [ -f $id/rest ]; then
 #			open_dialog COMMIT
 #			close_dialog
 			count=0
@@ -43,7 +32,7 @@ for dev in $DEVICES/*; do
 				fi
 				error 20
 			done
-			udevsettle
+			update-dev
 			[ ! -f sataraid ] || { dmraid -an; dmraid -ay; }
 			break
 		fi
