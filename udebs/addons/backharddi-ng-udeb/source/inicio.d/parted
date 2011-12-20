@@ -19,7 +19,7 @@ if [ ! -f /var/run/parted_server.pid ]; then
     mkdir $DEVICES || true
     
     modprobe dm-mod
-    dmraid -ay
+    dmraid1.0 -ay
 
     IFS="$NL"
     for partdev in $(parted_devices | 

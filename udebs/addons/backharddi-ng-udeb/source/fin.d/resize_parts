@@ -141,4 +141,5 @@ for dev in *; do
 			create_part $size
 		fi
 	done
+	[ ! -f sataraid ] || { dmraid1.0 -an; dmraid1.0 -ay; }
 done

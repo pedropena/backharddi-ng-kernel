@@ -27,7 +27,6 @@ install: build
 	dh_testdir
 	dh_testroot
 	dh_clean -k
-	dh_install fuse.ko lib/modules/3.0.0-1-486/kernel/fs/fuse
 	debian/install-rc update.d backharddi
 	debian/install-rc valid_visuals.d backharddi
 	debian/install-rc visual.d backharddi
@@ -48,7 +47,7 @@ install: build
 	dh_install stidump bin
 	dh_install cmospwd bin
 	dh_install dd_rescue bin
-	dh_install parted2.3 sbin
+	dh_install parted2.3 dmraid1.0 sbin
 	dh_install split usr/bin
 	rm -rf `find debian/backharddi-udeb -name CVS`
 	rm -rf `find debian/backharddi-udeb -name .svn`

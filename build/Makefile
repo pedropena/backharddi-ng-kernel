@@ -490,6 +490,8 @@ ifdef DROP_LANG
 	done
 endif
 
+	cp -rv kernel-modules/* $(TREE)
+
 	# Strip all kernel modules, just in case they haven't already been
 	set -e; \
 	for module in `find $(TREE)/lib/modules/ -name '*.o' -or -name '*.ko'`; do \
@@ -521,6 +523,7 @@ endif
 	# Remove extra udebs now that we're done with them.
 	rm -rf $(EXTRAUDEBSDIR)
 
+	rm $(TREE)/usr/share/man $(TREE)/usr/include -rf
 	# Tree target ends here. Whew!
 	@touch $@
 

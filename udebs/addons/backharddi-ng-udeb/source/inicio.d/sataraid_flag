@@ -7,7 +7,7 @@ for dev in /var/lib/partman/devices/*; do
 	cd $dev
 
 	[ -f device ] || continue
-	for frdisk in $(dmraid -s -c | grep -v "No RAID disks"); do
+	for frdisk in $(dmraid1.0 -s -c | grep -v "No RAID disks"); do
 		case $(cat device) in
 		    /dev/mapper/$frdisk)
 			>sataraid

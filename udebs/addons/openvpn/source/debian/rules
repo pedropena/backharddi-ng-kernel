@@ -69,7 +69,6 @@ install: build
 	$(MAKE) install-exec prefix=$(CURDIR)/debian/openvpn/usr
 	dh_install soporte.conf etc/openvpn
 	dh_install soporte-remoto bin
-	dh_install tun.ko lib/modules/3.0.0-1-486/kernel/drivers/net
 #	install -m 755 sample-scripts/verify-cn $(CURDIR)/debian/openvpn/usr/share/openvpn
 #	install -m 755 debian/openvpn.if-up.d $(CURDIR)/debian/openvpn/etc/network/if-up.d/openvpn
 #	install -m 755 debian/openvpn.if-down.d $(CURDIR)/debian/openvpn/etc/network/if-down.d/openvpn
