@@ -2,14 +2,17 @@
 
 # This script sets the sataraid flag for devices that are recognized by dmraid
 
+. /lib/backharddi/definitions.sh
+
 for dev in /var/lib/partman/devices/*; do
 	[ -d "$dev" ] || continue
 	cd $dev
 
 	[ -f device ] || continue
 	for frdisk in $(dmraid1.0 -s -c | grep -v "No RAID disks"); do
+		normalized_frdisk=$(normalize_dmraid_name $frdisk)
 		case $(cat device) in
-		    /dev/mapper/$frdisk)
+		    /dev/mapper/$normalized_frdisk)
 			>sataraid
 			break
 			;;

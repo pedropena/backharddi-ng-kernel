@@ -6,6 +6,7 @@ LOG=/var/log/backharddi
 REST_MBR_ERROR=/tmp/restore_mbr.error
 STOP_MONITOR=/tmp/stop_monitor
 ERROR=/tmp/backharddi_error
+DMRAID_MAP=/tmp/dmraid_map
 
 to_secure_string() {
         tr " " "_" | sed "s/[^a-zA-Z0-9ñÑçÇáéíóúàèìòù\+\.,:;-]/_/g"
@@ -41,6 +42,36 @@ sendstatus_to_server(){
 	shift
 	shift
 	wget -q -O /dev/null http://$server:$port/status?status=$status\;msg=$(echo $@ | escape_string) || error 71
+}
+
+normalize_dmraid_name(){
+	if grep -q $1 $DMRAID_MAP; then
+		grep $1 $DMRAID_MAP | cut -d " " -f 2
+		return
+	fi
+	for n in a b c d e f; do
+		if [ ! -b /dev/mapper/fake_raid$n ]; then
+			echo "$1 fake_raid$n" >> $DMRAID_MAP
+			echo "fake_raid$n"
+			break
+		fi
+	done
+}
+
+activate_dmraids(){
+	modprobe dm-mod
+	dmraid1.0 -ay -p
+	rm $DMRAID_MAP
+	for frdisk in $(dmraid1.0 -s -c | grep -v "No RAID disks"); do
+		normalized_frdisk=$(normalize_dmraid_name $frdisk)
+		dmsetup rename $frdisk $normalized_frdisk
+		kpartx -a /dev/mapper/$normalized_frdisk;
+	done
+}
+
+refresh_dmraid(){
+	kpartx -d $1;
+	kpartx -a $1;
 }
 
 open_dialog_with_no_error_handler(){

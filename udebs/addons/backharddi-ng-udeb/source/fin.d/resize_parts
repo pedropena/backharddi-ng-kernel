@@ -60,10 +60,12 @@ create_part() {
 		if [ -n "$result" ]; then
 			if echo "$result" | grep -q "not properly aligned for best performance"; then
 #				echo "Subiendo inicio..."
-				freespace_start=$((freespace_start+512))
-				freespace_start=$(((freespace_start/ALIGN+1)*ALIGN))
-				parted2.3 -s $devpath rm $num >&2
-				continue
+				if [ "$deleted_parts" = 1 ]; then
+					freespace_start=$((freespace_start+512))
+					freespace_start=$(((freespace_start/ALIGN+1)*ALIGN))
+					parted2.3 -s $devpath rm $num >&2
+					continue
+				fi
 			fi
 			if echo "$result" | grep -q "The closest location we can manage is"; then
 				echo -n "Ajustando inicio... "
@@ -74,13 +76,9 @@ create_part() {
 				$0 freespace $((freespace_size-ALIGN))
 				exit $?
 			fi
-			echo "Error: $result"
-			break
-		else
-			[ "x$bootable" = "xyes" ] && parted2.3 -s $devpath toggle $num boot >&2 || true
-			echo "ok."
-			break
 		fi
+		[ "x$bootable" = "xyes" ] && parted2.3 -s $devpath toggle $num boot >&2 || true
+		break
 	done
 }
 
@@ -120,13 +118,13 @@ for dev in *; do
 			[ -f $id/rest ] || continue
 			[ -f $id/resize -o -f $imagenes/$dev/$id/resize ] || continue
 			del_next_parts $start
-			deleted_parts=1
 			if [ $num = 5 ]; then
 				create_max_extended_part
 			fi
 			[ -f $id/resize ] && percent=$(cat $id/resize) || percent=$(cat $imagenes/$dev/$id/resize)
 			extra_space=$((freespace_size*percent/100))
 			create_part $(((size+extra_space)))
+			deleted_parts=1
 			offset=$((offset+extra_space))
 		elif [ -f $id/rest ] && [ -f $id/resize -o -f $imagenes/$dev/$id/resize ]; then
 			if [ $num = 5 ]; then
@@ -143,5 +141,7 @@ for dev in *; do
 			create_part $size
 		fi
 	done
-	[ ! -f sataraid ] || { dmraid1.0 -an; dmraid1.0 -ay; }
+	[ ! -f sataraid ] || refresh_dmraid $devpath
 done
+
+exit 0

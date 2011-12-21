@@ -47,7 +47,7 @@ install: build
 	dh_install stidump bin
 	dh_install cmospwd bin
 	dh_install dd_rescue bin
-	dh_install parted2.3 dmraid1.0 sbin
+	dh_install parted2.3 dmraid1.0 kpartx sbin
 	dh_install split usr/bin
 	rm -rf `find debian/backharddi-udeb -name CVS`
 	rm -rf `find debian/backharddi-udeb -name .svn`

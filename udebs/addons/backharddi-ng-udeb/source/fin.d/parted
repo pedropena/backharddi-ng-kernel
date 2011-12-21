@@ -33,7 +33,7 @@ for dev in $DEVICES/*; do
 				error 20
 			done
 			update-dev
-			[ ! -f sataraid ] || { dmraid1.0 -an; dmraid1.0 -ay; }
+			[ ! -f sataraid ] || refresh_dmraid "$(cat device)"
 			break
 		fi
 	done
