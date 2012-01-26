@@ -1,3 +1,13 @@
+backharddi-ng-kernel (0.32.1) lucid; urgency=low
+
+  * Corregido error por el cual se iniciaba directamente (sin pedir confirmación)
+    la restauración desde un CD/DVD de recuperación
+  * Mejora de la fiabilidad al redimensionar al alza particiones
+  * Mejora de la fiabilidad al restaurar tablas de particiones de dispositivos
+    que contienen particiones de backup activas
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Thu, 26 Jan 2012 11:02:41 +0100
+
 backharddi-ng-kernel (0.32) lucid; urgency=low
 
   *  Se da un nombre de dispositivo más genérico a los dispositivos Raid Software
