@@ -5,38 +5,54 @@
 db_get backharddi/imagenes
 imagenes="$RET"
 
+stop_parted_server
+
 for dev in $DEVICES/*; do
 	[ -d $dev ] || continue
 	cd $dev
 	for id in $dev/*; do
 		[ -d $id ] || continue
 		if [ -f $id/rest ]; then
-#			open_dialog COMMIT
-#			close_dialog
 			count=0
+			device=$(cat $imagenes/${dev##$DEVICES/}/device)
 			#Reintentamos volcar la tabla de particiones 5 veces
-			while sfdisk -f --no-reread $(cat $imagenes/${dev##$DEVICES/}/device) < $imagenes/${dev##$DEVICES/}/pt 2>&1 | grep -q failed; do
+			while ! sfdisk -f --no-reread $device < $imagenes/${dev##$DEVICES/}/pt 2>&1 | grep -q Successfully\ wrote\ the\ new\ partition\ table; do
+				echo "Error volcando tabla de particiones"
 				if [ "$count" -lt 5 ]; then
 					sleep 1
 					count=$((count+1))
 					continue
 				fi
 				error 20
+				exit 1
 			done
 			count=0
-			while sfdisk -R $(cat $imagenes/${dev##$DEVICES/}/device) 2>&1 | grep -q busy; do
+			if mount | grep -q $device; then
+				#TODO Asumimos que solo habra una particion de backup en el dispositivo
+				part=$(mount | grep $device | cut -d " " -f 1)
+				mp=$(mount | grep $device | cut -d " " -f 3)
+				umount $mp
+			fi
+			while sfdisk -R $device 2>&1 | grep -q busy; do
+				echo "Error releyendo tabla de particiones"
 				if [ "$count" -lt 5 ]; then
 					sleep 1
 					count=$((count+1))
 					continue
 				fi
 				error 20
+				if [ ! -z $mp ]; then
+					mount $part $mp
+				fi
+				exit 1
 			done
 			update-dev
 			[ ! -f sataraid ] || refresh_dmraid "$(cat device)"
+			if [ ! -z $mp ]; then
+				mount $part $mp
+			fi
 			break
 		fi
 	done
 done
 	
-stop_parted_server

@@ -141,6 +141,7 @@ for dev in *; do
 			create_part $size
 		fi
 	done
+	update-dev
 	[ ! -f sataraid ] || refresh_dmraid $devpath
 done
 

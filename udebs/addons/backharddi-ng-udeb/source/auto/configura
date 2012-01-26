@@ -63,6 +63,7 @@ case $modo in
 				db_set backharddi/net/port "$port"
 			;;
 			cdrom)
+				labels=$(find $backup -type f -name label | wc -l)
 				if [ $labels = 0 ]; then
 					db_input critical backharddi/cdrom/alert || true
 					db_go || exit 0
