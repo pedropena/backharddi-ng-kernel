@@ -1,3 +1,9 @@
+backharddi-ng-kernel (0.32.1precise1) precise; urgency=low
+
+  * Construcción en precise
+
+ -- Pedro Peña Pérez <pedro.pena@open-phoenix.com>  Tue, 29 May 2012 18:35:58 +0200
+
 backharddi-ng-kernel (0.32.1) lucid; urgency=low
 
   * Corregido error por el cual se iniciaba directamente (sin pedir confirmación)
